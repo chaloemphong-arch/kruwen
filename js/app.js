@@ -84,11 +84,17 @@ function showFail(n, load) { show('fail', { attempt: n, load: !!load, headName: 
 const retrying = { onRetry: (n) => showFail(n, false) };
 const loadingRetry = { onRetry: (n) => showFail(n, true) };
 
-function showError(res, back) {
+function showError(res, back, retry) {
   const screen = routeFor(res);
   if (screen === 'welcome') return show('welcome', {});
   if (screen === 'taken') return show('taken', { name: A.picked ? A.picked.name : '' });
-  return show('error', { message: res.message, back: !!back });
+  return show('error', { message: res.message, back: !!back, retry: !!retry });
+}
+
+// รหัสรายงานหนึ่งรหัสต่อหนึ่งฟอร์ม: ส่งซ้ำตอนเน็ตหลุดแล้วหลังบ้านไม่สร้างรายงานซ้ำ
+function newReportId() {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
+  return 'r' + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
 }
 
 function ensureConfig() {
@@ -164,7 +170,8 @@ function handleScan(res) {
     case 'covered': case 'onLeave': case 'subask': case 'wrongPoint':
       return show(screen, { r: res });
     default:
-      return showError(res);
+      // สแกนส่งซ้ำได้อย่างปลอดภัย: ข้อผิดพลาดของเซิร์ฟเวอร์ (รวมรอคิวนานเกิน) ให้ลองอีกครั้งได้
+      return showError(res, false, !!res && res.code === 'server_error');
   }
 }
 
@@ -302,7 +309,7 @@ async function startReport() {
   let photo = null;
   if (A.c && A.c.hasPhoto && !A.viaProxy) photo = { kind: 'scan', img: A.localPhoto };
   else if (A.localB64) photo = { kind: 'new', img: A.localPhoto, b64: A.localB64 };
-  A.rep = { categories: cats, selected: [], note: '', photo, error: '', sending: false };
+  A.rep = { categories: cats, selected: [], note: '', photo, error: '', sending: false, reportId: newReportId() };
   show('report', A.rep);
 }
 
@@ -324,7 +331,7 @@ async function sendReport() {
   readNote();
   if (V.reportButton(A.rep).disabled) return;
   const p = A.rep.photo;
-  const payload = { pointId: A.P, token: A.K, categories: A.rep.selected.slice(), note: A.rep.note, useScanPhoto: !!p && p.kind === 'scan' };
+  const payload = { reportId: A.rep.reportId, pointId: A.P, token: A.K, categories: A.rep.selected.slice(), note: A.rep.note, useScanPhoto: !!p && p.kind === 'scan' };
   if (p && p.kind === 'new') payload.photo = { base64: p.b64 };
   A.rep.sending = true;
   show('report', A.rep);
@@ -437,11 +444,12 @@ const ACTIONS = {
   repPhotoRemove: () => { readNote(); A.rep.photo = null; show('report', A.rep); },
   repPhotoNew: () => { readNote(); openCam('report', 'ถ่ายรูปเหตุการณ์'); },
   sendReport,
+  rescan: doScan,
   subFor: async (d) => {
     show('loading', { title: 'กำลังบันทึก' });
     const gps = A.mock !== null ? null : await getGps(3000);
     const r = await call('substitute', { pointId: A.P, token: A.K, forTeacherId: d.id, gps }, retrying);
-    if (!r.ok) return showError(r);
+    if (!r.ok) return r.code === 'already_substitute' ? doScan() : showError(r);
     handleScan(r);
   },
   notSub: () => show('wrongPoint', { r: { myDuty: A.st.r ? A.st.r.myDuty : null } })

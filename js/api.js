@@ -18,6 +18,9 @@ export function setIdentity(id) { identity = id || {}; }
 // โหมด mock: async (body) => Result (throw = เน็ตล้มเหลว)
 export function setTransport(fn) { transport = fn; }
 
+// HTTP 200 แต่ไม่ใช่ JSON = ตั้งค่า Web app ผิด ลองใหม่ไม่ช่วย → หยุดลองและแจ้งเป็นข้อผิดพลาด
+const BAD_RESPONSE = { ok: false, code: 'bad_response', message: 'ระบบตอบกลับผิดรูปแบบ แจ้งแอดมินให้ตรวจการตั้งค่า Web app' };
+
 async function httpTransport(body) {
   const res = await fetch(API_URL, {
     method: 'POST',
@@ -26,7 +29,7 @@ async function httpTransport(body) {
     redirect: 'follow'
   });
   if (!res.ok) throw new Error('http ' + res.status);
-  return res.json();
+  try { return await res.json(); } catch (e) { return BAD_RESPONSE; }
 }
 
 function wait(ms) {

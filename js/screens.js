@@ -321,7 +321,7 @@ export function fail(st) {
 export function error(st) {
   return `<div class="pad center mid"><div class="bigicon missicon">${ICON.alert}</div>
   <p class="title">ทำรายการไม่สำเร็จ</p><p class="muted">${esc(st.message || 'ระบบขัดข้อง ลองอีกครั้ง')}</p></div>
-  ${st.back ? dock('<button class="btn" data-act="toHome">กลับ</button>') : ''}`;
+  ${st.retry ? dock('<button class="btn pri" data-act="rescan">ลองอีกครั้ง</button>') : st.back ? dock('<button class="btn" data-act="toHome">กลับ</button>') : ''}`;
 }
 
 export function reportButton(st) {
