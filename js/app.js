@@ -48,7 +48,7 @@ const A = {
   c: null, home: 'success', viaProxy: null, noPhoto: null, photoSent: false, localPhoto: null, localB64: null,
   teacherName: '', renamed: false, photoGen: 0,
   pick: null, picked: null, friend: null, camFor: null, shot: null, rep: null, my: null, menuError: '',
-  config: null, configP: null, clock: null, timer: null, searchTimer: null, searchSeq: 0
+  config: null, configP: null, waitConfig: false, clock: null, timer: null, searchTimer: null, searchSeq: 0
 };
 
 // เวลาเซิร์ฟเวอร์ (นาที) = ค่าที่ได้ล่าสุด + เวลาที่ผ่านไปในเครื่อง (ไม่ใช้นาฬิกามือถือโดยตรง)
@@ -79,8 +79,10 @@ function show(screen, st) {
   if (screen === 'report') bindReport();
 }
 
-function showFail(n) { show('fail', { attempt: n, headName: A.c ? A.c.headName : '' }); }
-const retrying = { onRetry: showFail };
+// load = คำขออ่านอย่างเดียว ("ยังโหลดไม่สำเร็จ") ไม่ใช่การบันทึก
+function showFail(n, load) { show('fail', { attempt: n, load: !!load, headName: A.c ? A.c.headName : '' }); }
+const retrying = { onRetry: (n) => showFail(n, false) };
+const loadingRetry = { onRetry: (n) => showFail(n, true) };
 
 function showError(res, back) {
   const screen = routeFor(res);
@@ -91,7 +93,8 @@ function showError(res, back) {
 
 function ensureConfig() {
   if (!A.configP) {
-    A.configP = call('config', {}, retrying).then((cfg) => {
+    // config โหลดเบื้องหลัง: แสดงหน้า "ยังโหลดไม่สำเร็จ" เฉพาะตอนที่หน้าจอรอ config อยู่จริง (A.waitConfig)
+    A.configP = call('config', {}, { onRetry: (n) => { if (A.waitConfig) showFail(n, true); } }).then((cfg) => {
       if (cfg && cfg.ok) {
         A.config = cfg;
         A.school = cfg.school_name || '';
@@ -168,6 +171,8 @@ function handleScan(res) {
 function goMenu(c, viaProxy) {
   A.c = c; A.home = 'menu'; A.viaProxy = viaProxy; A.photoSent = false; A.menuError = '';
   show('menu', homeState());
+  // ผล menu ไม่มีเวลาปัจจุบัน: ยังไม่รู้เวลาเซิร์ฟเวอร์ → ขอ config เงียบ ๆ แล้ววาดเมนูใหม่ (ปุ่มเปลี่ยนชื่อต้องเทียบ renameUntil กับเวลาเซิร์ฟเวอร์)
+  if (!A.clock) ensureConfig().then(() => { if (A.screen === 'menu') show('menu', homeState()); });
 }
 
 function afterCheckin(c) {
@@ -271,7 +276,7 @@ const proxyTip = () => `ถ่ายรูปครู${A.friend ? A.friend.name
 
 async function startProxy() {
   show('loading', { title: 'กำลังโหลดรายชื่อ' });
-  const r = await call('proxyCandidates', { pointId: A.P }, retrying);
+  const r = await call('proxyCandidates', { pointId: A.P }, loadingRetry);
   if (!r.ok) return showError(r, true);
   show('proxyPick', { r, c: A.c });
 }
@@ -281,6 +286,8 @@ async function sendProxy(b64) {
   show('preview', { img, purpose: 'proxy', sending: true });
   const gps = A.mock !== null ? null : await getGps(3000);
   const r = await call('proxy', { pointId: A.P, token: A.K, friendId: A.friend.teacher_id, photo: { base64: b64 }, gps }, retrying);
+  // ลองใหม่หลังคำขอแรกถึงเซิร์ฟเวอร์แล้ว → 'already' = ลงชื่อให้ไปแล้ว
+  if (!r.ok && r.code === 'already') return show('proxyDone', { r: { friendName: A.friend.name, already: true }, c: A.c });
   if (!r.ok) return showError(r, true);
   show('proxyDone', { r, img, c: A.c });
 }
@@ -288,7 +295,9 @@ async function sendProxy(b64) {
 // ---------- รายงานเหตุการณ์ ----------
 async function startReport() {
   show('loading', { title: 'กำลังโหลด' });
+  A.waitConfig = true;
   const cfg = await ensureConfig();
+  A.waitConfig = false;
   const cats = cfg && cfg.ok ? cfg.report_categories || [] : [];
   let photo = null;
   if (A.c && A.c.hasPhoto && !A.viaProxy) photo = { kind: 'scan', img: A.localPhoto };
@@ -383,7 +392,9 @@ async function confirmYes() {
 // ---------- เวรของฉัน ----------
 async function doMy(month) {
   show('loading', { title: 'กำลังโหลด' });
-  const [cfg, r] = await Promise.all([ensureConfig(), call('my', month ? { month } : {}, retrying)]);
+  A.waitConfig = true;
+  const [cfg, r] = await Promise.all([ensureConfig(), call('my', month ? { month } : {}, loadingRetry)]);
+  A.waitConfig = false;
   if (!r.ok) return showError(r);
   rememberTeacher(r.teacher);
   const current = cfg && cfg.ok && cfg.serverTime ? cfg.serverTime.slice(0, 7) : '';
@@ -469,7 +480,9 @@ export async function start() {
     setIdentity({ deviceId: dev });
   } else {
     // โหมดสำรอง: ใช้ได้เมื่อแอดมินเปิด fallback_local_mode และเครื่องนี้เคยรู้ชื่อครู (จำไว้ตอนเปิดผ่าน LINE)
+    A.waitConfig = true;
     const cfg = await ensureConfig();
+    A.waitConfig = false;
     const teacherId = store('duty.teacherId');
     if (!cfg.ok || !cfg.fallback_local_mode || !teacherId) {
       return show('error', { message: 'เปิดผ่าน LINE ไม่สำเร็จ ให้ปิดหน้านี้แล้วเปิดลิงก์หรือสแกน QR จากแอป LINE อีกครั้ง' });

@@ -5,7 +5,7 @@
 export const HELPERS = ['reportButton', 'header'];
 
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const hmd = (hhmm) => String(hhmm || '').replace(':', '.');
+const hmd = (hhmm) => esc(String(hhmm || '').replace(':', '.'));
 const toMin = (hhmm) => { const p = String(hhmm || '0:0').split(':'); return Number(p[0]) * 60 + Number(p[1]); };
 const kru = (name) => { const n = String(name || ''); return !n || n.startsWith('ครู') ? n : 'ครู' + n; };
 const TMON = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
@@ -85,7 +85,7 @@ export function pick(st) {
 }
 
 export function confirm(st) {
-  const text = st.mode === 'rename' ? 'ระบบจะย้ายรายการลงเวรวันนี้ไปที่ชื่อนี้ และผูกชื่อนี้กับบัญชี LINE ของคุณแทนชื่อเดิม'
+  const text = st.mode === 'rename' ? 'ระบบจะย้ายรายการลงเวรวันนี้ไปที่ชื่อนี้ และผูกกับบัญชี LINE ของคุณ ชื่อเดิมจะถูกยกเลิก'
     : st.mode === 'my' || st.mode === 'change' ? 'ระบบจะจำชื่อนี้กับบัญชี LINE ของคุณ วันเวรสแกน QR แล้วลงเวรทันที ถ้าเลือกผิด แก้ได้เองจนกว่าจะสแกนลงเวรครั้งแรก'
       : 'ระบบจะจำชื่อนี้กับบัญชี LINE ของคุณ ครั้งต่อไปสแกนแล้วลงเวรทันที ไม่ต้องเลือกอีก แม้เปลี่ยนมือถือ';
   return `<div class="pad center">
@@ -144,7 +144,7 @@ export function menu(st) {
       mb('proxy', ICON.users, 'ลงชื่อให้เพื่อน', 'เพื่อนลืมโทรศัพท์ ถ่ายรูปเพื่อนที่จุดเวรเป็นหลักฐาน'),
       mb('report', ICON.alert, 'รายงานเหตุการณ์', 'นักเรียนมาสาย ทะเลาะวิวาท สถานที่ชำรุด ฯลฯ')
     ];
-    if (!c.hasPhoto && !st.photoSent) items.push(mb('photo', ICON.cam, 'ถ่ายรูปเวร', `ยังไม่มีรูปเวร ถ่ายได้ถึง ${hmd(c.actionsUntil)} น.`));
+    if (c.photoRequired && !c.hasPhoto && !st.photoSent) items.push(mb('photo', ICON.cam, 'ถ่ายรูปเวร', `ยังไม่มีรูปเวร ถ่ายได้ถึง ${hmd(c.actionsUntil)} น.`));
     let renameLink = '';
     if (st.canRename) {
       if (items.length < 3) items.push(mb('rename', ICON.pencil, 'เปลี่ยนชื่อ', `กดชื่อผิด แก้เองได้ถึง ${esc(c.renameUntil)}`));
@@ -169,7 +169,7 @@ export function scanCam(st) {
   const strip = `<div class="okstrip">${ICON.checkS} ลงเวรแล้ว ${esc(c.time)} · ${esc(c.duty.code)} ${esc(c.duty.point)}${c.late ? ' · สาย' : ''}</div>`;
   if (st.mode === 'ask') {
     return `${strip}<div class="pad">
-    <div class="warn askcard"><b>วันนี้ขอรูปจุดเวร 1 รูป</b><span>ลงเวรนับแล้ว ไม่ต้องกังวล ถ่ายบริเวณจุดเวรที่ยืนอยู่ ไม่ต้องมีหน้าครู</span></div>
+    <div class="warn askcard"><b>วันนี้ขอรูปจุดเวร 1 รูป</b><span>ลงเวรนับแล้ว ไม่ต้องกังวล ถ่ายจุดเวรที่ยืนอยู่ ไม่ต้องเซลฟี</span></div>
     <div class="fill"></div></div>
     ${dock(`<button class="btn pri" data-act="camScan">${ICON.cam} ถ่ายรูปจุดเวร</button><button class="btn ghost" data-act="skipPhoto">ไม่สะดวกตอนนี้</button>`)}`;
   }
@@ -212,6 +212,13 @@ export function proxyPick(st) {
 // st: {r (proxy_done), img, c}
 export function proxyDone(st) {
   const r = st.r, d = st.c ? st.c.duty : null;
+  if (r.already) {
+    // คำขอที่ลองใหม่แต่ถึงเซิร์ฟเวอร์ไปแล้ว (code 'already'): เพื่อนมีบันทึกแล้ว
+    return `<div class="okstrip">${ICON.checkS} ลงชื่อให้แล้ว · ${esc(kru(r.friendName))}</div>
+  <div class="pad"><p class="title">${esc(kru(r.friendName))} มีบันทึกเวรวันนี้แล้ว</p>
+   <p class="muted">ไม่ต้องลงชื่อให้ซ้ำ หัวหน้าเวรเห็นในแถวของ ${esc(kru(r.friendName))}</p><div class="fill"></div></div>
+  ${dock('<button class="btn" data-act="toHome">กลับ</button>')}`;
+  }
   return `<div class="okhero"><div class="ring pop">${ICON.check}</div><div class="where">ลงชื่อให้แล้ว</div><div class="time small-time">${esc(r.time)}</div>
    <div class="sub"><span>${esc(kru(r.friendName))}${d ? ` · ${esc(d.code)} ${esc(d.point)}` : ''}</span>${r.late ? '<span class="late">สาย</span>' : ''}</div></div>
   <div class="pad">${st.img ? `<img class="thumbs" src="${esc(st.img)}" alt="รูปยืนยัน">` : ''}
@@ -246,8 +253,7 @@ export function covered(st) {
 export function onLeave(st) {
   return `<div class="pad center">
   <div class="bigicon leaveicon">${ICON.clock}</div>
-  <p class="title">วันนี้คุณถูกบันทึกลา</p>
-  <div class="box left">${esc(st.r.message)}</div>
+  <p class="title">${esc(st.r.message)}</p>
   <p class="small muted">ไม่ได้บันทึกอะไร</p></div>
   ${dock('<button class="btn" data-act="my">ดูเวรของฉัน</button>')}`;
 }
@@ -305,7 +311,7 @@ export function outside(st) {
 // st: {attempt, headName}
 export function fail(st) {
   return `<div class="pad center"><div class="bigicon missicon">${ICON.wifi}</div>
-  <p class="title">ยังบันทึกไม่สำเร็จ</p><p class="muted">สัญญาณอินเทอร์เน็ตไม่พอ ระบบกำลังลองส่งใหม่เอง</p>
+  <p class="title">${st.load ? 'ยังโหลดไม่สำเร็จ' : 'ยังบันทึกไม่สำเร็จ'}</p><p class="muted">สัญญาณอินเทอร์เน็ตไม่พอ ระบบกำลังลองส่งใหม่เอง</p>
   <p>ลองไปแล้ว ${Number(st.attempt) || 0} ครั้ง</p>
   <p class="small muted">ถ้ายังไม่ได้ แจ้ง${st.headName ? esc(kru(st.headName)) : 'หัวหน้าเวรวันนี้'}ให้เช็คให้ ไม่นับเป็นขาด</p><div class="fill"></div></div>
   ${dock('<button class="btn pri" data-act="retryNow">ลองอีกครั้งตอนนี้</button>')}`;
