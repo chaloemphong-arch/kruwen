@@ -74,7 +74,7 @@ function myResult() {
     days: [day('2026-11-06', 'มา', 'หัวหน้าเวรเช็คให้'), day('2026-11-11', 'ไปแทน', 'แทนครูวิชัย รักเรียน', '2(1)'),
       day('2026-11-13', 'สาย', ''), day('2026-11-20', 'มา', 'เพื่อนลงชื่อให้'), day('2026-11-27', 'ยังไม่ถึง', '')],
     summary: { present: 3, late: 1, leave: 0, absent: 0, subbed: 1 },
-    headChecks: 1, proxied: 1, thresholds: { head: 2, proxy: 2 }
+    headChecks: 1, proxied: 1
   });
 }
 

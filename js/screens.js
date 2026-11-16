@@ -375,7 +375,6 @@ export function my(st) {
     <button class="arrow" data-act="myMonth" data-m="${shiftMonth(month, 1)}" aria-label="เดือนถัดไป"${canNext ? '' : ' disabled'}>›</button></div>
    <div>${rows}</div>
    <div class="stats">${stat(s.present - s.late, 'ตรงเวลา')}${stat(s.late, 'สาย')}${stat(s.leave, 'ลา')}${stat(s.absent, 'ขาด')}${stat(s.subbed, 'ไปแทน')}</div>
-   <div class="box small">เดือนนี้หัวหน้าเวรเช็คให้ ${Number(r.headChecks) || 0} ครั้ง และเพื่อนลงชื่อให้ ${Number(r.proxied) || 0} ครั้ง<br><span class="muted">ถ้าหัวหน้าเวรเช็คให้เกิน ${Number(r.thresholds.head) || 0} ครั้ง หรือเพื่อนลงชื่อให้เกิน ${Number(r.thresholds.proxy) || 0} ครั้งต่อเดือน ระบบจะแจ้งในรายงานประจำเดือน</span></div>
    <p class="small muted">ถ้าติดธุระวันเวร ให้ตกลงแลกเวรกับครูคนอื่นได้เลย คนที่มาแทนสแกน QR แล้วเลือก "มาแทน"</p>
    <p class="small muted center">หน้านี้เปิดจากลิงก์ในประกาศกลุ่ม LINE ครูได้ทุกที่ ไม่ต้องสแกน</p>
    ${nameChange}
