@@ -102,21 +102,19 @@ export function taken(st) {
   ${dock('<button class="btn pri" data-act="backPick">เลือกชื่ออื่น</button>')}`;
 }
 
-const NO_PHOTO_REASON = { camera: 'กล้องเปิดไม่ได้', skipped: 'ข้ามการถ่ายรูป', send: 'ส่งรูปไม่สำเร็จ' };
-function noPhotoStrip(c, noPhoto) {
-  const why = NO_PHOTO_REASON[noPhoto.reason] || 'ส่งรูปไม่สำเร็จ';
+function noPhotoStrip(c, noPhoto, photoOpen) {
   const retrying = noPhoto.retrying ? '<br><span class="small">ระบบกำลังลองส่งรูปใหม่เอง</span>' : '';
-  return `<div class="warn"><b>ยังไม่มีรูป · ${why} ถ่ายใหม่ได้จากการสแกนซ้ำถึง ${hmd(c.actionsUntil)} น.</b>${retrying}${noPhoto.message ? `<br><span class="small">${esc(noPhoto.message)}</span>` : ''}</div>`;
+  return `<div class="warn"><b>${photoOpen ? `ยังไม่มีรูป · ถ่ายได้ถึง ${esc(c.photoUntil)}` : 'ไม่มีรูป'}</b>${retrying}${noPhoto.message ? `<br><span class="small">${esc(noPhoto.message)}</span>` : ''}</div>`;
 }
 const sentTag = '<p class="center"><span class="tag t-ok">ส่งรูปแล้ว ขอบคุณครับ</span></p>';
 const expiredBox = '<div class="box small center">หมดเวลาเวรแล้ว ถ้าจะลงชื่อให้เพื่อนหรือรายงานเหตุการณ์ ให้สแกน QR อีกครั้ง</div>';
 
-// st: {c (ผล checked_in/menu), actionsOpen, canRename, noPhoto:{reason,retrying?,message?}|null, photoSent, teacherName, renamed}
+// st: {c (ผล checked_in/menu), actionsOpen, photoOpen, canRename, noPhoto:{reason,retrying?,message?}|null, photoSent, teacherName, renamed}
 export function success(st) {
   const c = st.c, d = c.duty;
   const sub = c.asSubstituteFor ? `<span>มาแทน ${esc(kru(c.asSubstituteFor.name))}</span>` : '';
   const who = st.teacherName ? `<p class="center small muted">${esc(kru(st.teacherName))}${st.renamed ? ' · ย้ายรายการจากชื่อเดิมแล้ว' : ''}</p>` : '';
-  const photo = st.noPhoto ? noPhotoStrip(c, st.noPhoto) : (st.photoSent ? sentTag : '');
+  const photo = st.noPhoto ? noPhotoStrip(c, st.noPhoto, st.photoOpen) : (st.photoSent ? sentTag : '');
   const actions = st.actionsOpen
     ? `<div class="chips2"><button class="btn" data-act="proxy">${ICON.users} ลงชื่อให้เพื่อน</button><button class="btn" data-act="report">${ICON.alert} มีเหตุการณ์</button></div>`
     : expiredBox;
@@ -129,7 +127,7 @@ export function success(st) {
   </div>`;
 }
 
-// st: {c, actionsOpen, canRename, viaProxy:{name,time}|null, photoSent, error}
+// st: {c, actionsOpen, photoOpen, canRename, viaProxy:{name,time}|null, photoSent, error}
 export function menu(st) {
   const c = st.c, d = c.duty;
   const strip = st.viaProxy ? `นับว่ามาแล้ว · เพื่อนลงชื่อให้ ${esc(st.viaProxy.time)}` : `ลงเวรแล้ว ${esc(c.time)}`;
@@ -144,7 +142,7 @@ export function menu(st) {
       mb('proxy', ICON.users, 'ลงชื่อให้เพื่อน', 'เพื่อนลืมโทรศัพท์ ถ่ายรูปเพื่อนที่จุดเวรเป็นหลักฐาน'),
       mb('report', ICON.alert, 'รายงานเหตุการณ์', 'นักเรียนมาสาย ทะเลาะวิวาท สถานที่ชำรุด ฯลฯ')
     ];
-    if (c.photoRequired && !c.hasPhoto && !st.photoSent) items.push(mb('photo', ICON.cam, 'ถ่ายรูปเวร', `ยังไม่มีรูปเวร ถ่ายได้ถึง ${hmd(c.actionsUntil)} น.`));
+    if (c.photoRequired && !c.hasPhoto && !st.photoSent && st.photoOpen) items.push(mb('photo', ICON.cam, 'ถ่ายรูปเวร', `ถ่ายได้ถึง ${esc(c.photoUntil)}`));
     let renameLink = '';
     if (st.canRename) {
       if (items.length < 3) items.push(mb('rename', ICON.pencil, 'เปลี่ยนชื่อ', `กดชื่อผิด แก้เองได้ถึง ${esc(c.renameUntil)}`));

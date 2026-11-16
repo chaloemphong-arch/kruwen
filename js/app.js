@@ -55,6 +55,7 @@ const A = {
 function setClock(hhmm) { if (hhmm) A.clock = { min: toMin(hhmm), at: Date.now() }; }
 function nowMin() { return A.clock ? A.clock.min + Math.floor((Date.now() - A.clock.at) / 60000) : null; }
 function actionsOpen(c) { const n = nowMin(); return n === null || n <= toMin(c.actionsUntil); }
+function photoOpen(c) { const n = nowMin(); return n === null || n <= toMin(c.photoUntil); }
 function canRename(c) { const n = nowMin(); return A.line && !A.viaProxy && n !== null && n <= toMin(c.renameUntil); }
 
 function store(key, value) {
@@ -118,9 +119,9 @@ function ensureConfig() {
 function homeState() {
   const c = A.c;
   if (A.home === 'menu') {
-    return { c, actionsOpen: actionsOpen(c), canRename: canRename(c), viaProxy: A.viaProxy, photoSent: A.photoSent, error: A.menuError };
+    return { c, actionsOpen: actionsOpen(c), photoOpen: photoOpen(c), canRename: canRename(c), viaProxy: A.viaProxy, photoSent: A.photoSent, error: A.menuError };
   }
-  return { c, actionsOpen: actionsOpen(c), canRename: canRename(c), noPhoto: A.noPhoto, photoSent: A.photoSent,
+  return { c, actionsOpen: actionsOpen(c), photoOpen: photoOpen(c), canRename: canRename(c), noPhoto: A.noPhoto, photoSent: A.photoSent,
     teacherName: A.teacherName, renamed: A.renamed };
 }
 function showHome() {
@@ -132,7 +133,7 @@ function showHome() {
 function tick() {
   if (A.screen === 'success' || A.screen === 'menu') {
     const next = homeState();
-    if (next.actionsOpen !== A.st.actionsOpen || next.canRename !== A.st.canRename) show(A.screen, next);
+    if (next.actionsOpen !== A.st.actionsOpen || next.photoOpen !== A.st.photoOpen || next.canRename !== A.st.canRename) show(A.screen, next);
   } else if (A.screen === 'outside') {
     show('outside', { r: A.st.r, nowMin: nowMin() });
   }

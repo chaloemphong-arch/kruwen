@@ -26,7 +26,7 @@ function checkinData(o = {}) {
   return {
     checkin_id: o.checkin_id || 'mock-c1', time, late: !!o.late, duty: Object.assign({}, DUTY),
     photoRequired: o.photoRequired !== undefined ? o.photoRequired : true, hasPhoto: !!o.hasPhoto,
-    photoMode: o.photoMode || 'ทุกครั้ง', actionsUntil: DUTY.end, renameUntil: addMin(time, 15), headName: HEAD
+    photoMode: o.photoMode || 'ทุกครั้ง', actionsUntil: DUTY.end, photoUntil: addMin(time, 10), renameUntil: addMin(time, 15), headName: HEAD
   };
 }
 const withKind = (kind, data) => Object.assign({ ok: true, kind }, data);
@@ -170,13 +170,13 @@ export function screenSamples() {
     s('confirm', { mode: 'scan', teacher: ME }),
     s('confirm', { mode: 'rename', teacher: FRIEND }, 'confirm rename'),
     s('taken', { name: FRIEND.name }),
-    s('success', { c, actionsOpen: true, canRename: true, noPhoto: null, photoSent: true, teacherName: ME.name }),
-    s('success', { c: checkinData({ late: true, time: '07:18' }), actionsOpen: false, canRename: false, noPhoto: { reason: 'camera' } }, 'success nocam'),
-    s('success', { c: mockCall('ask_sub', 'substitute', { forTeacherId: 't01' }), actionsOpen: true, canRename: false,
+    s('success', { c, actionsOpen: true, photoOpen: false, canRename: true, noPhoto: null, photoSent: true, teacherName: ME.name }),
+    s('success', { c: checkinData({ late: true, time: '07:18' }), actionsOpen: false, photoOpen: false, canRename: false, noPhoto: { reason: 'camera' } }, 'success nocam'),
+    s('success', { c: mockCall('ask_sub', 'substitute', { forTeacherId: 't01' }), actionsOpen: true, photoOpen: true, canRename: false,
       noPhoto: { reason: 'send', retrying: true }, renamed: true, teacherName: ME.name }, 'success sub'),
-    s('menu', { c: menuC, actionsOpen: true, canRename: true }),
-    s('menu', { c: Object.assign({}, menuC, { hasPhoto: true }), actionsOpen: true, canRename: false, viaProxy: { name: FRIEND.name, time: '07:03' } }, 'menu proxied'),
-    s('menu', { c: menuC, actionsOpen: false, canRename: false, error: 'กล้องเปิดไม่ได้' }, 'menu closed'),
+    s('menu', { c: menuC, actionsOpen: true, photoOpen: true, canRename: true }),
+    s('menu', { c: Object.assign({}, menuC, { hasPhoto: true }), actionsOpen: true, photoOpen: false, canRename: false, viaProxy: { name: FRIEND.name, time: '07:03' } }, 'menu proxied'),
+    s('menu', { c: menuC, actionsOpen: false, photoOpen: false, canRename: false, error: 'กล้องเปิดไม่ได้' }, 'menu closed'),
     s('scanCam', { c, mode: 'live' }),
     s('scanCam', { c, mode: 'ask' }, 'scanCam ask'),
     s('cam', { tip: 'ถ่ายรูปเพื่อนที่จุดเวร' }),
