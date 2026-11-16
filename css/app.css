@@ -1,14 +1,20 @@
-/* หน้าครูเวร: สีและรูปแบบจากเดโมระบบครูเวร (ส่วนครูเวร) · ตัวอักษรอย่างน้อย 16px ปุ่มสูงอย่างน้อย 48px */
+/* หน้าครูเวร + หน้าหัวหน้าเวร: โทเคนจาก Design System ระบบครูเวร (16 พ.ย. 2569) · ตัวอักษรอย่างน้อย 16px ปุ่มสูงอย่างน้อย 48px */
 :root{
   --bg:#F3F5F8;--card:#FFFFFF;--line:#DCE2EA;--text:#1E2B45;--muted:#5B6576;--brand:#2346A0;--brand-bg:#E6ECF8;--on-brand:#FFFFFF;
-  --ok:#1F7A4C;--ok-bg:#E1F2E8;--ok-strong:#1F7A4C;--head:#B86200;--head-bg:#FBEFD8;--miss:#B5302A;--miss-bg:#FBE4E1;
-  --leave:#44508A;--leave-bg:#E7EAF5;--idle:#6F7889;--idle-bg:#EEF0F4;
+  --ok:#1F7A4C;--ok-bg:#E1F2E8;--ok-strong:#1F7A4C;--head:#A45700;--head-bg:#FBEFD8;--miss:#B5302A;--miss-bg:#FBE4E1;
+  --leave:#44508A;--leave-bg:#E7EAF5;--idle:#646C7B;--idle-bg:#EEF0F4;
+  --shade:rgba(20,28,45,.42);
+  --duty-1-1:#C9CDD3;--duty-1-1-ink:#1E2B45;--duty-2-1:#F2DC3B;--duty-2-1-ink:#3A3000;--duty-3:#26863F;--duty-4:#2E77BA;
+  --duty-5:#C84081;--duty-6:#D62B2B;--duty-1-2:#1F5FBF;--duty-2-2:#F0A23A;--duty-2-2-ink:#3A2400;--duty-ink-light:#FFFFFF;
+  --space-4:4px;--space-6:6px;--space-8:8px;--space-10:10px;--space-12:12px;--space-14:14px;--space-16:16px;
+  --radius-sm:7px;--radius-md:12px;--radius-lg:14px;--radius-sheet:20px;--radius-pill:999px;
+  --tap-min:48px;--button-h:52px;--option-h:56px;--row-h:60px;--app-max:560px;
   --font:"Sarabun","Leelawadee UI","Thonburi",system-ui,sans-serif;
 }
 @media (prefers-color-scheme:dark){:root{
   --bg:#11151D;--card:#1A202B;--line:#2C3444;--text:#E6EAF2;--muted:#9AA4B5;--brand:#8EA8F0;--brand-bg:#1F2A45;--on-brand:#0E1424;
-  --ok:#5CCB8F;--ok-bg:#15301F;--ok-strong:#2E8F5C;--head:#F0A64A;--head-bg:#33260E;--miss:#F2827A;--miss-bg:#3A1B18;
-  --leave:#A5B1E6;--leave-bg:#1F2440;--idle:#8A93A3;--idle-bg:#232A36;color-scheme:dark}}
+  --ok:#5CCB8F;--ok-bg:#15301F;--ok-strong:#2A8455;--head:#F0A64A;--head-bg:#33260E;--miss:#F2827A;--miss-bg:#3A1B18;
+  --leave:#A5B1E6;--leave-bg:#1F2440;--idle:#8A93A3;--idle-bg:#232A36;--shade:rgba(0,0,0,.55);color-scheme:dark}}
 *,*::before,*::after{box-sizing:border-box}
 html,body{min-height:100%;margin:0}
 body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:17px;line-height:1.6;overflow-x:hidden}
@@ -62,7 +68,7 @@ p{margin:0}
 .okhero .time.small-time{font-size:44px}
 .okhero .where{font-size:22px;font-weight:600}
 .okhero .sub{font-size:16px;opacity:.95;display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap}
-.okhero .late{background:#fff;color:#B86200;border-radius:999px;padding:0 10px;font-weight:700}
+.okhero .late{background:#fff;color:#A45700;border-radius:999px;padding:0 10px;font-weight:700}
 @media (prefers-reduced-motion:no-preference){.pop{animation:pop .4s ease-out}@keyframes pop{from{transform:scale(.85);opacity:.3}to{transform:none;opacity:1}}}
 .okstrip{background:var(--ok-bg);color:var(--ok);display:flex;gap:8px;align-items:center;padding:12px 16px;font-weight:600;flex-wrap:wrap}
 

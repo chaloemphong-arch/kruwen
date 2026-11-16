@@ -1,0 +1,3308 @@
+{
+ "morning": {
+  "ok": true,
+  "kind": "head",
+  "date": "2026-11-20",
+  "dateThai": "20 พ.ย. 2569",
+  "nowHHMM": "07:40",
+  "canEdit": true,
+  "actingFor": null,
+  "headName": "สมชาย ใจดี",
+  "counts": {
+   "came": 6,
+   "total": 12,
+   "needs": 2,
+   "leave": 1,
+   "upcoming": 4
+  },
+  "banners": [],
+  "sessions": [
+   {
+    "session": "เช้า",
+    "label": "เวรเช้า",
+    "locked": false,
+    "timeText": "07.00–08.30",
+    "rows": [
+     {
+      "key": "1(1)|t01",
+      "dutyCode": "1(1)",
+      "teacherId": "t01",
+      "sig": "self|||",
+      "color": "#c9cdd3",
+      "name": "สมชาย ใจดี",
+      "sub": [
+       {
+        "text": "ประตู 1 · 07.00",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:02"
+      },
+      "needs": false,
+      "photo": {
+       "checkinId": "c1"
+      },
+      "note": "",
+      "options": [
+       {
+        "action": "",
+        "label": "มา (สแกนเอง)",
+        "hint": "สแกนเวลา 07:02",
+        "current": true,
+        "disabled": true
+       },
+       {
+        "action": "notfound",
+        "label": "ไม่พบตัวที่จุดเวร",
+        "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "1(1)|t02",
+      "dutyCode": "1(1)",
+      "teacherId": "t02",
+      "sig": "proxy|||",
+      "color": "#c9cdd3",
+      "name": "สมหญิง สุขสันต์",
+      "sub": [
+       {
+        "text": "ประตู 1 · 07.00",
+        "tone": ""
+       },
+       {
+        "text": "เพื่อนลงชื่อให้: ครูสมชาย ใจดี",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:05"
+      },
+      "needs": false,
+      "photo": {
+       "checkinId": "c2"
+      },
+      "note": "เพื่อนลงชื่อให้: ครูสมชาย ใจดี เมื่อ 07:05 · ดูรูปว่าตรงตัวไหม",
+      "options": [
+       {
+        "action": "",
+        "label": "มา (เพื่อนลงชื่อให้)",
+        "hint": "ลงชื่อให้โดย ครูสมชาย ใจดี 07:05",
+        "current": true,
+        "disabled": true
+       },
+       {
+        "action": "notfound",
+        "label": "ไม่พบตัวที่จุดเวร",
+        "hint": "รูปไม่ตรง หรือเดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(1)|t03",
+      "dutyCode": "2(1)",
+      "teacherId": "t03",
+      "sig": "self|t58|swap|",
+      "color": "#f2dc3b",
+      "name": "วิชัย รักเรียน",
+      "sub": [
+       {
+        "text": "ประตู 2 · 07.00",
+        "tone": ""
+       },
+       {
+        "text": "มีผู้มาแทน: ครูณัฐธิดา พึ่งบุญ",
+        "tone": ""
+       },
+       {
+        "text": "ไม่มีรูป",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:08"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "ครูณัฐธิดา พึ่งบุญ มาแทน (สแกนเวลา 07:08)",
+      "options": [
+       {
+        "action": "",
+        "label": "มา (ครูณัฐธิดา พึ่งบุญ มาแทน)",
+        "hint": "สแกนเวลา 07:08",
+        "current": true,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "notfound",
+        "label": "ไม่พบตัวที่จุดเวร",
+        "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(1)|t04",
+      "dutyCode": "2(1)",
+      "teacherId": "t04",
+      "sig": "self|||",
+      "color": "#f2dc3b",
+      "name": "วิภา มั่นคง",
+      "sub": [
+       {
+        "text": "ประตู 2 · 07.00",
+        "tone": ""
+       },
+       {
+        "text": "สาย",
+        "tone": "orange"
+       },
+       {
+        "text": "ไม่มีรูป",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:24"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "",
+        "label": "มา (สแกนเอง)",
+        "hint": "สแกนเวลา 07:24",
+        "current": true,
+        "disabled": true
+       },
+       {
+        "action": "notfound",
+        "label": "ไม่พบตัวที่จุดเวร",
+        "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "3|t05",
+      "dutyCode": "3",
+      "teacherId": "t05",
+      "sig": "leave|||",
+      "color": "#26863f",
+      "name": "ประเสริฐ แก้วมณี",
+      "sub": [
+       {
+        "text": "จุด 3 หอประชุม 1 / จุดสแกนบัตรอาคาร · 07.30",
+        "tone": ""
+       },
+       {
+        "text": "ยังไม่มีผู้แทน",
+        "tone": "red"
+       }
+      ],
+      "pill": {
+       "cls": "p-leave",
+       "text": "ลา"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "บันทึกลาโดย ครูสมชาย ใจดี",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": true,
+        "disabled": true
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ลาแต่ไม่มีครูมาแทน หัวหน้าเวรยืนที่จุดนี้เอง",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "clear",
+        "label": "ล้างค่า กลับเป็นยังว่าง",
+        "hint": "",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "4|t06",
+      "dutyCode": "4",
+      "teacherId": "t06",
+      "sig": "self|||",
+      "color": "#2e77ba",
+      "name": "ประภา ทองดี",
+      "sub": [
+       {
+        "text": "จุด 4 โรงอาหาร ห้องน้ำ อาคาร 2 · 07.30",
+        "tone": ""
+       },
+       {
+        "text": "ไม่มีรูป",
+        "tone": ""
+       },
+       {
+        "text": "รายงาน 1",
+        "tone": "blue"
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:33"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "",
+        "label": "มา (สแกนเอง)",
+        "hint": "สแกนเวลา 07:33",
+        "current": true,
+        "disabled": true
+       },
+       {
+        "action": "notfound",
+        "label": "ไม่พบตัวที่จุดเวร",
+        "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [
+       {
+        "id": "r1",
+        "categories": [
+         "นักเรียนมาสาย"
+        ],
+        "note": "ม.2 มาสาย 5 คน",
+        "hasPhoto": false
+       }
+      ],
+      "deviceFlag": false
+     },
+     {
+      "key": "5|t07",
+      "dutyCode": "5",
+      "teacherId": "t07",
+      "sig": "none",
+      "color": "#c84081",
+      "name": "สุรชัย เจริญสุข",
+      "sub": [
+       {
+        "text": "จุด 5 อาคาร 1 และจุดสแกนบัตรหน้าอาคาร 1 · 07.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังว่าง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "6|t08",
+      "dutyCode": "6",
+      "teacherId": "t08",
+      "sig": "head|||",
+      "color": "#d62b2b",
+      "name": "สุนิสา พึ่งบุญ",
+      "sub": [
+       {
+        "text": "หน้าเสาธง (กิจกรรมหน้าเสาธง) · 07.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-head",
+       "text": "✓ หัวหน้าเวรเช็ค"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "หัวหน้าเวรเช็ค (ครูสมชาย ใจดี 07:38)",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": true,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "clear",
+        "label": "ล้างค่า กลับเป็นยังว่าง",
+        "hint": "",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     }
+    ]
+   },
+   {
+    "session": "เย็น",
+    "label": "เวรเย็น",
+    "locked": false,
+    "timeText": "15.30–16.30",
+    "rows": [
+     {
+      "key": "1(2)|t09",
+      "dutyCode": "1(2)",
+      "teacherId": "t09",
+      "sig": "none",
+      "color": "#1f5fbf",
+      "name": "อนุชา ศรีสว่าง",
+      "sub": [
+       {
+        "text": "ประตู 1 · 15.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง 15.30"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "1(2)|t10",
+      "dutyCode": "1(2)",
+      "teacherId": "t10",
+      "sig": "none",
+      "color": "#1f5fbf",
+      "name": "อรทัย บุญมา",
+      "sub": [
+       {
+        "text": "ประตู 1 · 15.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง 15.30"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(2)|t11",
+      "dutyCode": "2(2)",
+      "teacherId": "t11",
+      "sig": "none",
+      "color": "#f0a23a",
+      "name": "กิตติ ใจดี",
+      "sub": [
+       {
+        "text": "ประตู 2 · 15.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง 15.30"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(2)|t12",
+      "dutyCode": "2(2)",
+      "teacherId": "t12",
+      "sig": "none",
+      "color": "#f0a23a",
+      "name": "กัลยา สุขสันต์",
+      "sub": [
+       {
+        "text": "ประตู 2 · 15.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง 15.30"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     }
+    ]
+   }
+  ]
+ },
+ "clearing": {
+  "ok": true,
+  "kind": "head",
+  "date": "2026-11-20",
+  "dateThai": "20 พ.ย. 2569",
+  "nowHHMM": "09:05",
+  "canEdit": true,
+  "actingFor": null,
+  "headName": "สมชาย ใจดี",
+  "counts": {
+   "came": 6,
+   "total": 12,
+   "needs": 2,
+   "leave": 1,
+   "upcoming": 4
+  },
+  "banners": [
+   {
+    "tone": "warn",
+    "text": "เวรเช้าจะล็อก 09.30 น. (อีก 25 นาที) · ยังว่าง 2 คน"
+   }
+  ],
+  "sessions": [
+   {
+    "session": "เช้า",
+    "label": "เวรเช้า",
+    "locked": false,
+    "timeText": "07.00–08.30",
+    "rows": [
+     {
+      "key": "1(1)|t01",
+      "dutyCode": "1(1)",
+      "teacherId": "t01",
+      "sig": "self|||",
+      "color": "#c9cdd3",
+      "name": "สมชาย ใจดี",
+      "sub": [
+       {
+        "text": "ประตู 1 · 07.00",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:02"
+      },
+      "needs": false,
+      "photo": {
+       "checkinId": "c1"
+      },
+      "note": "",
+      "options": [
+       {
+        "action": "",
+        "label": "มา (สแกนเอง)",
+        "hint": "สแกนเวลา 07:02",
+        "current": true,
+        "disabled": true
+       },
+       {
+        "action": "notfound",
+        "label": "ไม่พบตัวที่จุดเวร",
+        "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "1(1)|t02",
+      "dutyCode": "1(1)",
+      "teacherId": "t02",
+      "sig": "proxy|||",
+      "color": "#c9cdd3",
+      "name": "สมหญิง สุขสันต์",
+      "sub": [
+       {
+        "text": "ประตู 1 · 07.00",
+        "tone": ""
+       },
+       {
+        "text": "เพื่อนลงชื่อให้: ครูสมชาย ใจดี",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:05"
+      },
+      "needs": false,
+      "photo": {
+       "checkinId": "c2"
+      },
+      "note": "เพื่อนลงชื่อให้: ครูสมชาย ใจดี เมื่อ 07:05 · ดูรูปว่าตรงตัวไหม",
+      "options": [
+       {
+        "action": "",
+        "label": "มา (เพื่อนลงชื่อให้)",
+        "hint": "ลงชื่อให้โดย ครูสมชาย ใจดี 07:05",
+        "current": true,
+        "disabled": true
+       },
+       {
+        "action": "notfound",
+        "label": "ไม่พบตัวที่จุดเวร",
+        "hint": "รูปไม่ตรง หรือเดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(1)|t03",
+      "dutyCode": "2(1)",
+      "teacherId": "t03",
+      "sig": "self|t58|swap|",
+      "color": "#f2dc3b",
+      "name": "วิชัย รักเรียน",
+      "sub": [
+       {
+        "text": "ประตู 2 · 07.00",
+        "tone": ""
+       },
+       {
+        "text": "มีผู้มาแทน: ครูณัฐธิดา พึ่งบุญ",
+        "tone": ""
+       },
+       {
+        "text": "ไม่มีรูป",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:08"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "ครูณัฐธิดา พึ่งบุญ มาแทน (สแกนเวลา 07:08)",
+      "options": [
+       {
+        "action": "",
+        "label": "มา (ครูณัฐธิดา พึ่งบุญ มาแทน)",
+        "hint": "สแกนเวลา 07:08",
+        "current": true,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "notfound",
+        "label": "ไม่พบตัวที่จุดเวร",
+        "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(1)|t04",
+      "dutyCode": "2(1)",
+      "teacherId": "t04",
+      "sig": "self|||",
+      "color": "#f2dc3b",
+      "name": "วิภา มั่นคง",
+      "sub": [
+       {
+        "text": "ประตู 2 · 07.00",
+        "tone": ""
+       },
+       {
+        "text": "สาย",
+        "tone": "orange"
+       },
+       {
+        "text": "ไม่มีรูป",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:24"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "",
+        "label": "มา (สแกนเอง)",
+        "hint": "สแกนเวลา 07:24",
+        "current": true,
+        "disabled": true
+       },
+       {
+        "action": "notfound",
+        "label": "ไม่พบตัวที่จุดเวร",
+        "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "3|t05",
+      "dutyCode": "3",
+      "teacherId": "t05",
+      "sig": "leave|||",
+      "color": "#26863f",
+      "name": "ประเสริฐ แก้วมณี",
+      "sub": [
+       {
+        "text": "จุด 3 หอประชุม 1 / จุดสแกนบัตรอาคาร · 07.30",
+        "tone": ""
+       },
+       {
+        "text": "ไม่มีผู้แทนเวร",
+        "tone": "red"
+       }
+      ],
+      "pill": {
+       "cls": "p-leave",
+       "text": "ลา"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "บันทึกลาโดย ครูสมชาย ใจดี",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": true,
+        "disabled": true
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ลาแต่ไม่มีครูมาแทน หัวหน้าเวรยืนที่จุดนี้เอง",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "clear",
+        "label": "ล้างค่า กลับเป็นยังว่าง",
+        "hint": "",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "4|t06",
+      "dutyCode": "4",
+      "teacherId": "t06",
+      "sig": "self|||",
+      "color": "#2e77ba",
+      "name": "ประภา ทองดี",
+      "sub": [
+       {
+        "text": "จุด 4 โรงอาหาร ห้องน้ำ อาคาร 2 · 07.30",
+        "tone": ""
+       },
+       {
+        "text": "ไม่มีรูป",
+        "tone": ""
+       },
+       {
+        "text": "รายงาน 1",
+        "tone": "blue"
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:33"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "",
+        "label": "มา (สแกนเอง)",
+        "hint": "สแกนเวลา 07:33",
+        "current": true,
+        "disabled": true
+       },
+       {
+        "action": "notfound",
+        "label": "ไม่พบตัวที่จุดเวร",
+        "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [
+       {
+        "id": "r1",
+        "categories": [
+         "นักเรียนมาสาย"
+        ],
+        "note": "ม.2 มาสาย 5 คน",
+        "hasPhoto": false
+       }
+      ],
+      "deviceFlag": false
+     },
+     {
+      "key": "5|t07",
+      "dutyCode": "5",
+      "teacherId": "t07",
+      "sig": "none",
+      "color": "#c84081",
+      "name": "สุรชัย เจริญสุข",
+      "sub": [
+       {
+        "text": "จุด 5 อาคาร 1 และจุดสแกนบัตรหน้าอาคาร 1 · 07.30",
+        "tone": ""
+       },
+       {
+        "text": "ไม่มีผู้แทนเวร",
+        "tone": "red"
+       }
+      ],
+      "pill": {
+       "cls": "p-miss",
+       "text": "ขาด"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "เลยเวลาแล้ว ยังไม่มีการลงเวร",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "6|t08",
+      "dutyCode": "6",
+      "teacherId": "t08",
+      "sig": "head|||",
+      "color": "#d62b2b",
+      "name": "สุนิสา พึ่งบุญ",
+      "sub": [
+       {
+        "text": "หน้าเสาธง (กิจกรรมหน้าเสาธง) · 07.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-head",
+       "text": "✓ หัวหน้าเวรเช็ค"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "หัวหน้าเวรเช็ค (ครูสมชาย ใจดี 07:38)",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": true,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "clear",
+        "label": "ล้างค่า กลับเป็นยังว่าง",
+        "hint": "",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     }
+    ]
+   },
+   {
+    "session": "เย็น",
+    "label": "เวรเย็น",
+    "locked": false,
+    "timeText": "15.30–16.30",
+    "rows": [
+     {
+      "key": "1(2)|t09",
+      "dutyCode": "1(2)",
+      "teacherId": "t09",
+      "sig": "none",
+      "color": "#1f5fbf",
+      "name": "อนุชา ศรีสว่าง",
+      "sub": [
+       {
+        "text": "ประตู 1 · 15.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง 15.30"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "1(2)|t10",
+      "dutyCode": "1(2)",
+      "teacherId": "t10",
+      "sig": "none",
+      "color": "#1f5fbf",
+      "name": "อรทัย บุญมา",
+      "sub": [
+       {
+        "text": "ประตู 1 · 15.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง 15.30"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(2)|t11",
+      "dutyCode": "2(2)",
+      "teacherId": "t11",
+      "sig": "none",
+      "color": "#f0a23a",
+      "name": "กิตติ ใจดี",
+      "sub": [
+       {
+        "text": "ประตู 2 · 15.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง 15.30"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(2)|t12",
+      "dutyCode": "2(2)",
+      "teacherId": "t12",
+      "sig": "none",
+      "color": "#f0a23a",
+      "name": "กัลยา สุขสันต์",
+      "sub": [
+       {
+        "text": "ประตู 2 · 15.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง 15.30"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     }
+    ]
+   }
+  ]
+ },
+ "locked": {
+  "ok": true,
+  "kind": "head",
+  "date": "2026-11-20",
+  "dateThai": "20 พ.ย. 2569",
+  "nowHHMM": "09:40",
+  "canEdit": true,
+  "actingFor": null,
+  "headName": "สมชาย ใจดี",
+  "counts": {
+   "came": 6,
+   "total": 12,
+   "needs": 2,
+   "leave": 1,
+   "upcoming": 4
+  },
+  "banners": [
+   {
+    "tone": "lock",
+    "text": "เวรเช้าล็อกแล้ว 09.30 น. ถ้าต้องแก้ ให้แอดมินปลดล็อก"
+   }
+  ],
+  "sessions": [
+   {
+    "session": "เช้า",
+    "label": "เวรเช้า",
+    "locked": true,
+    "timeText": "07.00–08.30",
+    "rows": [
+     {
+      "key": "1(1)|t01",
+      "dutyCode": "1(1)",
+      "teacherId": "t01",
+      "sig": "self|||",
+      "color": "#c9cdd3",
+      "name": "สมชาย ใจดี",
+      "sub": [
+       {
+        "text": "ประตู 1 · 07.00",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:02"
+      },
+      "needs": false,
+      "photo": {
+       "checkinId": "c1"
+      },
+      "note": "ข้อมูลช่วงนี้ล็อกแล้ว ถ้าต้องแก้ ให้แอดมินปลดล็อก",
+      "options": [],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "1(1)|t02",
+      "dutyCode": "1(1)",
+      "teacherId": "t02",
+      "sig": "proxy|||",
+      "color": "#c9cdd3",
+      "name": "สมหญิง สุขสันต์",
+      "sub": [
+       {
+        "text": "ประตู 1 · 07.00",
+        "tone": ""
+       },
+       {
+        "text": "เพื่อนลงชื่อให้: ครูสมชาย ใจดี",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:05"
+      },
+      "needs": false,
+      "photo": {
+       "checkinId": "c2"
+      },
+      "note": "เพื่อนลงชื่อให้: ครูสมชาย ใจดี เมื่อ 07:05 · ดูรูปว่าตรงตัวไหม · ข้อมูลช่วงนี้ล็อกแล้ว ถ้าต้องแก้ ให้แอดมินปลดล็อก",
+      "options": [],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(1)|t03",
+      "dutyCode": "2(1)",
+      "teacherId": "t03",
+      "sig": "self|t58|swap|",
+      "color": "#f2dc3b",
+      "name": "วิชัย รักเรียน",
+      "sub": [
+       {
+        "text": "ประตู 2 · 07.00",
+        "tone": ""
+       },
+       {
+        "text": "มีผู้มาแทน: ครูณัฐธิดา พึ่งบุญ",
+        "tone": ""
+       },
+       {
+        "text": "ไม่มีรูป",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:08"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "ครูณัฐธิดา พึ่งบุญ มาแทน (สแกนเวลา 07:08) · ข้อมูลช่วงนี้ล็อกแล้ว ถ้าต้องแก้ ให้แอดมินปลดล็อก",
+      "options": [],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(1)|t04",
+      "dutyCode": "2(1)",
+      "teacherId": "t04",
+      "sig": "self|||",
+      "color": "#f2dc3b",
+      "name": "วิภา มั่นคง",
+      "sub": [
+       {
+        "text": "ประตู 2 · 07.00",
+        "tone": ""
+       },
+       {
+        "text": "สาย",
+        "tone": "orange"
+       },
+       {
+        "text": "ไม่มีรูป",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:24"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "ข้อมูลช่วงนี้ล็อกแล้ว ถ้าต้องแก้ ให้แอดมินปลดล็อก",
+      "options": [],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "3|t05",
+      "dutyCode": "3",
+      "teacherId": "t05",
+      "sig": "leave|||",
+      "color": "#26863f",
+      "name": "ประเสริฐ แก้วมณี",
+      "sub": [
+       {
+        "text": "จุด 3 หอประชุม 1 / จุดสแกนบัตรอาคาร · 07.30",
+        "tone": ""
+       },
+       {
+        "text": "ไม่มีผู้แทนเวร",
+        "tone": "red"
+       }
+      ],
+      "pill": {
+       "cls": "p-leave",
+       "text": "ลา"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "บันทึกลาโดย ครูสมชาย ใจดี · ข้อมูลช่วงนี้ล็อกแล้ว ถ้าต้องแก้ ให้แอดมินปลดล็อก",
+      "options": [],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "4|t06",
+      "dutyCode": "4",
+      "teacherId": "t06",
+      "sig": "self|||",
+      "color": "#2e77ba",
+      "name": "ประภา ทองดี",
+      "sub": [
+       {
+        "text": "จุด 4 โรงอาหาร ห้องน้ำ อาคาร 2 · 07.30",
+        "tone": ""
+       },
+       {
+        "text": "ไม่มีรูป",
+        "tone": ""
+       },
+       {
+        "text": "รายงาน 1",
+        "tone": "blue"
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:33"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "ข้อมูลช่วงนี้ล็อกแล้ว ถ้าต้องแก้ ให้แอดมินปลดล็อก",
+      "options": [],
+      "reports": [
+       {
+        "id": "r1",
+        "categories": [
+         "นักเรียนมาสาย"
+        ],
+        "note": "ม.2 มาสาย 5 คน",
+        "hasPhoto": false
+       }
+      ],
+      "deviceFlag": false
+     },
+     {
+      "key": "5|t07",
+      "dutyCode": "5",
+      "teacherId": "t07",
+      "sig": "none",
+      "color": "#c84081",
+      "name": "สุรชัย เจริญสุข",
+      "sub": [
+       {
+        "text": "จุด 5 อาคาร 1 และจุดสแกนบัตรหน้าอาคาร 1 · 07.30",
+        "tone": ""
+       },
+       {
+        "text": "ไม่มีผู้แทนเวร",
+        "tone": "red"
+       }
+      ],
+      "pill": {
+       "cls": "p-miss",
+       "text": "ขาด"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "เลยเวลาแล้ว ยังไม่มีการลงเวร · ข้อมูลช่วงนี้ล็อกแล้ว ถ้าต้องแก้ ให้แอดมินปลดล็อก",
+      "options": [],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "6|t08",
+      "dutyCode": "6",
+      "teacherId": "t08",
+      "sig": "head|||",
+      "color": "#d62b2b",
+      "name": "สุนิสา พึ่งบุญ",
+      "sub": [
+       {
+        "text": "หน้าเสาธง (กิจกรรมหน้าเสาธง) · 07.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-head",
+       "text": "✓ หัวหน้าเวรเช็ค"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "หัวหน้าเวรเช็ค (ครูสมชาย ใจดี 07:38) · ข้อมูลช่วงนี้ล็อกแล้ว ถ้าต้องแก้ ให้แอดมินปลดล็อก",
+      "options": [],
+      "reports": [],
+      "deviceFlag": false
+     }
+    ]
+   },
+   {
+    "session": "เย็น",
+    "label": "เวรเย็น",
+    "locked": false,
+    "timeText": "15.30–16.30",
+    "rows": [
+     {
+      "key": "1(2)|t09",
+      "dutyCode": "1(2)",
+      "teacherId": "t09",
+      "sig": "none",
+      "color": "#1f5fbf",
+      "name": "อนุชา ศรีสว่าง",
+      "sub": [
+       {
+        "text": "ประตู 1 · 15.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง 15.30"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "1(2)|t10",
+      "dutyCode": "1(2)",
+      "teacherId": "t10",
+      "sig": "none",
+      "color": "#1f5fbf",
+      "name": "อรทัย บุญมา",
+      "sub": [
+       {
+        "text": "ประตู 1 · 15.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง 15.30"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(2)|t11",
+      "dutyCode": "2(2)",
+      "teacherId": "t11",
+      "sig": "none",
+      "color": "#f0a23a",
+      "name": "กิตติ ใจดี",
+      "sub": [
+       {
+        "text": "ประตู 2 · 15.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง 15.30"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(2)|t12",
+      "dutyCode": "2(2)",
+      "teacherId": "t12",
+      "sig": "none",
+      "color": "#f0a23a",
+      "name": "กัลยา สุขสันต์",
+      "sub": [
+       {
+        "text": "ประตู 2 · 15.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง 15.30"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     }
+    ]
+   }
+  ]
+ },
+ "unlocked": {
+  "ok": true,
+  "kind": "head",
+  "date": "2026-11-20",
+  "dateThai": "20 พ.ย. 2569",
+  "nowHHMM": "10:10",
+  "canEdit": true,
+  "actingFor": null,
+  "headName": "สมชาย ใจดี",
+  "counts": {
+   "came": 6,
+   "total": 12,
+   "needs": 2,
+   "leave": 1,
+   "upcoming": 4
+  },
+  "banners": [
+   {
+    "tone": "info",
+    "text": "เวรเช้าปลดล็อกชั่วคราวถึง 11:00 น."
+   }
+  ],
+  "sessions": [
+   {
+    "session": "เช้า",
+    "label": "เวรเช้า",
+    "locked": false,
+    "timeText": "07.00–08.30",
+    "rows": [
+     {
+      "key": "1(1)|t01",
+      "dutyCode": "1(1)",
+      "teacherId": "t01",
+      "sig": "self|||",
+      "color": "#c9cdd3",
+      "name": "สมชาย ใจดี",
+      "sub": [
+       {
+        "text": "ประตู 1 · 07.00",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:02"
+      },
+      "needs": false,
+      "photo": {
+       "checkinId": "c1"
+      },
+      "note": "",
+      "options": [
+       {
+        "action": "",
+        "label": "มา (สแกนเอง)",
+        "hint": "สแกนเวลา 07:02",
+        "current": true,
+        "disabled": true
+       },
+       {
+        "action": "notfound",
+        "label": "ไม่พบตัวที่จุดเวร",
+        "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "1(1)|t02",
+      "dutyCode": "1(1)",
+      "teacherId": "t02",
+      "sig": "proxy|||",
+      "color": "#c9cdd3",
+      "name": "สมหญิง สุขสันต์",
+      "sub": [
+       {
+        "text": "ประตู 1 · 07.00",
+        "tone": ""
+       },
+       {
+        "text": "เพื่อนลงชื่อให้: ครูสมชาย ใจดี",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:05"
+      },
+      "needs": false,
+      "photo": {
+       "checkinId": "c2"
+      },
+      "note": "เพื่อนลงชื่อให้: ครูสมชาย ใจดี เมื่อ 07:05 · ดูรูปว่าตรงตัวไหม",
+      "options": [
+       {
+        "action": "",
+        "label": "มา (เพื่อนลงชื่อให้)",
+        "hint": "ลงชื่อให้โดย ครูสมชาย ใจดี 07:05",
+        "current": true,
+        "disabled": true
+       },
+       {
+        "action": "notfound",
+        "label": "ไม่พบตัวที่จุดเวร",
+        "hint": "รูปไม่ตรง หรือเดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(1)|t03",
+      "dutyCode": "2(1)",
+      "teacherId": "t03",
+      "sig": "self|t58|swap|",
+      "color": "#f2dc3b",
+      "name": "วิชัย รักเรียน",
+      "sub": [
+       {
+        "text": "ประตู 2 · 07.00",
+        "tone": ""
+       },
+       {
+        "text": "มีผู้มาแทน: ครูณัฐธิดา พึ่งบุญ",
+        "tone": ""
+       },
+       {
+        "text": "ไม่มีรูป",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:08"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "ครูณัฐธิดา พึ่งบุญ มาแทน (สแกนเวลา 07:08)",
+      "options": [
+       {
+        "action": "",
+        "label": "มา (ครูณัฐธิดา พึ่งบุญ มาแทน)",
+        "hint": "สแกนเวลา 07:08",
+        "current": true,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "notfound",
+        "label": "ไม่พบตัวที่จุดเวร",
+        "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(1)|t04",
+      "dutyCode": "2(1)",
+      "teacherId": "t04",
+      "sig": "self|||",
+      "color": "#f2dc3b",
+      "name": "วิภา มั่นคง",
+      "sub": [
+       {
+        "text": "ประตู 2 · 07.00",
+        "tone": ""
+       },
+       {
+        "text": "สาย",
+        "tone": "orange"
+       },
+       {
+        "text": "ไม่มีรูป",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:24"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "",
+        "label": "มา (สแกนเอง)",
+        "hint": "สแกนเวลา 07:24",
+        "current": true,
+        "disabled": true
+       },
+       {
+        "action": "notfound",
+        "label": "ไม่พบตัวที่จุดเวร",
+        "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "3|t05",
+      "dutyCode": "3",
+      "teacherId": "t05",
+      "sig": "leave|||",
+      "color": "#26863f",
+      "name": "ประเสริฐ แก้วมณี",
+      "sub": [
+       {
+        "text": "จุด 3 หอประชุม 1 / จุดสแกนบัตรอาคาร · 07.30",
+        "tone": ""
+       },
+       {
+        "text": "ไม่มีผู้แทนเวร",
+        "tone": "red"
+       }
+      ],
+      "pill": {
+       "cls": "p-leave",
+       "text": "ลา"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "บันทึกลาโดย ครูสมชาย ใจดี",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": true,
+        "disabled": true
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ลาแต่ไม่มีครูมาแทน หัวหน้าเวรยืนที่จุดนี้เอง",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "clear",
+        "label": "ล้างค่า กลับเป็นยังว่าง",
+        "hint": "",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "4|t06",
+      "dutyCode": "4",
+      "teacherId": "t06",
+      "sig": "self|||",
+      "color": "#2e77ba",
+      "name": "ประภา ทองดี",
+      "sub": [
+       {
+        "text": "จุด 4 โรงอาหาร ห้องน้ำ อาคาร 2 · 07.30",
+        "tone": ""
+       },
+       {
+        "text": "ไม่มีรูป",
+        "tone": ""
+       },
+       {
+        "text": "รายงาน 1",
+        "tone": "blue"
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:33"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "",
+        "label": "มา (สแกนเอง)",
+        "hint": "สแกนเวลา 07:33",
+        "current": true,
+        "disabled": true
+       },
+       {
+        "action": "notfound",
+        "label": "ไม่พบตัวที่จุดเวร",
+        "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [
+       {
+        "id": "r1",
+        "categories": [
+         "นักเรียนมาสาย"
+        ],
+        "note": "ม.2 มาสาย 5 คน",
+        "hasPhoto": false
+       }
+      ],
+      "deviceFlag": false
+     },
+     {
+      "key": "5|t07",
+      "dutyCode": "5",
+      "teacherId": "t07",
+      "sig": "none",
+      "color": "#c84081",
+      "name": "สุรชัย เจริญสุข",
+      "sub": [
+       {
+        "text": "จุด 5 อาคาร 1 และจุดสแกนบัตรหน้าอาคาร 1 · 07.30",
+        "tone": ""
+       },
+       {
+        "text": "ไม่มีผู้แทนเวร",
+        "tone": "red"
+       }
+      ],
+      "pill": {
+       "cls": "p-miss",
+       "text": "ขาด"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "เลยเวลาแล้ว ยังไม่มีการลงเวร",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "6|t08",
+      "dutyCode": "6",
+      "teacherId": "t08",
+      "sig": "head|||",
+      "color": "#d62b2b",
+      "name": "สุนิสา พึ่งบุญ",
+      "sub": [
+       {
+        "text": "หน้าเสาธง (กิจกรรมหน้าเสาธง) · 07.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-head",
+       "text": "✓ หัวหน้าเวรเช็ค"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "หัวหน้าเวรเช็ค (ครูสมชาย ใจดี 07:38)",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": true,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "clear",
+        "label": "ล้างค่า กลับเป็นยังว่าง",
+        "hint": "",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     }
+    ]
+   },
+   {
+    "session": "เย็น",
+    "label": "เวรเย็น",
+    "locked": false,
+    "timeText": "15.30–16.30",
+    "rows": [
+     {
+      "key": "1(2)|t09",
+      "dutyCode": "1(2)",
+      "teacherId": "t09",
+      "sig": "none",
+      "color": "#1f5fbf",
+      "name": "อนุชา ศรีสว่าง",
+      "sub": [
+       {
+        "text": "ประตู 1 · 15.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง 15.30"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "1(2)|t10",
+      "dutyCode": "1(2)",
+      "teacherId": "t10",
+      "sig": "none",
+      "color": "#1f5fbf",
+      "name": "อรทัย บุญมา",
+      "sub": [
+       {
+        "text": "ประตู 1 · 15.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง 15.30"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(2)|t11",
+      "dutyCode": "2(2)",
+      "teacherId": "t11",
+      "sig": "none",
+      "color": "#f0a23a",
+      "name": "กิตติ ใจดี",
+      "sub": [
+       {
+        "text": "ประตู 2 · 15.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง 15.30"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(2)|t12",
+      "dutyCode": "2(2)",
+      "teacherId": "t12",
+      "sig": "none",
+      "color": "#f0a23a",
+      "name": "กัลยา สุขสันต์",
+      "sub": [
+       {
+        "text": "ประตู 2 · 15.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง 15.30"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     }
+    ]
+   }
+  ]
+ },
+ "admin": {
+  "ok": true,
+  "kind": "head",
+  "date": "2026-11-16",
+  "dateThai": "16 พ.ย. 2569",
+  "nowHHMM": "07:40",
+  "canEdit": true,
+  "actingFor": "ธนากร รักเรียน",
+  "headName": "ธนากร รักเรียน",
+  "counts": {
+   "came": 2,
+   "total": 12,
+   "needs": 6,
+   "leave": 0,
+   "upcoming": 4
+  },
+  "banners": [
+   {
+    "tone": "info",
+    "text": "คุณกำลังทำหน้าที่แทนหัวหน้าเวร (ครูธนากร รักเรียน)"
+   }
+  ],
+  "sessions": [
+   {
+    "session": "เช้า",
+    "label": "เวรเช้า",
+    "locked": false,
+    "timeText": "07.00–08.30",
+    "rows": [
+     {
+      "key": "1(1)|t13",
+      "dutyCode": "1(1)",
+      "teacherId": "t13",
+      "sig": "self|||",
+      "color": "#c9cdd3",
+      "name": "ธนากร รักเรียน",
+      "sub": [
+       {
+        "text": "ประตู 1 · 07.00",
+        "tone": ""
+       },
+       {
+        "text": "ไม่มีรูป",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:03"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "",
+        "label": "มา (สแกนเอง)",
+        "hint": "สแกนเวลา 07:03",
+        "current": true,
+        "disabled": true
+       },
+       {
+        "action": "notfound",
+        "label": "ไม่พบตัวที่จุดเวร",
+        "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "1(1)|t14",
+      "dutyCode": "1(1)",
+      "teacherId": "t14",
+      "sig": "none",
+      "color": "#c9cdd3",
+      "name": "ธิดารัตน์ มั่นคง",
+      "sub": [
+       {
+        "text": "ประตู 1 · 07.00",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังว่าง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(1)|t15",
+      "dutyCode": "2(1)",
+      "teacherId": "t15",
+      "sig": "self|||",
+      "color": "#f2dc3b",
+      "name": "นพดล แก้วมณี",
+      "sub": [
+       {
+        "text": "ประตู 2 · 07.00",
+        "tone": ""
+       },
+       {
+        "text": "ไม่มีรูป",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:06"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "",
+        "label": "มา (สแกนเอง)",
+        "hint": "สแกนเวลา 07:06",
+        "current": true,
+        "disabled": true
+       },
+       {
+        "action": "notfound",
+        "label": "ไม่พบตัวที่จุดเวร",
+        "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(1)|t16",
+      "dutyCode": "2(1)",
+      "teacherId": "t16",
+      "sig": "none",
+      "color": "#f2dc3b",
+      "name": "นภา ทองดี",
+      "sub": [
+       {
+        "text": "ประตู 2 · 07.00",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังว่าง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "3|t17",
+      "dutyCode": "3",
+      "teacherId": "t17",
+      "sig": "none",
+      "color": "#26863f",
+      "name": "บุญเรือง เจริญสุข",
+      "sub": [
+       {
+        "text": "จุด 3 หอประชุม 1 / จุดสแกนบัตรอาคาร · 07.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังว่าง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "4|t18",
+      "dutyCode": "4",
+      "teacherId": "t18",
+      "sig": "none",
+      "color": "#2e77ba",
+      "name": "บุษบา พึ่งบุญ",
+      "sub": [
+       {
+        "text": "จุด 4 โรงอาหาร ห้องน้ำ อาคาร 2 · 07.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังว่าง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "5|t19",
+      "dutyCode": "5",
+      "teacherId": "t19",
+      "sig": "none",
+      "color": "#c84081",
+      "name": "ปรีชา ศรีสว่าง",
+      "sub": [
+       {
+        "text": "จุด 5 อาคาร 1 และจุดสแกนบัตรหน้าอาคาร 1 · 07.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังว่าง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "6|t20",
+      "dutyCode": "6",
+      "teacherId": "t20",
+      "sig": "none",
+      "color": "#d62b2b",
+      "name": "ปราณี บุญมา",
+      "sub": [
+       {
+        "text": "หน้าเสาธง (กิจกรรมหน้าเสาธง) · 07.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังว่าง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     }
+    ]
+   },
+   {
+    "session": "เย็น",
+    "label": "เวรเย็น",
+    "locked": false,
+    "timeText": "15.30–16.30",
+    "rows": [
+     {
+      "key": "1(2)|t21",
+      "dutyCode": "1(2)",
+      "teacherId": "t21",
+      "sig": "none",
+      "color": "#1f5fbf",
+      "name": "พงศกร ใจดี",
+      "sub": [
+       {
+        "text": "ประตู 1 · 15.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง 15.30"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "1(2)|t22",
+      "dutyCode": "1(2)",
+      "teacherId": "t22",
+      "sig": "none",
+      "color": "#1f5fbf",
+      "name": "พิมพ์ใจ สุขสันต์",
+      "sub": [
+       {
+        "text": "ประตู 1 · 15.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง 15.30"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(2)|t23",
+      "dutyCode": "2(2)",
+      "teacherId": "t23",
+      "sig": "none",
+      "color": "#f0a23a",
+      "name": "ภานุ รักเรียน",
+      "sub": [
+       {
+        "text": "ประตู 2 · 15.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง 15.30"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(2)|t24",
+      "dutyCode": "2(2)",
+      "teacherId": "t24",
+      "sig": "none",
+      "color": "#f0a23a",
+      "name": "ภัทรา มั่นคง",
+      "sub": [
+       {
+        "text": "ประตู 2 · 15.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง 15.30"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     }
+    ]
+   }
+  ]
+ },
+ "deputy": {
+  "ok": true,
+  "kind": "head",
+  "date": "2026-11-20",
+  "dateThai": "20 พ.ย. 2569",
+  "nowHHMM": "07:40",
+  "canEdit": false,
+  "actingFor": null,
+  "headName": "สมชาย ใจดี",
+  "counts": {
+   "came": 6,
+   "total": 12,
+   "needs": 2,
+   "leave": 1,
+   "upcoming": 4
+  },
+  "banners": [],
+  "sessions": [
+   {
+    "session": "เช้า",
+    "label": "เวรเช้า",
+    "locked": false,
+    "timeText": "07.00–08.30",
+    "rows": [
+     {
+      "key": "1(1)|t01",
+      "dutyCode": "1(1)",
+      "teacherId": "t01",
+      "sig": "self|||",
+      "color": "#c9cdd3",
+      "name": "สมชาย ใจดี",
+      "sub": [
+       {
+        "text": "ประตู 1 · 07.00",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:02"
+      },
+      "needs": false,
+      "photo": {
+       "checkinId": "c1"
+      },
+      "note": "ดูอย่างเดียว",
+      "options": [],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "1(1)|t02",
+      "dutyCode": "1(1)",
+      "teacherId": "t02",
+      "sig": "proxy|||",
+      "color": "#c9cdd3",
+      "name": "สมหญิง สุขสันต์",
+      "sub": [
+       {
+        "text": "ประตู 1 · 07.00",
+        "tone": ""
+       },
+       {
+        "text": "เพื่อนลงชื่อให้: ครูสมชาย ใจดี",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:05"
+      },
+      "needs": false,
+      "photo": {
+       "checkinId": "c2"
+      },
+      "note": "เพื่อนลงชื่อให้: ครูสมชาย ใจดี เมื่อ 07:05 · ดูรูปว่าตรงตัวไหม · ดูอย่างเดียว",
+      "options": [],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(1)|t03",
+      "dutyCode": "2(1)",
+      "teacherId": "t03",
+      "sig": "self|t58|swap|",
+      "color": "#f2dc3b",
+      "name": "วิชัย รักเรียน",
+      "sub": [
+       {
+        "text": "ประตู 2 · 07.00",
+        "tone": ""
+       },
+       {
+        "text": "มีผู้มาแทน: ครูณัฐธิดา พึ่งบุญ",
+        "tone": ""
+       },
+       {
+        "text": "ไม่มีรูป",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:08"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "ครูณัฐธิดา พึ่งบุญ มาแทน (สแกนเวลา 07:08) · ดูอย่างเดียว",
+      "options": [],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(1)|t04",
+      "dutyCode": "2(1)",
+      "teacherId": "t04",
+      "sig": "self|||",
+      "color": "#f2dc3b",
+      "name": "วิภา มั่นคง",
+      "sub": [
+       {
+        "text": "ประตู 2 · 07.00",
+        "tone": ""
+       },
+       {
+        "text": "สาย",
+        "tone": "orange"
+       },
+       {
+        "text": "ไม่มีรูป",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:24"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "ดูอย่างเดียว",
+      "options": [],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "3|t05",
+      "dutyCode": "3",
+      "teacherId": "t05",
+      "sig": "leave|||",
+      "color": "#26863f",
+      "name": "ประเสริฐ แก้วมณี",
+      "sub": [
+       {
+        "text": "จุด 3 หอประชุม 1 / จุดสแกนบัตรอาคาร · 07.30",
+        "tone": ""
+       },
+       {
+        "text": "ยังไม่มีผู้แทน",
+        "tone": "red"
+       }
+      ],
+      "pill": {
+       "cls": "p-leave",
+       "text": "ลา"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "บันทึกลาโดย ครูสมชาย ใจดี · ดูอย่างเดียว",
+      "options": [],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "4|t06",
+      "dutyCode": "4",
+      "teacherId": "t06",
+      "sig": "self|||",
+      "color": "#2e77ba",
+      "name": "ประภา ทองดี",
+      "sub": [
+       {
+        "text": "จุด 4 โรงอาหาร ห้องน้ำ อาคาร 2 · 07.30",
+        "tone": ""
+       },
+       {
+        "text": "ไม่มีรูป",
+        "tone": ""
+       },
+       {
+        "text": "รายงาน 1",
+        "tone": "blue"
+       }
+      ],
+      "pill": {
+       "cls": "p-ok",
+       "text": "✓ มา 07:33"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "ดูอย่างเดียว",
+      "options": [],
+      "reports": [
+       {
+        "id": "r1",
+        "categories": [
+         "นักเรียนมาสาย"
+        ],
+        "note": "ม.2 มาสาย 5 คน",
+        "hasPhoto": false
+       }
+      ],
+      "deviceFlag": false
+     },
+     {
+      "key": "5|t07",
+      "dutyCode": "5",
+      "teacherId": "t07",
+      "sig": "none",
+      "color": "#c84081",
+      "name": "สุรชัย เจริญสุข",
+      "sub": [
+       {
+        "text": "จุด 5 อาคาร 1 และจุดสแกนบัตรหน้าอาคาร 1 · 07.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังว่าง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "ดูอย่างเดียว",
+      "options": [],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "6|t08",
+      "dutyCode": "6",
+      "teacherId": "t08",
+      "sig": "head|||",
+      "color": "#d62b2b",
+      "name": "สุนิสา พึ่งบุญ",
+      "sub": [
+       {
+        "text": "หน้าเสาธง (กิจกรรมหน้าเสาธง) · 07.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-head",
+       "text": "✓ หัวหน้าเวรเช็ค"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "หัวหน้าเวรเช็ค (ครูสมชาย ใจดี 07:38) · ดูอย่างเดียว",
+      "options": [],
+      "reports": [],
+      "deviceFlag": false
+     }
+    ]
+   },
+   {
+    "session": "เย็น",
+    "label": "เวรเย็น",
+    "locked": false,
+    "timeText": "15.30–16.30",
+    "rows": [
+     {
+      "key": "1(2)|t09",
+      "dutyCode": "1(2)",
+      "teacherId": "t09",
+      "sig": "none",
+      "color": "#1f5fbf",
+      "name": "อนุชา ศรีสว่าง",
+      "sub": [
+       {
+        "text": "ประตู 1 · 15.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง 15.30"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "ดูอย่างเดียว",
+      "options": [],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "1(2)|t10",
+      "dutyCode": "1(2)",
+      "teacherId": "t10",
+      "sig": "none",
+      "color": "#1f5fbf",
+      "name": "อรทัย บุญมา",
+      "sub": [
+       {
+        "text": "ประตู 1 · 15.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง 15.30"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "ดูอย่างเดียว",
+      "options": [],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(2)|t11",
+      "dutyCode": "2(2)",
+      "teacherId": "t11",
+      "sig": "none",
+      "color": "#f0a23a",
+      "name": "กิตติ ใจดี",
+      "sub": [
+       {
+        "text": "ประตู 2 · 15.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง 15.30"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "ดูอย่างเดียว",
+      "options": [],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(2)|t12",
+      "dutyCode": "2(2)",
+      "teacherId": "t12",
+      "sig": "none",
+      "color": "#f0a23a",
+      "name": "กัลยา สุขสันต์",
+      "sub": [
+       {
+        "text": "ประตู 2 · 15.30",
+        "tone": ""
+       }
+      ],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง 15.30"
+      },
+      "needs": false,
+      "photo": null,
+      "note": "ดูอย่างเดียว",
+      "options": [],
+      "reports": [],
+      "deviceFlag": false
+     }
+    ]
+   }
+  ]
+ },
+ "notoday": {
+  "ok": false,
+  "code": "not_head",
+  "message": "วันนี้คุณไม่ใช่หัวหน้าเวร (หัวหน้าเวรวันนี้: ครูสมชาย ใจดี) ถ้าต้องดูเวรของตัวเอง ให้เปิดลิงก์ \"เวรของฉัน\""
+ },
+ "notbound": {
+  "ok": false,
+  "code": "not_bound",
+  "message": "ยังไม่ได้เลือกชื่อ ให้เปิดลิงก์ \"เวรของฉัน\" แล้วเลือกชื่อก่อน"
+ },
+ "holiday": {
+  "ok": true,
+  "kind": "head",
+  "date": "2026-11-20",
+  "dateThai": "20 พ.ย. 2569",
+  "nowHHMM": "07:40",
+  "canEdit": true,
+  "actingFor": null,
+  "headName": null,
+  "counts": {
+   "came": 0,
+   "total": 0,
+   "needs": 0,
+   "leave": 0,
+   "upcoming": 0
+  },
+  "banners": [],
+  "sessions": [],
+  "message": "วันนี้ไม่มีเวร"
+ }
+}

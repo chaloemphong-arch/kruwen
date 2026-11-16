@@ -465,6 +465,12 @@ function deviceId() {
 }
 
 export async function start() {
+  // ?v=head = หน้าหัวหน้าเวร (ใบเช็ค) แยกตัวควบคุม โหลดเฉพาะเมื่อเปิดหน้านี้
+  if (new URLSearchParams(location.search).get('v') === 'head') {
+    show('loading', { title: 'กำลังเปิด' });
+    const [{ startHead }, id] = await Promise.all([import('../head/app.js'), initIdentity()]);
+    return startHead(id);
+  }
   root().addEventListener('click', (e) => {
     const el = e.target.closest('[data-act]');
     if (!el || el.disabled) return;

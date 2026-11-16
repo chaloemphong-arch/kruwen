@@ -1,0 +1,77 @@
+/* หน้าหัวหน้าเวร (ใบเช็ค) ?v=head · ชิ้นส่วนจาก Design System ระบบครูเวร (SheetHeader, Banner, CheckRow, StatusPill, StatusSheet, UndoToast)
+   ทุกค่ามาจากโทเคนใน css/app.css · ตัวอักษรอย่างน้อย 16px · สิ่งที่แตะได้สูงอย่างน้อย 48px · ตัวเลือกสูงอย่างน้อย 56px */
+
+.label{font-size:16px;font-weight:600;line-height:1.4}
+
+/* SheetHeader */
+.hdr{position:sticky;top:0;z-index:2;background:var(--card);padding:var(--space-10) var(--space-16);border-bottom:1px solid var(--line);display:grid;gap:var(--space-8)}
+.hdr .r1{display:flex;justify-content:space-between;align-items:baseline;gap:var(--space-8);flex-wrap:wrap}
+.hdr .r1 b{font-size:19px;font-weight:600}
+.hdr p{font-variant-numeric:tabular-nums}
+.prog{height:8px;border-radius:var(--radius-pill);background:var(--idle-bg);overflow:hidden;display:flex}
+.prog i{display:block;height:100%}
+.prog .i-ok{background:var(--ok)}.prog .i-head{background:var(--head)}.prog .i-leave{background:var(--leave)}
+.fchips{display:flex;flex-wrap:wrap;gap:var(--space-6)}
+.rc{border:1px solid var(--line);border-radius:var(--radius-pill);padding:var(--space-6) var(--space-14);min-height:var(--tap-min);font-size:16px;background:var(--card);display:inline-flex;align-items:center}
+.rc[aria-pressed="true"]{background:var(--brand-bg);border-color:var(--brand);color:var(--brand);font-weight:600}
+
+/* Banner (แสดงผลอย่างเดียว) */
+.bar{padding:var(--space-10) var(--space-16);font-size:16px;line-height:1.45;border-radius:0}
+.bar.lock{background:var(--leave-bg);color:var(--leave)}
+.bar.warn{background:var(--head-bg);color:var(--head);font-weight:600}
+.bar.info{background:var(--brand-bg);color:var(--brand)}
+.bar.err{background:var(--miss-bg);color:var(--miss)}
+.bar.rounded{border-radius:var(--radius-md);padding:var(--space-10) var(--space-12)}
+
+/* CheckRow */
+.grph{margin:0;font-size:16px;font-weight:600;color:var(--muted);background:var(--bg);padding:var(--space-6) var(--space-16);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:var(--space-8);font-variant-numeric:tabular-nums}
+.nrow{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:var(--space-8);align-items:center;padding:var(--space-8) var(--space-12) var(--space-8) var(--space-16);border-bottom:1px solid var(--line);min-height:var(--row-h);width:100%;text-align:left;cursor:pointer;background:var(--card)}
+.nrow:hover{background:var(--bg)}
+.nrow .code{min-width:44px}
+.nm{min-width:0}
+.nm b{display:block;font-size:17px;font-weight:600;line-height:1.35;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.nm small{display:block;font-size:16px;color:var(--muted);line-height:1.35}
+.nm .red{color:var(--miss)}.nm .orange{color:var(--head)}.nm .blue{color:var(--brand)}
+.stw{display:flex;align-items:center;gap:var(--space-6)}
+.rthumb{width:36px;height:36px;border-radius:var(--radius-sm);object-fit:cover;background:var(--idle-bg);flex:none}
+.chev{color:var(--muted);font-size:24px;line-height:1}
+.hfoot{padding:var(--space-12) var(--space-16) 96px}
+
+/* StatusPill */
+.pill{display:inline-flex;align-items:center;gap:var(--space-4);font-size:16px;font-weight:600;padding:2px var(--space-10);border-radius:var(--radius-pill);white-space:nowrap;font-variant-numeric:tabular-nums;line-height:1.4}
+.p-ok{background:var(--ok-bg);color:var(--ok)}
+.p-head{background:var(--head-bg);color:var(--head)}
+.p-leave{background:var(--leave-bg);color:var(--leave)}
+.p-miss{background:var(--miss-bg);color:var(--miss)}
+.p-idle{color:var(--idle);font-weight:500;padding-inline:0}
+
+/* StatusSheet */
+.sheetwrap{position:fixed;inset:0;z-index:5}
+.shade{position:absolute;inset:0;background:var(--shade)}
+.sheet{position:absolute;left:0;right:0;bottom:0;margin:0 auto;max-width:var(--app-max);max-height:92vh;max-height:92dvh;overflow-y:auto;overscroll-behavior:contain;
+  background:var(--card);border-radius:var(--radius-sheet) var(--radius-sheet) 0 0;
+  padding:var(--space-8) var(--space-16) calc(var(--space-16) + env(safe-area-inset-bottom,0px));display:grid;gap:var(--space-10)}
+@media (prefers-reduced-motion:no-preference){.sheet{animation:shup .2s ease-out}@keyframes shup{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}}
+.grab{width:40px;height:4px;border-radius:var(--radius-pill);background:var(--line);margin:2px auto}
+.shhd{display:flex;gap:var(--space-10);align-items:center}
+.shname{font-weight:600;font-size:19px;line-height:1.35}
+.bigphoto{width:100%;max-height:45vh;object-fit:contain;border-radius:var(--radius-md);background:var(--bg);display:block}
+.opt{display:flex;align-items:center;gap:var(--space-12);width:100%;min-height:var(--option-h);padding:var(--space-8) var(--space-12);border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--card);text-align:left}
+.opt:hover:not(:disabled){border-color:var(--brand)}
+.opt[aria-pressed="true"]{border:2px solid var(--brand);background:var(--brand-bg)}
+.opt:disabled{cursor:default}
+.opt:disabled:not([aria-pressed="true"]){opacity:.5}
+.opt .ol{flex:1;min-width:0}.opt .ol b{display:block;font-size:17px;font-weight:600}.opt .ol small{display:block;font-size:16px;color:var(--muted);line-height:1.35}
+.opt .cur{font-size:16px;color:var(--brand);font-weight:600;white-space:nowrap}
+.bx{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:16px;line-height:1;flex:none}
+.bx.ok{background:var(--ok);color:var(--card)}.bx.head{background:var(--head);color:var(--card)}
+.bx.leave{background:var(--leave-bg);color:var(--leave)}.bx.miss{border:2px solid var(--miss);color:var(--miss)}
+.bx.pending{border:2px solid var(--muted);color:var(--muted)}
+.reps{background:var(--bg);border-radius:var(--radius-md);padding:var(--space-10) var(--space-12)}
+.reps ul{margin:var(--space-4) 0 0;padding-left:20px;font-size:16px}
+.shclose{justify-self:center}
+
+/* UndoToast */
+.toastwrap{position:fixed;left:0;right:0;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:6;padding:0 var(--space-16);max-width:var(--app-max);margin:0 auto;pointer-events:none}
+.toast{pointer-events:auto;background:var(--text);color:var(--card);border-radius:var(--radius-md);padding:var(--space-10) var(--space-14);display:flex;justify-content:space-between;align-items:center;gap:var(--space-10);font-size:16px}
+.toast button{color:var(--card);font-weight:700;text-decoration:underline;white-space:nowrap;min-height:var(--tap-min);padding-inline:var(--space-8)}
