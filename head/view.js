@@ -1,6 +1,6 @@
 // หน้าหัวหน้าเวร (ใบเช็ค): ฟังก์ชันล้วน คืน HTML string · import ได้ใน Node (เทสต์) ไม่แตะ document/window
 // ข้อมูลทุกอย่างมาจากหลังบ้าน (headView) หน้าเว็บแค่วาด · escape ทุกข้อความ
-// ui: { filter: 'all'|'needs', saving: {[row.key]: true}, thumbs: {[checkinId]: dataUrl} }
+// ui: { filter: 'all'|'needs', needsKeys: [row.key] (แถวที่ตัวกรองเลือกไว้ตอนแตะ), saving: {[row.key]: true}, thumbs: {[checkinId]: dataUrl} }
 
 const ESC = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
 export function esc(s) { return String(s === undefined || s === null ? '' : s).replace(/[&<>"']/g, (c) => ESC[c]); }
@@ -137,7 +137,9 @@ export function renderPage(view, ui = {}) {
     body = '<div class="pad mid center"><p class="title">' + esc(view.message) + '</p></div>';
   } else {
     body = (view.sessions || []).map((s) => {
-      const rows = filterRows(s.rows, ui.filter);
+      // ตัวกรอง "เฉพาะที่ต้องดู" ตรึงชุดแถวที่เห็นตอนแตะ: แถวที่เพิ่งเปลี่ยนไม่หายใต้นิ้ว (แถวไม่สลับที่)
+      const pinned = ui.filter === 'needs' && Array.isArray(ui.needsKeys) ? ui.needsKeys : null;
+      const rows = pinned ? s.rows.filter((r) => pinned.includes(r.key)) : filterRows(s.rows, ui.filter);
       if (!rows.length) return '';
       return '<section><h2 class="grph"><span>' + esc(s.label) + '</span><span>' + esc(s.timeText) + ' น.</span></h2>' +
         rows.map((r) => renderRow(r, ui)).join('') + '</section>';

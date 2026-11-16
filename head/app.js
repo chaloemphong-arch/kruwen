@@ -10,6 +10,7 @@ const REFRESH_MS = 60000;
 
 const H = {
   view: null, filter: 'all', saving: {}, thumbs: {}, full: {}, asked: new Set(),
+  needsKeys: null, seq: 0,
   sheetKey: null, toast: null, toastTimer: null, pending: 0, thumbBusy: false, mock: null
 };
 
@@ -19,7 +20,7 @@ const root = () => $('app');
 function allRows() { return H.view ? (H.view.sessions || []).flatMap((s) => s.rows) : []; }
 function rowByKey(key) { return allRows().find((r) => r.key === key) || null; }
 function rowEl(key) { return Array.from(document.querySelectorAll('[data-act="row"]')).find((el) => el.dataset.key === key) || null; }
-function ui() { return { filter: H.filter, saving: H.saving, thumbs: H.thumbs }; }
+function ui() { return { filter: H.filter, needsKeys: H.needsKeys, saving: H.saving, thumbs: H.thumbs }; }
 
 // ลิงก์ "เวรของฉัน" = หน้าเดิมไม่มี ?v (โหมดทดลองไปหน้า mock=my)
 function myDutyHref() { return location.pathname + (H.mock !== null ? '?mock=my' : ''); }
@@ -61,7 +62,7 @@ function drawRow(key) {
   tmp.innerHTML = renderRow(row, ui());
   const fresh = tmp.firstElementChild;
   el.replaceWith(fresh);
-  if (focused) fresh.focus();
+  if (focused) fresh.focus({ preventScroll: true });
 }
 
 // ---------- รูป ----------
@@ -124,7 +125,7 @@ function closeSheet(refocus = true) {
   document.body.style.overflow = '';
   const box = $('hsheet');
   if (box) { box.hidden = true; box.innerHTML = ''; }
-  if (refocus && key) { const el = rowEl(key); if (el) el.focus(); }
+  if (refocus && key) { const el = rowEl(key); if (el) el.focus({ preventScroll: true }); }
 }
 
 // ---------- แถบแจ้งผล + เลิกทำ ----------
@@ -137,6 +138,7 @@ function showToast(text, undoToken) {
 }
 
 function applyView(view) {
+  H.seq++;
   H.view = view;
   if (H.sheetKey && !rowByKey(H.sheetKey)) closeSheet(false);
   drawPage();
@@ -150,6 +152,7 @@ async function choose(action) {
   const opt = (row.options || []).find((o) => o.action === action);
   if (!opt || opt.disabled) return;
   closeSheet();
+  H.seq++;
   H.saving[row.key] = true;
   H.pending++;
   drawRow(row.key);
@@ -172,6 +175,7 @@ async function undo() {
   const t = H.toast && H.toast.undoToken;
   if (!t) return;
   showToast(null);
+  H.seq++;
   H.pending++;
   const res = await call('headUndo', { undoToken: t }, { retries: 0 });
   H.pending--;
@@ -185,8 +189,10 @@ async function undo() {
 async function refresh(force) {
   const idle = () => !H.sheetKey && H.pending === 0;
   if (!force && (document.visibilityState !== 'visible' || !idle())) return;
+  // ผลรีเฟรชที่ออกไปก่อนการบันทึก/เลิกทำ/วาดใหม่ ทิ้งไป (กันข้อมูลเก่าทับผลที่ใหม่กว่า)
+  const seq = H.seq;
   const res = await call('headView', {}, { retries: 0 });
-  if (res.ok && idle()) applyView(res);
+  if (res.ok && idle() && seq === H.seq) applyView(res);
 }
 
 // ---------- ปุ่มทั้งหมด ----------
@@ -194,7 +200,12 @@ const ACTIONS = {
   row: (d) => openSheet(d.key),
   close: () => closeSheet(),
   opt: (d) => choose(d.a),
-  filter: (d) => { H.filter = d.f === 'needs' ? 'needs' : 'all'; drawPage(); },
+  // แตะ "เฉพาะที่ต้องดู" = ตรึงชุดแถวที่ต้องดูตอนนี้ไว้ (แตะซ้ำเพื่อคำนวณใหม่) · "ทั้งหมด" = เลิกตรึง
+  filter: (d) => {
+    H.filter = d.f === 'needs' ? 'needs' : 'all';
+    H.needsKeys = H.filter === 'needs' ? allRows().filter((r) => r.needs).map((r) => r.key) : null;
+    drawPage();
+  },
   undo: () => undo()
 };
 
