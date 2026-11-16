@@ -51,7 +51,7 @@ function savingOf(row, ui) { return (ui && ui.saving && ui.saving[row.key]) || n
 function pill(row, ui) {
   const sv = savingOf(row, ui);
   const p = sv ? (sv.next || { cls: 'p-idle', text: SAVING }) : (row.pill || {});
-  return { cls: PILLS.includes(p.cls) ? p.cls : 'p-idle', text: p.text || '' };
+  return { cls: PILLS.includes(p.cls) ? p.cls : 'p-idle', text: p.text || '', late: !!p.late };
 }
 
 export function filterRows(rows, mode) {
@@ -73,12 +73,12 @@ export function renderRow(row, ui = {}) {
   const marked = !!(sv && sv.next); // ป้ายที่จะได้ขึ้นแล้ว: บอกในบรรทัดรองว่ายังบันทึกอยู่
   const thumb = row.photo ? safeImg(ui.thumbs && ui.thumbs[row.photo.checkinId]) : '';
   return '<div class="nrow" role="button" tabindex="0" data-act="row" data-key="' + esc(row.key) + '"' +
-    ' aria-label="' + esc(row.name + ' ' + p.text + (marked ? ' ' + SAVING : '') + ' แตะเพื่อเลือกสถานะ') + '">' +
+    ' aria-label="' + esc(row.name + ' ' + p.text + (p.late ? ' สาย' : '') + (marked ? ' ' + SAVING : '') + ' แตะเพื่อเลือกสถานะ') + '">' +
     code(row) +
-    '<span class="nm"><b>' + esc(row.name) + '</b><small>' + (marked ? '<span class="muted saving">' + SAVING + '</span> · ' : '') +
-    subLine(row.sub) + '</small></span>' +
+    '<span class="nm"><b>' + esc(row.name) + '</b><small>' +
+    [marked ? '<span class="muted saving">' + SAVING + '</span>' : '', subLine(row.sub)].filter(Boolean).join(' · ') + '</small></span>' +
     '<span class="stw">' + (thumb ? '<img class="rthumb" src="' + thumb + '" alt="">' : '') +
-    '<span class="pill ' + p.cls + '">' + esc(p.text) + '</span><span class="chev" aria-hidden="true">›</span></span></div>';
+    '<span class="pill ' + p.cls + '">' + esc(p.text) + (p.late ? '<small class="late">(สาย)</small>' : '') + '</span><span class="chev" aria-hidden="true">›</span></span></div>';
 }
 
 // วงสีหน้าตัวเลือก: สีเดียวกับป้ายที่จะได้
@@ -100,7 +100,6 @@ function option(o, row) {
 // sheetUi: { full: dataUrl ของรูปใหญ่ (ยังไม่มี = กำลังโหลด), failed: true = โหลดรูปไม่สำเร็จ }
 export function renderSheet(row, sheetUi = {}) {
   const opts = row.options || [];
-  const first = (row.sub && row.sub[0]) ? row.sub[0].text : '';
   const full = safeImg(sheetUi.full);
   let photo = '';
   if (row.photo) {
@@ -113,7 +112,8 @@ export function renderSheet(row, sheetUi = {}) {
   return '<div class="shade" data-act="close"></div>' +
     '<div class="sheet" role="dialog" aria-modal="true" aria-label="' + esc('เลือกสถานะ ' + row.name) + '">' +
     '<div class="grab"></div>' +
-    '<div class="shhd">' + code(row) + '<div class="minw"><p class="shname">' + esc(row.name) + '</p><p class="small muted">' + esc(first) + '</p></div></div>' +
+    '<div class="shhd">' + code(row) + '<div class="minw"><p class="shname">' + esc(row.name) + '</p></div></div>' +
+    (row.detail || []).map((d) => '<p class="small' + (TONES.includes(d.tone) ? ' ' + d.tone : '') + '">' + esc(d.text) + '</p>').join('') +
     (row.note ? '<p class="small">' + esc(row.note) + '</p>' : '') +
     (row.deviceFlag ? '<p class="bar warn rounded">เครื่องเดียวกันลงหลายชื่อวันนี้</p>' : '') +
     photo +
