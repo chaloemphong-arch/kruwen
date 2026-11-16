@@ -1,6 +1,7 @@
 // หน้าหัวหน้าเวร (ใบเช็ค): ฟังก์ชันล้วน คืน HTML string · import ได้ใน Node (เทสต์) ไม่แตะ document/window
 // ข้อมูลทุกอย่างมาจากหลังบ้าน (headView) หน้าเว็บแค่วาด · escape ทุกข้อความ
-// ui: { filter: 'all'|'needs', needsKeys: [row.key] (แถวที่ตัวกรองเลือกไว้ตอนแตะ), saving: {[row.key]: true}, thumbs: {[checkinId]: dataUrl} }
+// ui: { filter: 'all'|'needs', needsKeys: [row.key] (แถวที่ตัวกรองเลือกไว้ตอนแตะ), saving: {[row.key]: true}, thumbs: {[checkinId]: dataUrl},
+//       stale: true = รีเฟรชล่าสุดไม่สำเร็จเพราะเน็ต }
 
 const ESC = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
 export function esc(s) { return String(s === undefined || s === null ? '' : s).replace(/[&<>"']/g, (c) => ESC[c]); }
@@ -50,6 +51,15 @@ export function filterRows(rows, mode) {
   return mode === 'needs' ? (rows || []).filter((r) => r.needs) : (rows || []).slice();
 }
 
+// ตัวกรอง "เฉพาะที่ต้องดู" หลังรีเฟรชจากหลังบ้าน: เพิ่มแถวที่เพิ่งต้องดู ไม่เอาแถวไหนออก (แถวไม่หายใต้นิ้ว)
+// keys = null (ไม่ได้กรอง) คืน null · ลำดับแถวบนจอยังตามหลังบ้าน (renderPage กรองตามชุด key)
+export function mergeNeedsKeys(keys, view) {
+  if (!Array.isArray(keys)) return keys === undefined ? null : keys;
+  const out = keys.slice();
+  ((view && view.sessions) || []).forEach((s) => s.rows.forEach((r) => { if (r.needs && !out.includes(r.key)) out.push(r.key); }));
+  return out;
+}
+
 export function renderRow(row, ui = {}) {
   const p = pill(row, ui);
   const thumb = row.photo ? safeImg(ui.thumbs && ui.thumbs[row.photo.checkinId]) : '';
@@ -77,13 +87,16 @@ function option(o, row) {
     (o.current ? '<span class="cur">✓ ตอนนี้</span>' : '') + '</button>';
 }
 
-// sheetUi: { full: dataUrl ของรูปใหญ่ (ยังไม่มี = กำลังโหลด) }
+// sheetUi: { full: dataUrl ของรูปใหญ่ (ยังไม่มี = กำลังโหลด), failed: true = โหลดรูปไม่สำเร็จ }
 export function renderSheet(row, sheetUi = {}) {
   const opts = row.options || [];
   const first = (row.sub && row.sub[0]) ? row.sub[0].text : '';
   const full = safeImg(sheetUi.full);
   let photo = '';
-  if (row.photo) photo = full ? '<img class="bigphoto" src="' + full + '" alt="รูปที่จุดเวรของ ' + esc(row.name) + '">' : '<p class="small muted">กำลังโหลดรูป…</p>';
+  if (row.photo) {
+    photo = full ? '<img class="bigphoto" src="' + full + '" alt="รูปที่จุดเวรของ ' + esc(row.name) + '">'
+      : '<p class="small muted">' + (sheetUi.failed ? 'เปิดรูปไม่ได้' : 'กำลังโหลดรูป…') + '</p>';
+  }
   const reports = (row.reports || []).map((r) =>
     '<li>' + esc((r.categories || []).join(', ')) + (r.note ? (r.categories && r.categories.length ? ' · ' : '') + esc(r.note) : '') +
     (r.hasPhoto ? ' <span class="muted">(มีรูป)</span>' : '') + '</li>').join('');
@@ -130,7 +143,7 @@ function header(view, ui) {
 }
 
 export function renderPage(view, ui = {}) {
-  const banners = (view.banners || []).map((b) =>
+  const banners = (ui.stale ? '<p class="bar warn">ข้อมูลอาจไม่ล่าสุด · เช็คสัญญาณอินเทอร์เน็ต</p>' : '') + (view.banners || []).map((b) =>
     '<p class="bar ' + (BAR_TONES.includes(b.tone) ? b.tone : 'info') + '">' + esc(b.text) + '</p>').join('');
   let body = '';
   if (view.message && !(view.sessions || []).length) {

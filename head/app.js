@@ -2,17 +2,27 @@
 // เปิดจาก web/js/app.js start() · โค้ดที่แตะ document/window อยู่ในฟังก์ชันเท่านั้น
 import { call, setIdentity, setTransport } from '../js/api.js';
 import { mockScenario } from '../js/liff.js';
-import { renderPage, renderRow, renderSheet, renderToast, renderMessage } from './view.js';
+import { renderPage, renderRow, renderSheet, renderToast, renderMessage, mergeNeedsKeys } from './view.js';
 import { headMockTransport } from './mock.js';
 
 const TOAST_MS = 8000;
 const REFRESH_MS = 60000;
+const AUTH_KEY = 'head.authReload';
+const AUTH_RELOAD_GAP_MS = 120000;
 
+// seq = รุ่นของจอ (ผลรีเฟรชที่ออกก่อนรุ่นนี้ทิ้ง) · req/appliedReq = ลำดับคำขอบันทึก/เลิกทำ (ผลที่ตอบช้ากว่าไม่ทับผลใหม่)
 const H = {
-  view: null, filter: 'all', saving: {}, thumbs: {}, full: {}, asked: new Set(),
-  needsKeys: null, seq: 0,
+  view: null, filter: 'all', saving: {}, thumbs: {}, full: {}, fullFail: {}, asked: new Set(),
+  needsKeys: null, seq: 0, req: 0, appliedReq: 0, stale: false,
   sheetKey: null, toast: null, toastTimer: null, pending: 0, thumbBusy: false, mock: null
 };
+
+// โทเคน LINE หมดอายุ (หน้าเปิดค้างนาน) → โหลดหน้าใหม่ได้ครั้งเดียวต่อช่วง กันวนโหลดไม่รู้จบ
+export function authReloadAllowed(last, now, gapMs = AUTH_RELOAD_GAP_MS) {
+  const t = Number(last);
+  if (last === null || last === undefined || last === '' || !Number.isFinite(t)) return true;
+  return now - t >= gapMs || now < t;
+}
 
 const $ = (id) => document.getElementById(id);
 const root = () => $('app');
@@ -20,7 +30,7 @@ const root = () => $('app');
 function allRows() { return H.view ? (H.view.sessions || []).flatMap((s) => s.rows) : []; }
 function rowByKey(key) { return allRows().find((r) => r.key === key) || null; }
 function rowEl(key) { return Array.from(document.querySelectorAll('[data-act="row"]')).find((el) => el.dataset.key === key) || null; }
-function ui() { return { filter: H.filter, needsKeys: H.needsKeys, saving: H.saving, thumbs: H.thumbs }; }
+function ui() { return { filter: H.filter, needsKeys: H.needsKeys, saving: H.saving, thumbs: H.thumbs, stale: H.stale }; }
 
 // ลิงก์ "เวรของฉัน" = หน้าเดิมไม่มี ?v (โหมดทดลองไปหน้า mock=my)
 function myDutyHref() { return location.pathname + (H.mock !== null ? '?mock=my' : ''); }
@@ -37,6 +47,18 @@ function showError(res) {
   if (code === 'auth') return showMessage('ยืนยันตัวตนไม่สำเร็จ', res.message, false);
   if (code === 'network') return showMessage('ยังโหลดไม่สำเร็จ', 'สัญญาณอินเทอร์เน็ตไม่พอ ให้ปิดหน้านี้แล้วเปิดใหม่เมื่อมีสัญญาณ', false);
   return showMessage('เกิดข้อผิดพลาด', (res && res.message) || 'ระบบขัดข้อง ให้ปิดหน้านี้แล้วเปิดใหม่', false);
+}
+
+function reloadForAuth(res) {
+  let ok = false;
+  try {
+    ok = authReloadAllowed(sessionStorage.getItem(AUTH_KEY), Date.now());
+    if (ok) sessionStorage.setItem(AUTH_KEY, String(Date.now()));
+  } catch (e) {
+    ok = false; // จำไม่ได้ว่าเพิ่งโหลดใหม่ → ไม่โหลดเอง (กันวน)
+  }
+  if (ok) return location.reload();
+  showError(res);
 }
 
 function showLoading(text) {
@@ -92,7 +114,11 @@ async function loadFull(row) {
   const id = row.photo.checkinId;
   if (H.full[id]) return;
   const url = dataUrl(await call('headPhoto', { checkinId: id, size: 'full' }, { retries: 1 }));
-  if (!url) return;
+  if (!url) {
+    H.fullFail[id] = true;
+    if (H.sheetKey === row.key) drawSheet(false);
+    return;
+  }
   H.full[id] = url;
   if (H.sheetKey === row.key) drawSheet(false);
 }
@@ -102,7 +128,8 @@ function drawSheet(focus) {
   const row = rowByKey(H.sheetKey);
   if (!row) return closeSheet(false);
   const box = $('hsheet');
-  box.innerHTML = renderSheet(row, { full: row.photo ? H.full[row.photo.checkinId] : '' });
+  const id = row.photo ? row.photo.checkinId : null;
+  box.innerHTML = renderSheet(row, { full: id ? H.full[id] : '', failed: id ? !!H.fullFail[id] : false });
   box.hidden = false;
   if (focus) {
     const first = box.querySelector('.opt:not(:disabled)') || box.querySelector('[data-act="close"].btn');
@@ -114,6 +141,7 @@ function openSheet(key) {
   const row = rowByKey(key);
   if (!row || H.saving[key]) return;
   H.sheetKey = key;
+  if (row.photo) delete H.fullFail[row.photo.checkinId]; // เปิดใหม่ = ลองโหลดรูปอีกครั้ง
   document.body.style.overflow = 'hidden';
   drawSheet(true);
   if (row.photo) loadFull(row);
@@ -137,9 +165,11 @@ function showToast(text, undoToken) {
   if (H.toast) H.toastTimer = setTimeout(() => showToast(null), TOAST_MS);
 }
 
-function applyView(view) {
+// fromServer = รีเฟรชจากหลังบ้าน (ไม่ใช่ผลการบันทึกของหัวหน้าเวรเอง): ตัวกรองต้องดูเพิ่มแถวที่เพิ่งต้องดู
+function applyView(view, fromServer) {
   H.seq++;
   H.view = view;
+  if (fromServer && H.filter === 'needs') H.needsKeys = mergeNeedsKeys(H.needsKeys, view);
   if (H.sheetKey && !rowByKey(H.sheetKey)) closeSheet(false);
   drawPage();
   loadThumbs();
@@ -153,6 +183,7 @@ async function choose(action) {
   if (!opt || opt.disabled) return;
   closeSheet();
   H.seq++;
+  const req = ++H.req;
   H.saving[row.key] = true;
   H.pending++;
   drawRow(row.key);
@@ -161,14 +192,23 @@ async function choose(action) {
   }, { retries: 0 });
   H.pending--;
   delete H.saving[row.key];
-  if (res.ok) {
-    applyView(res.view);
-    return showToast(res.toast, res.undoToken);
-  }
-  if (res.code === 'not_head' || res.code === 'not_bound' || res.code === 'auth') return showError(res);
-  if (res.view) applyView(res.view); else drawRow(row.key);
-  showToast(res.message);
+  if (res.code === 'auth') return reloadForAuth(res);
+  if (res.code === 'not_head' || res.code === 'not_bound') return showError(res);
+  if (!takeView(req, res.view)) drawRow(row.key);
+  showToast(res.ok ? res.toast : res.message, res.ok ? res.undoToken : null);
   if (res.code === 'locked') refresh(true);
+}
+
+// ผลบันทึก/เลิกทำ: ใช้ view เฉพาะเมื่อคำขอนี้ใหม่กว่าผลที่ใช้ไปแล้ว · ผลเก่าที่มาช้าไม่ทับ (ขอข้อมูลล่าสุดแทนเมื่อว่าง)
+function takeView(req, view) {
+  if (!view) return false;
+  if (req > H.appliedReq) {
+    H.appliedReq = req;
+    applyView(view);
+    return true;
+  }
+  if (H.pending === 0) refresh(true);
+  return false;
 }
 
 async function undo() {
@@ -176,13 +216,20 @@ async function undo() {
   if (!t) return;
   showToast(null);
   H.seq++;
+  const req = ++H.req;
   H.pending++;
   const res = await call('headUndo', { undoToken: t }, { retries: 0 });
   H.pending--;
-  if (res.ok) { applyView(res.view); return showToast(res.toast); }
-  if (res.code === 'not_head' || res.code === 'not_bound' || res.code === 'auth') return showError(res);
-  if (res.view) applyView(res.view);
-  showToast(res.message);
+  if (res.code === 'auth') return reloadForAuth(res);
+  if (res.code === 'not_head' || res.code === 'not_bound') return showError(res);
+  takeView(req, res.view);
+  showToast(res.ok ? res.toast : res.message);
+}
+
+function setStale(on) {
+  if (H.stale === on) return;
+  H.stale = on;
+  if (H.view) drawPage();
 }
 
 // รีเฟรชเงียบ ๆ เมื่อเปิดหน้าอยู่ ไม่มีแผ่นเปิด และไม่มีงานบันทึกค้าง
@@ -192,7 +239,10 @@ async function refresh(force) {
   // ผลรีเฟรชที่ออกไปก่อนการบันทึก/เลิกทำ/วาดใหม่ ทิ้งไป (กันข้อมูลเก่าทับผลที่ใหม่กว่า)
   const seq = H.seq;
   const res = await call('headView', {}, { retries: 0 });
-  if (res.ok && idle() && seq === H.seq) applyView(res);
+  if (res.code === 'auth') return reloadForAuth(res);
+  if (res.code === 'network') return setStale(true);
+  if (!res.ok) return;
+  if (idle() && seq === H.seq) { H.stale = false; applyView(res, true); } else setStale(false);
 }
 
 // ---------- ปุ่มทั้งหมด ----------
@@ -243,4 +293,5 @@ export async function startHead(identity) {
   mountShell();
   applyView(view);
   setInterval(() => refresh(false), REFRESH_MS);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') refresh(false); });
 }

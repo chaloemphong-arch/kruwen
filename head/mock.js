@@ -1,5 +1,5 @@
 // โหมดทดลองหน้าหัวหน้าเวร ?v=head&mock=<scenario>: ตอบจาก mock-data.json (สร้างด้วย npm run head-mock จากหลังบ้านจริง)
-// headSet ใน mock เปลี่ยนป้ายแถวนั้นแบบง่าย พอให้ลองแตะ · stale = ตอบ stale ทุกครั้ง · netfail = เน็ตล้มเหลวตอนบันทึก
+// headSet ใน mock เปลี่ยนป้ายแถวนั้นแบบง่าย พอให้ลองแตะ · stale = ตอบ stale ทุกครั้ง · netfail = เน็ตล้มเหลวตอนบันทึก/รีเฟรช/รูปใหญ่
 
 export const HEAD_SCENARIOS = ['morning', 'clearing', 'locked', 'unlocked', 'admin', 'deputy', 'notoday', 'notbound', 'holiday', 'stale', 'netfail'];
 
@@ -103,9 +103,10 @@ export function headMockCall(scenario, data) {
   };
 }
 
-// transport ของ api.js: โหลด mock-data.json ครั้งเดียว หน่วงเล็กน้อย · netfail = บันทึก (headSet/headUndo) ล้มเหลวตลอด
+// transport ของ api.js: โหลด mock-data.json ครั้งเดียว หน่วงเล็กน้อย · netfail = บันทึก (headSet/headUndo) ล้มเหลวตลอด,
+// รีเฟรช (headView หลังครั้งแรก) ล้มเหลว และรูปใหญ่โหลดไม่ได้
 export function headMockTransport(scenario) {
-  let callP = null;
+  let callP = null, views = 0;
   const load = () => {
     if (!callP) {
       callP = fetch(new URL('./mock-data.json', import.meta.url)).then((r) => r.json()).then((data) => headMockCall(scenario, data));
@@ -115,7 +116,11 @@ export function headMockTransport(scenario) {
   return async (body) => {
     const call = await load();
     await new Promise((r) => setTimeout(r, body.action === 'headPhoto' ? 500 : 350));
-    if (scenario === 'netfail' && (body.action === 'headSet' || body.action === 'headUndo')) throw new Error('mock network');
+    if (scenario === 'netfail') {
+      if (body.action === 'headSet' || body.action === 'headUndo') throw new Error('mock network');
+      if (body.action === 'headView' && views++ > 0) throw new Error('mock network');
+      if (body.action === 'headPhoto' && body.size === 'full') throw new Error('mock network');
+    }
     return call(body);
   };
 }

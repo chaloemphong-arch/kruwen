@@ -1,7 +1,7 @@
 // ตัวควบคุมหน้าครูเวร: อ่าน ?p=&k= (สแกน) หรือไม่มี p (เวรของฉัน) แล้วเลือกหน้าจอจากผล call()
 // import ได้ใน Node (เทสต์ใช้ routeFor): โค้ดที่แตะ document/window/navigator อยู่ในฟังก์ชันเท่านั้น
 import { call, setIdentity, setTransport, retryNow } from './api.js';
-import { initIdentity, mockScenario } from './liff.js';
+import { initIdentity, mockScenario, viewParam } from './liff.js';
 import * as camera from './camera.js';
 import { getGps } from './gps.js';
 import * as V from './screens.js';
@@ -465,8 +465,8 @@ function deviceId() {
 }
 
 export async function start() {
-  // ?v=head = หน้าหัวหน้าเวร (ใบเช็ค) แยกตัวควบคุม โหลดเฉพาะเมื่อเปิดหน้านี้
-  if (new URLSearchParams(location.search).get('v') === 'head') {
+  // ?v=head = หน้าหัวหน้าเวร (ใบเช็ค) แยกตัวควบคุม โหลดเฉพาะเมื่อเปิดหน้านี้ (อ่านจาก liff.state ด้วย)
+  if (viewParam(location.search) === 'head') {
     show('loading', { title: 'กำลังเปิด' });
     const [{ startHead }, id] = await Promise.all([import('../head/app.js'), initIdentity()]);
     return startHead(id);

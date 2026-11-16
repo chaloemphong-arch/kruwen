@@ -4,6 +4,16 @@ import { LIFF_ID } from '../config.js';
 
 const SDK = 'https://static.line-scdn.net/liff/edge/versions/2.24.0/sdk.js';
 
+// ?v=<หน้า> จาก query ตรง ๆ หรือจาก liff.state (เปิดผ่าน liff.line.me/<id>?v=head ครั้งแรกจะได้ ?liff.state=%3Fv%3Dhead ก่อน liff.init)
+export function viewParam(search) {
+  const q = new URLSearchParams(search || '');
+  if (q.get('v')) return q.get('v');
+  const st = q.get('liff.state');
+  if (!st) return null;
+  const i = st.indexOf('?');
+  return new URLSearchParams(i >= 0 ? st.slice(i + 1) : st).get('v');
+}
+
 export function mockScenario(search) {
   return new URLSearchParams(search || '').get('mock');
 }
