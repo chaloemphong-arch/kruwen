@@ -197,14 +197,13 @@ export function proxyPick(st) {
   const r = st.r, d = st.c ? st.c.duty : null;
   const list = r.friends || [];
   let body;
-  if (r.remaining <= 0) body = '<div class="err">วันนี้คุณลงชื่อให้ครบแล้ว คนที่เหลือให้หัวหน้าเวรเช็คให้</div>';
-  else if (list.length) {
+  if (list.length) {
     body = list.map((t) => `<button class="plist" data-act="proxyTo" data-id="${esc(t.teacher_id)}" data-name="${esc(t.name)}">${d ? chip(d.code, d.color) : ''}<span><b>${esc(kru(t.name))}</b>${d ? `<small>${esc(d.point)} · ${hmd(d.start)}–${hmd(d.end)}</small>` : ''}</span><span class="muted">›</span></button>`).join('');
   } else {
     body = `<div class="box">${esc(r.message || 'ครูเวรจุดนี้ลงเวรครบแล้ว')}${r.message ? '' : '<br><span class="small muted">ครูที่ลืมโทรศัพท์ให้หัวหน้าเวรเช็คให้</span>'}</div>`;
   }
   return `<div class="pad"><p class="title">ลงชื่อให้ใคร</p>
-   <p class="small muted">แสดงเฉพาะครูที่มีเวรจุดเดียวกันและเวลาเดียวกับคุณ${d ? ` (${esc(d.code)} ${esc(d.point)})` : ''} ที่ยังไม่ได้ลงเวร · ลงชื่อให้ได้อีก ${Number(r.remaining) || 0} คนวันนี้</p>
+   <p class="small muted">แสดงเฉพาะครูที่มีเวรจุดเดียวกันและเวลาเดียวกับคุณ${d ? ` (${esc(d.code)} ${esc(d.point)})` : ''} ที่ยังไม่ได้ลงเวร</p>
    ${body}<div class="fill"></div></div>
    ${dock('<button class="btn" data-act="toHome">กลับ</button>')}`;
 }
@@ -222,8 +221,6 @@ export function proxyDone(st) {
   return `<div class="okhero"><div class="ring pop">${ICON.check}</div><div class="where">ลงชื่อให้แล้ว</div><div class="time small-time">${esc(r.time)}</div>
    <div class="sub"><span>${esc(kru(r.friendName))}${d ? ` · ${esc(d.code)} ${esc(d.point)}` : ''}</span>${r.late ? '<span class="late">สาย</span>' : ''}</div></div>
   <div class="pad">${st.img ? `<img class="thumbs" src="${esc(st.img)}" alt="รูปยืนยัน">` : ''}
-   <div class="box">หัวหน้าเวรวันนี้${r.headName ? ` (${esc(kru(r.headName))})` : ''} เห็นรูปนี้ในแถวของ ${esc(kru(r.friendName))} ถ้ารูปไม่ตรง แก้เป็น "ไม่พบตัว" ได้</div>
-   <p class="small muted center">ลงชื่อให้ได้อีก ${Number(r.remaining) || 0} คนวันนี้</p>
    <div class="fill"></div></div>
   ${dock('<button class="btn" data-act="toHome">กลับ</button>')}`;
 }

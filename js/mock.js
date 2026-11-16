@@ -102,9 +102,9 @@ export function mockCall(scenario, action, payload = {}) {
       const t = TEACHERS.find((x) => x.teacher_id === payload.teacherId) || ME;
       return withKind('bound', { teacher: { teacher_id: t.teacher_id, name: t.name } });
     }
-    case 'proxyCandidates': return withKind('proxy_candidates', { friends: [FRIEND], remaining: 2 });
+    case 'proxyCandidates': return withKind('proxy_candidates', { friends: [FRIEND] });
     case 'proxy':
-      return withKind('proxy_done', { friendName: FRIEND.name, time: '07:06', late: false, photo_url: PHOTO_URL, remaining: 1, headName: HEAD });
+      return withKind('proxy_done', { friendName: FRIEND.name, time: '07:06', late: false, photo_url: PHOTO_URL, headName: HEAD });
     case 'report': return withKind('report_done', { report_id: 'mock-r1', count: (payload.categories || []).length || 1 });
     case 'photo': return withKind('photo_done', { photo_url: PHOTO_URL, time: '07:06' });
     case 'rename': {
@@ -183,8 +183,7 @@ export function screenSamples() {
     s('preview', { img, purpose: 'scan', sending: false }),
     s('preview', { img, purpose: 'report', sending: true }, 'preview sending'),
     s('proxyPick', { r: mockCall('x', 'proxyCandidates'), c }),
-    s('proxyPick', { r: { ok: true, kind: 'proxy_candidates', friends: [], remaining: 2, message: 'ครูที่ลืมโทรศัพท์ให้หัวหน้าเวรเช็คให้' }, c }, 'proxyPick alone'),
-    s('proxyPick', { r: { ok: true, kind: 'proxy_candidates', friends: [FRIEND], remaining: 0 }, c }, 'proxyPick limit'),
+    s('proxyPick', { r: { ok: true, kind: 'proxy_candidates', friends: [], message: 'ครูที่ลืมโทรศัพท์ให้หัวหน้าเวรเช็คให้' }, c }, 'proxyPick alone'),
     s('proxyDone', { r: mockCall('x', 'proxy'), img, c }),
     s('proxyDone', { r: { friendName: FRIEND.name, already: true }, c }, 'proxyDone already'),
     s('fail', { attempt: 1, load: true }, 'fail load'),
