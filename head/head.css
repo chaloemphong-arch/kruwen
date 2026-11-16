@@ -39,7 +39,7 @@
 
 /* StatusPill */
 .pill{display:inline-flex;align-items:center;gap:var(--space-4);font-size:16px;font-weight:600;padding:2px var(--space-10);border-radius:var(--radius-pill);white-space:nowrap;font-variant-numeric:tabular-nums;line-height:1.4}
-.pill:has(.late){flex-direction:column;gap:0;align-items:flex-end;line-height:1.2}
+.pill.two{flex-direction:column;gap:0;align-items:flex-end;line-height:1.2}
 .pill .late{display:block;font-size:.8em;font-weight:600;color:var(--head)}
 .p-ok{background:var(--ok-bg);color:var(--ok)}
 .p-head{background:var(--head-bg);color:var(--head)}

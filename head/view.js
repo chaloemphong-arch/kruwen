@@ -78,7 +78,7 @@ export function renderRow(row, ui = {}) {
     '<span class="nm"><b>' + esc(row.name) + '</b><small>' +
     [marked ? '<span class="muted saving">' + SAVING + '</span>' : '', subLine(row.sub)].filter(Boolean).join(' · ') + '</small></span>' +
     '<span class="stw">' + (thumb ? '<img class="rthumb" src="' + thumb + '" alt="">' : '') +
-    '<span class="pill ' + p.cls + '">' + esc(p.text) + (p.late ? '<small class="late">(สาย)</small>' : '') + '</span><span class="chev" aria-hidden="true">›</span></span></div>';
+    '<span class="pill ' + p.cls + (p.late ? ' two' : '') + '">' + esc(p.text) + (p.late ? '<small class="late">(สาย)</small>' : '') + '</span><span class="chev" aria-hidden="true">›</span></span></div>';
 }
 
 // วงสีหน้าตัวเลือก: สีเดียวกับป้ายที่จะได้
