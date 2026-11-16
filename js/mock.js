@@ -11,9 +11,9 @@ const HEAD = 'สมชาย ใจดี';
 const TEACHERS = [FRIEND, ME, { teacher_id: 't03', name: 'วิชัย รักเรียน' }, { teacher_id: 't04', name: 'วิภา มั่นคง' },
   { teacher_id: 't05', name: 'ประเสริฐ แก้วมณี' }, { teacher_id: 't06', name: 'ประภา ทองดี' },
   { teacher_id: 't13', name: 'ธนากร ศรีสว่าง' }, { teacher_id: 't21', name: 'สมพร ใจดี' }];
-const DUTY = { code: '1(1)', label: '1(1)', point: 'ประตู 1', start: '07:00', end: '08:30', color: '#9ca3af' };
-const DUTY_PM = { code: '1(2)', label: '1(2)', point: 'ประตู 1', start: '15:30', end: '16:30', color: '#1e3a8a' };
-const summary = (d) => ({ code: d.code, label: d.label, point: d.point, start: d.start, end: d.end }); // dutySummary (ไม่มี color)
+const DUTY = { code: '1(1)', label: '1(1)', point: 'ประตู 1', title: 'ประตู 1', short: 'ประตู 1', start: '07:00', end: '08:30', color: '#9ca3af' };
+const DUTY_PM = { code: '1(2)', label: '1(2)', point: 'ประตู 1', title: 'ประตู 1', short: 'ประตู 1', start: '15:30', end: '16:30', color: '#1e3a8a' };
+const summary = (d) => ({ code: d.code, label: d.label, point: d.point, title: d.title, short: d.short, start: d.start, end: d.end }); // dutySummary (ไม่มี color)
 const SERVER_TIME = '2026-11-20T07:05:00+07:00';
 const CATEGORIES = ['นักเรียนมาสาย', 'แต่งกายผิดระเบียบ', 'ทะเลาะวิวาท', 'อุบัติเหตุ/บาดเจ็บ', 'สถานที่ชำรุด', 'อื่น ๆ'];
 const PHOTO_URL = 'https://drive.google.com/file/d/mock/view';
@@ -67,7 +67,7 @@ function scanResult(scenario) {
 }
 
 function myResult() {
-  const day = (date, status, note, code = '1(1)') => ({ date, duty_code: code, label: code, status, note });
+  const day = (date, status, note, code = '1(1)') => ({ date, duty_code: code, label: code, place: code === '2(1)' ? 'ประตู 2' : 'ประตู 1', status, note });
   return withKind('my', {
     teacher: ME, canSelfChange: false,
     next: { date: '2026-11-27', duty: summary(DUTY) }, isToday: false,
