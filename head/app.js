@@ -157,12 +157,14 @@ function closeSheet(refocus = true) {
 }
 
 // ---------- แถบแจ้งผล + เลิกทำ ----------
-function showToast(text, undoToken) {
+// undo = { token, key, prev }: ปุ่มเลิกทำ (prev = ป้ายของแถวก่อนเลือก ใช้ขึ้นทันทีตอนแตะเลิกทำ)
+// sticky = ค้างไว้จนกว่าผลบันทึกจะมา (ยังไม่มีปุ่มเลิกทำ ยังไม่นับเวลา)
+function showToast(text, undo, sticky) {
   clearTimeout(H.toastTimer);
-  H.toast = text ? { text, undo: !!undoToken, undoToken: undoToken || null } : null;
+  H.toast = text ? { text, undo: !!(undo && undo.token), undoInfo: undo && undo.token ? undo : null } : null;
   const box = $('htoast');
   if (box) box.innerHTML = renderToast(H.toast);
-  if (H.toast) H.toastTimer = setTimeout(() => showToast(null), TOAST_MS);
+  if (H.toast && !sticky) H.toastTimer = setTimeout(() => showToast(null), TOAST_MS);
 }
 
 // fromServer = รีเฟรชจากหลังบ้าน (ไม่ใช่ผลการบันทึกของหัวหน้าเวรเอง): ตัวกรองต้องดูเพิ่มแถวที่เพิ่งต้องดู
@@ -175,28 +177,39 @@ function applyView(view, fromServer) {
   loadThumbs();
 }
 
-// เลือกสถานะ: ปิดแผ่นทันที แถวขึ้น "กำลังบันทึก…" · ไม่ลองซ้ำเอง (กันเขียนซ้อน)
+// เลือกสถานะ: ปิดแผ่นทันที แถวขึ้นป้ายที่จะได้ (option.next จากหลังบ้าน) + "กำลังบันทึก…" ทันที
+// สำเร็จ = ใช้ view จากหลังบ้าน แล้วแถบแจ้งผลได้ปุ่มเลิกทำ · ไม่สำเร็จ = แถวกลับเป็นเดิม (หรือ view ที่หลังบ้านส่งมา)
+// ไม่ลองซ้ำเอง (กันเขียนซ้อน) · แถวที่กำลังบันทึกแตะเปิดไม่ได้ (openSheet)
 async function choose(action) {
   const row = rowByKey(H.sheetKey);
   if (!row || !action) return;
   const opt = (row.options || []).find((o) => o.action === action);
   if (!opt || opt.disabled) return;
   closeSheet();
+  showToast('ครู' + row.name + ': ' + opt.label, null, true);
+  const res = await save(row.key, opt.next, 'headSet', {
+    date: H.view.date, dutyCode: row.dutyCode, teacherId: row.teacherId, setAction: action, expectSig: row.sig
+  });
+  if (!res) return;
+  showToast(res.ok ? res.toast : res.message, res.ok ? { token: res.undoToken, key: row.key, prev: row.pill } : null);
+  if (res.code === 'locked') refresh(true);
+}
+
+// บันทึก/เลิกทำหนึ่งครั้ง: แถว key ขึ้นป้าย next ระหว่างรอ · คืน res หรือ null เมื่อออกจากหน้า (auth/not_head/not_bound)
+// H.saving ทับแถวไว้จนผลมา: รีเฟรชไม่วิ่งระหว่างนี้ (pending) และ drawPage/drawRow จากผลอื่นก็ยังวาดป้ายที่กำลังบันทึก
+async function save(key, next, action, body) {
   H.seq++;
   const req = ++H.req;
-  H.saving[row.key] = true;
+  H.saving[key] = { next: next || null };
   H.pending++;
-  drawRow(row.key);
-  const res = await call('headSet', {
-    date: H.view.date, dutyCode: row.dutyCode, teacherId: row.teacherId, setAction: action, expectSig: row.sig
-  }, { retries: 0 });
+  drawRow(key);
+  const res = await call(action, body, { retries: 0 });
   H.pending--;
-  delete H.saving[row.key];
-  if (res.code === 'auth') return reloadForAuth(res);
-  if (res.code === 'not_head' || res.code === 'not_bound') return showError(res);
-  if (!takeView(req, res.view)) drawRow(row.key);
-  showToast(res.ok ? res.toast : res.message, res.ok ? res.undoToken : null);
-  if (res.code === 'locked') refresh(true);
+  delete H.saving[key];
+  if (res.code === 'auth') { reloadForAuth(res); return null; }
+  if (res.code === 'not_head' || res.code === 'not_bound') { showError(res); return null; }
+  if (!takeView(req, res.view)) drawRow(key);
+  return res;
 }
 
 // ผลบันทึก/เลิกทำ: ใช้ view เฉพาะเมื่อคำขอนี้ใหม่กว่าผลที่ใช้ไปแล้ว · ผลเก่าที่มาช้าไม่ทับ (ขอข้อมูลล่าสุดแทนเมื่อว่าง)
@@ -211,19 +224,13 @@ function takeView(req, view) {
   return false;
 }
 
+// เลิกทำ: แถวขึ้นป้ายก่อนเลือกทันที + "กำลังบันทึก…" แล้วใช้ view จากหลังบ้าน · ไม่สำเร็จ = แถวกลับเป็นป้ายปัจจุบัน + แจ้ง
 async function undo() {
-  const t = H.toast && H.toast.undoToken;
-  if (!t) return;
+  const u = H.toast && H.toast.undoInfo;
+  if (!u || H.saving[u.key]) return;
   showToast(null);
-  H.seq++;
-  const req = ++H.req;
-  H.pending++;
-  const res = await call('headUndo', { undoToken: t }, { retries: 0 });
-  H.pending--;
-  if (res.code === 'auth') return reloadForAuth(res);
-  if (res.code === 'not_head' || res.code === 'not_bound') return showError(res);
-  takeView(req, res.view);
-  showToast(res.ok ? res.toast : res.message);
+  const res = await save(u.key, u.prev, 'headUndo', { undoToken: u.token });
+  if (res) showToast(res.ok ? res.toast : res.message);
 }
 
 function setStale(on) {

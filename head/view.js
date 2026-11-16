@@ -1,6 +1,8 @@
 // หน้าหัวหน้าเวร (ใบเช็ค): ฟังก์ชันล้วน คืน HTML string · import ได้ใน Node (เทสต์) ไม่แตะ document/window
 // ข้อมูลทุกอย่างมาจากหลังบ้าน (headView) หน้าเว็บแค่วาด · escape ทุกข้อความ
-// ui: { filter: 'all'|'needs', needsKeys: [row.key] (แถวที่ตัวกรองเลือกไว้ตอนแตะ), saving: {[row.key]: true}, thumbs: {[checkinId]: dataUrl},
+// ui: { filter: 'all'|'needs', needsKeys: [row.key] (แถวที่ตัวกรองเลือกไว้ตอนแตะ), thumbs: {[checkinId]: dataUrl},
+//       saving: {[row.key]: { next: {cls, text} }} = กำลังบันทึก: แถวขึ้นป้ายที่จะได้ (option.next จากหลังบ้าน) ทันที + "กำลังบันทึก…"
+//               (ไม่มี next = ป้ายเทา "กำลังบันทึก…" แบบเดิม),
 //       stale: true = รีเฟรชล่าสุดไม่สำเร็จเพราะเน็ต }
 
 const ESC = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
@@ -41,9 +43,14 @@ function subLine(sub) {
   return (sub || []).map((s) => (TONES.includes(s.tone) ? '<span class="' + s.tone + '">' + esc(s.text) + '</span>' : esc(s.text))).join(' · ');
 }
 
+const SAVING = 'กำลังบันทึก…';
+
+function savingOf(row, ui) { return (ui && ui.saving && ui.saving[row.key]) || null; }
+
+// ป้ายของแถว: กำลังบันทึกและรู้ผล (next) = ป้ายที่จะได้ · กำลังบันทึกแต่ไม่รู้ผล = ป้ายเทา · ปกติ = ป้ายจากหลังบ้าน
 function pill(row, ui) {
-  if (ui && ui.saving && ui.saving[row.key]) return { cls: 'p-idle', text: 'กำลังบันทึก…' };
-  const p = row.pill || {};
+  const sv = savingOf(row, ui);
+  const p = sv ? (sv.next || { cls: 'p-idle', text: SAVING }) : (row.pill || {});
   return { cls: PILLS.includes(p.cls) ? p.cls : 'p-idle', text: p.text || '' };
 }
 
@@ -62,11 +69,14 @@ export function mergeNeedsKeys(keys, view) {
 
 export function renderRow(row, ui = {}) {
   const p = pill(row, ui);
+  const sv = savingOf(row, ui);
+  const marked = !!(sv && sv.next); // ป้ายที่จะได้ขึ้นแล้ว: บอกในบรรทัดรองว่ายังบันทึกอยู่
   const thumb = row.photo ? safeImg(ui.thumbs && ui.thumbs[row.photo.checkinId]) : '';
   return '<div class="nrow" role="button" tabindex="0" data-act="row" data-key="' + esc(row.key) + '"' +
-    ' aria-label="' + esc(row.name + ' ' + p.text + ' แตะเพื่อเลือกสถานะ') + '">' +
+    ' aria-label="' + esc(row.name + ' ' + p.text + (marked ? ' ' + SAVING : '') + ' แตะเพื่อเลือกสถานะ') + '">' +
     code(row) +
-    '<span class="nm"><b>' + esc(row.name) + '</b><small>' + subLine(row.sub) + '</small></span>' +
+    '<span class="nm"><b>' + esc(row.name) + '</b><small>' + (marked ? '<span class="muted saving">' + SAVING + '</span> · ' : '') +
+    subLine(row.sub) + '</small></span>' +
     '<span class="stw">' + (thumb ? '<img class="rthumb" src="' + thumb + '" alt="">' : '') +
     '<span class="pill ' + p.cls + '">' + esc(p.text) + '</span><span class="chev" aria-hidden="true">›</span></span></div>';
 }

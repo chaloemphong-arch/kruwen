@@ -51,14 +51,22 @@
         "label": "มา (สแกนเอง)",
         "hint": "สแกนเวลา 07:02",
         "current": true,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ มา 07:02"
+        }
        },
        {
         "action": "notfound",
         "label": "ไม่พบตัวที่จุดเวร",
         "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ไม่พบตัว"
+        }
        }
       ],
       "reports": [],
@@ -96,14 +104,22 @@
         "label": "มา (เพื่อนลงชื่อให้)",
         "hint": "ลงชื่อให้โดย ครูสมชาย ใจดี 07:05",
         "current": true,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ มา 07:05"
+        }
        },
        {
         "action": "notfound",
         "label": "ไม่พบตัวที่จุดเวร",
         "hint": "รูปไม่ตรง หรือเดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ไม่พบตัว"
+        }
        }
       ],
       "reports": [],
@@ -143,21 +159,33 @@
         "label": "มา (ครูณัฐธิดา พึ่งบุญ มาแทน)",
         "hint": "สแกนเวลา 07:08",
         "current": true,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ มา 07:08"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "notfound",
         "label": "ไม่พบตัวที่จุดเวร",
         "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ไม่พบตัว"
+        }
        }
       ],
       "reports": [],
@@ -197,14 +225,22 @@
         "label": "มา (สแกนเอง)",
         "hint": "สแกนเวลา 07:24",
         "current": true,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ มา 07:24"
+        }
        },
        {
         "action": "notfound",
         "label": "ไม่พบตัวที่จุดเวร",
         "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ไม่พบตัว"
+        }
        }
       ],
       "reports": [],
@@ -240,28 +276,44 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": true,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "ลาแต่ไม่มีครูมาแทน หัวหน้าเวรยืนที่จุดนี้เอง",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "clear",
         "label": "ล้างค่า กลับเป็นยังว่าง",
         "hint": "",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-idle",
+         "text": "ยังว่าง"
+        }
        }
       ],
       "reports": [],
@@ -301,14 +353,22 @@
         "label": "มา (สแกนเอง)",
         "hint": "สแกนเวลา 07:33",
         "current": true,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ มา 07:33"
+        }
        },
        {
         "action": "notfound",
         "label": "ไม่พบตัวที่จุดเวร",
         "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ไม่พบตัว"
+        }
        }
       ],
       "reports": [
@@ -349,21 +409,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -395,21 +467,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
         "current": true,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "clear",
         "label": "ล้างค่า กลับเป็นยังว่าง",
         "hint": "",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-idle",
+         "text": "ยังว่าง"
+        }
        }
       ],
       "reports": [],
@@ -449,21 +533,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -495,21 +591,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -541,21 +649,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -587,21 +707,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -668,14 +800,22 @@
         "label": "มา (สแกนเอง)",
         "hint": "สแกนเวลา 07:02",
         "current": true,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ มา 07:02"
+        }
        },
        {
         "action": "notfound",
         "label": "ไม่พบตัวที่จุดเวร",
         "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ไม่พบตัว"
+        }
        }
       ],
       "reports": [],
@@ -713,14 +853,22 @@
         "label": "มา (เพื่อนลงชื่อให้)",
         "hint": "ลงชื่อให้โดย ครูสมชาย ใจดี 07:05",
         "current": true,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ มา 07:05"
+        }
        },
        {
         "action": "notfound",
         "label": "ไม่พบตัวที่จุดเวร",
         "hint": "รูปไม่ตรง หรือเดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ไม่พบตัว"
+        }
        }
       ],
       "reports": [],
@@ -760,21 +908,33 @@
         "label": "มา (ครูณัฐธิดา พึ่งบุญ มาแทน)",
         "hint": "สแกนเวลา 07:08",
         "current": true,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ มา 07:08"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "notfound",
         "label": "ไม่พบตัวที่จุดเวร",
         "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ไม่พบตัว"
+        }
        }
       ],
       "reports": [],
@@ -814,14 +974,22 @@
         "label": "มา (สแกนเอง)",
         "hint": "สแกนเวลา 07:24",
         "current": true,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ มา 07:24"
+        }
        },
        {
         "action": "notfound",
         "label": "ไม่พบตัวที่จุดเวร",
         "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ไม่พบตัว"
+        }
        }
       ],
       "reports": [],
@@ -857,28 +1025,44 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": true,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "ลาแต่ไม่มีครูมาแทน หัวหน้าเวรยืนที่จุดนี้เอง",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "clear",
         "label": "ล้างค่า กลับเป็นยังว่าง",
         "hint": "",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -918,14 +1102,22 @@
         "label": "มา (สแกนเอง)",
         "hint": "สแกนเวลา 07:33",
         "current": true,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ มา 07:33"
+        }
        },
        {
         "action": "notfound",
         "label": "ไม่พบตัวที่จุดเวร",
         "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ไม่พบตัว"
+        }
        }
       ],
       "reports": [
@@ -970,21 +1162,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -1016,21 +1220,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
         "current": true,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "clear",
         "label": "ล้างค่า กลับเป็นยังว่าง",
         "hint": "",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -1070,21 +1286,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -1116,21 +1344,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -1162,21 +1402,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -1208,21 +1460,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -1536,21 +1800,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -1582,21 +1858,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -1628,21 +1916,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -1674,21 +1974,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -1755,14 +2067,22 @@
         "label": "มา (สแกนเอง)",
         "hint": "สแกนเวลา 07:02",
         "current": true,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ มา 07:02"
+        }
        },
        {
         "action": "notfound",
         "label": "ไม่พบตัวที่จุดเวร",
         "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ไม่พบตัว"
+        }
        }
       ],
       "reports": [],
@@ -1800,14 +2120,22 @@
         "label": "มา (เพื่อนลงชื่อให้)",
         "hint": "ลงชื่อให้โดย ครูสมชาย ใจดี 07:05",
         "current": true,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ มา 07:05"
+        }
        },
        {
         "action": "notfound",
         "label": "ไม่พบตัวที่จุดเวร",
         "hint": "รูปไม่ตรง หรือเดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ไม่พบตัว"
+        }
        }
       ],
       "reports": [],
@@ -1847,21 +2175,33 @@
         "label": "มา (ครูณัฐธิดา พึ่งบุญ มาแทน)",
         "hint": "สแกนเวลา 07:08",
         "current": true,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ มา 07:08"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "notfound",
         "label": "ไม่พบตัวที่จุดเวร",
         "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ไม่พบตัว"
+        }
        }
       ],
       "reports": [],
@@ -1901,14 +2241,22 @@
         "label": "มา (สแกนเอง)",
         "hint": "สแกนเวลา 07:24",
         "current": true,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ มา 07:24"
+        }
        },
        {
         "action": "notfound",
         "label": "ไม่พบตัวที่จุดเวร",
         "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ไม่พบตัว"
+        }
        }
       ],
       "reports": [],
@@ -1944,28 +2292,44 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": true,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "ลาแต่ไม่มีครูมาแทน หัวหน้าเวรยืนที่จุดนี้เอง",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "clear",
         "label": "ล้างค่า กลับเป็นยังว่าง",
         "hint": "",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -2005,14 +2369,22 @@
         "label": "มา (สแกนเอง)",
         "hint": "สแกนเวลา 07:33",
         "current": true,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ มา 07:33"
+        }
        },
        {
         "action": "notfound",
         "label": "ไม่พบตัวที่จุดเวร",
         "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ไม่พบตัว"
+        }
        }
       ],
       "reports": [
@@ -2057,21 +2429,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -2103,21 +2487,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
         "current": true,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "clear",
         "label": "ล้างค่า กลับเป็นยังว่าง",
         "hint": "",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -2157,21 +2553,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -2203,21 +2611,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -2249,21 +2669,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -2295,21 +2727,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -2378,14 +2822,22 @@
         "label": "มา (สแกนเอง)",
         "hint": "สแกนเวลา 07:03",
         "current": true,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ มา 07:03"
+        }
        },
        {
         "action": "notfound",
         "label": "ไม่พบตัวที่จุดเวร",
         "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ไม่พบตัว"
+        }
        }
       ],
       "reports": [],
@@ -2417,21 +2869,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -2467,14 +2931,22 @@
         "label": "มา (สแกนเอง)",
         "hint": "สแกนเวลา 07:06",
         "current": true,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ มา 07:06"
+        }
        },
        {
         "action": "notfound",
         "label": "ไม่พบตัวที่จุดเวร",
         "hint": "เดินตรวจแล้วไม่เจอ · นับเป็นขาด และครูจะโดนสุ่มขอรูปบ่อยขึ้น",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ไม่พบตัว"
+        }
        }
       ],
       "reports": [],
@@ -2506,21 +2978,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -2552,21 +3036,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -2598,21 +3094,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -2644,21 +3152,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -2690,21 +3210,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -2744,21 +3276,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -2790,21 +3334,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -2836,21 +3392,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -2882,21 +3450,33 @@
         "label": "มา (หัวหน้าเวรเช็ค)",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
        },
        {
         "action": "leave",
         "label": "ลา/ไปราชการ",
         "hint": "ไม่นับเป็นขาด",
         "current": false,
-        "disabled": false
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
        },
        {
         "action": "standin",
         "label": "หัวหน้าเวรยืนแทน",
         "hint": "เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
-        "disabled": true
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],

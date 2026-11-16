@@ -1,17 +1,18 @@
 // โหมดทดลองหน้าหัวหน้าเวร ?v=head&mock=<scenario>: ตอบจาก mock-data.json (สร้างด้วย npm run head-mock จากหลังบ้านจริง)
-// headSet ใน mock เปลี่ยนป้ายแถวนั้นแบบง่าย พอให้ลองแตะ · stale = ตอบ stale ทุกครั้ง · netfail = เน็ตล้มเหลวตอนบันทึก/รีเฟรช/รูปใหญ่
+// headSet ใน mock เปลี่ยนป้ายแถวนั้นเป็น option.next (ป้ายที่หลังบ้านบอกไว้) พอให้ลองแตะ · บันทึก/เลิกทำหน่วง ~1.5 วิ ให้เห็นป้ายขึ้นทันที · stale = ตอบ stale ทุกครั้ง · netfail = เน็ตล้มเหลวตอนบันทึก/รีเฟรช/รูปใหญ่
 
 export const HEAD_SCENARIOS = ['morning', 'clearing', 'locked', 'unlocked', 'admin', 'deputy', 'notoday', 'notbound', 'holiday', 'stale', 'netfail'];
 
 const BASE = { stale: 'morning', netfail: 'morning' };
+const SAVE_DELAY_MS = 1500; // ใกล้เวลาบันทึกจริง (~2.5 วิ) พอให้เห็นป้ายขึ้นทันทีระหว่างรอ
 const clone = (x) => JSON.parse(JSON.stringify(x));
 const fail = (code, message, extra) => Object.assign({ ok: false, code, message }, extra || {});
 
 // ตัวเลือกของแถวยังว่าง (ตรงกับ headOptions ของหลังบ้าน)
 const OPEN_OPTIONS = [
-  { action: 'head', label: 'มา (หัวหน้าเวรเช็ค)', hint: 'ครูมาที่จุดแต่ไม่ได้สแกน' },
-  { action: 'leave', label: 'ลา/ไปราชการ', hint: 'ไม่นับเป็นขาด' },
-  { action: 'standin', label: 'หัวหน้าเวรยืนแทน', hint: 'ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด' }
+  { action: 'head', label: 'มา (หัวหน้าเวรเช็ค)', hint: 'ครูมาที่จุดแต่ไม่ได้สแกน', next: { cls: 'p-head', text: '✓ หัวหน้าเวรเช็ค' } },
+  { action: 'leave', label: 'ลา/ไปราชการ', hint: 'ไม่นับเป็นขาด', next: { cls: 'p-leave', text: 'ลา' } },
+  { action: 'standin', label: 'หัวหน้าเวรยืนแทน', hint: 'ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด', next: { cls: 'p-miss', text: 'ขาด' } }
 ];
 const PILL = {
   head: { cls: 'p-head', text: '✓ หัวหน้าเวรเช็ค' }, leave: { cls: 'p-leave', text: 'ลา' },
@@ -40,9 +41,10 @@ function recount(view) {
   });
 }
 
-function applyMock(row, action, original) {
+function applyMock(row, opt, original) {
+  const action = opt.action;
   if (action === 'restore') return Object.assign(row, clone(original));
-  row.pill = PILL[action] || row.pill;
+  row.pill = clone(opt.next || PILL[action] || row.pill);
   row.sig = 'mock-' + Math.random().toString(36).slice(2, 8);
   if (action === 'clear' || action === 'uncover') {
     row.options = OPEN_OPTIONS.map((o) => Object.assign({ current: false, disabled: false }, o));
@@ -55,7 +57,7 @@ function applyMock(row, action, original) {
     current: o.action === action, disabled: o.action === action || (o.disabled && !o.current)
   }));
   if (!opts.some((o) => o.action === 'clear' || o.action === 'restore' || o.action === 'uncover')) {
-    opts.push({ action: 'restore', label: 'ยกเลิก กลับเป็นสถานะเดิม', hint: '', current: false, disabled: false });
+    opts.push({ action: 'restore', label: 'ยกเลิก กลับเป็นสถานะเดิม', hint: '', current: false, disabled: false, next: clone(original.pill) });
   }
   row.options = opts;
   return row;
@@ -86,7 +88,7 @@ export function headMockCall(scenario, data) {
         if (!opt || opt.current || opt.disabled) return fail('bad_action', 'ตอนนี้เลือกสถานะนี้ไม่ได้ ดูอีกครั้งแล้วเลือกใหม่', { view: clone(view) });
         const token = 'mock-u' + ++seq;
         undo.set(token, clone(view));
-        applyMock(row, body.setAction, original[key]);
+        applyMock(row, opt, original[key]);
         recount(view);
         return { ok: true, kind: 'head_done', view: clone(view), undoToken: token, toast: 'ครู' + row.name + ': ' + opt.label };
       }
@@ -103,7 +105,7 @@ export function headMockCall(scenario, data) {
   };
 }
 
-// transport ของ api.js: โหลด mock-data.json ครั้งเดียว หน่วงเล็กน้อย · netfail = บันทึก (headSet/headUndo) ล้มเหลวตลอด,
+// transport ของ api.js: โหลด mock-data.json ครั้งเดียว หน่วงเล็กน้อย (บันทึก/เลิกทำ SAVE_DELAY_MS) · netfail = บันทึก (headSet/headUndo) ล้มเหลวตลอด,
 // รีเฟรช (headView หลังครั้งแรก) ล้มเหลว และรูปใหญ่โหลดไม่ได้
 export function headMockTransport(scenario) {
   let callP = null, views = 0;
@@ -115,7 +117,8 @@ export function headMockTransport(scenario) {
   };
   return async (body) => {
     const call = await load();
-    await new Promise((r) => setTimeout(r, body.action === 'headPhoto' ? 500 : 350));
+    const save = body.action === 'headSet' || body.action === 'headUndo';
+    await new Promise((r) => setTimeout(r, save ? SAVE_DELAY_MS : body.action === 'headPhoto' ? 500 : 350));
     if (scenario === 'netfail') {
       if (body.action === 'headSet' || body.action === 'headUndo') throw new Error('mock network');
       if (body.action === 'headView' && views++ > 0) throw new Error('mock network');
