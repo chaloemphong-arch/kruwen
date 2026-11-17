@@ -159,17 +159,16 @@ const camBar = (left) => `<div class="cambar">${left}<button class="shutter" dat
   <button class="flipbtn" data-act="flip" aria-label="สลับกล้องหน้า/หลัง">${ICON.flip}<span>สลับกล้อง</span></button></div>`;
 const viewfinder = (tip) => `<div class="vf"><video id="video" playsinline muted autoplay></video><div class="tip">${esc(tip)}</div></div>`;
 
-// กล้องหลังสแกน st: {c, mode:'live'|'ask'} (ask = โหมดสุ่ม แสดงการ์ดขอรูปก่อนเปิดกล้อง)
+// กล้องหลังสแกน st: {c, mode:'live'|'ask'} (ask = โหมดสุ่ม แสดงหน้าขอรูปก่อนเปิดกล้อง)
 export function scanCam(st) {
   const c = st.c;
-  const strip = `<div class="okstrip">${ICON.checkS} ลงเวรแล้ว ${esc(c.time)} · ${esc(c.duty.code)} ${esc(c.duty.point)}${c.late ? ' · สาย' : ''}</div>`;
+  const done = `ลงเวรแล้ว ${esc(c.time)}${c.late ? ' (สาย)' : ''}`;
   if (st.mode === 'ask') {
-    return `${strip}<div class="pad">
-    <div class="warn askcard"><b>วันนี้ขอรูปจุดเวร 1 รูป</b><span>ลงเวรนับแล้ว ไม่ต้องกังวล ถ่ายจุดเวรที่ยืนอยู่ ไม่ต้องเซลฟี</span></div>
-    <div class="fill"></div></div>
-    ${dock(`<button class="btn pri" data-act="camScan">${ICON.cam} ถ่ายรูปจุดเวร</button><button class="btn ghost" data-act="skipPhoto">ไม่สะดวกตอนนี้</button>`)}`;
+    return `<div class="pad"><div class="mid"><div class="ring info">${ICON.cam}</div>
+    <p class="big bal">วันนี้ขอรูปจุดเวร 1 รูป</p><p class="ok lead">${done}</p></div></div>
+    ${dock(`<button class="btn pri" data-act="camScan">ถ่ายรูปจุดเวร</button><button class="sublink" data-act="skipPhoto">ไม่สะดวกตอนนี้</button>`)}`;
   }
-  return `<div class="camv">${strip}${viewfinder('ถ่ายจุดเวรตอนนี้ จะมีตัวเองในรูปหรือไม่ก็ได้')}
+  return `<div class="camv"><div class="camstrip"><p class="camok">${done}</p><p class="camplace bal">${esc(placeFull(c.duty))}</p></div>${viewfinder('ถ่ายจุดเวร')}
   ${camBar('<button class="l" data-act="skipPhoto">ข้ามไปก่อน</button>')}</div>`;
 }
 
@@ -181,26 +180,18 @@ export function cam(st) {
 // st: {img (data URL), purpose:'scan'|'proxy'|'report', sending}
 export function preview(st) {
   const send = st.purpose === 'report' ? 'ใช้รูปนี้' : 'ส่งรูป';
-  return `<div class="pad"><p class="title">ตรวจรูปก่อนส่ง</p>
-  <img class="thumb" src="${esc(st.img)}" alt="รูปที่ถ่าย">
-  <p class="small muted">เวลาที่ใช้เป็นหลักฐานคือเวลาที่เซิร์ฟเวอร์ได้รับรูป ระบบไม่เขียนอะไรลงบนรูป</p>
-  ${st.sending ? '<div class="pbar"><i></i></div><p class="small muted center">กำลังส่งรูป</p>' : ''}<div class="fill"></div></div>
-  ${st.sending ? '' : dock(`<button class="btn pri" data-act="sendPhoto">${send}</button><button class="btn" data-act="retake">ถ่ายใหม่</button>`)}`;
+  return `<div class="pad top"><p class="h1">ตรวจรูปก่อนส่ง</p>
+  <img class="pvimg" src="${esc(st.img)}" alt="รูปที่ถ่าย">
+  ${st.sending ? '<div class="pbar"><i></i></div><p class="small muted center">กำลังส่งรูป</p>' : `<button class="btn pri" data-act="sendPhoto">${send}</button><button class="btn" data-act="retake">ถ่ายใหม่</button>`}</div>`;
 }
 
 // st: {r (proxy_candidates), c}
 export function proxyPick(st) {
-  const r = st.r, d = st.c ? st.c.duty : null;
-  const list = r.friends || [];
-  let body;
-  if (list.length) {
-    body = list.map((t) => `<button class="plist" data-act="proxyTo" data-id="${esc(t.teacher_id)}" data-name="${esc(t.name)}">${d ? chip(d.code, d.color) : ''}<span><b>${esc(kru(t.name))}</b>${d ? `<small>${esc(d.point)} · ${hmd(d.start)}–${hmd(d.end)}</small>` : ''}</span><span class="muted">›</span></button>`).join('');
-  } else {
-    body = `<div class="box">${esc(r.message || 'ครูเวรจุดนี้ลงเวรครบแล้ว')}${r.message ? '' : '<br><span class="small muted">ครูที่ลืมโทรศัพท์ให้หัวหน้าเวรเช็คให้</span>'}</div>`;
-  }
-  return `<div class="pad"><p class="title">ลงชื่อให้ใคร</p>
-   <p class="small muted">แสดงเฉพาะครูที่มีเวรจุดเดียวกันและเวลาเดียวกับคุณ${d ? ` (${esc(d.code)} ${esc(d.point)})` : ''} ที่ยังไม่ได้ลงเวร</p>
-   ${body}<div class="fill"></div></div>
+  const list = st.r.friends || [];
+  const body = list.length
+    ? list.map((t) => `<button class="prow" data-act="proxyTo" data-id="${esc(t.teacher_id)}" data-name="${esc(t.name)}"><span>${esc(kru(t.name))}</span>${ICON.chev}</button>`).join('')
+    : `<p class="lead">${esc(st.r.message || 'ลงเวรครบแล้ว')}</p>`;
+  return `<div class="pad top"><p class="h1">เลือกชื่อ</p><div class="plist2">${body}</div><div class="fill"></div></div>
    ${dock('<button class="btn" data-act="toHome">กลับ</button>')}`;
 }
 
@@ -209,15 +200,14 @@ export function proxyDone(st) {
   const r = st.r, d = st.c ? st.c.duty : null;
   if (r.already) {
     // คำขอที่ลองใหม่แต่ถึงเซิร์ฟเวอร์ไปแล้ว (code 'already'): เพื่อนมีบันทึกแล้ว
-    return `<div class="okstrip">${ICON.checkS} ลงชื่อให้แล้ว · ${esc(kru(r.friendName))}</div>
-  <div class="pad"><p class="title">${esc(kru(r.friendName))} มีบันทึกเวรวันนี้แล้ว</p>
-   <p class="muted">ไม่ต้องลงชื่อให้ซ้ำ หัวหน้าเวรเห็นในแถวของ ${esc(kru(r.friendName))}</p><div class="fill"></div></div>
+    return `<div class="pad"><div class="mid"><div class="ring ok">${ICON.checkBig}</div>
+    <p class="big bal">${esc(kruFirst(r.friendName))} มีบันทึกเวรแล้ว</p><p class="small muted">ไม่ต้องลงชื่อให้ซ้ำ</p></div></div>
   ${dock('<button class="btn" data-act="toHome">กลับ</button>')}`;
   }
-  return `<div class="okhero"><div class="ring pop">${ICON.check}</div><div class="where">ลงชื่อให้แล้ว</div><div class="time small-time">${esc(r.time)}</div>
-   <div class="sub"><span>${esc(kru(r.friendName))}${d ? ` · ${esc(d.code)} ${esc(d.point)}` : ''}</span>${r.late ? '<span class="late">สาย</span>' : ''}</div></div>
-  <div class="pad">${st.img ? `<img class="thumbs" src="${esc(st.img)}" alt="รูปยืนยัน">` : ''}
-   <div class="fill"></div></div>
+  return `<div class="pad"><div class="mid"><div class="ring ok">${ICON.checkBig}</div>
+   <p class="hd28">ลงชื่อให้แล้ว</p><p class="num t56">${esc(r.time)}</p>${r.late ? '<p class="late nm20">(สาย)</p>' : ''}
+   <p class="nm20 bal">${esc(kru(r.friendName))}</p>${d ? `<p class="small muted bal">${esc(placeShort(d))}</p>` : ''}
+   ${st.img ? `<img class="thumbs" src="${esc(st.img)}" alt="รูปยืนยัน">` : ''}</div></div>
   ${dock('<button class="btn" data-act="toHome">กลับ</button>')}`;
 }
 
@@ -328,23 +318,24 @@ export function report(st) {
   const p = st.photo;
   const photo = p
     ? `<div class="repphoto">${p.img ? `<img class="thumbs" src="${esc(p.img)}" alt="รูปประกอบ">` : ''}
-       <div><p class="strong">${ICON.checkS} ใช้${p.kind === 'scan' ? 'รูปตอนสแกน' : 'รูปที่ถ่ายใหม่'}เป็นรูปประกอบ</p>
-       <div class="row2"><button class="btn sm" data-act="repPhotoRemove">เอาออก</button><button class="btn sm" data-act="repPhotoNew">${ICON.cam} ถ่ายใหม่</button></div></div></div>`
-    : `<button class="btn" data-act="repPhotoNew">${ICON.cam} ถ่ายรูปประกอบ (ไม่บังคับ)</button>`;
-  return `<div class="pad"><p class="title">รายงานเหตุการณ์</p><p class="small muted">เลือกได้หลายข้อ</p>
-  <div class="chips2">${(st.categories || []).map((x, i) => `<button class="chip" data-act="cat" data-i="${i}" aria-pressed="${(st.selected || []).includes(x)}">${esc(x)}</button>`).join('')}</div>
-  <label class="small muted" for="note">รายละเอียด (ไม่บังคับ)</label>
-  <textarea id="note" placeholder="เช่น นักเรียน ม.2 มาสาย 5 คน">${esc(st.note)}</textarea>
+       <div><p class="small">${p.kind === 'scan' ? 'ใช้รูปตอนสแกน' : 'ใช้รูปที่ถ่ายใหม่'}</p>
+       <div class="row2"><button class="btn sm" data-act="repPhotoRemove">เอาออก</button><button class="btn sm" data-act="repPhotoNew">ถ่ายใหม่</button></div></div></div>`
+    : `<button class="btn dashed" data-act="repPhotoNew">${ICON.cam}<span>ถ่ายรูปประกอบ</span></button>`;
+  const sel = st.selected || [];
+  return `<div class="pad top"><p class="h1">รายงานเหตุการณ์</p>
+  <div class="chips2">${(st.categories || []).map((x, i) => `<button class="chip" data-act="cat" data-i="${i}" aria-pressed="${sel.includes(x)}">${sel.includes(x) ? '✓ ' : ''}${esc(x)}</button>`).join('')}</div>
+  <label class="small strong" for="note">รายละเอียด</label>
+  <textarea class="repnote" id="note" placeholder="เช่น นักเรียน ม.2 มาสาย 5 คน">${esc(st.note)}</textarea>
   ${photo}${st.error ? `<div class="err">${esc(st.error)}</div>` : ''}<div class="fill"></div></div>
   ${dock(`<button class="btn pri" id="sendReport" data-act="sendReport"${b.disabled || st.sending ? ' disabled' : ''}>${st.sending ? 'กำลังส่ง' : b.label}</button><button class="btn" data-act="toHome">ยกเลิก</button>`)}`;
 }
 
 // st: {cats, note, time}
 export function reportDone(st) {
-  const title = (st.cats || []).length ? st.cats.join(' · ') : 'รายงานเหตุการณ์';
-  return `<div class="okstrip">${ICON.checkS} ส่งรายงานแล้ว${st.time ? ' ' + esc(st.time) : ''}</div>
-  <div class="pad"><p class="title">${esc(title)}</p>${st.note ? `<p>${esc(st.note)}</p>` : ''}
-  <p class="muted">หัวหน้าเวรเห็นทันทีในแถวของคุณ และขึ้นในเอกสารประจำวันกับหน้าผู้บริหาร</p><div class="fill"></div></div>
+  const cats = (st.cats || []).join(' · ');
+  return `<div class="pad"><div class="mid"><div class="ring ok">${ICON.checkBig}</div>
+  <p class="hd28">ส่งรายงานแล้ว</p>${st.time ? `<p class="lead muted num">${esc(st.time)}</p>` : ''}
+  ${cats ? `<p class="nm22 bal">${esc(cats)}</p>` : ''}${st.note ? `<p class="note17">${esc(st.note)}</p>` : ''}</div></div>
   ${dock('<button class="btn" data-act="toHome">กลับ</button>')}`;
 }
 

@@ -280,7 +280,7 @@ async function sendScanPhoto(b64) {
 }
 
 // ---------- ลงชื่อให้เพื่อน ----------
-const proxyTip = () => `ถ่ายรูปครู${A.friend ? A.friend.name : 'เพื่อน'}ที่จุดเวร ให้เห็นหน้าและจุดเวร`;
+export const proxyTip = () => { const f = A.friend ? V.firstName(A.friend.name) : ''; return f ? `ถ่ายรูปครู${f}ที่จุดเวร` : 'ถ่ายรูปเพื่อนที่จุดเวร'; };
 
 async function startProxy() {
   show('loading', { title: 'กำลังโหลดรายชื่อ' });
