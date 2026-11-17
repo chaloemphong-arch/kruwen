@@ -2,12 +2,18 @@
 // หน้าตาและข้อความตามเดโม เดโมระบบครูเวร.html (V.*) ข้อมูลมาจากผล call() ของหลังบ้าน
 
 // ฟังก์ชันที่ export แต่ไม่ใช่หน้าจอ
-export const HELPERS = ['reportButton'];
+export const HELPERS = ['reportButton', 'firstName', 'placeFull', 'placeShort'];
 
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const hmd = (hhmm) => esc(String(hhmm || '').replace(':', '.'));
 const toMin = (hhmm) => { const p = String(hhmm || '0:0').split(':'); return Number(p[0]) * 60 + Number(p[1]); };
 const kru = (name) => { const n = String(name || ''); return !n || n.startsWith('ครู') ? n : 'ครู' + n; };
+// ชื่อแรกของครู (ตัด "ครู" นำหน้า) และชื่อสถานที่ (เต็ม/สั้น) — ผู้เรียกต้อง esc เอง
+export const firstName = (name) => String(name || '').trim().replace(/^ครู/, '').trim().split(/\s+/)[0] || '';
+export const placeFull = (d) => (d && (d.title || d.point || d.code)) || '';
+export const placeShort = (d) => (d && (d.short || d.point || d.code)) || '';
+const kruFirst = (name) => { const f = firstName(name); return f ? 'ครู' + f : ''; };
+const rng = (d) => `${hmd(d.start)}–${hmd(d.end)}`;
 const TMON = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
 const DOW = ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'];
 const ymdParts = (ymd) => String(ymd).split('-').map(Number);
@@ -29,9 +35,10 @@ const dutyLine = (d) => d ? `${chip(d.code, d.color)} ${esc(d.point)} · ${hmd(d
 const ICON = {
   check: '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
   checkS: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+  checkBig: '<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+  chev: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A96AA" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>',
   users: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.3-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><path d="M16 4.8a3.5 3.5 0 010 6.4M18 14.8c2 .7 3.2 2.4 3.5 5.2"/></svg>',
   alert: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9.5 17h-19z"/><path d="M12 10v4.5M12 17.5v.2"/></svg>',
-  pencil: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4.5L16 4.5l3.5 3.5L8.5 19z"/><path d="M14 7l3.5 3.5"/></svg>',
   cam: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h4l2-3h6l2 3h4v11H3z"/><circle cx="12" cy="13" r="3.5"/></svg>',
   clock: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
   lock: '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>',
@@ -98,59 +105,54 @@ export function taken(st) {
   ${dock('<button class="btn pri" data-act="backPick">เลือกชื่ออื่น</button>')}`;
 }
 
-function noPhotoStrip(c, noPhoto, photoOpen) {
-  const retrying = noPhoto.retrying ? '<br><span class="small">ระบบกำลังลองส่งรูปใหม่เอง</span>' : '';
-  return `<div class="warn"><b>${photoOpen ? `ยังไม่มีรูป · ถ่ายได้ถึง ${esc(c.photoUntil)}` : 'ไม่มีรูป'}</b>${retrying}${noPhoto.message ? `<br><span class="small">${esc(noPhoto.message)}</span>` : ''}</div>`;
-}
-const sentTag = '<p class="center"><span class="tag t-ok">ส่งรูปแล้ว ขอบคุณครับ</span></p>';
-const expiredBox = '<div class="box small center">หมดเวลาเวรแล้ว ถ้าจะลงชื่อให้เพื่อนหรือรายงานเหตุการณ์ ให้สแกน QR อีกครั้ง</div>';
-
 // st: {c (ผล checked_in/menu), actionsOpen, photoOpen, canRename, noPhoto:{reason,retrying?,message?}|null, photoSent, teacherName, renamed}
 export function success(st) {
-  const c = st.c, d = c.duty;
-  const sub = c.asSubstituteFor ? `<span>มาแทน ${esc(kru(c.asSubstituteFor.name))}</span>` : '';
-  const who = st.teacherName ? `<p class="center small muted">${esc(kru(st.teacherName))}${st.renamed ? ' · ย้ายรายการจากชื่อเดิมแล้ว' : ''}</p>` : '';
-  const photo = st.noPhoto ? noPhotoStrip(c, st.noPhoto, st.photoOpen) : (st.photoSent ? sentTag : '');
-  const actions = st.actionsOpen
-    ? `<div class="chips2"><button class="btn" data-act="proxy">${ICON.users} ลงชื่อให้เพื่อน</button><button class="btn" data-act="report">${ICON.alert} มีเหตุการณ์</button></div>`
-    : expiredBox;
-  const rename = st.canRename ? `<button class="btn ghost" data-act="rename">${st.teacherName ? `ไม่ใช่ ${esc(kru(st.teacherName))}?` : 'เลือกชื่อผิด?'} เปลี่ยนชื่อ</button>` : '';
-  return `<div class="okhero"><div class="ring pop">${ICON.check}</div><div class="time">${esc(c.time)}</div><div class="where">${esc(d.point)}</div>
-   <div class="sub"><span>${esc(d.code)} · ${hmd(d.start)}–${hmd(d.end)}</span>${c.late ? '<span class="late">สาย</span>' : ''}${sub}</div></div>
-  <div class="pad">
-   <p class="center title">เสร็จแล้ว ปิดหน้านี้ได้เลย</p>${who}${photo}
-   <div class="fill"></div>${actions}${myLink}${rename}
+  const c = st.c, d = c.duty, np = st.noPhoto;
+  const line = (cls, text) => `<p class="${cls}" style="font-size:16px">${text}</p>`;
+  let photo = '';
+  if (st.photoSent) photo = '<p class="ok" style="font-size:17px;font-weight:600;margin-top:12px">ส่งรูปแล้ว</p>';
+  else if (np && st.photoOpen) {
+    photo = `<p class="late" style="font-size:17px;font-weight:600;margin-top:12px">ยังไม่มีรูป · ถ่ายได้ถึง ${esc(c.photoUntil)}</p>${np.retrying ? line('muted', 'กำลังลองส่งรูปใหม่') : ''}`;
+  } else if (np) photo = '<p class="muted" style="font-size:17px;font-weight:600;margin-top:12px">ไม่มีรูป</p>';
+  const extra = np && np.message ? line('muted', esc(np.message)) : '';
+  const photoFirst = st.noPhoto && st.photoOpen && c.photoRequired && !c.hasPhoto;
+  const row = st.actionsOpen
+    ? `<div class="row2">${photoFirst ? '<button class="btn" data-act="photo">ถ่ายรูปเวร</button>' : '<button class="btn" data-act="proxy">ลงชื่อเพิ่ม</button>'}<button class="btn" data-act="report">รายงานเหตุการณ์</button></div>`
+    : '<p class="muted center" style="font-size:16px">หมดเวลาเวรแล้ว</p>';
+  return `<div class="pad"><div class="mid">
+   <div class="ring ok">${ICON.checkBig}</div>
+   <div class="num" style="font-size:72px;font-weight:700;line-height:1;letter-spacing:-1px">${esc(c.time)}</div>
+   ${c.late ? '<div class="late" style="font-size:20px;font-weight:600">(สาย)</div>' : ''}
+   <div class="bal" style="font-size:24px;font-weight:600;margin-top:8px">${esc(placeFull(d))}</div>
+   <div class="muted num" style="font-size:16px">${rng(d)}</div>
+   ${c.asSubstituteFor ? line('muted', `มาแทน ${esc(kru(c.asSubstituteFor.name))}`) : ''}
+   ${st.renamed && st.teacherName ? line('muted', `เปลี่ยนเป็น ${esc(kru(st.teacherName))} แล้ว`) : ''}
+   ${photo}${extra}
+  </div>
+  ${row}<button class="link" data-act="my">ดูเวรของฉัน</button>${st.canRename ? '<button class="sublink" data-act="rename">เลือกชื่อผิด? เปลี่ยนชื่อ</button>' : ''}
   </div>`;
 }
 
 // st: {c, actionsOpen, photoOpen, canRename, viaProxy:{name,time}|null, photoSent, error}
 export function menu(st) {
   const c = st.c, d = c.duty;
-  const strip = st.viaProxy ? `นับว่ามาแล้ว · เพื่อนลงชื่อให้ ${esc(st.viaProxy.time)}` : `ลงเวรแล้ว ${esc(c.time)}`;
-  const mb = (act, icon, title, small) => `<button class="mbtn" data-act="${act}"><span class="ic">${icon}</span><span><b>${title}</b><small>${small}</small></span><span class="chev">›</span></button>`;
-  let body;
+  const mrow = (act, icon, label) => `<button class="mrow" data-act="${act}">${icon}<span>${label}</span>${ICON.chev}</button>`;
+  let body = '';
   if (st.viaProxy) {
-    body = `<div class="box">${esc(kru(st.viaProxy.name))} ลงชื่อให้คุณแล้ว ไม่ต้องทำอะไรเพิ่ม ถ้ามีเหตุการณ์ให้แจ้งหัวหน้าเวรวันนี้${c.headName ? ` (${esc(kru(c.headName))})` : ''}</div>`;
+    body = `<p style="font-size:18px">${esc(kruFirst(st.viaProxy.name))} ลงชื่อให้คุณแล้ว</p><p class="muted" style="font-size:16px">ไม่ต้องทำอะไรเพิ่ม</p>`;
   } else if (!st.actionsOpen) {
-    body = expiredBox;
+    body = '<p class="muted" style="font-size:16px">หมดเวลาเวรแล้ว</p>';
   } else {
-    const items = [
-      mb('proxy', ICON.users, 'ลงชื่อให้เพื่อน', 'เพื่อนลืมโทรศัพท์ ถ่ายรูปเพื่อนที่จุดเวรเป็นหลักฐาน'),
-      mb('report', ICON.alert, 'รายงานเหตุการณ์', 'นักเรียนมาสาย ทะเลาะวิวาท สถานที่ชำรุด ฯลฯ')
-    ];
-    if (c.photoRequired && !c.hasPhoto && !st.photoSent && st.photoOpen) items.push(mb('photo', ICON.cam, 'ถ่ายรูปเวร', `ถ่ายได้ถึง ${esc(c.photoUntil)}`));
-    let renameLink = '';
-    if (st.canRename) {
-      if (items.length < 3) items.push(mb('rename', ICON.pencil, 'เปลี่ยนชื่อ', `กดชื่อผิด แก้เองได้ถึง ${esc(c.renameUntil)}`));
-      else renameLink = `<button class="btn ghost" data-act="rename">กดชื่อผิด? เปลี่ยนชื่อ (ถึง ${esc(c.renameUntil)})</button>`;
-    }
-    body = items.join('') + renameLink;
+    const rows = [mrow('proxy', ICON.users, 'ลงชื่อเพิ่ม'), mrow('report', ICON.alert, 'รายงานเหตุการณ์')];
+    if (c.photoRequired && !c.hasPhoto && !st.photoSent && st.photoOpen) rows.push(mrow('photo', ICON.cam, 'ถ่ายรูปเวร'));
+    body = `<div class="mlist">${rows.join('')}</div>`;
   }
-  return `<div class="okstrip">${ICON.checkS} ${strip} · ${esc(d.code)} ${esc(d.point)}</div>
-  <div class="pad"><p class="title">สแกนซ้ำ ต้องการทำอะไร</p>
-   ${st.photoSent ? sentTag : ''}${st.error ? `<div class="err">${esc(st.error)}</div>` : ''}
-   ${body}
-   <div class="fill"></div>${myLink}</div>`;
+  const head = st.viaProxy ? `นับว่ามาแล้ว ${esc(st.viaProxy.time)}` : `ลงเวรแล้ว ${esc(c.time)}`;
+  return `<div class="strip num">${ICON.checkS}<span><span class="ok" style="font-size:24px;font-weight:600">${head}</span>
+   <span class="bal" style="font-size:17px;font-weight:500">${esc(placeFull(d))}</span></span></div>
+  <div class="pad">${body}
+   ${st.photoSent ? '<p class="ok" style="font-size:16px">ส่งรูปแล้ว</p>' : ''}${st.error ? `<div class="err">${esc(st.error)}</div>` : ''}
+   <div class="fill"></div>${st.canRename ? '<button class="sublink" data-act="rename">เลือกชื่อผิด? เปลี่ยนชื่อ</button>' : ''}<button class="link" data-act="my">ดูเวรของฉัน</button></div>`;
 }
 
 const camBar = (left) => `<div class="cambar">${left}<button class="shutter" data-act="shoot" aria-label="ถ่ายรูป"></button>

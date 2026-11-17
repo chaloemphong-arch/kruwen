@@ -3,7 +3,7 @@
 
 export const SCENARIOS = ['first', 'checked_in', 'late', 'nocamera', 'photofail', 'random_hit', 'random_miss', 'menu',
   'menu_nophoto', 'proxied', 'stood_by_other', 'ask_sub', 'wrong_point', 'outside_before', 'outside_after',
-  'outside_holiday', 'on_leave', 'taken', 'netfail', 'my', 'welcome'];
+  'outside_holiday', 'on_leave', 'taken', 'netfail', 'my', 'welcome', 'long'];
 
 const ME = { teacher_id: 't02', name: 'สมหญิง สุขสันต์' };
 const FRIEND = { teacher_id: 't01', name: 'สมชาย ใจดี' };
@@ -24,7 +24,7 @@ const addMin = (hhmm, n) => { const p = hhmm.split(':').map(Number); const t = p
 function checkinData(o = {}) {
   const time = o.time || '07:05';
   return {
-    checkin_id: o.checkin_id || 'mock-c1', time, late: !!o.late, duty: Object.assign({}, DUTY),
+    checkin_id: o.checkin_id || 'mock-c1', time, late: !!o.late, duty: Object.assign({}, DUTY, o.duty || {}),
     photoRequired: o.photoRequired !== undefined ? o.photoRequired : true, hasPhoto: !!o.hasPhoto,
     photoMode: o.photoMode || 'ทุกครั้ง', actionsUntil: DUTY.end, photoUntil: addMin(time, 10), renameUntil: addMin(time, 15), headName: HEAD
   };
@@ -36,6 +36,10 @@ function scanResult(scenario) {
     case 'first': case 'taken':
       return withKind('need_bind', { candidates: [FRIEND, ME] });
     case 'late': return withKind('checked_in', checkinData({ time: '07:18', late: true }));
+    case 'long':
+      return withKind('checked_in', checkinData({ time: '07:18', late: true, photoRequired: false, duty: {
+        code: '4', label: '4', title: 'จุดที่ 4 โรงอาหาร ห้องน้ำนักเรียนหญิง/ชาย', short: 'จุดที่ 4 โรงอาหาร ห้องน้ำ',
+        point: 'โรงอาหาร ห้องน้ำนักเรียนหญิง/ชาย', start: '07:30', end: '08:30' } }));
     case 'random_hit': return withKind('checked_in', checkinData({ photoMode: 'สุ่ม' }));
     case 'random_miss': return withKind('checked_in', checkinData({ photoMode: 'สุ่ม', photoRequired: false }));
     case 'menu': return withKind('menu', checkinData({ time: '06:55', hasPhoto: true }));
@@ -170,7 +174,7 @@ export function screenSamples() {
     s('confirm', { mode: 'scan', teacher: ME }),
     s('confirm', { mode: 'rename', teacher: FRIEND }, 'confirm rename'),
     s('taken', { name: FRIEND.name }),
-    s('success', { c, actionsOpen: true, photoOpen: false, canRename: true, noPhoto: null, photoSent: true, teacherName: ME.name }),
+    s('success', { c, actionsOpen: true, photoOpen: false, canRename: true, noPhoto: null, photoSent: true }),
     s('success', { c: checkinData({ late: true, time: '07:18' }), actionsOpen: false, photoOpen: false, canRename: false, noPhoto: { reason: 'camera' } }, 'success nocam'),
     s('success', { c: mockCall('ask_sub', 'substitute', { forTeacherId: 't01' }), actionsOpen: true, photoOpen: true, canRename: false,
       noPhoto: { reason: 'send', retrying: true }, renamed: true, teacherName: ME.name }, 'success sub'),
