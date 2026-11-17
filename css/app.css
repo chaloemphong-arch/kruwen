@@ -37,6 +37,7 @@ p{margin:0}
 .ring{width:88px;height:88px;border-radius:50%;display:grid;place-items:center;margin:0 auto 16px;flex:none}
 .ring.ok{border:3px solid var(--ok);color:var(--ok);background:var(--card)}
 .ring.info{background:var(--brand-bg);color:var(--brand)}
+.ring.warn,.ring.err{border-radius:50%;padding:0;font-size:inherit}
 .ring.warn{background:var(--head-bg);color:var(--head)}
 .ring.err{background:var(--miss-bg);color:var(--miss)}
 .ring.leave{background:var(--leave-bg);color:var(--leave)}
