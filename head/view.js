@@ -1,6 +1,6 @@
 // หน้าหัวหน้าเวร (ใบเช็ค): ฟังก์ชันล้วน คืน HTML string · import ได้ใน Node (เทสต์) ไม่แตะ document/window
 // ข้อมูลทุกอย่างมาจากหลังบ้าน (headView) หน้าเว็บแค่วาด · escape ทุกข้อความ
-// ui: { filter: 'all'|'needs', needsKeys: [row.key] (แถวที่ตัวกรองเลือกไว้ตอนแตะ), thumbs: {[checkinId]: dataUrl},
+// ui: { filter: 'all'|'needs', needsKeys: [row.key] (แถวที่ตัวกรองเลือกไว้ตอนแตะ),
 //       saving: {[row.key]: { next: {cls, text} }} = กำลังบันทึก: แถวขึ้นป้ายที่จะได้ (option.next จากหลังบ้าน) ทันที + "กำลังบันทึก…"
 //               (ไม่มี next = ป้ายเทา "กำลังบันทึก…" แบบเดิม),
 //       stale: true = รีเฟรชล่าสุดไม่สำเร็จเพราะเน็ต }
@@ -25,18 +25,21 @@ function lum(hex) {
   return 0.2126 * ch[0] + 0.7152 * ch[1] + 0.0722 * ch[2];
 }
 
-// สีป้ายรหัสจาก Duties.color: รับเฉพาะ #rgb/#rrggbb แล้วเลือกตัวหนังสือขาวหรือเข้มตามความต่างที่มากกว่า
-export function codeStyle(color) {
+// สีตัวหนังสือรหัสเวรจาก Duties.color: รับเฉพาะ #rgb/#rrggbb แล้วทำให้เข้มขึ้นจนความต่างบนพื้นขาวอย่างน้อย 4.5 · อื่นๆ คืน ''
+export function codeInk(color) {
   const c = String(color || '').trim();
   if (!/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(c)) return '';
-  const L = lum(c);
-  const white = 1.05 / (L + 0.05), dark = (L + 0.05) / (lum('#1e2b45') + 0.05);
-  return 'background:' + c + ';color:var(' + (white >= dark ? '--duty-ink-light' : '--duty-1-1-ink') + ')';
+  let h = c.slice(1).toLowerCase();
+  if (h.length === 3) h = h.split('').map((x) => x + x).join('');
+  let rgb = [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16));
+  const hex = (a) => '#' + a.map((v) => v.toString(16).padStart(2, '0')).join('');
+  for (let i = 0; i < 60 && 1.05 / (lum(hex(rgb)) + 0.05) < 4.5; i++) rgb = rgb.map((v) => Math.floor(v * 0.9));
+  return hex(rgb);
 }
 
 function code(row) {
-  const st = codeStyle(row.color);
-  return '<i class="code"' + (st ? ' style="' + st + '"' : '') + '>' + esc(row.dutyCode) + '</i>';
+  const ink = codeInk(row.color);
+  return '<span class="code' + (ink ? '' : ' muted') + '"' + (ink ? ' style="color:' + ink + '"' : '') + '>' + esc(row.dutyCode) + '</span>';
 }
 
 function subLine(sub) {
@@ -71,19 +74,17 @@ export function renderRow(row, ui = {}) {
   const p = pill(row, ui);
   const sv = savingOf(row, ui);
   const marked = !!(sv && sv.next); // ป้ายที่จะได้ขึ้นแล้ว: บอกในบรรทัดรองว่ายังบันทึกอยู่
-  const thumb = row.photo ? safeImg(ui.thumbs && ui.thumbs[row.photo.checkinId]) : '';
   return '<div class="nrow" role="button" tabindex="0" data-act="row" data-key="' + esc(row.key) + '"' +
     ' aria-label="' + esc(row.name + ' ' + p.text + (p.late ? ' สาย' : '') + (marked ? ' ' + SAVING : '') + ' แตะเพื่อเลือกสถานะ') + '">' +
     code(row) +
     '<span class="nm"><b>' + esc(row.name) + '</b><small>' +
     [marked ? '<span class="muted saving">' + SAVING + '</span>' : '', subLine(row.sub)].filter(Boolean).join(' · ') + '</small></span>' +
-    '<span class="stw">' + (thumb ? '<img class="rthumb" src="' + thumb + '" alt="">' : '') +
-    '<span class="pill ' + p.cls + (p.late ? ' two' : '') + '">' + esc(p.text) + (p.late ? '<small class="late">(สาย)</small>' : '') + '</span><span class="chev" aria-hidden="true">›</span></span></div>';
+    '<span class="st ' + p.cls + (p.late ? ' two' : '') + '">' + esc(p.text) + (p.late ? '<small class="late">(สาย)</small>' : '') + '</span></div>';
 }
 
 // วงสีหน้าตัวเลือก: สีเดียวกับป้ายที่จะได้
 const BX = {
-  head: ['head', '✓'], leave: ['leave', 'ลา'], notfound: ['miss', '✗'], standin: ['head', 'ยืน'],
+  head: ['head', '✓'], leave: ['leave', 'ลา'], notfound: ['miss', '✗'], standin: ['head', 'แทน'],
   restore: ['ok', '↺'], uncover: ['pending', '↺'], clear: ['pending', '↺']
 };
 const BX_OF_PILL = { 'p-ok': ['ok', '✓'], 'p-head': ['head', '✓'], 'p-leave': ['leave', 'ลา'], 'p-miss': ['miss', '✗'], 'p-idle': ['pending', '–'] };
@@ -93,8 +94,8 @@ function option(o, row) {
   return '<button class="opt" data-act="opt" data-a="' + esc(o.action) + '"' +
     (o.current ? ' aria-pressed="true"' : '') + (o.disabled ? ' disabled' : '') + '>' +
     '<span class="bx ' + bx[0] + '" aria-hidden="true">' + bx[1] + '</span>' +
-    '<span class="ol"><b>' + esc(o.label) + '</b>' + (o.hint ? '<small>' + esc(o.hint) + '</small>' : '') + '</span>' +
-    (o.current ? '<span class="cur">✓ ตอนนี้</span>' : '') + '</button>';
+    '<span class="ol"><b>' + esc(o.label) + '</b>' + (o.hint && o.disabled && !o.current ? '<small>' + esc(o.hint) + '</small>' : '') + '</span>' +
+    '</button>';
 }
 
 // sheetUi: { full: dataUrl ของรูปใหญ่ (ยังไม่มี = กำลังโหลด), failed: true = โหลดรูปไม่สำเร็จ }
@@ -110,16 +111,16 @@ export function renderSheet(row, sheetUi = {}) {
     '<li>' + esc((r.categories || []).join(', ')) + (r.note ? (r.categories && r.categories.length ? ' · ' : '') + esc(r.note) : '') +
     (r.hasPhoto ? ' <span class="muted">(มีรูป)</span>' : '') + '</li>').join('');
   return '<div class="shade" data-act="close"></div>' +
-    '<div class="sheet" role="dialog" aria-modal="true" aria-label="' + esc('เลือกสถานะ ' + row.name) + '">' +
+    '<div class="sheet" role="dialog" aria-modal="true" aria-label="' + esc(row.name) + '">' +
     '<div class="grab"></div>' +
     '<div class="shhd">' + code(row) + '<div class="minw"><p class="shname">' + esc(row.name) + '</p></div></div>' +
     (row.detail || []).map((d) => '<p class="small' + (TONES.includes(d.tone) ? ' ' + d.tone : '') + '">' + esc(d.text) + '</p>').join('') +
     (row.note ? '<p class="small">' + esc(row.note) + '</p>' : '') +
     (row.deviceFlag ? '<p class="bar warn rounded">เครื่องเดียวกันลงหลายชื่อวันนี้</p>' : '') +
     photo +
-    (opts.length ? '<p class="label">เลือกสถานะ</p>' + opts.map((o) => option(o, row)).join('') : '') +
+    opts.map((o) => option(o, row)).join('') +
     (reports ? '<div class="reps"><p class="label">รายงานเหตุการณ์</p><ul>' + reports + '</ul></div>' : '') +
-    '<button class="btn ghost shclose" data-act="close">ปิด</button></div>';
+    '<button class="shclose" data-act="close">ปิด</button></div>';
 }
 
 // toast: { text, undo: boolean }
@@ -142,13 +143,12 @@ function header(view, ui) {
   const pct = (k) => (c.total ? Math.round((k / c.total) * 1000) / 10 : 0);
   const f = ui.filter === 'needs' ? 'needs' : 'all';
   return '<header class="hdr">' +
-    '<div class="r1"><b>ตรวจเวรวันนี้</b><span class="small muted">' + esc(view.dateThai) + ' · ' + esc(view.nowHHMM) + '</span></div>' +
-    '<p class="small"><b>มาแล้ว ' + Number(c.came || 0) + ' จาก ' + Number(c.total || 0) + ' คน</b> <span class="muted">· ต้องดู ' +
-    Number(c.needs || 0) + ' · ลา ' + Number(c.leave || 0) + ' · ยังไม่ถึง ' + Number(c.upcoming || 0) + '</span></p>' +
+    '<div class="r1"><b>ตรวจเวรวันนี้</b><span class="muted">' + esc(view.dateThai) + ' · ' + esc(view.nowHHMM) + '</span></div>' +
+    '<p class="cnt"><b>มาแล้ว ' + Number(c.came || 0) + '</b> <span class="muted">จาก ' + Number(c.total || 0) + ' คน</span></p>' +
     '<div class="prog" aria-hidden="true"><i class="i-ok" style="width:' + pct(n('p-ok')) + '%"></i><i class="i-head" style="width:' +
     pct(n('p-head')) + '%"></i><i class="i-leave" style="width:' + pct(n('p-leave')) + '%"></i></div>' +
     '<div class="fchips"><button class="rc" data-act="filter" data-f="all" aria-pressed="' + (f === 'all') + '">ทั้งหมด ' + Number(c.total || 0) +
-    '</button><button class="rc" data-act="filter" data-f="needs" aria-pressed="' + (f === 'needs') + '">เฉพาะที่ต้องดู ' + Number(c.needs || 0) +
+    '</button><button class="rc" data-act="filter" data-f="needs" aria-pressed="' + (f === 'needs') + '">ต้องดู ' + Number(c.needs || 0) +
     '</button></div></header>';
 }
 
@@ -164,7 +164,7 @@ export function renderPage(view, ui = {}) {
       const pinned = ui.filter === 'needs' && Array.isArray(ui.needsKeys) ? ui.needsKeys : null;
       const rows = pinned ? s.rows.filter((r) => pinned.includes(r.key)) : filterRows(s.rows, ui.filter);
       if (!rows.length) return '';
-      return '<section><h2 class="grph"><span>' + esc(s.label) + '</span><span>' + esc(s.timeText) + ' น.</span></h2>' +
+      return '<section><h2 class="grph"><span>' + esc(s.label) + '</span><span>' + esc(s.timeText) + '</span></h2>' +
         rows.map((r) => renderRow(r, ui)).join('') + '</section>';
     }).join('');
     if (!body) body = '<div class="pad mid center"><p>ไม่มีรายการที่ต้องดู</p></div>';

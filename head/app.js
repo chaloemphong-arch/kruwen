@@ -12,9 +12,9 @@ const AUTH_RELOAD_GAP_MS = 120000;
 
 // seq = รุ่นของจอ (ผลรีเฟรชที่ออกก่อนรุ่นนี้ทิ้ง) · req/appliedReq = ลำดับคำขอบันทึก/เลิกทำ (ผลที่ตอบช้ากว่าไม่ทับผลใหม่)
 const H = {
-  view: null, filter: 'all', saving: {}, thumbs: {}, full: {}, fullFail: {}, asked: new Set(),
+  view: null, filter: 'all', saving: {}, full: {}, fullFail: {},
   needsKeys: null, seq: 0, req: 0, appliedReq: 0, stale: false,
-  sheetKey: null, toast: null, toastTimer: null, pending: 0, thumbBusy: false, mock: null
+  sheetKey: null, toast: null, toastTimer: null, pending: 0, mock: null
 };
 
 // โทเคน LINE หมดอายุ (หน้าเปิดค้างนาน) → โหลดหน้าใหม่ได้ครั้งเดียวต่อช่วง กันวนโหลดไม่รู้จบ
@@ -30,7 +30,7 @@ const root = () => $('app');
 function allRows() { return H.view ? (H.view.sessions || []).flatMap((s) => s.rows) : []; }
 function rowByKey(key) { return allRows().find((r) => r.key === key) || null; }
 function rowEl(key) { return Array.from(document.querySelectorAll('[data-act="row"]')).find((el) => el.dataset.key === key) || null; }
-function ui() { return { filter: H.filter, needsKeys: H.needsKeys, saving: H.saving, thumbs: H.thumbs, stale: H.stale }; }
+function ui() { return { filter: H.filter, needsKeys: H.needsKeys, saving: H.saving, stale: H.stale }; }
 
 // ลิงก์ "เวรของฉัน" = หน้าเดิมไม่มี ?v (โหมดทดลองไปหน้า mock=my)
 function myDutyHref() { return location.pathname + (H.mock !== null ? '?mock=my' : ''); }
@@ -89,26 +89,6 @@ function drawRow(key) {
 
 // ---------- รูป ----------
 function dataUrl(r) { return r && r.ok && /^image\//.test(String(r.mime)) && r.base64 ? 'data:' + r.mime + ';base64,' + r.base64 : ''; }
-
-// รูปเล็กทีละรูปหลังวาด เก็บตาม checkinId
-async function loadThumbs() {
-  if (H.thumbBusy) return;
-  H.thumbBusy = true;
-  try {
-    for (;;) {
-      const row = allRows().find((r) => r.photo && !H.thumbs[r.photo.checkinId] && !H.asked.has(r.photo.checkinId));
-      if (!row) break;
-      const id = row.photo.checkinId;
-      H.asked.add(id);
-      const url = dataUrl(await call('headPhoto', { checkinId: id, size: 'thumb' }, { retries: 1 }));
-      if (!url) continue;
-      H.thumbs[id] = url;
-      allRows().filter((r) => r.photo && r.photo.checkinId === id).forEach((r) => drawRow(r.key));
-    }
-  } finally {
-    H.thumbBusy = false;
-  }
-}
 
 async function loadFull(row) {
   const id = row.photo.checkinId;
@@ -174,7 +154,6 @@ function applyView(view, fromServer) {
   if (fromServer && H.filter === 'needs') H.needsKeys = mergeNeedsKeys(H.needsKeys, view);
   if (H.sheetKey && !rowByKey(H.sheetKey)) closeSheet(false);
   drawPage();
-  loadThumbs();
 }
 
 // เลือกสถานะ: ปิดแผ่นทันที แถวขึ้นป้ายที่จะได้ (option.next จากหลังบ้าน) + "กำลังบันทึก…" ทันที
