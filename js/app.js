@@ -81,7 +81,7 @@ function show(screen, st) {
 }
 
 // load = คำขออ่านอย่างเดียว ("ยังโหลดไม่สำเร็จ") ไม่ใช่การบันทึก
-function showFail(n, load) { show('fail', { attempt: n, load: !!load, headName: A.c ? A.c.headName : '' }); }
+function showFail(n, load) { show('fail', { attempt: n, load: !!load }); }
 const retrying = { onRetry: (n) => showFail(n, false) };
 const loadingRetry = { onRetry: (n) => showFail(n, true) };
 

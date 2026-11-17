@@ -22,7 +22,6 @@ const thaiDay = (ymd) => { const [y, m, d] = ymdParts(ymd); return DOW[new Date(
 const thaiMonth = (ym) => { const [y, m] = ymdParts(ym); return TMON[m - 1] + ' ' + (y + 543); };
 
 const ICON = {
-  check: '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
   checkS: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
   checkBig: '<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
   chev: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A96AA" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>',
@@ -172,7 +171,7 @@ export function scanCam(st) {
   ${camBar('<button class="l" data-act="skipPhoto">ข้ามไปก่อน</button>')}</div>`;
 }
 
-// กล้องทั่วไป (ลงชื่อให้เพื่อน / รูปประกอบรายงาน) st: {tip}
+// กล้องทั่วไป (ลงชื่อเพิ่ม / รูปประกอบรายงาน) st: {tip}
 export function cam(st) {
   return `<div class="camv">${viewfinder(st.tip)}${camBar('<button class="l" data-act="camCancel">ยกเลิก</button>')}</div>`;
 }
