@@ -31,6 +31,7 @@
 .nm{min-width:0}
 .nm b{display:block;font-size:18px;font-weight:600;line-height:1.35;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .nm small{display:block;font-size:16px;color:var(--muted);line-height:1.2}
+.sheet .small{color:var(--muted)}
 .nm .red,.sheet .red{color:var(--miss);font-weight:600}
 .nm .orange,.sheet .orange{color:var(--head)}
 .nm .blue,.sheet .blue{color:var(--brand);font-weight:600}
@@ -57,7 +58,6 @@
 .shhd{display:flex;gap:12px;align-items:baseline}
 .shhd .code{font-size:22px}
 .shname{font-weight:700;font-size:22px;line-height:1.35}
-.sheet .small{color:var(--muted)}
 .label{font-size:16px;font-weight:600;line-height:1.4}
 .bigphoto{width:100%;max-height:45vh;object-fit:contain;border-radius:var(--radius-md);background:var(--bg);display:block}
 .opt{display:flex;align-items:center;gap:12px;width:100%;min-height:64px;padding:8px 14px;border:1px solid var(--border);border-radius:14px;background:var(--card);text-align:left}
