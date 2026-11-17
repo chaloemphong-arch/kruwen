@@ -73,7 +73,7 @@ function show(screen, st) {
   A.screen = screen;
   A.st = st || {};
   const html = V[screen](A.st);
-  root().innerHTML = (CAM_SCREENS.includes(screen) ? '' : V.header({ school: A.school })) + html;
+  root().innerHTML = html;
   document.body.classList.toggle('dark', CAM_SCREENS.includes(screen));
   window.scrollTo(0, 0);
   if (screen === 'pick') bindSearch();

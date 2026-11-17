@@ -2,7 +2,7 @@
 // หน้าตาและข้อความตามเดโม เดโมระบบครูเวร.html (V.*) ข้อมูลมาจากผล call() ของหลังบ้าน
 
 // ฟังก์ชันที่ export แต่ไม่ใช่หน้าจอ
-export const HELPERS = ['reportButton', 'header'];
+export const HELPERS = ['reportButton'];
 
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const hmd = (hhmm) => esc(String(hhmm || '').replace(':', '.'));
@@ -44,12 +44,8 @@ const PDPA = '<p class="pdpa">ระบบเก็บชื่อ เวลา�
 const myLink = '<button class="btn ghost" data-act="my">ดูเวรของฉัน</button>';
 const dock = (inner) => `<div class="dock">${inner}</div>`;
 
-export function header(st = {}) {
-  return `<div class="lhdr"><b>ระบบครูเวร</b>${st.school ? `<small>${esc(st.school)}</small>` : ''}</div>`;
-}
-
 export function loading(st = {}) {
-  return `<div class="pad center mid"><div class="spin"></div><p class="title">${esc(st.title || 'กำลังโหลด')}</p></div>`;
+  return `<div class="pad"><div class="mid"><div class="spin"></div><p style="font-size:24px;font-weight:600;line-height:1.4">${esc(st.title || 'กำลังโหลด')}</p></div></div>`;
 }
 
 export function welcome() {
