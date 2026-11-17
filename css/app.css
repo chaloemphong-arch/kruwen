@@ -135,6 +135,7 @@ textarea{width:100%;min-height:90px;border:1px solid var(--line);border-radius:1
 .drow .dst.idle{font-weight:400}
 .drow.today{background:var(--brand-bg);border-radius:8px;padding-inline:6px}
 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;text-align:center;border-top:1px solid var(--line);padding-top:12px;margin-top:8px}
+.stats.three{grid-template-columns:repeat(3,minmax(0,1fr))}
 .stats div{display:grid}
 .stats b{font-size:28px;font-weight:700;line-height:1.2}
 .stats .statl{font-size:16px;color:var(--muted);line-height:1.25}

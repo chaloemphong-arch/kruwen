@@ -106,6 +106,10 @@ export function taken(st) {
   ${dock('<button class="btn pri" data-act="backPick">เลือกชื่ออื่น</button>')}`;
 }
 
+// แสดงคำว่า "สาย" ให้ครูเห็นหรือไม่ (ผู้ใช้ 17 พ.ย. 2569: ตอนนี้แสดงแค่เวลา ระบบยังบันทึกสายเหมือนเดิม เปิดใหม่ได้ที่นี่ที่เดียว)
+export const SHOW_LATE = false;
+const lateMark = (late, html) => (SHOW_LATE && late ? html : '');
+
 // st: {c (ผล checked_in/menu), actionsOpen, photoOpen, canRename, noPhoto:{reason,retrying?,message?}|null, photoSent, teacherName, renamed}
 export function success(st) {
   const c = st.c, d = c.duty, np = st.noPhoto;
@@ -123,7 +127,7 @@ export function success(st) {
   return `<div class="pad"><div class="mid">
    <div class="ring ok">${ICON.checkBig}</div>
    <div class="num" style="font-size:72px;font-weight:700;line-height:1;letter-spacing:-1px">${esc(c.time)}</div>
-   ${c.late ? '<div class="late" style="font-size:20px;font-weight:600">(สาย)</div>' : ''}
+   ${lateMark(c.late, '<div class="late" style="font-size:20px;font-weight:600">(สาย)</div>')}
    <div class="bal" style="font-size:24px;font-weight:600;margin-top:8px">${esc(placeFull(d))}</div>
    <div class="muted num" style="font-size:16px">${rng(d)}</div>
    ${c.asSubstituteFor ? line('muted', `มาแทน ${esc(kru(c.asSubstituteFor.name))}`) : ''}
@@ -163,7 +167,7 @@ const viewfinder = (tip) => `<div class="vf"><video id="video" playsinline muted
 // กล้องหลังสแกน st: {c, mode:'live'|'ask'} (ask = โหมดสุ่ม แสดงหน้าขอรูปก่อนเปิดกล้อง)
 export function scanCam(st) {
   const c = st.c;
-  const done = `ลงเวรแล้ว ${esc(c.time)}${c.late ? ' (สาย)' : ''}`;
+  const done = `ลงเวรแล้ว ${esc(c.time)}${lateMark(c.late, ' (สาย)')}`;
   if (st.mode === 'ask') {
     return `<div class="pad"><div class="mid"><div class="ring info">${ICON.cam}</div>
     <p class="big bal">วันนี้ขอรูปจุดเวร 1 รูป</p><p class="ok lead">${done}</p></div></div>
@@ -206,7 +210,7 @@ export function proxyDone(st) {
   ${dock('<button class="btn" data-act="toHome">กลับ</button>')}`;
   }
   return `<div class="pad"><div class="mid"><div class="ring ok">${ICON.checkBig}</div>
-   <p class="hd28">ลงชื่อให้แล้ว</p><p class="num t56">${esc(r.time)}</p>${r.late ? '<p class="late nm20">(สาย)</p>' : ''}
+   <p class="hd28">ลงชื่อให้แล้ว</p><p class="num t56">${esc(r.time)}</p>${lateMark(r.late, '<p class="late nm20">(สาย)</p>')}
    <p class="nm20 bal">${esc(kru(r.friendName))}</p>${d ? `<p class="small muted bal">${esc(placeShort(d))}</p>` : ''}
    ${st.img ? `<img class="thumbs" src="${esc(st.img)}" alt="รูปยืนยัน">` : ''}</div></div>
   ${dock('<button class="btn" data-act="toHome">กลับ</button>')}`;
@@ -331,7 +335,7 @@ export function reportDone(st) {
 const shiftMonth = (ym, n) => { const [y, m] = ymdParts(ym); const t = y * 12 + (m - 1) + n; const mm = t % 12 + 1; return Math.floor(t / 12) + '-' + (mm < 10 ? '0' : '') + mm; };
 
 // ป้ายสถานะของแถววันเวร: [ข้อความ, คลาสสี]
-const DAY_STATUS = { 'มา': ['✓ มา', 'ok'], 'ไปแทน': ['✓ มา', 'ok'], 'สาย': ['สาย', 'late'], 'ลา': ['ลา', 'leavec'], 'ขาด': ['ขาด', 'miss'], 'มีคนมาแทน': ['มีคนมาแทน', 'late'] };
+const DAY_STATUS = { 'มา': ['✓ มา', 'ok'], 'ไปแทน': ['✓ มา', 'ok'], 'สาย': SHOW_LATE ? ['สาย', 'late'] : ['✓ มา', 'ok'], 'ลา': ['ลา', 'leavec'], 'ขาด': ['ขาด', 'miss'], 'มีคนมาแทน': ['มีคนมาแทน', 'late'] };
 
 // st: {r (my), month 'YYYY-MM', currentMonth 'YYYY-MM'}
 // สรุป: backend นับ present = ตรงเวลา + สาย จึงแสดง "ตรงเวลา" = present − late ไม่ให้วันสายถูกนับสองครั้ง
@@ -354,7 +358,7 @@ export function my(st) {
     <b class="mname">${thaiMonth(month)}</b>
     <button class="arrow" data-act="myMonth" data-m="${shiftMonth(month, 1)}" aria-label="เดือนถัดไป"${canNext ? '' : ' disabled'}>${ICON.chevR}</button></div>
    <div>${rows}</div>
-   <div class="stats">${stat(s.present - s.late, 'ตรงเวลา')}${stat(s.late, 'สาย', 'late')}${stat(s.leave, 'ลา')}${stat(s.absent, 'ขาด')}</div>
+   <div class="stats${SHOW_LATE ? '' : ' three'}">${SHOW_LATE ? stat(s.present - s.late, 'ตรงเวลา') + stat(s.late, 'สาย', 'late') : stat(s.present, 'มา')}${stat(s.leave, 'ลา')}${stat(s.absent, 'ขาด')}</div>
    ${nameChange}
   </div>`;
 }

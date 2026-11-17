@@ -1,9 +1,9 @@
 // โหมดทดลองหน้าหัวหน้าเวร ?v=head&mock=<scenario>: ตอบจาก mock-data.json (สร้างด้วย npm run head-mock จากหลังบ้านจริง)
 // headSet ใน mock เปลี่ยนป้ายแถวนั้นเป็น option.next (ป้ายที่หลังบ้านบอกไว้) พอให้ลองแตะ · บันทึก/เลิกทำหน่วง ~1.5 วิ ให้เห็นป้ายขึ้นทันที · stale = ตอบ stale ทุกครั้ง · netfail = เน็ตล้มเหลวตอนบันทึก/รีเฟรช/รูปใหญ่
 
-export const HEAD_SCENARIOS = ['morning', 'clearing', 'locked', 'unlocked', 'admin', 'deputy', 'notoday', 'notbound', 'holiday', 'stale', 'netfail'];
+export const HEAD_SCENARIOS = ['morning', 'clearing', 'locked', 'unlocked', 'admin', 'deputy', 'notoday', 'notbound', 'holiday', 'stale', 'netfail', 'exec'];
 
-const BASE = { stale: 'morning', netfail: 'morning' };
+const BASE = { stale: 'morning', netfail: 'morning', exec: 'morning' }; // exec = ผู้บริหารเปิดดูใบเช็คของวันนี้ (เห็นคำว่าสาย)
 const SAVE_DELAY_MS = 1500; // ใกล้เวลาบันทึกจริง (~2.5 วิ) พอให้เห็นป้ายขึ้นทันทีระหว่างรอ
 const clone = (x) => JSON.parse(JSON.stringify(x));
 const fail = (code, message, extra) => Object.assign({ ok: false, code, message }, extra || {});
@@ -75,7 +75,7 @@ export function headMockCall(scenario, data) {
     switch (body.action) {
       case 'headHome':
         if (!base.ok) return clone(base);
-        return { ok: true, kind: 'head_home', name: base.headName || '', today: base.date, isHeadToday: !base.actingFor && base.canEdit,
+        return { ok: true, kind: 'head_home', name: base.headName || '', today: base.date, isHeadToday: scenario !== 'exec' && !base.actingFor && base.canEdit,
           isAdmin: !!base.actingFor, canView: true, headNameToday: base.headName };
       case 'headView':
         return clone(view);

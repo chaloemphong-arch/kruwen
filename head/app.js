@@ -14,7 +14,7 @@ const AUTH_RELOAD_GAP_MS = 120000;
 const H = {
   view: null, filter: 'all', saving: {}, full: {}, fullFail: {},
   needsKeys: null, seq: 0, req: 0, appliedReq: 0, stale: false,
-  sheetKey: null, toast: null, toastTimer: null, pending: 0, mock: null
+  sheetKey: null, toast: null, toastTimer: null, pending: 0, mock: null, showLate: false
 };
 
 // โทเคน LINE หมดอายุ (หน้าเปิดค้างนาน) → โหลดหน้าใหม่ได้ครั้งเดียวต่อช่วง กันวนโหลดไม่รู้จบ
@@ -24,13 +24,16 @@ export function authReloadAllowed(last, now, gapMs = AUTH_RELOAD_GAP_MS) {
   return now - t >= gapMs || now < t;
 }
 
+// ใครเห็นคำว่า "สาย" ในใบเช็ค: แอดมิน หรือผู้บริหาร (เปิดดูได้แต่ไม่ใช่หัวหน้าเวรวันนี้) · หัวหน้าเวรเห็นแค่เวลา
+export function lateVisible(home) { return !!(home && (home.isAdmin || (home.canView && !home.isHeadToday))); }
+
 const $ = (id) => document.getElementById(id);
 const root = () => $('app');
 
 function allRows() { return H.view ? (H.view.sessions || []).flatMap((s) => s.rows) : []; }
 function rowByKey(key) { return allRows().find((r) => r.key === key) || null; }
 function rowEl(key) { return Array.from(document.querySelectorAll('[data-act="row"]')).find((el) => el.dataset.key === key) || null; }
-function ui() { return { filter: H.filter, needsKeys: H.needsKeys, saving: H.saving, stale: H.stale }; }
+function ui() { return { filter: H.filter, needsKeys: H.needsKeys, saving: H.saving, stale: H.stale, showLate: H.showLate }; }
 
 // ลิงก์ "เวรของฉัน" = หน้าเดิมไม่มี ?v (โหมดทดลองไปหน้า mock=my)
 function myDutyHref() { return location.pathname + (H.mock !== null ? '?mock=my' : ''); }
@@ -274,6 +277,7 @@ export async function startHead(identity) {
   const onRetry = (n) => showLoading('ยังโหลดไม่สำเร็จ กำลังลองใหม่ (ครั้งที่ ' + n + ')');
   const home = await call('headHome', {}, { onRetry, retries: 5 });
   if (!home.ok) return showError(home);
+  H.showLate = lateVisible(home);
   const view = await call('headView', {}, { onRetry, retries: 5 });
   if (!view.ok) return showError(view);
   mountShell();

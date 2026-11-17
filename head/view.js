@@ -54,7 +54,8 @@ function savingOf(row, ui) { return (ui && ui.saving && ui.saving[row.key]) || n
 function pill(row, ui) {
   const sv = savingOf(row, ui);
   const p = sv ? (sv.next || { cls: 'p-idle', text: SAVING }) : (row.pill || {});
-  return { cls: PILLS.includes(p.cls) ? p.cls : 'p-idle', text: p.text || '', late: !!p.late };
+  // "(สาย)" ใต้เวลาเห็นเฉพาะแอดมินและผู้บริหาร (ui.showLate) หัวหน้าเวรเห็นแค่เวลา
+  return { cls: PILLS.includes(p.cls) ? p.cls : 'p-idle', text: p.text || '', late: !!(p.late && ui && ui.showLate) };
 }
 
 export function filterRows(rows, mode) {
