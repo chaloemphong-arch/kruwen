@@ -2,6 +2,7 @@
 // เปิดจาก web/js/app.js start() · โค้ดที่แตะ document/window อยู่ในฟังก์ชันเท่านั้น
 import { call, setIdentity, setTransport } from '../js/api.js';
 import { mockScenario } from '../js/liff.js';
+import { withTitle } from '../js/names.js';
 import { renderPage, renderRow, renderSheet, renderToast, renderMessage, mergeNeedsKeys } from './view.js';
 import { headMockTransport } from './mock.js';
 
@@ -168,7 +169,7 @@ async function choose(action) {
   const opt = (row.options || []).find((o) => o.action === action);
   if (!opt || opt.disabled) return;
   closeSheet();
-  showToast('ครู' + row.name + ': ' + opt.label, null, true);
+  showToast(withTitle(row.name) + ': ' + opt.label, null, true);
   const res = await save(row.key, opt.next, 'headSet', {
     date: H.view.date, dutyCode: row.dutyCode, teacherId: row.teacherId, setAction: action, expectSig: row.sig
   });

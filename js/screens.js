@@ -1,4 +1,5 @@
 // หน้าจอของหน้าครูเวร: ทุกฟังก์ชันเป็นฟังก์ชันล้วน (state → HTML string) ไม่แตะ DOM
+import { withTitle } from './names.js';
 // หน้าตาและข้อความตามเดโม เดโมระบบครูเวร.html (V.*) ข้อมูลมาจากผล call() ของหลังบ้าน
 
 // ฟังก์ชันที่ export แต่ไม่ใช่หน้าจอ
@@ -9,12 +10,12 @@ export const HELPERS = ['header', 'reportButton', 'firstName', 'placeFull', 'pla
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const hmd = (hhmm) => esc(String(hhmm || '').replace(':', '.'));
 const toMin = (hhmm) => { const p = String(hhmm || '0:0').split(':'); return Number(p[0]) * 60 + Number(p[1]); };
-const kru = (name) => { const n = String(name || ''); return !n || n.startsWith('ครู') ? n : 'ครู' + n; };
+const kru = withTitle;
 // ชื่อแรกของครู (ตัด "ครู" นำหน้า) และชื่อสถานที่ (เต็ม/สั้น) — ผู้เรียกต้อง esc เอง
 export const firstName = (name) => String(name || '').trim().replace(/^ครู/, '').trim().split(/\s+/)[0] || '';
 export const placeFull = (d) => (d && (d.title || d.point || d.code)) || '';
 export const placeShort = (d) => (d && (d.short || d.point || d.code)) || '';
-const kruFirst = (name) => { const f = firstName(name); return f ? 'ครู' + f : ''; };
+const kruFirst = (name) => withTitle(firstName(name));
 const rng = (d) => `${hmd(d.start)}–${hmd(d.end)}`;
 const TMON = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
 const DOW = ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'];

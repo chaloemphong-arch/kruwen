@@ -1,4 +1,5 @@
 // หน้าหัวหน้าเวร (ใบเช็ค): ฟังก์ชันล้วน คืน HTML string · import ได้ใน Node (เทสต์) ไม่แตะ document/window
+import { withTitle } from '../js/names.js';
 // ข้อมูลทุกอย่างมาจากหลังบ้าน (headView) หน้าเว็บแค่วาด · escape ทุกข้อความ
 // ui: { filter: 'all'|'needs', needsKeys: [row.key] (แถวที่ตัวกรองเลือกไว้ตอนแตะ),
 //       saving: {[row.key]: { next: {cls, text} }} = กำลังบันทึก: แถวขึ้นป้ายที่จะได้ (option.next จากหลังบ้าน) ทันที + "กำลังบันทึก…"
@@ -171,5 +172,5 @@ export function renderPage(view, ui = {}) {
     if (!body) body = '<div class="pad mid center"><p>ไม่มีรายการที่ต้องดู</p></div>';
   }
   return header(view, ui) + banners + '<div class="rows">' + body + '</div>' +
-    '<p class="hfoot small muted">หัวหน้าเวรวันนี้: ' + (view.headName ? 'ครู' + esc(view.headName) : 'ไม่มี') + '</p>';
+    '<p class="hfoot small muted">หัวหน้าเวรวันนี้: ' + (view.headName ? esc(withTitle(view.headName)) : 'ไม่มี') + '</p>';
 }
