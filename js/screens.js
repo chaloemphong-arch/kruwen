@@ -2,7 +2,9 @@
 // หน้าตาและข้อความตามเดโม เดโมระบบครูเวร.html (V.*) ข้อมูลมาจากผล call() ของหลังบ้าน
 
 // ฟังก์ชันที่ export แต่ไม่ใช่หน้าจอ
-export const HELPERS = ['reportButton', 'firstName', 'placeFull', 'placeShort'];
+// kept for one release so an old cached app.js (which still calls V.header) keeps working
+export const header = () => '';
+export const HELPERS = ['header', 'reportButton', 'firstName', 'placeFull', 'placeShort'];
 
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const hmd = (hhmm) => esc(String(hhmm || '').replace(':', '.'));
@@ -138,7 +140,7 @@ export function menu(st) {
   const mrow = (act, icon, label) => `<button class="mrow" data-act="${act}">${icon}<span>${label}</span>${ICON.chev}</button>`;
   let body = '';
   if (st.viaProxy) {
-    body = `<p style="font-size:18px">${esc(kruFirst(st.viaProxy.name))} ลงชื่อให้คุณแล้ว</p><p class="muted" style="font-size:16px">ไม่ต้องทำอะไรเพิ่ม</p>`;
+    body = `<p style="font-size:18px">${esc(who(st.viaProxy.name))}ลงชื่อให้คุณแล้ว</p><p class="muted" style="font-size:16px">ไม่ต้องทำอะไรเพิ่ม</p>`;
   } else if (!st.actionsOpen) {
     body = '<p class="muted" style="font-size:16px">หมดเวลาเวรแล้ว</p>';
   } else {
@@ -200,7 +202,7 @@ export function proxyDone(st) {
   if (r.already) {
     // คำขอที่ลองใหม่แต่ถึงเซิร์ฟเวอร์ไปแล้ว (code 'already'): เพื่อนมีบันทึกแล้ว
     return `<div class="pad"><div class="mid"><div class="ring ok">${ICON.checkBig}</div>
-    <p class="big bal">${esc(kruFirst(r.friendName))} มีบันทึกเวรแล้ว</p><p class="small muted">ไม่ต้องลงชื่อให้ซ้ำ</p></div></div>
+    <p class="big bal">${esc(who(r.friendName))}มีบันทึกเวรแล้ว</p><p class="small muted">ไม่ต้องลงชื่อให้ซ้ำ</p></div></div>
   ${dock('<button class="btn" data-act="toHome">กลับ</button>')}`;
   }
   return `<div class="pad"><div class="mid"><div class="ring ok">${ICON.checkBig}</div>
