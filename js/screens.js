@@ -47,8 +47,17 @@ const ICON = {
   flip: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9a8 8 0 0114-3l2 2M20 4v4h-4M20 15a8 8 0 01-14 3l-2-2M4 20v-4h4"/></svg>'
 };
 
-const myLink = '<button class="btn ghost" data-act="my">ดูเวรของฉัน</button>';
+const myLink = '<button class="link" data-act="my">ดูเวรของฉัน</button>';
 const dock = (inner) => `<div class="dock">${inner}</div>`;
+const who = (name) => (kruFirst(name) ? kruFirst(name) + ' ' : 'มีครู');
+const NOT_RECORDED = '<p class="small muted">ยังไม่ได้บันทึกการลงเวร</p>';
+// หน้าข้อความกลางจอ: วงกลมไอคอน + หัวเรื่อง + บรรทัดข้อความ; foot เป็นลิงก์ (อยู่ใน .pad) หรือ dock (อยู่นอก .pad)
+// title ถูก esc ในนี้; lines/foot เป็น HTML ที่ผู้เรียกประกอบและ esc ข้อมูลเองแล้ว
+function notice({ ring, icon, title, lines, foot }) {
+  const f = foot || '';
+  const inDock = f.startsWith('<div class="dock"');
+  return `<div class="pad"><div class="mid"><div class="ring ${ring}">${icon}</div><p class="big bal">${esc(title)}</p>${lines || ''}</div>${inDock ? '' : f}</div>${inDock ? f : ''}`;
+}
 
 export function loading(st = {}) {
   return `<div class="pad"><div class="mid"><div class="spin"></div><p style="font-size:24px;font-weight:600;line-height:1.4">${esc(st.title || 'กำลังโหลด')}</p></div></div>`;
@@ -213,56 +222,45 @@ export function proxyDone(st) {
 
 // st: {r (proxied)}
 export function proxied(st) {
-  const r = st.r, d = r.menu.duty;
-  return `<div class="okstrip">${ICON.checkS} นับว่ามาแล้ว · ${esc(d.code)} ${esc(d.point)}</div>
-  <div class="pad"><p class="title">${esc(kru(r.by.name))} ลงชื่อให้คุณแล้ว เมื่อ ${esc(r.time)}</p>
-   <p class="muted">${r.photo_url ? 'เพื่อนถ่ายรูปยืนยันไว้แล้ว ' : ''}ระบบไม่บันทึกซ้ำ ไม่ต้องทำอะไรเพิ่ม</p>
-   <div class="fill"></div>${myLink}</div>
-  ${dock('<button class="btn pri" data-act="toMenu">ไปที่เมนู</button>')}`;
+  const r = st.r;
+  return notice({ ring: 'ok', icon: ICON.checkBig, title: `${who(r.by && r.by.name)}ลงชื่อให้คุณแล้ว`,
+    lines: `<p class="lead num">${esc(r.time)}</p><p class="lead strong ok">นับว่ามาแล้ว</p><p class="small muted">ไม่ต้องทำอะไรเพิ่ม</p>`,
+    foot: dock('<button class="btn pri" data-act="toMenu">ไปที่เมนู</button>') });
 }
 
 // st: {r (stood_by_other)}
 export function covered(st) {
   const r = st.r;
-  return `<div class="pad center">
-  <div class="bigicon warnicon">${ICON.swap}</div>
-  <p class="title">${esc(kru(r.byName))} ลงเวรแทนคุณแล้ว<br>เมื่อ ${esc(r.time)}</p>
-  <p class="muted">วันนี้คุณไม่ต้องลงเวรที่จุดนี้</p>
-  <div class="box left">ถ้าไม่ได้ตกลงแลกเวรกันไว้ แจ้งหัวหน้าเวรวันนี้</div></div>
-  ${dock('<button class="btn" data-act="my">ดูเวรของฉัน</button>')}`;
+  return notice({ ring: 'info', icon: ICON.swap, title: `${who(r.byName)}ลงเวรแทนคุณแล้ว`,
+    lines: `<p class="lead num">${esc(r.time)}</p><p class="lead">วันนี้คุณไม่ต้องลงเวรที่จุดนี้</p><p class="small muted">ถ้าไม่ได้ตกลงกันไว้ แจ้งหัวหน้าเวร</p>`,
+    foot: myLink });
 }
 
 // st: {r (on_leave)}
-export function onLeave(st) {
-  return `<div class="pad center">
-  <div class="bigicon leaveicon">${ICON.clock}</div>
-  <p class="title">${esc(st.r.message)}</p>
-  <p class="small muted">ไม่ได้บันทึกอะไร</p></div>
-  ${dock('<button class="btn" data-act="my">ดูเวรของฉัน</button>')}`;
+export function onLeave() {
+  return notice({ ring: 'leave', icon: ICON.clock, title: 'วันนี้คุณถูกบันทึกลา', lines: '<p class="lead">กรุณาติดต่อหัวหน้าเวร</p>', foot: myLink });
 }
 
-const myDutyNote = (d) => d ? `<p class="small muted center">เวรของคุณวันนี้: ${dutyLine(d)}</p>` : '';
+const myDutyElse = (d) => d ? `<p class="small muted">เวรของคุณวันนี้: ${esc(placeShort(d))} · ${rng(d)}</p>` : '';
 
 // st: {r (ask_substitute)}
 export function subask(st) {
   const opts = st.r.options || [];
   const label = (o) => esc(kru(o.name)) + (o.onLeave ? ' (ลา)' : '');
   const one = opts.length === 1;
-  return `<div class="pad"><p class="title">ชื่อของคุณไม่อยู่ในตารางเวรจุดนี้วันนี้</p>
-   <p>${one ? `คุณมาแทน ${label(opts[0])} ใช่ไหม` : 'คุณมาแทนใคร'}</p>
+  return `<div class="pad top"><p class="hd28 bal">ชื่อคุณไม่อยู่ในเวรจุดนี้วันนี้</p>
+   <p class="ln20">${one ? `คุณมาแทน ${esc(kru(opts[0].name))} ใช่ไหม` : 'คุณมาแทนใคร'}</p>
    ${one ? '' : opts.map((o) => `<button class="btn sug" data-act="subFor" data-id="${esc(o.teacher_id)}">มาแทน ${label(o)}</button>`).join('')}
-   <div class="fill"></div>${myDutyNote(st.r.myDuty)}</div>
-  ${dock((one ? `<button class="btn pri" data-act="subFor" data-id="${esc(opts[0].teacher_id)}">ใช่ มาแทน ${label(opts[0])}</button>` : '') + '<button class="btn" data-act="notSub">ไม่ใช่ สแกนผิดจุด</button>')}`;
+   <div class="fill"></div>${myDutyElse(st.r.myDuty)}</div>
+  ${dock((one ? `<button class="btn pri" data-act="subFor" data-id="${esc(opts[0].teacher_id)}">ใช่ มาแทน ${esc(kru(opts[0].name))}</button>` : '') + '<button class="btn" data-act="notSub">ไม่ใช่ สแกนผิดจุด</button>')}`;
 }
 
 // st: {r: {myDuty}} (จาก wrong_point หรือกด "ไม่ใช่ สแกนผิดจุด")
 export function wrongPoint(st) {
   const d = st.r.myDuty;
-  return `<div class="pad center mid">
-  <p class="title">ไม่ได้บันทึกอะไร</p>
-  ${d ? `<p class="muted">เวรของคุณวันนี้</p><p class="bigname rowc">${chip(d.code, d.color)} ${esc(d.point)}</p><p>${hmd(d.start)}–${hmd(d.end)}</p><p class="small muted">ไปสแกนที่ป้ายของจุดนั้น</p>`
-    : '<p class="muted">วันนี้คุณไม่มีเวร ไม่ต้องลงเวร</p>'}</div>
-  ${dock('<button class="btn" data-act="my">ดูเวรของฉัน</button>')}`;
+  return notice({ ring: 'info', icon: ICON.swap, title: d ? 'สแกนผิดจุด' : 'วันนี้คุณไม่มีเวร',
+    lines: (d ? `<p class="small muted">เวรของคุณวันนี้</p><p class="nm24 bal">${esc(placeFull(d))}</p><p class="lead num">${rng(d)}</p>` : '') + NOT_RECORDED,
+    foot: myLink });
 }
 
 const MY_STATUS = { self: 'ลงเวรแล้ว', proxy: 'เพื่อนลงชื่อให้', head: 'หัวหน้าเวรเช็คให้', leave: 'ลา', notfound: 'ไม่พบตัวที่จุดเวร', absent: 'ขาด', missing: 'ไม่ได้ลงเวร' };
@@ -272,39 +270,38 @@ export function outside(st) {
   const r = st.r, d = r.myDuty;
   const list = r.dutiesAtPoint || [];
   const mine = !!d && list.some((x) => x.code === d.code);
-  const listBox = list.length ? `<div class="box left">${list.map((x) => `<div class="rowc">${chip(x.code, x.color)} ${hmd(x.start)}–${hmd(x.end)}</div>`).join('')}</div>` : '';
-  let body;
+  const place = d ? `<p class="nm22 bal">${esc(placeFull(d))}</p>` : '';
+  let title, lines;
   if (r.reason === 'holiday') {
-    body = '<p class="title">วันนี้ไม่มีเวร (วันหยุด)</p><p class="muted">ไม่ต้องลงเวร</p>';
+    title = 'วันนี้ไม่มีเวร';
+    lines = '<p class="lead">วันหยุด ไม่ต้องลงเวร</p>';
   } else if (r.reason === 'before' && mine) {
     const left = toMin(d.start) - Number(st.nowMin);
-    body = `<p class="title">ยังไม่ถึงเวลาเวรของคุณ</p><p class="bigname rowc">${chip(d.code, d.color)} ${esc(d.point)}</p>
-    <p>เริ่ม ${hmd(d.start)} น.${left > 0 ? ` · <b>อีก ${left} นาที</b>` : ''}</p><p class="small muted">${esc(r.message)}</p>`;
+    title = 'ยังไม่ถึงเวลาเวรของคุณ';
+    lines = `${place}<p class="lead">เริ่ม ${hmd(d.start)} น.${left > 0 ? ` · <b>อีก ${left} นาที</b>` : ''}</p>${NOT_RECORDED}`;
   } else if (r.reason === 'after' && mine) {
-    const status = r.myTime ? `ลงเวรแล้ว ${esc(r.myTime)}` : (MY_STATUS[r.myStatus] || '');
-    body = `<p class="title">เวรของคุณวันนี้จบแล้ว ${hmd(d.end)} น.</p><p class="bigname rowc">${chip(d.code, d.color)} ${esc(d.point)}</p>
-    ${status ? `<p><span class="tag ${r.myTime || r.myStatus === 'head' || r.myStatus === 'proxy' ? 't-ok' : r.myStatus === 'leave' ? 't-leave' : 't-miss'}">${status}</span></p>` : ''}`;
+    const status = r.myTime ? ['ok', `✓ ลงเวรแล้ว ${esc(r.myTime)}`]
+      : MY_STATUS[r.myStatus] ? [r.myStatus === 'head' || r.myStatus === 'proxy' ? 'ok' : r.myStatus === 'leave' ? 'leavec' : 'miss', MY_STATUS[r.myStatus]] : null;
+    title = 'เวรของคุณวันนี้จบแล้ว';
+    lines = `${place}<p class="lead">จบ ${hmd(d.end)} น.</p>${status ? `<p class="lead strong ${status[0]}">${status[1]}</p>` : ''}`;
   } else {
-    body = `<p class="title">ตอนนี้ไม่ใช่เวลาเวรของจุดนี้</p>${listBox}<p class="small muted">${esc(r.message)}</p>`;
+    title = 'ตอนนี้ไม่ใช่เวลาเวรของจุดนี้';
+    lines = list.map((x) => `<p class="lead num">${rng(x)}</p>`).join('') + (d && !mine ? myDutyElse(d) : '') + NOT_RECORDED;
   }
-  return `<div class="pad center"><div class="bigicon idleicon">${ICON.clock}</div>${body}
-  ${d && !mine ? myDutyNote(d) : ''}<p class="small muted">ไม่ได้บันทึกอะไร</p><div class="fill"></div>${myLink}</div>`;
+  return notice({ ring: 'info', icon: ICON.clock, title, lines, foot: myLink });
 }
 
-// st: {attempt, headName}
+// st: {attempt}
 export function fail(st) {
-  return `<div class="pad center"><div class="bigicon missicon">${ICON.wifi}</div>
-  <p class="title">${st.load ? 'ยังโหลดไม่สำเร็จ' : 'ยังบันทึกไม่สำเร็จ'}</p><p class="muted">สัญญาณอินเทอร์เน็ตไม่พอ ระบบกำลังลองส่งใหม่เอง</p>
-  <p>ลองไปแล้ว ${Number(st.attempt) || 0} ครั้ง</p>
-  <p class="small muted">ถ้ายังไม่ได้ แจ้ง${st.headName ? esc(kru(st.headName)) : 'หัวหน้าเวรวันนี้'}ให้เช็คให้ ไม่นับเป็นขาด</p><div class="fill"></div></div>
-  ${dock('<button class="btn pri" data-act="retryNow">ลองอีกครั้งตอนนี้</button>')}`;
+  return notice({ ring: 'err', icon: ICON.wifi, title: st.load ? 'ยังโหลดไม่สำเร็จ' : 'ยังบันทึกไม่สำเร็จ',
+    lines: `<p class="lead">ลองไปแล้ว ${Number(st.attempt) || 0} ครั้ง</p>${st.load ? '' : '<p class="small muted">ถ้ายังไม่ได้ ให้แจ้งหัวหน้าเวร ไม่นับเป็นขาด</p>'}`,
+    foot: dock('<button class="btn pri" data-act="retryNow">ลองอีกครั้งตอนนี้</button>') });
 }
 
-// st: {message, back}
+// st: {message, back, retry}
 export function error(st) {
-  return `<div class="pad center mid"><div class="bigicon missicon">${ICON.alert}</div>
-  <p class="title">ทำรายการไม่สำเร็จ</p><p class="muted">${esc(st.message || 'ระบบขัดข้อง ลองอีกครั้ง')}</p></div>
-  ${st.retry ? dock('<button class="btn pri" data-act="rescan">ลองอีกครั้ง</button>') : st.back ? dock('<button class="btn" data-act="toHome">กลับ</button>') : ''}`;
+  return notice({ ring: 'err', icon: ICON.alert, title: 'ทำรายการไม่สำเร็จ', lines: `<p class="lead">${esc(st.message || 'ระบบขัดข้อง ลองอีกครั้ง')}</p>`,
+    foot: st.retry ? dock('<button class="btn pri" data-act="rescan">ลองอีกครั้ง</button>') : st.back ? dock('<button class="btn" data-act="toHome">กลับ</button>') : '' });
 }
 
 export function reportButton(st) {

@@ -66,7 +66,6 @@ p{margin:0}
 .row2{display:flex;gap:12px}
 .row2 .btn{flex:1 1 0;min-width:0}
 
-.box{background:var(--bg);border-radius:12px;padding:12px 14px}
 .warn{background:var(--head-bg);color:var(--head);border-radius:12px;padding:12px 14px;font-size:16px}
 .err{background:var(--miss-bg);color:var(--miss);border-radius:12px;padding:12px 14px;font-size:16px}
 .tag{display:inline-flex;align-items:center;gap:4px;font-size:16px;padding:1px 10px;border-radius:999px;font-weight:500;white-space:nowrap}
@@ -75,11 +74,6 @@ p{margin:0}
 .code{font-style:normal;flex:none;min-width:34px;height:30px;padding:0 6px;border-radius:7px;display:inline-grid;place-items:center;font-size:16px;font-weight:700;
   background:var(--idle-bg);color:var(--text);font-variant-numeric:tabular-nums}
 
-.okstrip{background:var(--ok-bg);color:var(--ok);display:flex;gap:8px;align-items:center;padding:12px 16px;font-weight:600;flex-wrap:wrap}
-
-.bigicon{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;margin:8px auto 2px}
-.warnicon{background:var(--head-bg);color:var(--head)}.missicon{background:var(--miss-bg);color:var(--miss)}
-.idleicon{background:var(--idle-bg);color:var(--muted)}.leaveicon{background:var(--leave-bg);color:var(--leave)}
 .bigname{font-size:25px;font-weight:700;line-height:1.3}
 .spin{width:56px;height:56px;border-radius:50%;border:5px solid var(--line);border-top-color:var(--brand);margin:0 auto}
 @media (prefers-reduced-motion:no-preference){.spin{animation:sp 1s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}}
@@ -109,6 +103,8 @@ textarea{width:100%;min-height:90px;border:1px solid var(--line);border-radius:1
 .hd28{font-size:28px;font-weight:700;line-height:1.3}
 .t56{font-size:56px;font-weight:700;line-height:1.1}
 .nm20{font-size:20px;font-weight:600}
+.nm24{font-size:24px;font-weight:600;line-height:1.4}
+.ln20{font-size:20px}
 .nm22{font-size:22px;font-weight:600;line-height:1.4}
 .note17{font-size:17px}
 
