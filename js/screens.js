@@ -87,21 +87,21 @@ export function confirm(st) {
   const note = st.mode === 'rename' ? 'รายการลงเวรวันนี้จะย้ายไปชื่อนี้'
     : st.mode === 'change' ? ''
       : 'ระบบเก็บชื่อ เวลาลงเวร บัญชี LINE และรูปที่ถ่าย เพื่อทำรายงานเวรเท่านั้น เก็บ 1 ปีการศึกษา <button class="inlink" data-act="pdpa">อ่านทั้งหมด</button>';
-  return `<div class="pad"><div class="mid"><p class="lead muted">ยืนยันชื่อ</p><p class="nm bal">${esc(kru(st.teacher.name))}</p></div></div>
+  return `<div class="pad"><div class="mid"><p class="lead muted">ยืนยันชื่อ</p><p class="confname bal">${esc(kru(st.teacher.name))}</p></div></div>
   ${dock(`${note ? `<p class="small muted center">${note}</p>` : ''}<button class="btn pri" data-act="confirmYes">ใช่ นี่คือฉัน</button><button class="btn" data-act="backPick">ไม่ใช่ เลือกใหม่</button>`)}`;
 }
 
 export function pdpa() {
   return `<div class="pad top"><p class="h1">ข้อมูลที่ระบบเก็บ</p>
-  <p class="lead body">ระบบเก็บชื่อ เวลาลงเวร รหัสผู้ใช้ LINE พิกัด (ถ้าอนุญาต) และรูปที่ถ่าย (รูปอาจมีหน้าครูหรือนักเรียน) เพื่อทำรายงานเวรเท่านั้น</p>
-  <p class="lead body">ระบบอ่านแชท ดูรายชื่อเพื่อน หรือส่งข้อความหาคุณไม่ได้</p>
-  <p class="lead body strong">เก็บ 1 ปีการศึกษา</p><div class="fill"></div></div>
+  <p class="lead pdpatext">ระบบเก็บชื่อ เวลาลงเวร รหัสผู้ใช้ LINE พิกัด (ถ้าอนุญาต) และรูปที่ถ่าย (รูปอาจมีหน้าครูหรือนักเรียน) เพื่อทำรายงานเวรเท่านั้น</p>
+  <p class="lead pdpatext">ระบบอ่านแชท ดูรายชื่อเพื่อน หรือส่งข้อความหาคุณไม่ได้</p>
+  <p class="lead pdpatext strong">เก็บ 1 ปีการศึกษา</p><div class="fill"></div></div>
   ${dock('<button class="btn" data-act="pdpaBack">กลับ</button>')}`;
 }
 
 export function taken(st) {
   return `<div class="pad"><div class="mid"><div class="ring warn">${ICON.lock}</div>
-  <p class="big bal">ชื่อนี้ผูกกับ LINE อื่นแล้ว</p><p class="nm2">${esc(kru(st.name))}</p><p class="lead">ถ้านี่คือชื่อของคุณ ให้แจ้งแอดมิน</p></div></div>
+  <p class="big bal">ชื่อนี้ผูกกับ LINE อื่นแล้ว</p><p class="confsub">${esc(kru(st.name))}</p><p class="lead">ถ้านี่คือชื่อของคุณ ให้แจ้งแอดมิน</p></div></div>
   ${dock('<button class="btn pri" data-act="backPick">เลือกชื่ออื่น</button>')}`;
 }
 

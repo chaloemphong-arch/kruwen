@@ -93,10 +93,10 @@ p{margin:0}
 @media (prefers-reduced-motion:no-preference){.spin{animation:sp 1s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}}
 
 .wel{font-size:32px}
-.nm{font-size:36px;font-weight:700;line-height:1.25}
-.nm2{font-size:20px;font-weight:600}
-.body{line-height:1.65;text-align:left}
-.pad>.body{margin-top:4px}
+.confname{font-size:36px;font-weight:700;line-height:1.25}
+.confsub{font-size:20px;font-weight:600}
+.pdpatext{line-height:1.65;text-align:left}
+.pad>.pdpatext{margin-top:4px}
 .btn.sug{min-height:60px;justify-content:flex-start;text-align:left;padding:6px 16px;font-size:18px}
 .search{border:1px solid var(--border);border-radius:12px;padding:0 14px;background:var(--bg);width:100%;min-height:56px;font-size:18px}
 .namebtn{display:block;width:100%;min-height:56px;padding:12px 4px;border-bottom:1px solid var(--line);font-size:18px}
