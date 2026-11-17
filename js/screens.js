@@ -338,7 +338,7 @@ const shiftMonth = (ym, n) => { const [y, m] = ymdParts(ym); const t = y * 12 + 
 const DAY_STATUS = { 'มา': ['✓ มา', 'ok'], 'ไปแทน': ['✓ มา', 'ok'], 'สาย': SHOW_LATE ? ['สาย', 'late'] : ['✓ มา', 'ok'], 'ลา': ['ลา', 'leavec'], 'ขาด': ['ขาด', 'miss'], 'มีคนมาแทน': ['มีคนมาแทน', 'late'] };
 
 // st: {r (my), month 'YYYY-MM', currentMonth 'YYYY-MM'}
-// สรุป: backend นับ present = ตรงเวลา + สาย จึงแสดง "ตรงเวลา" = present − late ไม่ให้วันสายถูกนับสองครั้ง
+// สรุป: backend นับ present = ตรงเวลา + สาย · SHOW_LATE ปิด = แสดง "มา" = present · เปิด = "ตรงเวลา" = present − late และ "สาย" แยก
 export function my(st) {
   const r = st.r, s = r.summary, next = r.next;
   const month = st.month, canNext = st.currentMonth && month < st.currentMonth;
