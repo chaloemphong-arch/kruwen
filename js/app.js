@@ -5,6 +5,7 @@ import { initIdentity, mockScenario, viewParam } from './liff.js';
 import * as camera from './camera.js';
 import { getGps } from './gps.js';
 import * as V from './screens.js';
+import { withTitle } from './names.js';
 import { mockTransport, mockStreamSource } from './mock.js';
 
 // ผลจากหลังบ้าน → ชื่อหน้าจอ
@@ -280,7 +281,7 @@ async function sendScanPhoto(b64) {
 }
 
 // ---------- ลงชื่อให้เพื่อน ----------
-export const proxyTip = () => { const f = A.friend ? V.firstName(A.friend.name) : ''; return f ? `ถ่ายรูปครู${f}ที่จุดเวร` : 'ถ่ายรูปเพื่อนที่จุดเวร'; };
+export const proxyTip = () => { const f = A.friend ? V.firstName(A.friend.name) : ''; return f ? `ถ่ายรูป${withTitle(f)}ที่จุดเวร` : 'ถ่ายรูปเพื่อนที่จุดเวร'; };
 
 async function startProxy() {
   show('loading', { title: 'กำลังโหลดรายชื่อ' });

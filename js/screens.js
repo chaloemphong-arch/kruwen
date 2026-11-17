@@ -1,5 +1,5 @@
 // หน้าจอของหน้าครูเวร: ทุกฟังก์ชันเป็นฟังก์ชันล้วน (state → HTML string) ไม่แตะ DOM
-import { withTitle } from './names.js';
+import { withTitle, firstWithTitle } from './names.js';
 // หน้าตาและข้อความตามเดโม เดโมระบบครูเวร.html (V.*) ข้อมูลมาจากผล call() ของหลังบ้าน
 
 // ฟังก์ชันที่ export แต่ไม่ใช่หน้าจอ
@@ -12,7 +12,7 @@ const hmd = (hhmm) => esc(String(hhmm || '').replace(':', '.'));
 const toMin = (hhmm) => { const p = String(hhmm || '0:0').split(':'); return Number(p[0]) * 60 + Number(p[1]); };
 const kru = withTitle;
 // ชื่อแรกของครู (ตัด "ครู" นำหน้า) และชื่อสถานที่ (เต็ม/สั้น) — ผู้เรียกต้อง esc เอง
-export const firstName = (name) => String(name || '').trim().replace(/^ครู/, '').trim().split(/\s+/)[0] || '';
+export const firstName = firstWithTitle;
 export const placeFull = (d) => (d && (d.title || d.point || d.code)) || '';
 export const placeShort = (d) => (d && (d.short || d.point || d.code)) || '';
 const kruFirst = (name) => withTitle(firstName(name));

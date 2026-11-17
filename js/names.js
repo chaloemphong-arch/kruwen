@@ -4,5 +4,12 @@ export const NAME_TITLES = ['ครู', 'นางสาว', 'นาง', 'น
 
 export const hasTitle = (name) => { const n = String(name == null ? '' : name).trim(); return NAME_TITLES.some((t) => n.startsWith(t)); };
 
+// ชื่อแรกพร้อมคำนำหน้าที่พิมพ์ไว้: "นาย ก้อง มั่นคง" -> "นายก้อง" · "ครูสมชาย ใจดี" -> "สมชาย" (ตัด ครู ออก ผู้เรียกเติมเองด้วย withTitle)
+export const firstWithTitle = (name) => {
+  const w = String(name == null ? '' : name).trim().replace(/^ครู\s*/, '').split(/\s+/).filter(Boolean);
+  if (w.length > 1 && NAME_TITLES.includes(w[0])) return w[0] + w[1];
+  return w[0] || '';
+};
+
 // "สมชาย ใจดี" -> "ครูสมชาย ใจดี" · "นายสมชาย ใจดี" -> เดิม · '' -> ''
 export const withTitle = (name) => { const n = String(name == null ? '' : name).trim(); return !n ? '' : hasTitle(n) ? n : 'ครู' + n; };
