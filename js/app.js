@@ -87,7 +87,7 @@ const loadingRetry = { onRetry: (n) => showFail(n, true) };
 
 function showError(res, back, retry) {
   const screen = routeFor(res);
-  if (screen === 'welcome') return show('welcome', {});
+  if (screen === 'welcome') return show('welcome', { school: A.school });
   if (screen === 'taken') return show('taken', { name: A.picked ? A.picked.name : '' });
   return show('error', { message: res.message, back: !!back, retry: !!retry });
 }
@@ -419,6 +419,8 @@ const ACTIONS = {
   rename: () => startPick('rename'),
   pickName: (d) => { A.picked = { teacher_id: d.id, name: d.name }; show('confirm', { mode: A.pick.mode, teacher: A.picked }); },
   backPick: () => show('pick', A.pick),
+  pdpa: () => { A.pdpaFrom = { screen: A.screen, st: A.st }; show('pdpa', {}); },
+  pdpaBack: () => show(A.pdpaFrom.screen, A.pdpaFrom.st),
   cancelPick: () => (A.pick.mode === 'rename' ? showHome() : doMy()),
   confirmYes,
   retryNow: () => retryNow(),

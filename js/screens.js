@@ -47,7 +47,6 @@ const ICON = {
   flip: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9a8 8 0 0114-3l2 2M20 4v4h-4M20 15a8 8 0 01-14 3l-2-2M4 20v-4h4"/></svg>'
 };
 
-const PDPA = '<p class="pdpa">ระบบเก็บชื่อ เวลาลงเวร รหัสบัญชี LINE พิกัด (ถ้าอนุญาต) และรูปที่ถ่าย (รูปอาจมีหน้าครูหรือนักเรียน) เพื่อทำรายงานเวรเท่านั้น ระบบอ่านแชท ดูรายชื่อเพื่อน หรือส่งข้อความหาคุณไม่ได้ เก็บ 1 ปีการศึกษา</p>';
 const myLink = '<button class="btn ghost" data-act="my">ดูเวรของฉัน</button>';
 const dock = (inner) => `<div class="dock">${inner}</div>`;
 
@@ -55,10 +54,10 @@ export function loading(st = {}) {
   return `<div class="pad"><div class="mid"><div class="spin"></div><p style="font-size:24px;font-weight:600;line-height:1.4">${esc(st.title || 'กำลังโหลด')}</p></div></div>`;
 }
 
-export function welcome() {
-  return `<div class="pad center mid"><p class="title">ยินดีต้อนรับสู่ระบบครูเวร</p>
-  <p class="muted">เลือกชื่อของคุณครั้งเดียว แล้วดูวันเวรของตัวเองได้ทันที วันเวรสแกน QR ที่จุดเวรแล้วลงเวรเลย</p></div>
-  ${dock('<button class="btn pri" data-act="pickFromMy">เลือกชื่อของฉัน</button><p class="small muted center">หรือสแกน QR ที่จุดเวรครั้งแรกก็ได้</p>')}`;
+export function welcome(st = {}) {
+  return `<div class="pad"><div class="mid"><div class="ring info">${ICON.users}</div>
+  <p class="h1 wel">ยินดีต้อนรับ</p><p class="lead muted">ระบบบริหารจัดการงานเวร</p>${st.school ? `<p class="lead muted">${esc(st.school)}</p>` : ''}</div></div>
+  ${dock('<button class="btn pri" data-act="pickFromMy">เลือกชื่อของฉัน</button>')}`;
 }
 
 export function searchResults(st = {}) {
@@ -66,7 +65,7 @@ export function searchResults(st = {}) {
   if (!q) return '';
   if (st.error) return `<p class="small err">${esc(st.error)}</p>`;
   if (!st.results) return '<p class="small muted">กำลังค้นหา…</p>';
-  if (!st.results.length) return '<p class="small muted">ไม่พบชื่อนี้ ถ้าชื่อไม่อยู่ในระบบ แจ้งแอดมิน</p>';
+  if (!st.results.length) return '<p class="small muted">ไม่พบชื่อนี้ แจ้งแอดมิน</p>';
   return st.results.map((t) => `<button class="namebtn" data-act="pickName" data-id="${esc(t.teacher_id)}" data-name="${esc(t.name)}">${esc(kru(t.name))}</button>`).join('');
 }
 
@@ -74,34 +73,35 @@ export function searchResults(st = {}) {
 export function pick(st) {
   const mode = st.mode, changing = mode === 'rename' || mode === 'change';
   const cands = mode === 'scan' ? (st.candidates || []) : [];
-  const head = changing ? '<p class="title">เปลี่ยนชื่อ เลือกชื่อที่ถูกต้อง</p>'
-    : mode === 'my' ? '<p class="title">เลือกชื่อของคุณ</p><p class="small muted">ทำครั้งเดียว ระบบจะจำชื่อกับบัญชี LINE วันเวรสแกน QR ที่จุดเวรแล้วลงเวรทันที</p>'
-      : '<p class="title">ใช้ครั้งแรก เลือกชื่อของคุณ</p>';
-  const sug = cands.length ? `<div class="suggest"><span class="small strong brand">ครูที่มีเวรจุดนี้ตอนนี้</span>
-    ${cands.map((t) => `<button class="btn sug" data-act="pickName" data-id="${esc(t.teacher_id)}" data-name="${esc(t.name)}">ฉันคือ ${esc(kru(t.name))}</button>`).join('')}</div>` : '';
-  return `<div class="pad">${head}${sug}
-  <label class="small muted" for="q">${cands.length ? 'ไม่ใช่ชื่อด้านบน? ค้นหาชื่อหรือนามสกุล' : 'ค้นหาชื่อหรือนามสกุล'}</label>
+  const sug = cands.length ? `<p class="small strong brand">ครูที่มีเวรจุดนี้ตอนนี้</p>
+    ${cands.map((t) => `<button class="btn sug" data-act="pickName" data-id="${esc(t.teacher_id)}" data-name="${esc(t.name)}">${esc(kru(t.name))}</button>`).join('')}` : '';
+  return `<div class="pad top"><p class="h1">${changing ? 'เปลี่ยนชื่อ' : 'เลือกชื่อของคุณ'}</p>${sug}
+  <label class="small muted" for="q">${cands.length ? 'ไม่ใช่? ค้นหาชื่อหรือนามสกุล' : 'ค้นหาชื่อหรือนามสกุล'}</label>
   <input class="search" id="q" placeholder="เช่น สมชาย หรือ ใจดี" value="${esc(st.query)}" autocomplete="off">
   <div id="qres">${searchResults(st)}</div><div class="fill"></div>
-  ${changing ? '' : PDPA}</div>
+  ${changing ? '' : '<button class="sublink" data-act="pdpa">ข้อมูลที่ระบบเก็บ</button>'}</div>
   ${changing ? dock('<button class="btn" data-act="cancelPick">ยกเลิก</button>') : ''}`;
 }
 
 export function confirm(st) {
-  const text = st.mode === 'rename' ? 'ระบบจะย้ายรายการลงเวรวันนี้ไปที่ชื่อนี้ และผูกกับบัญชี LINE ของคุณ ชื่อเดิมจะถูกยกเลิก'
-    : st.mode === 'my' || st.mode === 'change' ? 'ระบบจะจำชื่อนี้กับบัญชี LINE ของคุณ วันเวรสแกน QR แล้วลงเวรทันที ถ้าเลือกผิด แก้ได้เองจนกว่าจะสแกนลงเวรครั้งแรก'
-      : 'ระบบจะจำชื่อนี้กับบัญชี LINE ของคุณ ครั้งต่อไปสแกนแล้วลงเวรทันที ไม่ต้องเลือกอีก แม้เปลี่ยนมือถือ';
-  return `<div class="pad center">
-  <p class="muted" style="margin-top:18px">ยืนยันชื่อ</p><p class="bigname">${esc(kru(st.teacher.name))}</p><p class="title" style="font-weight:500">ใช่คุณไหม</p>
-  <div class="box left">${text}</div></div>
-  ${dock('<button class="btn pri" data-act="confirmYes">ใช่ นี่คือฉัน</button><button class="btn" data-act="backPick">ไม่ใช่ เลือกใหม่</button>')}`;
+  const note = st.mode === 'rename' ? 'รายการลงเวรวันนี้จะย้ายไปชื่อนี้'
+    : st.mode === 'change' ? ''
+      : 'ระบบเก็บชื่อ เวลาลงเวร บัญชี LINE และรูปที่ถ่าย เพื่อทำรายงานเวรเท่านั้น เก็บ 1 ปีการศึกษา <button class="inlink" data-act="pdpa">อ่านทั้งหมด</button>';
+  return `<div class="pad"><div class="mid"><p class="lead muted">ยืนยันชื่อ</p><p class="nm bal">${esc(kru(st.teacher.name))}</p></div></div>
+  ${dock(`${note ? `<p class="small muted center">${note}</p>` : ''}<button class="btn pri" data-act="confirmYes">ใช่ นี่คือฉัน</button><button class="btn" data-act="backPick">ไม่ใช่ เลือกใหม่</button>`)}`;
+}
+
+export function pdpa() {
+  return `<div class="pad top"><p class="h1">ข้อมูลที่ระบบเก็บ</p>
+  <p class="lead body">ระบบเก็บชื่อ เวลาลงเวร รหัสผู้ใช้ LINE พิกัด (ถ้าอนุญาต) และรูปที่ถ่าย (รูปอาจมีหน้าครูหรือนักเรียน) เพื่อทำรายงานเวรเท่านั้น</p>
+  <p class="lead body">ระบบอ่านแชท ดูรายชื่อเพื่อน หรือส่งข้อความหาคุณไม่ได้</p>
+  <p class="lead body strong">เก็บ 1 ปีการศึกษา</p><div class="fill"></div></div>
+  ${dock('<button class="btn" data-act="pdpaBack">กลับ</button>')}`;
 }
 
 export function taken(st) {
-  return `<div class="pad center">
-  <div class="bigicon warnicon">${ICON.lock}</div>
-  <p class="title">ชื่อนี้ผูกกับบัญชี LINE อื่นแล้ว</p><p class="muted">${esc(kru(st.name))} ใช้งานระบบอยู่แล้วจากบัญชี LINE อื่น</p>
-  <div class="box left">ถ้านี่คือชื่อของคุณ เช่น เพิ่งเปลี่ยนบัญชี LINE ให้แจ้งแอดมินกด "ปลดการผูก" แล้วสแกนใหม่<br><span class="small muted">แอดมินเห็นในระบบว่ามีคนพยายามเลือกชื่อนี้</span></div></div>
+  return `<div class="pad"><div class="mid"><div class="ring warn">${ICON.lock}</div>
+  <p class="big bal">ชื่อนี้ผูกกับ LINE อื่นแล้ว</p><p class="nm2">${esc(kru(st.name))}</p><p class="lead">ถ้านี่คือชื่อของคุณ ให้แจ้งแอดมิน</p></div></div>
   ${dock('<button class="btn pri" data-act="backPick">เลือกชื่ออื่น</button>')}`;
 }
 

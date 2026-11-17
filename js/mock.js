@@ -165,7 +165,7 @@ export function screenSamples() {
   const s = (screen, state, label) => ({ screen, state, label: label || screen });
   return [
     s('loading', { title: 'กำลังบันทึก' }),
-    s('welcome', {}),
+    s('welcome', { school: 'โรงเรียนอุบลรัตน์พิทยาคม' }),
     s('pick', { mode: 'scan', candidates: [FRIEND, ME], query: '', results: null }, 'pick scan'),
     s('pick', { mode: 'my', candidates: [], query: 'สม', results: [FRIEND] }, 'pick my'),
     s('pick', { mode: 'rename', candidates: [], query: '', results: null }, 'pick rename'),
@@ -173,6 +173,7 @@ export function screenSamples() {
     s('searchResults', { query: 'ไม่มี', results: [] }, 'search empty'),
     s('confirm', { mode: 'scan', teacher: ME }),
     s('confirm', { mode: 'rename', teacher: FRIEND }, 'confirm rename'),
+    s('pdpa', {}),
     s('taken', { name: FRIEND.name }),
     s('success', { c, actionsOpen: true, photoOpen: false, canRename: true, noPhoto: null, photoSent: true }),
     s('success', { c: checkinData({ late: true, time: '07:18' }), actionsOpen: false, photoOpen: false, canRename: false, noPhoto: { reason: 'camera' } }, 'success nocam'),

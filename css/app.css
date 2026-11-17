@@ -92,10 +92,15 @@ p{margin:0}
 .spin{width:56px;height:56px;border-radius:50%;border:5px solid var(--line);border-top-color:var(--brand);margin:0 auto}
 @media (prefers-reduced-motion:no-preference){.spin{animation:sp 1s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}}
 
-.suggest{border:2px solid var(--brand);border-radius:14px;padding:12px;display:grid;gap:8px;background:var(--brand-bg)}
-.search{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--bg);width:100%;min-height:52px;font-size:17px}
-.namebtn{display:block;width:100%;min-height:52px;padding:11px 4px;border-bottom:1px solid var(--line);font-size:17px}
-.pdpa{font-size:16px;color:var(--muted);line-height:1.5}
+.wel{font-size:32px}
+.nm{font-size:36px;font-weight:700;line-height:1.25}
+.nm2{font-size:20px;font-weight:600}
+.body{line-height:1.65;text-align:left}
+.pad>.body{margin-top:4px}
+.btn.sug{min-height:60px;justify-content:flex-start;text-align:left;padding:6px 16px;font-size:18px}
+.search{border:1px solid var(--border);border-radius:12px;padding:0 14px;background:var(--bg);width:100%;min-height:56px;font-size:18px}
+.namebtn{display:block;width:100%;min-height:56px;padding:12px 4px;border-bottom:1px solid var(--line);font-size:18px}
+.inlink{display:inline;padding:12px 4px;font-size:16px;font-weight:500;color:var(--brand);background:none;border:0;text-decoration:none}
 textarea{width:100%;min-height:90px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--bg);resize:vertical;font-size:17px}
 
 .strip{display:flex;align-items:flex-start;gap:8px;padding:20px 24px;border-bottom:1px solid var(--line);color:var(--ok);font-weight:600}
