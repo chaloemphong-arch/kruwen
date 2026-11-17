@@ -21,22 +21,13 @@ const dayMonth = (ymd) => { const [, m, d] = ymdParts(ymd); return d + ' ' + TMO
 const thaiDay = (ymd) => { const [y, m, d] = ymdParts(ymd); return DOW[new Date(Date.UTC(y, m - 1, d)).getUTCDay()] + ' ' + d + ' ' + TMON[m - 1]; };
 const thaiMonth = (ym) => { const [y, m] = ymdParts(ym); return TMON[m - 1] + ' ' + (y + 543); };
 
-function textOn(hex) {
-  const m = /^#?([0-9a-f]{6})$/i.exec(String(hex || ''));
-  if (!m) return '#FFFFFF';
-  const n = parseInt(m[1], 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255;
-  return (0.299 * r + 0.587 * g + 0.114 * b) / 255 > 0.6 ? '#1E2B45' : '#FFFFFF';
-}
-const chip = (code, color) => color
-  ? `<i class="code" style="background:${esc(color)};color:${textOn(color)}">${esc(code)}</i>`
-  : `<i class="code">${esc(code)}</i>`;
-const dutyLine = (d) => d ? `${chip(d.code, d.color)} ${esc(d.point)} · ${hmd(d.start)}–${hmd(d.end)}` : '';
-
 const ICON = {
   check: '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
   checkS: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
   checkBig: '<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
   chev: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A96AA" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>',
+  chevL: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>',
+  chevR: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>',
   users: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.3-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><path d="M16 4.8a3.5 3.5 0 010 6.4M18 14.8c2 .7 3.2 2.4 3.5 5.2"/></svg>',
   alert: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9.5 17h-19z"/><path d="M12 10v4.5M12 17.5v.2"/></svg>',
   cam: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h4l2-3h6l2 3h4v11H3z"/><circle cx="12" cy="13" r="3.5"/></svg>',
@@ -336,8 +327,10 @@ export function reportDone(st) {
   ${dock('<button class="btn" data-act="toHome">กลับ</button>')}`;
 }
 
-const TAG = { 'มา': 't-ok', 'สาย': 't-head', 'ลา': 't-leave', 'ขาด': 't-miss', 'ไปแทน': 't-ok', 'มีคนมาแทน': 't-head', 'ยังไม่ถึง': 't-idle', 'รอลงเวร': 't-idle' };
 const shiftMonth = (ym, n) => { const [y, m] = ymdParts(ym); const t = y * 12 + (m - 1) + n; const mm = t % 12 + 1; return Math.floor(t / 12) + '-' + (mm < 10 ? '0' : '') + mm; };
+
+// ป้ายสถานะของแถววันเวร: [ข้อความ, คลาสสี]
+const DAY_STATUS = { 'มา': ['✓ มา', 'ok'], 'ไปแทน': ['✓ มา', 'ok'], 'สาย': ['สาย', 'late'], 'ลา': ['ลา', 'leavec'], 'ขาด': ['ขาด', 'miss'], 'มีคนมาแทน': ['มีคนมาแทน', 'late'] };
 
 // st: {r (my), month 'YYYY-MM', currentMonth 'YYYY-MM'}
 // สรุป: backend นับ present = ตรงเวลา + สาย จึงแสดง "ตรงเวลา" = present − late ไม่ให้วันสายถูกนับสองครั้ง
@@ -345,22 +338,22 @@ export function my(st) {
   const r = st.r, s = r.summary, next = r.next;
   const month = st.month, canNext = st.currentMonth && month < st.currentMonth;
   const today = r.isToday && next ? next.date : '';
-  const rows = r.days.length ? r.days.map((d) => `<div class="drow${d.date === today ? ' today' : ''}"><span class="dt">${dayMonth(d.date)}</span>
-     <span class="rowc minw">${chip(d.label || d.duty_code)}${d.note ? `<span class="small muted">${esc(d.note)}</span>` : ''}</span>
-     <span class="tag ${TAG[d.status] || 't-idle'}">${esc(d.status)}</span></div>`).join('')
-    : '<p class="small muted">เดือนนี้ไม่มีวันเวร</p>';
-  const stat = (n, label) => `<div><b>${Number(n) || 0}</b><small>${label}</small></div>`;
-  const nameChange = r.canSelfChange ? `<button class="btn ghost" data-act="pickChange">ไม่ใช่ ${esc(kru(r.teacher.name))}? เปลี่ยนชื่อ</button><p class="small muted center">แก้เองได้จนกว่าจะสแกนลงเวรครั้งแรก</p>` : '';
-  return `<div class="pad"><p class="muted">${esc(kru(r.teacher.name))}</p>
-   <div class="next"><span class="small strong brand">${r.isToday ? 'เวรวันนี้' : 'เวรถัดไป'}</span>
-    <span class="d">${next ? thaiDay(next.date) : 'ยังไม่มีเวรในช่วงนี้'}</span>${next ? `<span class="rowc">${dutyLine(next.duty)}</span>` : ''}</div>
-   <div class="monthnav"><button class="arrow" data-act="myMonth" data-m="${shiftMonth(month, -1)}" aria-label="เดือนก่อน">‹</button>
-    <b>วันเวรเดือน ${thaiMonth(month)}</b>
-    <button class="arrow" data-act="myMonth" data-m="${shiftMonth(month, 1)}" aria-label="เดือนถัดไป"${canNext ? '' : ' disabled'}>›</button></div>
+  const dayRow = (d) => {
+    const [text, cls] = DAY_STATUS[d.status] || [d.status, 'muted idle'];
+    const where = esc(d.place || d.label || d.duty_code) + (d.status === 'ไปแทน' ? ' · ไปแทน' : '');
+    return `<div class="drow${d.date === today ? ' today' : ''}"><span class="dt num">${dayMonth(d.date)}</span><span class="dwhere muted">${where}</span><span class="dst ${cls}">${esc(text)}</span></div>`;
+  };
+  const rows = r.days.length ? r.days.map(dayRow).join('') : '<p class="small muted">เดือนนี้ไม่มีวันเวร</p>';
+  const stat = (n, label, cls) => `<div><b class="num${cls && Number(n) > 0 ? ' ' + cls : ''}">${Number(n) || 0}</b><small class="statl">${label}</small></div>`;
+  const nameChange = r.canSelfChange ? '<button class="sublink" data-act="pickChange">เลือกชื่อผิด? เปลี่ยนชื่อ</button>' : '';
+  return `<div class="pad top"><p class="muted">${esc(kru(r.teacher.name))}</p>
+   <div class="next"><p class="nlbl">${r.isToday ? 'เวรวันนี้' : 'เวรถัดไป'}</p>
+    <p class="${next ? 'nday' : 'nday none'}">${next ? thaiDay(next.date) : 'ยังไม่มีเวรในช่วงนี้'}</p>${next ? `<p class="nwhere muted num">${esc(placeShort(next.duty))} · ${rng(next.duty)}</p>` : ''}</div>
+   <div class="monthnav"><button class="arrow" data-act="myMonth" data-m="${shiftMonth(month, -1)}" aria-label="เดือนก่อน">${ICON.chevL}</button>
+    <b class="mname">${thaiMonth(month)}</b>
+    <button class="arrow" data-act="myMonth" data-m="${shiftMonth(month, 1)}" aria-label="เดือนถัดไป"${canNext ? '' : ' disabled'}>${ICON.chevR}</button></div>
    <div>${rows}</div>
-   <div class="stats">${stat(s.present - s.late, 'ตรงเวลา')}${stat(s.late, 'สาย')}${stat(s.leave, 'ลา')}${stat(s.absent, 'ขาด')}${stat(s.subbed, 'ไปแทน')}</div>
-   <p class="small muted">ถ้าติดธุระวันเวร ให้ตกลงแลกเวรกับครูคนอื่นได้เลย คนที่มาแทนสแกน QR แล้วเลือก "มาแทน"</p>
-   <p class="small muted center">หน้านี้เปิดจากลิงก์ในประกาศกลุ่ม LINE ครูได้ทุกที่ ไม่ต้องสแกน</p>
+   <div class="stats">${stat(s.present - s.late, 'ตรงเวลา')}${stat(s.late, 'สาย', 'late')}${stat(s.leave, 'ลา')}${stat(s.absent, 'ขาด')}</div>
    ${nameChange}
   </div>`;
 }
