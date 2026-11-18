@@ -2,7 +2,7 @@
 // เปิดจาก web/js/app.js start() · โค้ดที่แตะ document/window อยู่ในฟังก์ชันเท่านั้น
 import { call, setIdentity, setTransport } from '../js/api.js';
 import { mockScenario } from '../js/liff.js';
-import { withTitle } from '../js/names.js';
+import { withTitle, setAddKru } from '../js/names.js';
 import { renderPage, renderRow, renderSheet, renderToast, renderMessage, mergeNeedsKeys } from './view.js';
 import { headMockTransport } from './mock.js';
 
@@ -279,6 +279,7 @@ export async function startHead(identity) {
   const home = await call('headHome', {}, { onRetry, retries: 5 });
   if (!home.ok) return showError(home);
   H.showLate = lateVisible(home);
+  setAddKru(home.nameAddKru);
   const view = await call('headView', {}, { onRetry, retries: 5 });
   if (!view.ok) return showError(view);
   mountShell();

@@ -5,7 +5,7 @@ import { initIdentity, mockScenario, viewParam } from './liff.js';
 import * as camera from './camera.js';
 import { getGps } from './gps.js';
 import * as V from './screens.js';
-import { withTitle } from './names.js';
+import { withTitle, setAddKru } from './names.js';
 import { mockTransport, mockStreamSource } from './mock.js';
 
 // ผลจากหลังบ้าน → ชื่อหน้าจอ
@@ -105,6 +105,8 @@ function ensureConfig() {
     A.configP = call('config', {}, { onRetry: (n) => { if (A.waitConfig) showFail(n, true); } }).then((cfg) => {
       if (cfg && cfg.ok) {
         A.config = cfg;
+        setAddKru(cfg.name_add_kru);
+        store('duty.addKru', cfg.name_add_kru === false ? '0' : '1');
         A.school = cfg.school_name || '';
         if (!A.clock && cfg.serverTime) setClock(cfg.serverTime.slice(11, 16));
       } else {
@@ -481,6 +483,7 @@ export async function start() {
     const fn = ACTIONS[el.dataset.act];
     if (fn) fn(el.dataset);
   });
+  if (store('duty.addKru') === '0') setAddKru(false); // ค่าล่าสุดที่จำไว้ ใช้ก่อน config มาถึง
   A.mock = mockScenario(location.search);
   if (A.mock !== null) {
     A.mock = A.mock || 'checked_in';
