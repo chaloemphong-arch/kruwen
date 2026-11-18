@@ -268,7 +268,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -398,7 +398,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -454,7 +454,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": true,
         "disabled": true,
         "next": {
@@ -998,7 +998,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -1133,7 +1133,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -1189,7 +1189,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": true,
         "disabled": true,
         "next": {
@@ -2228,7 +2228,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -2363,7 +2363,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -2419,7 +2419,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": true,
         "disabled": true,
         "next": {
@@ -2791,7 +2791,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -2897,7 +2897,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -2953,7 +2953,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -3009,7 +3009,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -3065,7 +3065,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -3121,7 +3121,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -3818,7 +3818,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -3874,7 +3874,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -3930,7 +3930,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -3986,7 +3986,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -4042,7 +4042,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -4098,7 +4098,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -4154,7 +4154,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -4210,7 +4210,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -4266,7 +4266,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -4322,7 +4322,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -4378,7 +4378,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -4434,7 +4434,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -4490,7 +4490,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -4546,7 +4546,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -4602,7 +4602,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -4658,7 +4658,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -4714,7 +4714,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -4770,7 +4770,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -4826,7 +4826,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -4882,7 +4882,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -4938,7 +4938,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -4994,7 +4994,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -5050,7 +5050,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -5106,7 +5106,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -5162,7 +5162,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -5218,7 +5218,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -5274,7 +5274,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -5330,7 +5330,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -5386,7 +5386,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -5442,7 +5442,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -5498,7 +5498,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -5554,7 +5554,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -5610,7 +5610,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
@@ -5666,7 +5666,7 @@
        {
         "action": "head",
         "label": "มา (หัวหน้าเวรเช็ค)",
-        "hint": "มาที่จุดแต่ไม่ได้สแกน",
+        "hint": "",
         "current": false,
         "disabled": false,
         "next": {
