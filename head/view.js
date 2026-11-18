@@ -172,6 +172,7 @@ function header(view, ui) {
   return '<header class="hdr">' +
     '<div class="r1"><b>' + (view.preview ? 'สถานะเวรพรุ่งนี้' : 'สถานะเวรวันนี้') + '</b><span class="muted">' + esc(view.dateThai) + ' · ' + esc(view.nowHHMM) + '</span></div>' +
     (ui.canPreview ? '<button class="pv" data-act="preview">' + (ui.previewing ? '← กลับวันนี้' : 'ดูพรุ่งนี้ →') + '</button>' : '') +
+    (view.canClearAll ? '<button class="clr" data-act="clearall">' + (ui.point ? 'ล้างสถานะจุดนี้' : 'ล้างสถานะทั้งหมด') + '</button>' : '') +
     '<div class="stats">' + stat('s-ok', came, 'มาแล้ว') + stat('s-wait', wait, 'รอสแกน') + stat('s-leave', leave, 'ลา') + stat('s-miss', absent, 'ขาด') + '</div>' +
     tabs + '</header>';
 }

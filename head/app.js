@@ -248,6 +248,7 @@ const ACTIONS = {
   },
   point: (d) => { H.point = d.p || ''; drawPage(); },
   undo: () => undo(),
+  clearall: () => clearAll(),
   // แอดมิน: สลับดู "พรุ่งนี้" (ดูอย่างเดียว) ↔ กลับวันนี้
   preview: async () => {
     if (H.pending > 0 || !H.view) return;
@@ -261,6 +262,27 @@ const ACTIONS = {
     window.scrollTo(0, 0);
   }
 };
+
+// แอดมิน (เมื่อเปิด allow_clear_all): ล้างสถานะทุกคนของวันนั้นครั้งเดียว หรือเฉพาะจุดที่เลือกอยู่ · ไม่มีเลิกทำ จึงถามยืนยันก่อน
+async function clearAll() {
+  if (H.pending > 0 || !H.view) return;
+  const pt = H.point ? pointName(H.point) : '';
+  if (!window.confirm('ล้างสถานะ' + (pt ? 'ของจุด ' + pt : 'ทุกคน') + ' ให้กลับเป็นยังไม่สแกน?\nทำแล้วเลิกทำไม่ได้')) return;
+  H.seq++;
+  const req = ++H.req;
+  H.pending++;
+  showToast('กำลังล้างสถานะ…', null, true);
+  const res = await call('headClearAll', { date: H.view.date, pointId: H.point || '' }, { retries: 0 });
+  H.pending--;
+  if (res.code === 'auth') return reloadForAuth(res);
+  takeView(req, res.view);
+  showToast(res.ok ? res.toast : res.message);
+}
+
+function pointName(id) {
+  const r = allRows().find((x) => x.pointId === id);
+  return r ? r.place : '';
+}
 
 export function tomorrowOf(ymd) {
   return new Date(Date.parse(String(ymd) + 'T12:00:00Z') + 86400000).toISOString().slice(0, 10);
