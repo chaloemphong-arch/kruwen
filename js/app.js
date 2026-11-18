@@ -217,7 +217,7 @@ async function openCam(purpose, tip) {
   const s = await startCamera();
   if (s || A.screen !== 'cam') return;
   if (purpose === 'proxy') {
-    return show('error', { message: 'เปิดกล้องไม่ได้ ลงชื่อให้เพื่อนต้องมีรูปทุกครั้ง ให้ครูที่ลืมโทรศัพท์แจ้งหัวหน้าเวรเช็คให้', back: true });
+    return show('error', { message: 'เปิดกล้องไม่ได้ ลงชื่อให้เพื่อนต้องมีรูปทุกครั้ง ให้คนที่ลืมโทรศัพท์แจ้งหัวหน้าเวรเช็คให้', back: true });
   }
   A.rep.error = 'เปิดกล้องไม่ได้ ส่งรายงานโดยไม่มีรูปได้';
   show('report', A.rep);

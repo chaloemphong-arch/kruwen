@@ -42,7 +42,7 @@ const ICON = {
 
 const myLink = '<button class="link" data-act="my">ดูเวรของฉัน</button>';
 const dock = (inner) => `<div class="dock">${inner}</div>`;
-const who = (name) => (kruFirst(name) ? kruFirst(name) + ' ' : 'มีครู');
+const who = (name) => (kruFirst(name) ? kruFirst(name) + ' ' : 'มีคน');
 const NOT_RECORDED = '<p class="small muted">ยังไม่ได้บันทึกการลงเวร</p>';
 // หน้าข้อความกลางจอ: วงกลมไอคอน + หัวเรื่อง + บรรทัดข้อความ; foot เป็นลิงก์ (อยู่ใน .pad) หรือ dock (อยู่นอก .pad)
 // title ถูก esc ในนี้; lines/foot เป็น HTML ที่ผู้เรียกประกอบและ esc ข้อมูลเองแล้ว

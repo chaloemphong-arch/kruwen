@@ -188,7 +188,7 @@ export function screenSamples() {
     s('preview', { img, purpose: 'scan', sending: false }),
     s('preview', { img, purpose: 'report', sending: true }, 'preview sending'),
     s('proxyPick', { r: mockCall('x', 'proxyCandidates'), c }),
-    s('proxyPick', { r: { ok: true, kind: 'proxy_candidates', friends: [], message: 'ครูที่ลืมโทรศัพท์ให้หัวหน้าเวรเช็คให้' }, c }, 'proxyPick alone'),
+    s('proxyPick', { r: { ok: true, kind: 'proxy_candidates', friends: [], message: 'คนที่ลืมโทรศัพท์ให้หัวหน้าเวรเช็คให้' }, c }, 'proxyPick alone'),
     s('proxyDone', { r: mockCall('x', 'proxy'), img, c }),
     s('proxyDone', { r: { friendName: FRIEND.name, already: true }, c }, 'proxyDone already'),
     s('fail', { attempt: 1, load: true }, 'fail load'),
