@@ -64,7 +64,7 @@
 .opt:hover:not(:disabled){border-color:var(--brand)}
 .opt[aria-pressed="true"]{border:2px solid var(--brand);background:var(--brand-bg)}
 .opt:disabled{cursor:default}
-.opt:disabled:not([aria-pressed="true"]){opacity:.5}
+.opt:disabled:not([aria-pressed="true"]),.opt[aria-disabled="true"]{opacity:.5}
 .opt .ol{flex:1;min-width:0}.opt .ol b{display:block;font-size:19px;font-weight:600;line-height:1.35}.opt .ol small{display:block;font-size:16px;color:var(--muted);line-height:1.35}
 .bx{min-width:36px;text-align:center;font-weight:700;font-size:18px;line-height:1;flex:none}
 .bx.ok{color:var(--ok)}.bx.head{color:var(--head)}.bx.leave{color:var(--leave)}.bx.miss{color:var(--miss)}.bx.pending{color:var(--muted)}

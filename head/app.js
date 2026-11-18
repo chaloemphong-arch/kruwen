@@ -167,6 +167,7 @@ async function choose(action) {
   const row = rowByKey(H.sheetKey);
   if (!row || !action) return;
   const opt = (row.options || []).find((o) => o.action === action);
+  if (opt && opt.disabled && !opt.current && opt.hint) return showToast(opt.hint);
   if (!opt || opt.disabled) return;
   closeSheet();
   showToast(withTitle(row.name) + ': ' + opt.label, null, true);
