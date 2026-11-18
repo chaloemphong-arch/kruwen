@@ -142,11 +142,16 @@ function tick() {
   }
 }
 
+// ขอพิกัดเฉพาะเมื่อ Settings use_gps = TRUE (config ยังไม่มา = ไม่ขอ) · โหมดทดลองไม่ขอ
+function scanGps() {
+  return A.mock === null && A.config && A.config.use_gps === true ? getGps(3000) : Promise.resolve(null);
+}
+
 // ---------- สแกน ----------
 async function doScan() {
   show('loading', { title: 'กำลังบันทึก' });
   ensureConfig();
-  const gps = A.mock !== null ? null : await getGps(3000);
+  const gps = await scanGps();
   const res = await call('scan', { pointId: A.P, token: A.K, gps }, retrying);
   handleScan(res);
 }
@@ -295,7 +300,7 @@ async function startProxy() {
 async function sendProxy(b64) {
   const img = 'data:image/jpeg;base64,' + b64;
   show('preview', { img, purpose: 'proxy', sending: true });
-  const gps = A.mock !== null ? null : await getGps(3000);
+  const gps = await scanGps();
   const r = await call('proxy', { pointId: A.P, token: A.K, friendId: A.friend.teacher_id, photo: { base64: b64 }, gps }, retrying);
   // ลองใหม่หลังคำขอแรกถึงเซิร์ฟเวอร์แล้ว → 'already' = ลงชื่อให้ไปแล้ว
   if (!r.ok && r.code === 'already') return show('proxyDone', { r: { friendName: A.friend.name, already: true }, c: A.c });
@@ -461,7 +466,7 @@ const ACTIONS = {
   rescan: doScan,
   subFor: async (d) => {
     show('loading', { title: 'กำลังบันทึก' });
-    const gps = A.mock !== null ? null : await getGps(3000);
+    const gps = await scanGps();
     const r = await call('substitute', { pointId: A.P, token: A.K, forTeacherId: d.id, gps }, retrying);
     if (!r.ok) return r.code === 'already_substitute' ? doScan() : showError(r);
     handleScan(r);

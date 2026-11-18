@@ -88,7 +88,7 @@ export function mockCall(scenario, action, payload = {}) {
   switch (action) {
     case 'config':
       return withKind('config', { school_name: 'โรงเรียนอุบลรัตน์พิทยาคม', report_categories: CATEGORIES.slice(),
-        liff_id: '', fallback_local_mode: false, name_add_kru: true, serverTime: SERVER_TIME });
+        liff_id: '', fallback_local_mode: false, name_add_kru: true, use_gps: false, serverTime: SERVER_TIME });
     case 'scan':
       if ((scenario === 'first') && bound[scenario]) return withKind('checked_in', checkinData());
       return scanResult(scenario);
