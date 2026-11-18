@@ -154,8 +154,8 @@ function pointTabs(rows, ui, c, f) {
   if (pts.length < 2) return '';
   const cur = pts.some((x) => x.id === ui.point) ? ui.point : '';
   return '<div class="ptabs" role="tablist">' +
-    '<button class="pt" data-act="point" data-p="" aria-pressed="' + (cur === '') + '">ทุกจุด <i>' + rows.length + '</i></button>' +
-    pts.map((x) => '<button class="pt" data-act="point" data-p="' + esc(x.id) + '" aria-pressed="' + (cur === x.id) + '">' + esc(x.name) + ' <i>' + x.n + '</i></button>').join('') +
+    '<button class="pt" data-act="point" data-p="" aria-pressed="' + (cur === '') + '">ทั้งหมด</button>' +
+    pts.map((x) => '<button class="pt" data-act="point" data-p="' + esc(x.id) + '" aria-pressed="' + (cur === x.id) + '">' + esc(x.name) + '</button>').join('') +
     '</div>';
 }
 
