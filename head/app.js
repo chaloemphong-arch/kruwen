@@ -13,7 +13,7 @@ const AUTH_RELOAD_GAP_MS = 120000;
 
 // seq = รุ่นของจอ (ผลรีเฟรชที่ออกก่อนรุ่นนี้ทิ้ง) · req/appliedReq = ลำดับคำขอบันทึก/เลิกทำ (ผลที่ตอบช้ากว่าไม่ทับผลใหม่)
 const H = {
-  view: null, point: '', filter: 'all', saving: {}, full: {}, fullFail: {},
+  view: null, point: '', canPreview: false, previewDate: '', filter: 'all', saving: {}, full: {}, fullFail: {},
   needsKeys: null, seq: 0, req: 0, appliedReq: 0, stale: false,
   sheetKey: null, toast: null, toastTimer: null, pending: 0, mock: null, showLate: false
 };
@@ -34,7 +34,7 @@ const root = () => $('app');
 function allRows() { return H.view ? (H.view.sessions || []).flatMap((s) => s.rows) : []; }
 function rowByKey(key) { return allRows().find((r) => r.key === key) || null; }
 function rowEl(key) { return Array.from(document.querySelectorAll('[data-act="row"]')).find((el) => el.dataset.key === key) || null; }
-function ui() { return { filter: H.filter, needsKeys: H.needsKeys, saving: H.saving, stale: H.stale, showLate: H.showLate, point: H.point }; }
+function ui() { return { filter: H.filter, needsKeys: H.needsKeys, saving: H.saving, stale: H.stale, showLate: H.showLate, point: H.point, canPreview: H.canPreview, previewing: !!H.previewDate }; }
 
 // ลิงก์ "เวรของฉัน" = หน้าเดิมไม่มี ?v (โหมดทดลองไปหน้า mock=my)
 function myDutyHref() { return location.pathname + (H.mock !== null ? '?mock=my' : ''); }
@@ -228,7 +228,7 @@ async function refresh(force) {
   if (!force && (document.visibilityState !== 'visible' || !idle())) return;
   // ผลรีเฟรชที่ออกไปก่อนการบันทึก/เลิกทำ/วาดใหม่ ทิ้งไป (กันข้อมูลเก่าทับผลที่ใหม่กว่า)
   const seq = H.seq;
-  const res = await call('headView', {}, { retries: 0 });
+  const res = await call('headView', H.previewDate ? { date: H.previewDate } : {}, { retries: 0 });
   if (res.code === 'auth') return reloadForAuth(res);
   if (res.code === 'network') return setStale(true);
   if (!res.ok) return;
@@ -247,8 +247,24 @@ const ACTIONS = {
     drawPage();
   },
   point: (d) => { H.point = d.p || ''; drawPage(); },
-  undo: () => undo()
+  undo: () => undo(),
+  // แอดมิน: สลับดู "พรุ่งนี้" (ดูอย่างเดียว) ↔ กลับวันนี้
+  preview: async () => {
+    if (H.pending > 0 || !H.view) return;
+    const back = !!H.previewDate;
+    const date = back ? '' : tomorrowOf(H.view.date);
+    const res = await call('headView', date ? { date } : {}, { retries: 1 });
+    if (!res.ok) return showToast(res.message || 'เปิดไม่สำเร็จ ลองอีกครั้ง');
+    H.previewDate = date; H.point = ''; H.filter = 'all'; H.needsKeys = null; H.stale = false;
+    closeSheet(false);
+    applyView(res, false);
+    window.scrollTo(0, 0);
+  }
 };
+
+export function tomorrowOf(ymd) {
+  return new Date(Date.parse(String(ymd) + 'T12:00:00Z') + 86400000).toISOString().slice(0, 10);
+}
 
 function bindEvents() {
   root().addEventListener('click', (e) => {
@@ -281,6 +297,7 @@ export async function startHead(identity) {
   const home = await call('headHome', {}, { onRetry, retries: 5 });
   if (!home.ok) return showError(home);
   H.showLate = lateVisible(home);
+  H.canPreview = !!home.isAdmin;
   setAddKru(home.nameAddKru);
   const view = await call('headView', {}, { onRetry, retries: 5 });
   if (!view.ok) return showError(view);

@@ -106,3 +106,4 @@
 .pt i{font-style:normal;font-size:16px;color:var(--muted);font-variant-numeric:tabular-nums}
 .pt[aria-pressed="true"]{background:var(--brand-ink);border-color:var(--brand-ink);color:var(--on-brand);font-weight:600}
 .pt[aria-pressed="true"] i{color:var(--on-brand)}
+.pv{justify-self:start;min-height:48px;padding:0 18px;border-radius:var(--radius-pill);border:1px solid var(--brand);color:var(--brand);font-size:16px;font-weight:600;background:var(--card)}

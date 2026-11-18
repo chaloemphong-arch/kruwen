@@ -170,7 +170,8 @@ function header(view, ui) {
   const wait = Math.max(0, rows.length - came - leave - absent);
   const stat = (cls, num, label) => '<div class="stat ' + cls + '"><b>' + num + '</b><span>' + label + '</span></div>';
   return '<header class="hdr">' +
-    '<div class="r1"><b>สถานะเวรวันนี้</b><span class="muted">' + esc(view.dateThai) + ' · ' + esc(view.nowHHMM) + '</span></div>' +
+    '<div class="r1"><b>' + (view.preview ? 'สถานะเวรพรุ่งนี้' : 'สถานะเวรวันนี้') + '</b><span class="muted">' + esc(view.dateThai) + ' · ' + esc(view.nowHHMM) + '</span></div>' +
+    (ui.canPreview ? '<button class="pv" data-act="preview">' + (ui.previewing ? '← กลับวันนี้' : 'ดูพรุ่งนี้ →') + '</button>' : '') +
     '<div class="stats">' + stat('s-ok', came, 'มาแล้ว') + stat('s-wait', wait, 'รอสแกน') + stat('s-leave', leave, 'ลา') + stat('s-miss', absent, 'ขาด') + '</div>' +
     tabs + '</header>';
 }
