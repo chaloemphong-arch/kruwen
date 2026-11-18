@@ -352,7 +352,8 @@ export function my(st) {
   const rows = r.days.length ? r.days.map(dayRow).join('') : '<p class="small muted">เดือนนี้ไม่มีวันเวร</p>';
   const stat = (n, label, cls) => `<div><b class="num${cls && Number(n) > 0 ? ' ' + cls : ''}">${Number(n) || 0}</b><small class="statl">${label}</small></div>`;
   const nameChange = r.canSelfChange ? '<button class="sublink" data-act="pickChange">เลือกชื่อผิด? เปลี่ยนชื่อ</button>' : '';
-  return `<div class="pad top"><p class="muted">${esc(kru(r.teacher.name))}</p>
+  const headBtn = r.canHead ? '<button class="btn pri" data-act="toHead">ตรวจเวรวันนี้</button>' : '';
+  return `<div class="pad top"><p class="muted">${esc(kru(r.teacher.name))}</p>${headBtn}
    <div class="next"><p class="nlbl">${r.isToday ? 'เวรวันนี้' : 'เวรถัดไป'}</p>
     <p class="${next ? 'nday' : 'nday none'}">${next ? thaiDay(next.date) : 'ยังไม่มีเวรในช่วงนี้'}</p>${next ? `<p class="nwhere muted num">${esc(placeShort(next.duty))} · ${rng(next.duty)}</p>` : ''}</div>
    <div class="monthnav"><button class="arrow" data-act="myMonth" data-m="${shiftMonth(month, -1)}" aria-label="เดือนก่อน">${ICON.chevL}</button>

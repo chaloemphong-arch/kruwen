@@ -73,7 +73,7 @@ function scanResult(scenario) {
 function myResult() {
   const day = (date, status, note, code = '1(1)', place = '') => ({ date, duty_code: code, label: code, place: place || (code === '2(1)' ? 'ประตู 2' : 'ประตู 1'), status, note });
   return withKind('my', {
-    teacher: ME, canSelfChange: false,
+    teacher: ME, canSelfChange: false, canHead: false,
     next: { date: '2026-11-27', duty: summary(DUTY) }, isToday: false,
     days: [day('2026-11-06', 'มา', 'หัวหน้าเวรเช็คให้'), day('2026-11-11', 'ไปแทน', 'แทนครูวิชัย รักเรียน', '2(1)'),
       day('2026-11-13', 'สาย', ''), day('2026-11-18', 'มา', '', '3', 'จุดที่ 3 ตู้สแกน อุตสาหกรรม'), day('2026-11-20', 'มา', 'เพื่อนลงชื่อให้'), day('2026-11-27', 'ยังไม่ถึง', '')],

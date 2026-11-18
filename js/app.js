@@ -410,12 +410,20 @@ async function doMy(month) {
   rememberTeacher(r.teacher);
   const current = cfg && cfg.ok && cfg.serverTime ? cfg.serverTime.slice(0, 7) : '';
   const m = month || current || (r.next ? r.next.date.slice(0, 7) : '');
+  // คนที่เปิดใบเช็คได้และไม่มีเวรของตัวเองเลย (เช่น ครูที่คุมเวรนักเรียน) ไปหน้าตรวจเวรทันที
+  if (!month && r.canHead && !r.next && !(r.days || []).length) return toHead();
   show('my', { r, month: m, currentMonth: current || m });
+}
+
+function toHead() {
+  show('loading', { title: 'กำลังเปิด' });
+  location.replace(location.pathname + '?v=head' + (A.mock !== null ? '&mock=morning' : ''));
 }
 
 // ---------- ปุ่มทั้งหมด ----------
 const ACTIONS = {
   my: () => doMy(),
+  toHead: () => toHead(),
   myMonth: (d) => doMy(d.m),
   pickFromMy: () => startPick('my'),
   pickChange: () => startPick('change'),
