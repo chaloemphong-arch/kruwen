@@ -10,8 +10,8 @@ const fail = (code, message, extra) => Object.assign({ ok: false, code, message 
 
 // ตัวเลือกของแถวยังว่าง (ตรงกับ headOptions ของหลังบ้าน)
 const OPEN_OPTIONS = [
-  { action: 'head', label: 'มา (หัวหน้าเวรเช็ค)', hint: 'ครูมาที่จุดแต่ไม่ได้สแกน', next: { cls: 'p-head', text: '✓ หัวหน้าเวรเช็ค' } },
-  { action: 'leave', label: 'ลา/ไปราชการ', hint: 'ไม่นับเป็นขาด', next: { cls: 'p-leave', text: 'ลา' } },
+  { action: 'head', label: 'มา (หัวหน้าเวรเช็ค)', hint: 'มาที่จุดแต่ไม่ได้สแกน', next: { cls: 'p-head', text: '✓ หัวหน้าเวรเช็ค' } },
+  { action: 'leave', label: 'ลา', hint: 'ไม่นับเป็นขาด', next: { cls: 'p-leave', text: 'ลา' } },
   { action: 'standin', label: 'หัวหน้าเวรยืนแทน', hint: '', next: { cls: 'p-miss', text: 'ขาด' } }
 ];
 const PILL = {
