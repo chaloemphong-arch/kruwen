@@ -299,8 +299,14 @@ export async function startHead(identity) {
   H.showLate = lateVisible(home);
   H.canPreview = !!home.isAdmin;
   setAddKru(home.nameAddKru);
-  const view = await call('headView', {}, { onRetry, retries: 5 });
+  let view = await call('headView', {}, { onRetry, retries: 5 });
   if (!view.ok) return showError(view);
+  // วันนี้ไม่มีเวร (เช่น ก่อนวันเริ่มใช้จริง) → แอดมินเห็นของพรุ่งนี้ทันที ดูอย่างเดียว
+  if (H.canPreview && !(view.sessions || []).length) {
+    const date = tomorrowOf(view.date);
+    const next = await call('headView', { date }, { onRetry, retries: 2 });
+    if (next.ok && (next.sessions || []).length) { view = next; H.previewDate = date; }
+  }
   mountShell();
   applyView(view);
   setInterval(() => refresh(false), REFRESH_MS);
