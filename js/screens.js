@@ -58,7 +58,7 @@ export function loading(st = {}) {
 
 export function welcome(st = {}) {
   return `<div class="pad"><div class="mid"><div class="ring info">${ICON.users}</div>
-  <p class="h1 wel">ยินดีต้อนรับ</p><p class="lead muted">ระบบบริหารจัดการงานเวร</p>${st.school ? `<p class="lead muted">${esc(st.school)}</p>` : ''}</div></div>
+  <p class="h1 wel">ยินดีต้อนรับ</p>${st.school ? `<p class="lead muted">${esc(st.school)}</p>` : ''}</div></div>
   ${dock('<button class="btn pri" data-act="pickFromMy">เลือกชื่อของฉัน</button>')}`;
 }
 
