@@ -30,6 +30,8 @@
       "sig": "self|||",
       "color": "#c9cdd3",
       "name": "สมชาย ใจดี",
+      "pointId": "gate1",
+      "place": "ประตู 1",
       "sub": [],
       "detail": [],
       "pill": {
@@ -75,6 +77,8 @@
       "sig": "proxy|||",
       "color": "#c9cdd3",
       "name": "สมหญิง สุขสันต์",
+      "pointId": "gate1",
+      "place": "ประตู 1",
       "sub": [],
       "detail": [
        {
@@ -125,6 +129,8 @@
       "sig": "self|t58|swap|",
       "color": "#f2dc3b",
       "name": "วิชัย รักเรียน",
+      "pointId": "gate2",
+      "place": "ประตู 2",
       "sub": [
        {
         "text": "ครูณัฐธิดา แทน",
@@ -189,6 +195,8 @@
       "sig": "self|||",
       "color": "#f2dc3b",
       "name": "วิภา มั่นคง",
+      "pointId": "gate2",
+      "place": "ประตู 2",
       "sub": [],
       "detail": [
        {
@@ -239,6 +247,8 @@
       "sig": "leave|||",
       "color": "#26863f",
       "name": "ประเสริฐ แก้วมณี",
+      "pointId": "p3",
+      "place": "จุดที่ 3 ตู้สแกน อุตสาหกรรม",
       "sub": [
        {
         "text": "ไม่มีครูเวรแทน",
@@ -309,6 +319,8 @@
       "sig": "self|||",
       "color": "#2e77ba",
       "name": "ประภา ทองดี",
+      "pointId": "p4",
+      "place": "จุดที่ 4 โรงอาหาร ห้องน้ำ",
       "sub": [],
       "detail": [
        {
@@ -370,6 +382,8 @@
       "sig": "none",
       "color": "#c84081",
       "name": "สุรชัย เจริญสุข",
+      "pointId": "p5",
+      "place": "จุดที่ 5 ตู้สแกน ประชาสัมพันธ์",
       "sub": [],
       "detail": [],
       "pill": {
@@ -424,6 +438,8 @@
       "sig": "head|||",
       "color": "#d62b2b",
       "name": "สุนิสา พึ่งบุญ",
+      "pointId": "flag",
+      "place": "จุดที่ 6 หน้าเสาธง",
       "sub": [],
       "detail": [],
       "pill": {
@@ -486,6 +502,8 @@
       "sig": "none",
       "color": "#1f5fbf",
       "name": "อนุชา ศรีสว่าง",
+      "pointId": "gate1",
+      "place": "ประตู 1",
       "sub": [],
       "detail": [],
       "pill": {
@@ -540,6 +558,8 @@
       "sig": "none",
       "color": "#1f5fbf",
       "name": "อรทัย บุญมา",
+      "pointId": "gate1",
+      "place": "ประตู 1",
       "sub": [],
       "detail": [],
       "pill": {
@@ -594,6 +614,8 @@
       "sig": "none",
       "color": "#f0a23a",
       "name": "กิตติ ใจดี",
+      "pointId": "gate2",
+      "place": "ประตู 2",
       "sub": [],
       "detail": [],
       "pill": {
@@ -648,6 +670,8 @@
       "sig": "none",
       "color": "#f0a23a",
       "name": "กัลยา สุขสันต์",
+      "pointId": "gate2",
+      "place": "ประตู 2",
       "sub": [],
       "detail": [],
       "pill": {
@@ -735,6 +759,8 @@
       "sig": "self|||",
       "color": "#c9cdd3",
       "name": "สมชาย ใจดี",
+      "pointId": "gate1",
+      "place": "ประตู 1",
       "sub": [],
       "detail": [],
       "pill": {
@@ -780,6 +806,8 @@
       "sig": "proxy|||",
       "color": "#c9cdd3",
       "name": "สมหญิง สุขสันต์",
+      "pointId": "gate1",
+      "place": "ประตู 1",
       "sub": [],
       "detail": [
        {
@@ -830,6 +858,8 @@
       "sig": "self|t58|swap|",
       "color": "#f2dc3b",
       "name": "วิชัย รักเรียน",
+      "pointId": "gate2",
+      "place": "ประตู 2",
       "sub": [
        {
         "text": "ครูณัฐธิดา แทน",
@@ -894,6 +924,8 @@
       "sig": "self|||",
       "color": "#f2dc3b",
       "name": "วิภา มั่นคง",
+      "pointId": "gate2",
+      "place": "ประตู 2",
       "sub": [],
       "detail": [
        {
@@ -944,6 +976,8 @@
       "sig": "leave|||",
       "color": "#26863f",
       "name": "ประเสริฐ แก้วมณี",
+      "pointId": "p3",
+      "place": "จุดที่ 3 ตู้สแกน อุตสาหกรรม",
       "sub": [
        {
         "text": "ไม่มีครูเวรแทน",
@@ -1014,6 +1048,8 @@
       "sig": "self|||",
       "color": "#2e77ba",
       "name": "ประภา ทองดี",
+      "pointId": "p4",
+      "place": "จุดที่ 4 โรงอาหาร ห้องน้ำ",
       "sub": [],
       "detail": [
        {
@@ -1075,6 +1111,8 @@
       "sig": "none",
       "color": "#c84081",
       "name": "สุรชัย เจริญสุข",
+      "pointId": "p5",
+      "place": "จุดที่ 5 ตู้สแกน ประชาสัมพันธ์",
       "sub": [
        {
         "text": "ไม่มีครูเวรแทน",
@@ -1134,6 +1172,8 @@
       "sig": "head|||",
       "color": "#d62b2b",
       "name": "สุนิสา พึ่งบุญ",
+      "pointId": "flag",
+      "place": "จุดที่ 6 หน้าเสาธง",
       "sub": [],
       "detail": [],
       "pill": {
@@ -1196,6 +1236,8 @@
       "sig": "none",
       "color": "#1f5fbf",
       "name": "อนุชา ศรีสว่าง",
+      "pointId": "gate1",
+      "place": "ประตู 1",
       "sub": [],
       "detail": [],
       "pill": {
@@ -1250,6 +1292,8 @@
       "sig": "none",
       "color": "#1f5fbf",
       "name": "อรทัย บุญมา",
+      "pointId": "gate1",
+      "place": "ประตู 1",
       "sub": [],
       "detail": [],
       "pill": {
@@ -1304,6 +1348,8 @@
       "sig": "none",
       "color": "#f0a23a",
       "name": "กิตติ ใจดี",
+      "pointId": "gate2",
+      "place": "ประตู 2",
       "sub": [],
       "detail": [],
       "pill": {
@@ -1358,6 +1404,8 @@
       "sig": "none",
       "color": "#f0a23a",
       "name": "กัลยา สุขสันต์",
+      "pointId": "gate2",
+      "place": "ประตู 2",
       "sub": [],
       "detail": [],
       "pill": {
@@ -1445,6 +1493,8 @@
       "sig": "self|||",
       "color": "#c9cdd3",
       "name": "สมชาย ใจดี",
+      "pointId": "gate1",
+      "place": "ประตู 1",
       "sub": [],
       "detail": [],
       "pill": {
@@ -1467,6 +1517,8 @@
       "sig": "proxy|||",
       "color": "#c9cdd3",
       "name": "สมหญิง สุขสันต์",
+      "pointId": "gate1",
+      "place": "ประตู 1",
       "sub": [],
       "detail": [
        {
@@ -1494,6 +1546,8 @@
       "sig": "self|t58|swap|",
       "color": "#f2dc3b",
       "name": "วิชัย รักเรียน",
+      "pointId": "gate2",
+      "place": "ประตู 2",
       "sub": [
        {
         "text": "ครูณัฐธิดา แทน",
@@ -1524,6 +1578,8 @@
       "sig": "self|||",
       "color": "#f2dc3b",
       "name": "วิภา มั่นคง",
+      "pointId": "gate2",
+      "place": "ประตู 2",
       "sub": [],
       "detail": [
        {
@@ -1550,6 +1606,8 @@
       "sig": "leave|||",
       "color": "#26863f",
       "name": "ประเสริฐ แก้วมณี",
+      "pointId": "p3",
+      "place": "จุดที่ 3 ตู้สแกน อุตสาหกรรม",
       "sub": [
        {
         "text": "ไม่มีครูเวรแทน",
@@ -1575,6 +1633,8 @@
       "sig": "self|||",
       "color": "#2e77ba",
       "name": "ประภา ทองดี",
+      "pointId": "p4",
+      "place": "จุดที่ 4 โรงอาหาร ห้องน้ำ",
       "sub": [],
       "detail": [
        {
@@ -1613,6 +1673,8 @@
       "sig": "none",
       "color": "#c84081",
       "name": "สุรชัย เจริญสุข",
+      "pointId": "p5",
+      "place": "จุดที่ 5 ตู้สแกน ประชาสัมพันธ์",
       "sub": [
        {
         "text": "ไม่มีครูเวรแทน",
@@ -1638,6 +1700,8 @@
       "sig": "head|||",
       "color": "#d62b2b",
       "name": "สุนิสา พึ่งบุญ",
+      "pointId": "flag",
+      "place": "จุดที่ 6 หน้าเสาธง",
       "sub": [],
       "detail": [],
       "pill": {
@@ -1666,6 +1730,8 @@
       "sig": "none",
       "color": "#1f5fbf",
       "name": "อนุชา ศรีสว่าง",
+      "pointId": "gate1",
+      "place": "ประตู 1",
       "sub": [],
       "detail": [],
       "pill": {
@@ -1720,6 +1786,8 @@
       "sig": "none",
       "color": "#1f5fbf",
       "name": "อรทัย บุญมา",
+      "pointId": "gate1",
+      "place": "ประตู 1",
       "sub": [],
       "detail": [],
       "pill": {
@@ -1774,6 +1842,8 @@
       "sig": "none",
       "color": "#f0a23a",
       "name": "กิตติ ใจดี",
+      "pointId": "gate2",
+      "place": "ประตู 2",
       "sub": [],
       "detail": [],
       "pill": {
@@ -1828,6 +1898,8 @@
       "sig": "none",
       "color": "#f0a23a",
       "name": "กัลยา สุขสันต์",
+      "pointId": "gate2",
+      "place": "ประตู 2",
       "sub": [],
       "detail": [],
       "pill": {
@@ -1915,6 +1987,8 @@
       "sig": "self|||",
       "color": "#c9cdd3",
       "name": "สมชาย ใจดี",
+      "pointId": "gate1",
+      "place": "ประตู 1",
       "sub": [],
       "detail": [],
       "pill": {
@@ -1960,6 +2034,8 @@
       "sig": "proxy|||",
       "color": "#c9cdd3",
       "name": "สมหญิง สุขสันต์",
+      "pointId": "gate1",
+      "place": "ประตู 1",
       "sub": [],
       "detail": [
        {
@@ -2010,6 +2086,8 @@
       "sig": "self|t58|swap|",
       "color": "#f2dc3b",
       "name": "วิชัย รักเรียน",
+      "pointId": "gate2",
+      "place": "ประตู 2",
       "sub": [
        {
         "text": "ครูณัฐธิดา แทน",
@@ -2074,6 +2152,8 @@
       "sig": "self|||",
       "color": "#f2dc3b",
       "name": "วิภา มั่นคง",
+      "pointId": "gate2",
+      "place": "ประตู 2",
       "sub": [],
       "detail": [
        {
@@ -2124,6 +2204,8 @@
       "sig": "leave|||",
       "color": "#26863f",
       "name": "ประเสริฐ แก้วมณี",
+      "pointId": "p3",
+      "place": "จุดที่ 3 ตู้สแกน อุตสาหกรรม",
       "sub": [
        {
         "text": "ไม่มีครูเวรแทน",
@@ -2194,6 +2276,8 @@
       "sig": "self|||",
       "color": "#2e77ba",
       "name": "ประภา ทองดี",
+      "pointId": "p4",
+      "place": "จุดที่ 4 โรงอาหาร ห้องน้ำ",
       "sub": [],
       "detail": [
        {
@@ -2255,6 +2339,8 @@
       "sig": "none",
       "color": "#c84081",
       "name": "สุรชัย เจริญสุข",
+      "pointId": "p5",
+      "place": "จุดที่ 5 ตู้สแกน ประชาสัมพันธ์",
       "sub": [
        {
         "text": "ไม่มีครูเวรแทน",
@@ -2314,6 +2400,8 @@
       "sig": "head|||",
       "color": "#d62b2b",
       "name": "สุนิสา พึ่งบุญ",
+      "pointId": "flag",
+      "place": "จุดที่ 6 หน้าเสาธง",
       "sub": [],
       "detail": [],
       "pill": {
@@ -2376,6 +2464,8 @@
       "sig": "none",
       "color": "#1f5fbf",
       "name": "อนุชา ศรีสว่าง",
+      "pointId": "gate1",
+      "place": "ประตู 1",
       "sub": [],
       "detail": [],
       "pill": {
@@ -2430,6 +2520,8 @@
       "sig": "none",
       "color": "#1f5fbf",
       "name": "อรทัย บุญมา",
+      "pointId": "gate1",
+      "place": "ประตู 1",
       "sub": [],
       "detail": [],
       "pill": {
@@ -2484,6 +2576,8 @@
       "sig": "none",
       "color": "#f0a23a",
       "name": "กิตติ ใจดี",
+      "pointId": "gate2",
+      "place": "ประตู 2",
       "sub": [],
       "detail": [],
       "pill": {
@@ -2538,6 +2632,8 @@
       "sig": "none",
       "color": "#f0a23a",
       "name": "กัลยา สุขสันต์",
+      "pointId": "gate2",
+      "place": "ประตู 2",
       "sub": [],
       "detail": [],
       "pill": {
@@ -2625,6 +2721,8 @@
       "sig": "self|||",
       "color": "#c9cdd3",
       "name": "ธนากร รักเรียน",
+      "pointId": "gate1",
+      "place": "ประตู 1",
       "sub": [],
       "detail": [
        {
@@ -2673,6 +2771,8 @@
       "sig": "none",
       "color": "#c9cdd3",
       "name": "ธิดารัตน์ มั่นคง",
+      "pointId": "gate1",
+      "place": "ประตู 1",
       "sub": [],
       "detail": [],
       "pill": {
@@ -2727,6 +2827,8 @@
       "sig": "self|||",
       "color": "#f2dc3b",
       "name": "นพดล แก้วมณี",
+      "pointId": "gate2",
+      "place": "ประตู 2",
       "sub": [],
       "detail": [
        {
@@ -2775,6 +2877,8 @@
       "sig": "none",
       "color": "#f2dc3b",
       "name": "นภา ทองดี",
+      "pointId": "gate2",
+      "place": "ประตู 2",
       "sub": [],
       "detail": [],
       "pill": {
@@ -2829,6 +2933,8 @@
       "sig": "none",
       "color": "#26863f",
       "name": "บุญเรือง เจริญสุข",
+      "pointId": "p3",
+      "place": "จุดที่ 3 ตู้สแกน อุตสาหกรรม",
       "sub": [],
       "detail": [],
       "pill": {
@@ -2883,6 +2989,8 @@
       "sig": "none",
       "color": "#2e77ba",
       "name": "บุษบา พึ่งบุญ",
+      "pointId": "p4",
+      "place": "จุดที่ 4 โรงอาหาร ห้องน้ำ",
       "sub": [],
       "detail": [],
       "pill": {
@@ -2937,6 +3045,8 @@
       "sig": "none",
       "color": "#c84081",
       "name": "ปรีชา ศรีสว่าง",
+      "pointId": "p5",
+      "place": "จุดที่ 5 ตู้สแกน ประชาสัมพันธ์",
       "sub": [],
       "detail": [],
       "pill": {
@@ -2991,6 +3101,8 @@
       "sig": "none",
       "color": "#d62b2b",
       "name": "ปราณี บุญมา",
+      "pointId": "flag",
+      "place": "จุดที่ 6 หน้าเสาธง",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3053,6 +3165,8 @@
       "sig": "none",
       "color": "#1f5fbf",
       "name": "พงศกร ใจดี",
+      "pointId": "gate1",
+      "place": "ประตู 1",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3107,6 +3221,8 @@
       "sig": "none",
       "color": "#1f5fbf",
       "name": "พิมพ์ใจ สุขสันต์",
+      "pointId": "gate1",
+      "place": "ประตู 1",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3161,6 +3277,8 @@
       "sig": "none",
       "color": "#f0a23a",
       "name": "ภานุ รักเรียน",
+      "pointId": "gate2",
+      "place": "ประตู 2",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3215,6 +3333,8 @@
       "sig": "none",
       "color": "#f0a23a",
       "name": "ภัทรา มั่นคง",
+      "pointId": "gate2",
+      "place": "ประตู 2",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3297,6 +3417,8 @@
       "sig": "self|||",
       "color": "#c9cdd3",
       "name": "สมชาย ใจดี",
+      "pointId": "gate1",
+      "place": "ประตู 1",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3319,6 +3441,8 @@
       "sig": "proxy|||",
       "color": "#c9cdd3",
       "name": "สมหญิง สุขสันต์",
+      "pointId": "gate1",
+      "place": "ประตู 1",
       "sub": [],
       "detail": [
        {
@@ -3346,6 +3470,8 @@
       "sig": "self|t58|swap|",
       "color": "#f2dc3b",
       "name": "วิชัย รักเรียน",
+      "pointId": "gate2",
+      "place": "ประตู 2",
       "sub": [
        {
         "text": "ครูณัฐธิดา แทน",
@@ -3376,6 +3502,8 @@
       "sig": "self|||",
       "color": "#f2dc3b",
       "name": "วิภา มั่นคง",
+      "pointId": "gate2",
+      "place": "ประตู 2",
       "sub": [],
       "detail": [
        {
@@ -3402,6 +3530,8 @@
       "sig": "leave|||",
       "color": "#26863f",
       "name": "ประเสริฐ แก้วมณี",
+      "pointId": "p3",
+      "place": "จุดที่ 3 ตู้สแกน อุตสาหกรรม",
       "sub": [
        {
         "text": "ไม่มีครูเวรแทน",
@@ -3427,6 +3557,8 @@
       "sig": "self|||",
       "color": "#2e77ba",
       "name": "ประภา ทองดี",
+      "pointId": "p4",
+      "place": "จุดที่ 4 โรงอาหาร ห้องน้ำ",
       "sub": [],
       "detail": [
        {
@@ -3465,6 +3597,8 @@
       "sig": "none",
       "color": "#c84081",
       "name": "สุรชัย เจริญสุข",
+      "pointId": "p5",
+      "place": "จุดที่ 5 ตู้สแกน ประชาสัมพันธ์",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3485,6 +3619,8 @@
       "sig": "head|||",
       "color": "#d62b2b",
       "name": "สุนิสา พึ่งบุญ",
+      "pointId": "flag",
+      "place": "จุดที่ 6 หน้าเสาธง",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3513,6 +3649,8 @@
       "sig": "none",
       "color": "#1f5fbf",
       "name": "อนุชา ศรีสว่าง",
+      "pointId": "gate1",
+      "place": "ประตู 1",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3533,6 +3671,8 @@
       "sig": "none",
       "color": "#1f5fbf",
       "name": "อรทัย บุญมา",
+      "pointId": "gate1",
+      "place": "ประตู 1",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3553,6 +3693,8 @@
       "sig": "none",
       "color": "#f0a23a",
       "name": "กิตติ ใจดี",
+      "pointId": "gate2",
+      "place": "ประตู 2",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3573,6 +3715,8 @@
       "sig": "none",
       "color": "#f0a23a",
       "name": "กัลยา สุขสันต์",
+      "pointId": "gate2",
+      "place": "ประตู 2",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3619,5 +3763,1937 @@
   "banners": [],
   "sessions": [],
   "message": "วันนี้ไม่มีเวร"
+ },
+ "meeting": {
+  "ok": true,
+  "kind": "head",
+  "date": "2026-11-19",
+  "dateThai": "19 พ.ย. 2569",
+  "nowHHMM": "13:50",
+  "canEdit": true,
+  "actingFor": null,
+  "headName": "ครูเมฆ",
+  "counts": {
+   "came": 0,
+   "total": 34,
+   "needs": 0,
+   "leave": 0,
+   "upcoming": 34
+  },
+  "banners": [],
+  "sessions": [
+   {
+    "session": "เช้า",
+    "label": "(ทดสอบ)",
+    "locked": false,
+    "timeText": "14.00–15.30",
+    "rows": [
+     {
+      "key": "6|s01",
+      "dutyCode": "6",
+      "teacherId": "s01",
+      "sig": "none",
+      "color": "#d62b2b",
+      "name": "นักเรียน 01 (ตัวอย่าง)",
+      "pointId": "flag",
+      "place": "หน้าเสาธง",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "6|s02",
+      "dutyCode": "6",
+      "teacherId": "s02",
+      "sig": "none",
+      "color": "#d62b2b",
+      "name": "นักเรียน 02 (ตัวอย่าง)",
+      "pointId": "flag",
+      "place": "หน้าเสาธง",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "6|s03",
+      "dutyCode": "6",
+      "teacherId": "s03",
+      "sig": "none",
+      "color": "#d62b2b",
+      "name": "นักเรียน 03 (ตัวอย่าง)",
+      "pointId": "flag",
+      "place": "หน้าเสาธง",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "6|s04",
+      "dutyCode": "6",
+      "teacherId": "s04",
+      "sig": "none",
+      "color": "#d62b2b",
+      "name": "นักเรียน 04 (ตัวอย่าง)",
+      "pointId": "flag",
+      "place": "หน้าเสาธง",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "6|s05",
+      "dutyCode": "6",
+      "teacherId": "s05",
+      "sig": "none",
+      "color": "#d62b2b",
+      "name": "นักเรียน 05 (ตัวอย่าง)",
+      "pointId": "flag",
+      "place": "หน้าเสาธง",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "6|s06",
+      "dutyCode": "6",
+      "teacherId": "s06",
+      "sig": "none",
+      "color": "#d62b2b",
+      "name": "นักเรียน 06 (ตัวอย่าง)",
+      "pointId": "flag",
+      "place": "หน้าเสาธง",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "6|s07",
+      "dutyCode": "6",
+      "teacherId": "s07",
+      "sig": "none",
+      "color": "#d62b2b",
+      "name": "นักเรียน 07 (ตัวอย่าง)",
+      "pointId": "flag",
+      "place": "หน้าเสาธง",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "6|s08",
+      "dutyCode": "6",
+      "teacherId": "s08",
+      "sig": "none",
+      "color": "#d62b2b",
+      "name": "นักเรียน 08 (ตัวอย่าง)",
+      "pointId": "flag",
+      "place": "หน้าเสาธง",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "6|s09",
+      "dutyCode": "6",
+      "teacherId": "s09",
+      "sig": "none",
+      "color": "#d62b2b",
+      "name": "นักเรียน 09 (ตัวอย่าง)",
+      "pointId": "flag",
+      "place": "หน้าเสาธง",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "6|s10",
+      "dutyCode": "6",
+      "teacherId": "s10",
+      "sig": "none",
+      "color": "#d62b2b",
+      "name": "นักเรียน 10 (ตัวอย่าง)",
+      "pointId": "flag",
+      "place": "หน้าเสาธง",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "6|s11",
+      "dutyCode": "6",
+      "teacherId": "s11",
+      "sig": "none",
+      "color": "#d62b2b",
+      "name": "นักเรียน 11 (ตัวอย่าง)",
+      "pointId": "flag",
+      "place": "หน้าเสาธง",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "6|s12",
+      "dutyCode": "6",
+      "teacherId": "s12",
+      "sig": "none",
+      "color": "#d62b2b",
+      "name": "นักเรียน 12 (ตัวอย่าง)",
+      "pointId": "flag",
+      "place": "หน้าเสาธง",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "6|s13",
+      "dutyCode": "6",
+      "teacherId": "s13",
+      "sig": "none",
+      "color": "#d62b2b",
+      "name": "นักเรียน 13 (ตัวอย่าง)",
+      "pointId": "flag",
+      "place": "หน้าเสาธง",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "6|s14",
+      "dutyCode": "6",
+      "teacherId": "s14",
+      "sig": "none",
+      "color": "#d62b2b",
+      "name": "นักเรียน 14 (ตัวอย่าง)",
+      "pointId": "flag",
+      "place": "หน้าเสาธง",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "6|s15",
+      "dutyCode": "6",
+      "teacherId": "s15",
+      "sig": "none",
+      "color": "#d62b2b",
+      "name": "นักเรียน 15 (ตัวอย่าง)",
+      "pointId": "flag",
+      "place": "หน้าเสาธง",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "1(1)|s16",
+      "dutyCode": "1(1)",
+      "teacherId": "s16",
+      "sig": "none",
+      "color": "#c9cdd3",
+      "name": "นักเรียน 16 (ตัวอย่าง)",
+      "pointId": "gate1",
+      "place": "ประตู 1",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "1(1)|s17",
+      "dutyCode": "1(1)",
+      "teacherId": "s17",
+      "sig": "none",
+      "color": "#c9cdd3",
+      "name": "นักเรียน 17 (ตัวอย่าง)",
+      "pointId": "gate1",
+      "place": "ประตู 1",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "1(1)|s18",
+      "dutyCode": "1(1)",
+      "teacherId": "s18",
+      "sig": "none",
+      "color": "#c9cdd3",
+      "name": "นักเรียน 18 (ตัวอย่าง)",
+      "pointId": "gate1",
+      "place": "ประตู 1",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "1(1)|s19",
+      "dutyCode": "1(1)",
+      "teacherId": "s19",
+      "sig": "none",
+      "color": "#c9cdd3",
+      "name": "นักเรียน 19 (ตัวอย่าง)",
+      "pointId": "gate1",
+      "place": "ประตู 1",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "1(1)|s20",
+      "dutyCode": "1(1)",
+      "teacherId": "s20",
+      "sig": "none",
+      "color": "#c9cdd3",
+      "name": "นักเรียน 20 (ตัวอย่าง)",
+      "pointId": "gate1",
+      "place": "ประตู 1",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "1(1)|s21",
+      "dutyCode": "1(1)",
+      "teacherId": "s21",
+      "sig": "none",
+      "color": "#c9cdd3",
+      "name": "นักเรียน 21 (ตัวอย่าง)",
+      "pointId": "gate1",
+      "place": "ประตู 1",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "1(1)|s22",
+      "dutyCode": "1(1)",
+      "teacherId": "s22",
+      "sig": "none",
+      "color": "#c9cdd3",
+      "name": "นักเรียน 22 (ตัวอย่าง)",
+      "pointId": "gate1",
+      "place": "ประตู 1",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(1)|s23",
+      "dutyCode": "2(1)",
+      "teacherId": "s23",
+      "sig": "none",
+      "color": "#f2dc3b",
+      "name": "นักเรียน 23 (ตัวอย่าง)",
+      "pointId": "gate2",
+      "place": "ประตู 2",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(1)|s24",
+      "dutyCode": "2(1)",
+      "teacherId": "s24",
+      "sig": "none",
+      "color": "#f2dc3b",
+      "name": "นักเรียน 24 (ตัวอย่าง)",
+      "pointId": "gate2",
+      "place": "ประตู 2",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(1)|s25",
+      "dutyCode": "2(1)",
+      "teacherId": "s25",
+      "sig": "none",
+      "color": "#f2dc3b",
+      "name": "นักเรียน 25 (ตัวอย่าง)",
+      "pointId": "gate2",
+      "place": "ประตู 2",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(1)|s26",
+      "dutyCode": "2(1)",
+      "teacherId": "s26",
+      "sig": "none",
+      "color": "#f2dc3b",
+      "name": "นักเรียน 26 (ตัวอย่าง)",
+      "pointId": "gate2",
+      "place": "ประตู 2",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(1)|s27",
+      "dutyCode": "2(1)",
+      "teacherId": "s27",
+      "sig": "none",
+      "color": "#f2dc3b",
+      "name": "นักเรียน 27 (ตัวอย่าง)",
+      "pointId": "gate2",
+      "place": "ประตู 2",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(1)|s28",
+      "dutyCode": "2(1)",
+      "teacherId": "s28",
+      "sig": "none",
+      "color": "#f2dc3b",
+      "name": "นักเรียน 28 (ตัวอย่าง)",
+      "pointId": "gate2",
+      "place": "ประตู 2",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "2(1)|s29",
+      "dutyCode": "2(1)",
+      "teacherId": "s29",
+      "sig": "none",
+      "color": "#f2dc3b",
+      "name": "นักเรียน 29 (ตัวอย่าง)",
+      "pointId": "gate2",
+      "place": "ประตู 2",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "3|s30",
+      "dutyCode": "3",
+      "teacherId": "s30",
+      "sig": "none",
+      "color": "#26863f",
+      "name": "นักเรียน 30 (ตัวอย่าง)",
+      "pointId": "p3",
+      "place": "ตรวจอาคาร",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "3|s31",
+      "dutyCode": "3",
+      "teacherId": "s31",
+      "sig": "none",
+      "color": "#26863f",
+      "name": "นักเรียน 31 (ตัวอย่าง)",
+      "pointId": "p3",
+      "place": "ตรวจอาคาร",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "3|s32",
+      "dutyCode": "3",
+      "teacherId": "s32",
+      "sig": "none",
+      "color": "#26863f",
+      "name": "นักเรียน 32 (ตัวอย่าง)",
+      "pointId": "p3",
+      "place": "ตรวจอาคาร",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "3|s33",
+      "dutyCode": "3",
+      "teacherId": "s33",
+      "sig": "none",
+      "color": "#26863f",
+      "name": "นักเรียน 33 (ตัวอย่าง)",
+      "pointId": "p3",
+      "place": "ตรวจอาคาร",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     },
+     {
+      "key": "3|s34",
+      "dutyCode": "3",
+      "teacherId": "s34",
+      "sig": "none",
+      "color": "#26863f",
+      "name": "นักเรียน 34 (ตัวอย่าง)",
+      "pointId": "p3",
+      "place": "ตรวจอาคาร",
+      "sub": [],
+      "detail": [],
+      "pill": {
+       "cls": "p-idle",
+       "text": "ยังไม่ถึง"
+      },
+      "needs": true,
+      "photo": null,
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา (หัวหน้าเวรเช็ค)",
+        "hint": "ครูมาที่จุดแต่ไม่ได้สแกน",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา/ไปราชการ",
+        "hint": "ไม่นับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "standin",
+        "label": "หัวหน้าเวรยืนแทน",
+        "hint": "ครูไม่มาและไม่มีคนแทน หัวหน้าเวรยืนเอง · ครูนับเป็นขาด",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "reports": [],
+      "deviceFlag": false
+     }
+    ]
+   }
+  ]
  }
 }

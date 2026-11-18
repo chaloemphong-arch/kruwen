@@ -13,7 +13,7 @@ const AUTH_RELOAD_GAP_MS = 120000;
 
 // seq = รุ่นของจอ (ผลรีเฟรชที่ออกก่อนรุ่นนี้ทิ้ง) · req/appliedReq = ลำดับคำขอบันทึก/เลิกทำ (ผลที่ตอบช้ากว่าไม่ทับผลใหม่)
 const H = {
-  view: null, filter: 'all', saving: {}, full: {}, fullFail: {},
+  view: null, point: '', filter: 'all', saving: {}, full: {}, fullFail: {},
   needsKeys: null, seq: 0, req: 0, appliedReq: 0, stale: false,
   sheetKey: null, toast: null, toastTimer: null, pending: 0, mock: null, showLate: false
 };
@@ -34,7 +34,7 @@ const root = () => $('app');
 function allRows() { return H.view ? (H.view.sessions || []).flatMap((s) => s.rows) : []; }
 function rowByKey(key) { return allRows().find((r) => r.key === key) || null; }
 function rowEl(key) { return Array.from(document.querySelectorAll('[data-act="row"]')).find((el) => el.dataset.key === key) || null; }
-function ui() { return { filter: H.filter, needsKeys: H.needsKeys, saving: H.saving, stale: H.stale, showLate: H.showLate }; }
+function ui() { return { filter: H.filter, needsKeys: H.needsKeys, saving: H.saving, stale: H.stale, showLate: H.showLate, point: H.point }; }
 
 // ลิงก์ "เวรของฉัน" = หน้าเดิมไม่มี ?v (โหมดทดลองไปหน้า mock=my)
 function myDutyHref() { return location.pathname + (H.mock !== null ? '?mock=my' : ''); }
@@ -246,6 +246,7 @@ const ACTIONS = {
     H.needsKeys = H.filter === 'needs' ? allRows().filter((r) => r.needs).map((r) => r.key) : null;
     drawPage();
   },
+  point: (d) => { H.point = d.p || ''; drawPage(); },
   undo: () => undo()
 };
 
@@ -264,6 +265,7 @@ function bindEvents() {
 }
 
 export async function startHead(identity) {
+  try { document.title = 'สถานะเวร'; } catch (e) { /* ไม่เป็นไร */ }
   bindEvents();
   H.mock = mockScenario(location.search);
   if (H.mock !== null) {

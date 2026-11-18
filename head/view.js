@@ -80,7 +80,7 @@ export function renderRow(row, ui = {}) {
     ' aria-label="' + esc(row.name + ' ' + p.text + (p.late ? ' สาย' : '') + (marked ? ' ' + SAVING : '') + ' แตะเพื่อเลือกสถานะ') + '">' +
     code(row) +
     '<span class="nm"><b>' + esc(row.name) + '</b><small>' +
-    [marked ? '<span class="muted saving">' + SAVING + '</span>' : '', subLine(row.sub)].filter(Boolean).join(' · ') + '</small></span>' +
+    [row.place ? '<span class="place">' + esc(row.place) + '</span>' : '', marked ? '<span class="muted saving">' + SAVING + '</span>' : '', subLine(row.sub)].filter(Boolean).join(' · ') + '</small></span>' +
     '<span class="st ' + p.cls + (p.late ? ' two' : '') + '">' + esc(p.text) + (p.late ? '<small class="late">(สาย)</small>' : '') + '</span></div>';
 }
 
@@ -138,20 +138,41 @@ export function renderMessage(title, text, link) {
     (link ? '<a class="btn pri" href="' + esc(link.href) + '">' + esc(link.label) + '</a>' : '') + '</div>';
 }
 
+// แท็บตามจุด (จากชื่อจุดของแถว) · ไม่ขึ้นถ้ามีจุดเดียว
+function pointsOf(rows) {
+  const out = [];
+  rows.forEach((r) => {
+    if (!r.pointId) return;
+    let o = out.find((x) => x.id === r.pointId);
+    if (!o) { o = { id: r.pointId, name: r.place || r.dutyCode, n: 0 }; out.push(o); }
+    o.n++;
+  });
+  return out;
+}
+function pointTabs(rows, ui, c, f) {
+  const pts = pointsOf(rows);
+  if (pts.length < 2) return '';
+  const cur = pts.some((x) => x.id === ui.point) ? ui.point : '';
+  return '<div class="ptabs" role="tablist">' +
+    '<button class="pt" data-act="point" data-p="" aria-pressed="' + (cur === '') + '">ทุกจุด <i>' + rows.length + '</i></button>' +
+    pts.map((x) => '<button class="pt" data-act="point" data-p="' + esc(x.id) + '" aria-pressed="' + (cur === x.id) + '">' + esc(x.name) + ' <i>' + x.n + '</i></button>').join('') +
+    '</div>';
+}
+
 function header(view, ui) {
   const c = view.counts || {};
   const rows = (view.sessions || []).flatMap((s) => s.rows);
   const n = (cls) => rows.filter((r) => (r.pill || {}).cls === cls).length;
   const pct = (k) => (c.total ? Math.round((k / c.total) * 1000) / 10 : 0);
   const f = ui.filter === 'needs' ? 'needs' : 'all';
+  const tabs = pointTabs(rows, ui, c, f);
+  const came = n('p-ok') + n('p-head'), leave = n('p-leave'), absent = n('p-miss');
+  const wait = Math.max(0, rows.length - came - leave - absent);
+  const stat = (cls, num, label) => '<div class="stat ' + cls + '"><b>' + num + '</b><span>' + label + '</span></div>';
   return '<header class="hdr">' +
-    '<div class="r1"><b>ตรวจเวรวันนี้</b><span class="muted">' + esc(view.dateThai) + ' · ' + esc(view.nowHHMM) + '</span></div>' +
-    '<p class="cnt"><b>มาแล้ว ' + Number(c.came || 0) + '</b> <span class="muted">จาก ' + Number(c.total || 0) + ' คน</span></p>' +
-    '<div class="prog" aria-hidden="true"><i class="i-ok" style="width:' + pct(n('p-ok')) + '%"></i><i class="i-head" style="width:' +
-    pct(n('p-head')) + '%"></i><i class="i-leave" style="width:' + pct(n('p-leave')) + '%"></i></div>' +
-    '<div class="fchips"><button class="rc" data-act="filter" data-f="all" aria-pressed="' + (f === 'all') + '">ทั้งหมด ' + Number(c.total || 0) +
-    '</button><button class="rc" data-act="filter" data-f="needs" aria-pressed="' + (f === 'needs') + '">ต้องดู ' + Number(c.needs || 0) +
-    '</button></div></header>';
+    '<div class="r1"><b>สถานะเวรวันนี้</b><span class="muted">' + esc(view.dateThai) + ' · ' + esc(view.nowHHMM) + '</span></div>' +
+    '<div class="stats">' + stat('s-ok', came, 'มาแล้ว') + stat('s-wait', wait, 'รอสแกน') + stat('s-leave', leave, 'ลา') + stat('s-miss', absent, 'ขาด') + '</div>' +
+    tabs + '</header>';
 }
 
 export function renderPage(view, ui = {}) {
@@ -164,10 +185,16 @@ export function renderPage(view, ui = {}) {
     body = (view.sessions || []).map((s) => {
       // ตัวกรอง "เฉพาะที่ต้องดู" ตรึงชุดแถวที่เห็นตอนแตะ: แถวที่เพิ่งเปลี่ยนไม่หายใต้นิ้ว (แถวไม่สลับที่)
       const pinned = ui.filter === 'needs' && Array.isArray(ui.needsKeys) ? ui.needsKeys : null;
-      const rows = pinned ? s.rows.filter((r) => pinned.includes(r.key)) : filterRows(s.rows, ui.filter);
+      const base = pinned ? s.rows.filter((r) => pinned.includes(r.key)) : filterRows(s.rows, ui.filter);
+      const rows = ui.point ? base.filter((r) => r.pointId === ui.point) : base;
       if (!rows.length) return '';
-      return '<section><h2 class="grph"><span>' + esc(s.label) + '</span><span>' + esc(s.timeText) + '</span></h2>' +
-        rows.map((r) => renderRow(r, ui)).join('') + '</section>';
+      const codes = [];
+      rows.forEach((r) => { if (!codes.includes(r.dutyCode)) codes.push(r.dutyCode); });
+      const grouped = codes.length < 2 ? rows.map((r) => renderRow(r, ui)).join('') : codes.map((cd) => {
+        const g = rows.filter((r) => r.dutyCode === cd);
+        return '<div class="sub"><span>' + esc(g[0].place || 'เวร ' + cd) + '</span><span>' + g.length + ' คน</span></div>' + g.map((r) => renderRow(r, ui)).join('');
+      }).join('');
+      return '<section><h2 class="grph"><span>' + esc(s.label) + '</span><span>' + esc(s.timeText) + '</span></h2>' + grouped + '</section>';
     }).join('');
     if (!body) body = '<div class="pad mid center"><p>ไม่มีรายการที่ต้องดู</p></div>';
   }
