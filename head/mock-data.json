@@ -107,17 +107,6 @@
          "cls": "p-ok",
          "text": "✓ 07:05"
         }
-       },
-       {
-        "action": "notfound",
-        "label": "ไม่พบตัวที่จุดเวร",
-        "hint": "",
-        "current": false,
-        "disabled": false,
-        "next": {
-         "cls": "p-miss",
-         "text": "ไม่พบตัว"
-        }
        }
       ],
       "reports": [],
@@ -836,17 +825,6 @@
         "next": {
          "cls": "p-ok",
          "text": "✓ 07:05"
-        }
-       },
-       {
-        "action": "notfound",
-        "label": "ไม่พบตัวที่จุดเวร",
-        "hint": "",
-        "current": false,
-        "disabled": false,
-        "next": {
-         "cls": "p-miss",
-         "text": "ไม่พบตัว"
         }
        }
       ],
@@ -2066,17 +2044,6 @@
         "next": {
          "cls": "p-ok",
          "text": "✓ 07:05"
-        }
-       },
-       {
-        "action": "notfound",
-        "label": "ไม่พบตัวที่จุดเวร",
-        "hint": "",
-        "current": false,
-        "disabled": false,
-        "next": {
-         "cls": "p-miss",
-         "text": "ไม่พบตัว"
         }
        }
       ],

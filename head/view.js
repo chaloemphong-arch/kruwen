@@ -80,7 +80,7 @@ export function renderRow(row, ui = {}) {
     ' aria-label="' + esc(row.name + ' ' + p.text + (p.late ? ' สาย' : '') + (marked ? ' ' + SAVING : '') + ' แตะเพื่อเลือกสถานะ') + '">' +
     code(row) +
     '<span class="nm"><b>' + esc(row.name) + '</b><small>' +
-    [row.place ? '<span class="place">' + esc(row.place) + '</span>' : '', marked ? '<span class="muted saving">' + SAVING + '</span>' : '', subLine(row.sub)].filter(Boolean).join(' · ') + '</small></span>' +
+    [row.place && !ui.noPlace ? '<span class="place">' + esc(row.place) + '</span>' : '', marked ? '<span class="muted saving">' + SAVING + '</span>' : '', subLine(row.sub)].filter(Boolean).join(' · ') + '</small></span>' +
     '<span class="st ' + p.cls + (p.late ? ' two' : '') + '">' + esc(p.text) + (p.late ? '<small class="late">(สาย)</small>' : '') + '</span></div>';
 }
 
@@ -194,9 +194,11 @@ export function renderPage(view, ui = {}) {
       if (!rows.length) return '';
       const codes = [];
       rows.forEach((r) => { if (!codes.includes(r.dutyCode)) codes.push(r.dutyCode); });
-      const grouped = codes.length < 2 ? rows.map((r) => renderRow(r, ui)).join('') : codes.map((cd) => {
+      // ชื่อจุดอยู่ที่หัวกลุ่มหรือปุ่มกรองจุดแล้ว: ไม่ต้องเขียนซ้ำใต้ชื่อครู
+      const rowUi = Object.assign({}, ui, { noPlace: codes.length >= 2 || !!ui.point });
+      const grouped = codes.length < 2 ? rows.map((r) => renderRow(r, rowUi)).join('') : codes.map((cd) => {
         const g = rows.filter((r) => r.dutyCode === cd);
-        return '<div class="sub"><span>' + esc(g[0].place || 'เวร ' + cd) + '</span><span>' + g.length + ' คน</span></div>' + g.map((r) => renderRow(r, ui)).join('');
+        return '<div class="sub"><span>' + esc(g[0].place || 'เวร ' + cd) + '</span><span>' + g.length + ' คน</span></div>' + g.map((r) => renderRow(r, rowUi)).join('');
       }).join('');
       return '<section><h2 class="grph"><span>' + esc(s.label) + '</span><span>' + esc(s.timeText) + '</span></h2>' + grouped + '</section>';
     }).join('');
