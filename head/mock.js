@@ -77,8 +77,19 @@ export function headMockCall(scenario, data) {
         if (!base.ok) return clone(base);
         return { ok: true, kind: 'head_home', name: base.headName || '', today: base.date, isHeadToday: scenario !== 'exec' && !base.actingFor && base.canEdit,
           isAdmin: !!base.actingFor, canView: true, headNameToday: base.headName, nameAddKru: true };
-      case 'headView':
-        return clone(view);
+      case 'headView': {
+        // โหมดตัวอย่าง: เลื่อนวันได้ (รายชื่อชุดเดิม) ให้เห็นลูกศรกับหัวข้อทำงาน · ของจริงหลังบ้านคำนวณเอง
+        const v = clone(view);
+        if (!body.date || body.date === base.date || !v.nav) return v;
+        const add = (ymd, n) => new Date(Date.parse(ymd + 'T12:00:00Z') + n * 86400000).toISOString().slice(0, 10);
+        const step = v.nav.next ? (Date.parse(v.nav.next) - Date.parse(base.date)) / 86400000 : 7;
+        const [y, m, d] = body.date.split('-').map(Number);
+        const MON = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+        const DOW = ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'];
+        return Object.assign(v, { date: body.date, isToday: false, preview: body.date > base.date || undefined,
+          dateThai: d + ' ' + MON[m - 1] + ' ' + (y + 543), weekdayThai: DOW[new Date(Date.UTC(y, m - 1, d)).getUTCDay()],
+          nav: { prev: add(body.date, -step), next: add(body.date, step) } });
+      }
       case 'headSet': {
         const key = body.dutyCode + '|' + body.teacherId;
         const row = rowsOf(view).find((r) => r.key === key);

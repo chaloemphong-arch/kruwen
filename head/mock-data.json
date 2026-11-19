@@ -5,6 +5,12 @@
   "date": "2026-11-20",
   "dateThai": "20 พ.ย. 2569",
   "nowHHMM": "07:40",
+  "isToday": true,
+  "weekdayThai": "ศุกร์",
+  "nav": {
+   "prev": "2026-11-13",
+   "next": "2026-11-27"
+  },
   "canEdit": true,
   "actingFor": null,
   "headName": "สมชาย ใจดี",
@@ -719,6 +725,12 @@
   "date": "2026-11-20",
   "dateThai": "20 พ.ย. 2569",
   "nowHHMM": "09:05",
+  "isToday": true,
+  "weekdayThai": "ศุกร์",
+  "nav": {
+   "prev": "2026-11-13",
+   "next": "2026-11-27"
+  },
   "canEdit": true,
   "actingFor": null,
   "headName": "สมชาย ใจดี",
@@ -1443,6 +1455,12 @@
   "date": "2026-11-20",
   "dateThai": "20 พ.ย. 2569",
   "nowHHMM": "09:40",
+  "isToday": true,
+  "weekdayThai": "ศุกร์",
+  "nav": {
+   "prev": "2026-11-13",
+   "next": "2026-11-27"
+  },
   "canEdit": true,
   "actingFor": null,
   "headName": "สมชาย ใจดี",
@@ -1938,6 +1956,12 @@
   "date": "2026-11-20",
   "dateThai": "20 พ.ย. 2569",
   "nowHHMM": "10:10",
+  "isToday": true,
+  "weekdayThai": "ศุกร์",
+  "nav": {
+   "prev": "2026-11-13",
+   "next": "2026-11-27"
+  },
   "canEdit": true,
   "actingFor": null,
   "headName": "สมชาย ใจดี",
@@ -2662,6 +2686,12 @@
   "date": "2026-11-16",
   "dateThai": "16 พ.ย. 2569",
   "nowHHMM": "07:40",
+  "isToday": true,
+  "weekdayThai": "จันทร์",
+  "nav": {
+   "prev": "2026-11-13",
+   "next": "2026-11-17"
+  },
   "canEdit": true,
   "actingFor": "ธนากร รักเรียน",
   "headName": "ธนากร รักเรียน",
@@ -3364,6 +3394,12 @@
   "date": "2026-11-20",
   "dateThai": "20 พ.ย. 2569",
   "nowHHMM": "07:40",
+  "isToday": true,
+  "weekdayThai": "ศุกร์",
+  "nav": {
+   "prev": "2026-11-19",
+   "next": "2026-11-23"
+  },
   "canEdit": false,
   "actingFor": null,
   "headName": "สมชาย ใจดี",
@@ -3723,6 +3759,12 @@
   "date": "2026-11-20",
   "dateThai": "20 พ.ย. 2569",
   "nowHHMM": "07:40",
+  "isToday": true,
+  "weekdayThai": "ศุกร์",
+  "nav": {
+   "prev": "2026-11-19",
+   "next": "2026-11-23"
+  },
   "canEdit": true,
   "actingFor": null,
   "headName": null,
@@ -3744,6 +3786,12 @@
   "date": "2026-11-19",
   "dateThai": "19 พ.ย. 2569",
   "nowHHMM": "13:50",
+  "isToday": true,
+  "weekdayThai": "ศุกร์",
+  "nav": {
+   "prev": "2026-11-13",
+   "next": "2026-11-27"
+  },
   "canEdit": true,
   "actingFor": null,
   "headName": "ครูเมฆ",

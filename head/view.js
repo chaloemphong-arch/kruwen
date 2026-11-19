@@ -38,11 +38,6 @@ export function codeInk(color) {
   return hex(rgb);
 }
 
-function code(row) {
-  const ink = codeInk(row.color);
-  return '<span class="code' + (ink ? '' : ' muted') + '"' + (ink ? ' style="color:' + ink + '"' : '') + '>' + esc(row.dutyCode) + '</span>';
-}
-
 function subLine(sub) {
   return (sub || []).map((s) => (TONES.includes(s.tone) ? '<span class="' + s.tone + '">' + esc(s.text) + '</span>' : esc(s.text))).join(' · ');
 }
@@ -78,7 +73,6 @@ export function renderRow(row, ui = {}) {
   const marked = !!(sv && sv.next); // ป้ายที่จะได้ขึ้นแล้ว: บอกในบรรทัดรองว่ายังบันทึกอยู่
   return '<div class="nrow" role="button" tabindex="0" data-act="row" data-key="' + esc(row.key) + '"' +
     ' aria-label="' + esc(row.name + ' ' + p.text + (p.late ? ' สาย' : '') + (marked ? ' ' + SAVING : '') + ' แตะเพื่อเลือกสถานะ') + '">' +
-    code(row) +
     '<span class="nm"><b>' + esc(row.name) + '</b><small>' +
     [row.place && !ui.noPlace ? '<span class="place">' + esc(row.place) + '</span>' : '', marked ? '<span class="muted saving">' + SAVING + '</span>' : '', subLine(row.sub)].filter(Boolean).join(' · ') + '</small></span>' +
     '<span class="st ' + p.cls + (p.late ? ' two' : '') + '">' + esc(p.text) + (p.late ? '<small class="late">(สาย)</small>' : '') + '</span></div>';
@@ -117,7 +111,7 @@ export function renderSheet(row, sheetUi = {}) {
   return '<div class="shade" data-act="close"></div>' +
     '<div class="sheet" role="dialog" aria-modal="true" aria-label="' + esc(row.name) + '">' +
     '<div class="grab"></div>' +
-    '<div class="shhd">' + code(row) + '<div class="minw"><p class="shname">' + esc(row.name) + '</p></div></div>' +
+    '<div class="shhd"><div class="minw"><p class="shname">' + esc(row.name) + '</p></div></div>' +
     (row.detail || []).map((d) => '<p class="small' + (TONES.includes(d.tone) ? ' ' + d.tone : '') + '">' + esc(d.text) + '</p>').join('') +
     (row.note ? '<p class="small">' + esc(row.note) + '</p>' : '') +
     (row.deviceFlag ? '<p class="bar warn rounded">เครื่องเดียวกันลงหลายชื่อวันนี้</p>' : '') +
@@ -172,11 +166,22 @@ function header(view, ui) {
   const wait = Math.max(0, rows.length - came - leave - absent);
   const stat = (cls, num, label) => '<div class="stat ' + cls + '"><b>' + num + '</b><span>' + label + '</span></div>';
   return '<header class="hdr">' +
-    '<div class="r1"><b>' + (view.preview ? 'สถานะเวรพรุ่งนี้' : 'สถานะเวรวันนี้') + '</b><span class="muted">' + esc(view.dateThai) + ' · ' + esc(view.nowHHMM) + '</span></div>' +
-    (ui.canPreview ? '<button class="pv" data-act="preview">' + (ui.previewing ? '← กลับวันนี้' : 'ดูพรุ่งนี้ →') + '</button>' : '') +
+    (view.nav
+      ? '<div class="r1"><b>' + (view.isToday === false ? 'สถานะเวร' : 'สถานะเวรวันนี้') + '</b>' +
+        (view.isToday === false ? '<button class="dtoday" data-act="today">กลับวันนี้</button>' : '') + '</div>' + dayNav(view)
+      : '<div class="r1"><b>สถานะเวรวันนี้</b><span class="muted">' + esc(view.dateThai) + ' · ' + esc(view.nowHHMM) + '</span></div>') +
     (view.canClearAll ? '<button class="clr" data-act="clearall">' + (ui.point ? 'ล้างสถานะจุดนี้' : 'ล้างสถานะทั้งหมด') + '</button>' : '') +
     '<div class="stats">' + stat('s-ok', came, 'มาแล้ว') + stat('s-wait', wait, 'รอสแกน') + stat('s-leave', leave, 'ลา') + stat('s-miss', absent, 'ขาด') + '</div>' +
     tabs + '</header>';
+}
+
+// ลูกศร ‹ › เลื่อนวัน (หลังบ้านคำนวณวันก่อน/ถัดไปตามสิทธิ์: แอดมินทีละวัน หัวหน้าเวรทีละสัปดาห์) · วันอื่นมีปุ่มกลับวันนี้
+function dayNav(view) {
+  const nav = view.nav;
+  if (!nav) return '';
+  const btn = (d, label, ch) => '<button class="dn" data-act="day" data-d="' + esc(d || '') + '" aria-label="' + label + '"' + (d ? '' : ' disabled') + '>' + ch + '</button>';
+  const label = view.isToday === false ? (view.weekdayThai ? view.weekdayThai + ' ' : '') + view.dateThai : view.dateThai + ' · ' + view.nowHHMM;
+  return '<div class="dnav">' + btn(nav.prev, 'วันก่อน', '‹') + '<span class="dl">' + esc(label) + '</span>' + btn(nav.next, 'วันถัดไป', '›') + '</div>';
 }
 
 export function renderPage(view, ui = {}) {

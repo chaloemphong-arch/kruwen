@@ -34,7 +34,7 @@ const root = () => $('app');
 function allRows() { return H.view ? (H.view.sessions || []).flatMap((s) => s.rows) : []; }
 function rowByKey(key) { return allRows().find((r) => r.key === key) || null; }
 function rowEl(key) { return Array.from(document.querySelectorAll('[data-act="row"]')).find((el) => el.dataset.key === key) || null; }
-function ui() { return { filter: H.filter, needsKeys: H.needsKeys, saving: H.saving, stale: H.stale, showLate: H.showLate, point: H.point, canPreview: H.canPreview, previewing: !!H.previewDate }; }
+function ui() { return { filter: H.filter, needsKeys: H.needsKeys, saving: H.saving, stale: H.stale, showLate: H.showLate, point: H.point }; }
 
 // ลิงก์ "เวรของฉัน" = หน้าเดิมไม่มี ?v (โหมดทดลองไปหน้า mock=my)
 function myDutyHref() { return location.pathname + (H.mock !== null ? '?mock=my' : ''); }
@@ -250,19 +250,20 @@ const ACTIONS = {
   point: (d) => { H.point = d.p || ''; drawPage(); },
   undo: () => undo(),
   clearall: () => clearAll(),
-  // แอดมิน: สลับดู "พรุ่งนี้" (ดูอย่างเดียว) ↔ กลับวันนี้
-  preview: async () => {
-    if (H.pending > 0 || !H.view) return;
-    const back = !!H.previewDate;
-    const date = back ? '' : tomorrowOf(H.view.date);
-    const res = await call('headView', date ? { date } : {}, { retries: 1 });
-    if (!res.ok) return showToast(res.message || 'เปิดไม่สำเร็จ ลองอีกครั้ง');
-    H.previewDate = date; H.point = ''; H.filter = 'all'; H.needsKeys = null; H.stale = false;
-    closeSheet(false);
-    applyView(res, false);
-    window.scrollTo(0, 0);
-  }
+  // ลูกศร ‹ › เลื่อนวัน (วันที่มาจาก view.nav ของหลังบ้าน) · กลับวันนี้ = ไม่ส่งวันที่
+  day: (d) => goDate(d.d),
+  today: () => goDate('')
 };
+
+async function goDate(date) {
+  if (H.pending > 0 || !H.view || (date && date === H.view.date)) return;
+  const res = await call('headView', date ? { date } : {}, { retries: 1 });
+  if (!res.ok) return showToast(res.message || 'เปิดไม่สำเร็จ ลองอีกครั้ง');
+  H.previewDate = res.isToday ? '' : res.date; H.point = ''; H.filter = 'all'; H.needsKeys = null; H.stale = false;
+  closeSheet(false);
+  applyView(res, false);
+  window.scrollTo(0, 0);
+}
 
 // แอดมิน (เมื่อเปิด allow_clear_all): ล้างสถานะทุกคนของวันนั้นครั้งเดียว หรือเฉพาะจุดที่เลือกอยู่ · ไม่มีเลิกทำ จึงถามยืนยันก่อน
 async function clearAll() {
@@ -283,10 +284,6 @@ async function clearAll() {
 function pointName(id) {
   const r = allRows().find((x) => x.pointId === id);
   return r ? r.place : '';
-}
-
-export function tomorrowOf(ymd) {
-  return new Date(Date.parse(String(ymd) + 'T12:00:00Z') + 86400000).toISOString().slice(0, 10);
 }
 
 function bindEvents() {
@@ -324,9 +321,9 @@ export async function startHead(identity) {
   setAddKru(home.nameAddKru);
   let view = await call('headView', {}, { onRetry, retries: 5 });
   if (!view.ok) return showError(view);
-  // วันนี้ไม่มีเวร (เช่น ก่อนวันเริ่มใช้จริง) → แอดมินเห็นของพรุ่งนี้ทันที ดูอย่างเดียว
-  if (H.canPreview && !(view.sessions || []).length) {
-    const date = tomorrowOf(view.date);
+  // วันนี้ไม่มีเวร (เช่น เสาร์อาทิตย์ หรือก่อนวันเริ่มใช้จริง) → แอดมินเห็นวันเวรถัดไปทันที
+  if (H.canPreview && !(view.sessions || []).length && view.nav && view.nav.next) {
+    const date = view.nav.next;
     const next = await call('headView', { date }, { onRetry, retries: 2 });
     if (next.ok && (next.sessions || []).length) { view = next; H.previewDate = date; }
   }

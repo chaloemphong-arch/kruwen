@@ -365,7 +365,8 @@ export function my(st) {
     const [text, cls] = DAY_STATUS[d.status] || [d.status, 'muted'];
     const note = DAY_NOTE.includes(d.status) && d.note ? ' · <span class="dnote">' + esc(d.note) + '</span>' : '';
     const [, m, dd] = ymdParts(d.date);
-    return `<div class="drow"><span class="dt num">${DOW_SHORT[dowOf(d.date)]} ${dd} ${TMON[m - 1]}</span><span class="dwhere">${esc(d.place || d.label || d.duty_code)}${note}</span><span class="dst ${cls}">${esc(text)}</span></div>`;
+    const ses = d.session ? ' (' + esc(d.session) + ')' : '';
+    return `<div class="drow"><span class="dt num">${DOW_SHORT[dowOf(d.date)]} ${dd} ${TMON[m - 1]}</span><span class="dwhere">${esc(d.place || d.label || d.duty_code)}${ses}${note}</span><span class="dst ${cls}">${esc(text)}</span></div>`;
   };
   const rows = r.days.length ? r.days.map(dayRow).join('') : '<p class="muted drow-none">เดือนนี้ไม่มีวันเวร</p>';
   let nextHtml = '<p class="muted">ยังไม่มีเวรที่กำหนด</p>';
@@ -374,7 +375,7 @@ export function my(st) {
     // isToday จากหลังบ้านเชื่อถือกว่าวันที่ใน config (config โหลดครั้งเดียว ถ้าเปิดหน้าค้างข้ามคืนจะเก่า)
     const rel = r.isToday ? { text: 'วันนี้', strong: true } : relDay(st.today, next.date);
     nextHtml = `<div class="nextd"><div class="cal" aria-label="${esc(thaiDay(next.date))}"><div class="w">${DOW[dowOf(next.date)]}</div><div class="n num">${d}</div><div class="mo">${TMON[m - 1]}</div></div>
-     <div><p class="nx">${esc(placeShort(next.duty))}</p><p class="nx2 muted num">${rng(next.duty)} น.</p>${rel ? `<p class="when${rel.strong ? ' strong' : ''}">${rel.text}</p>` : ''}</div></div>`;
+     <div><p class="nx">${esc(placeShort(next.duty))}</p>${next.session ? `<p class="nx2 muted">เวร${esc(next.session)}</p>` : ''}${rel ? `<p class="when${rel.strong ? ' strong' : ''}">${rel.text}</p>` : ''}</div></div>`;
   }
   const headLink = r.canHead ? '<button class="link" data-act="toHead">เปิดใบเช็คหัวหน้าเวร</button>' : '';
   const nameChange = r.canSelfChange ? '<button class="sublink" data-act="pickChange">เลือกชื่อผิด? เปลี่ยนชื่อ</button>' : '';
