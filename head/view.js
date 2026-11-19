@@ -37,6 +37,13 @@ export function codeInk(color) {
   return hex(rgb);
 }
 
+// รหัสเวรสีตามจุด (เอากลับมา 20 พ.ย.: ไม่มีรหัสแล้วแถวดูปนกัน) เช่น 1(1) ประตู 1 เช้า · 3 ตรวจอาคารเรียน · 4 กิจกรรมหน้าเสาธง
+function code(row) {
+  if (!row.dutyCode) return '';
+  const ink = codeInk(row.color);
+  return '<span class="code' + (ink ? '' : ' muted') + '"' + (ink ? ' style="color:' + ink + '"' : '') + '>' + esc(row.dutyCode) + '</span>';
+}
+
 function subLine(sub) {
   return (sub || []).map((s) => (TONES.includes(s.tone) ? '<span class="' + s.tone + '">' + esc(s.text) + '</span>' : esc(s.text))).join(' · ');
 }
@@ -72,6 +79,7 @@ export function renderRow(row, ui = {}) {
   const marked = !!(sv && sv.next); // ป้ายที่จะได้ขึ้นแล้ว: บอกในบรรทัดรองว่ายังบันทึกอยู่
   return '<div class="nrow" role="button" tabindex="0" data-act="row" data-key="' + esc(row.key) + '"' +
     ' aria-label="' + esc(row.name + ' ' + p.text + (p.late ? ' สาย' : '') + (marked ? ' ' + SAVING : '') + ' แตะเพื่อเลือกสถานะ') + '">' +
+    code(row) +
     '<span class="nm"><b>' + esc(row.name) + '</b><small>' +
     [row.place && !ui.noPlace ? '<span class="place">' + esc(row.place) + '</span>' : '', marked ? '<span class="muted saving">' + SAVING + '</span>' : '', subLine(row.sub)].filter(Boolean).join(' · ') + '</small></span>' +
     '<span class="st ' + p.cls + (p.late ? ' two' : '') + '">' + esc(p.text) + (p.late ? '<small class="late">(สาย)</small>' : '') + '</span></div>';
@@ -110,7 +118,7 @@ export function renderSheet(row, sheetUi = {}) {
   return '<div class="shade" data-act="close"></div>' +
     '<div class="sheet" role="dialog" aria-modal="true" aria-label="' + esc(row.name) + '">' +
     '<div class="grab"></div>' +
-    '<div class="shhd"><div class="minw"><p class="shname">' + esc(row.name) + '</p></div></div>' +
+    '<div class="shhd">' + code(row) + '<div class="minw"><p class="shname">' + esc(row.name) + '</p></div></div>' +
     (row.detail || []).map((d) => '<p class="small' + (TONES.includes(d.tone) ? ' ' + d.tone : '') + '">' + esc(d.text) + '</p>').join('') +
     (row.note ? '<p class="small">' + esc(row.note) + '</p>' : '') +
     (row.deviceFlag ? '<p class="bar warn rounded">เครื่องเดียวกันลงหลายชื่อวันนี้</p>' : '') +

@@ -24,8 +24,10 @@
 
 /* แถว */
 .grph{margin:0;font-size:16px;font-weight:600;color:var(--brand-ink);background:var(--brand-bg);padding:8px var(--gut);display:flex;justify-content:space-between;gap:8px;font-variant-numeric:tabular-nums}
-.nrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:6px var(--gut);border-bottom:1px solid var(--line);min-height:60px;width:100%;text-align:left;cursor:pointer;background:var(--card)}
+.nrow{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;padding:6px var(--gut);border-bottom:1px solid var(--line);min-height:60px;width:100%;text-align:left;cursor:pointer;background:var(--card)}
 .nrow:hover{background:var(--brand-bg)}
+.code{font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.code.muted{color:var(--muted)}
 .nm{min-width:0}
 .nm b{display:block;font-size:18px;font-weight:600;line-height:1.35;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .nm small{display:block;font-size:16px;color:var(--muted);line-height:1.2}
@@ -54,6 +56,7 @@
 @media (prefers-reduced-motion:no-preference){.sheet{animation:shup .2s ease-out}@keyframes shup{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}}
 .grab{width:40px;height:4px;border-radius:var(--radius-pill);background:var(--line);margin:2px auto}
 .shhd{display:flex;gap:12px;align-items:baseline}
+.shhd .code{font-size:22px}
 .shname{font-weight:700;font-size:22px;line-height:1.35}
 .label{font-size:16px;font-weight:600;line-height:1.4}
 .bigphoto{width:100%;max-height:45vh;object-fit:contain;border-radius:var(--radius-md);background:var(--bg);display:block}
@@ -83,6 +86,7 @@
 .sub{display:flex;justify-content:space-between;padding:10px var(--gut) 4px;font-size:16px;font-weight:600;color:var(--muted);background:var(--card);font-variant-numeric:tabular-nums}
 .nrow{padding:8px var(--gut);min-height:64px}
 .nrow:active{background:var(--brand-bg)}
+.nrow .code{display:inline-grid;place-items:center;min-width:44px;height:36px;border-radius:10px;background:var(--idle-bg);padding:0 6px}
 .nm small,.nm small .red{font-weight:400;color:var(--muted)}
 .st{padding:4px 12px;border-radius:var(--radius-pill);align-items:center;background:var(--idle-bg)}
 .st.p-ok{background:#DDF1E5}.st.p-head{background:var(--head-bg)}.st.p-leave{background:var(--leave-bg)}.st.p-miss{background:var(--miss-bg)}
