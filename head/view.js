@@ -1,5 +1,4 @@
 // หน้าหัวหน้าเวร (ใบเช็ค): ฟังก์ชันล้วน คืน HTML string · import ได้ใน Node (เทสต์) ไม่แตะ document/window
-import { withTitle } from '../js/names.js';
 // ข้อมูลทุกอย่างมาจากหลังบ้าน (headView) หน้าเว็บแค่วาด · escape ทุกข้อความ
 // ui: { filter: 'all'|'needs', needsKeys: [row.key] (แถวที่ตัวกรองเลือกไว้ตอนแตะ),
 //       saving: {[row.key]: { next: {cls, text} }} = กำลังบันทึก: แถวขึ้นป้ายที่จะได้ (option.next จากหลังบ้าน) ทันที + "กำลังบันทึก…"
@@ -158,20 +157,14 @@ function pointTabs(rows, ui, c, f) {
 function header(view, ui) {
   const c = view.counts || {};
   const rows = (view.sessions || []).flatMap((s) => s.rows);
-  const n = (cls) => rows.filter((r) => (r.pill || {}).cls === cls).length;
-  const pct = (k) => (c.total ? Math.round((k / c.total) * 1000) / 10 : 0);
   const f = ui.filter === 'needs' ? 'needs' : 'all';
   const tabs = pointTabs(rows, ui, c, f);
-  const came = n('p-ok') + n('p-head'), leave = n('p-leave'), absent = n('p-miss');
-  const wait = Math.max(0, rows.length - came - leave - absent);
-  const stat = (cls, num, label) => '<div class="stat ' + cls + '"><b>' + num + '</b><span>' + label + '</span></div>';
   return '<header class="hdr">' +
     (view.nav
       ? '<div class="r1"><b>' + (view.isToday === false ? 'สถานะเวร' : 'สถานะเวรวันนี้') + '</b>' +
         (view.isToday === false ? '<button class="dtoday" data-act="today">กลับวันนี้</button>' : '') + '</div>' + dayNav(view)
       : '<div class="r1"><b>สถานะเวรวันนี้</b><span class="muted">' + esc(view.dateThai) + ' · ' + esc(view.nowHHMM) + '</span></div>') +
     (view.canClearAll ? '<button class="clr" data-act="clearall">' + (ui.point ? 'ล้างสถานะจุดนี้' : 'ล้างสถานะทั้งหมด') + '</button>' : '') +
-    '<div class="stats">' + stat('s-ok', came, 'มาแล้ว') + stat('s-wait', wait, 'รอสแกน') + stat('s-leave', leave, 'ลา') + stat('s-miss', absent, 'ขาด') + '</div>' +
     tabs + '</header>';
 }
 
@@ -209,6 +202,6 @@ export function renderPage(view, ui = {}) {
     }).join('');
     if (!body) body = '<div class="pad mid center"><p>ไม่มีรายการที่ต้องดู</p></div>';
   }
-  return header(view, ui) + banners + '<div class="rows">' + body + '</div>' +
-    '<p class="hfoot small muted">หัวหน้าเวรวันนี้: ' + (view.headName ? esc(withTitle(view.headName)) : 'ไม่มี') + '</p>';
+  // ไม่มีตัวเลขสรุปและบรรทัดชื่อหัวหน้าเวร (20 พ.ย.): สรุปข้อมูลทำแยกทีหลัง
+  return header(view, ui) + banners + '<div class="rows">' + body + '</div>';
 }
