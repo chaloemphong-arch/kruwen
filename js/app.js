@@ -417,7 +417,8 @@ async function doMy(month) {
   const m = month || current || (r.next ? r.next.date.slice(0, 7) : '');
   // คนที่เปิดใบเช็คได้และไม่มีเวรของตัวเองเลย (เช่น ครูที่คุมเวรนักเรียน) ไปหน้าตรวจเวรทันที
   if (!month && r.canHead && !r.next && !(r.days || []).length) return toHead();
-  show('my', { r, month: m, currentMonth: current || m });
+  const today = cfg && cfg.ok && cfg.serverTime ? cfg.serverTime.slice(0, 10) : '';
+  show('my', { r, month: m, currentMonth: current || m, today });
 }
 
 function toHead() {

@@ -208,7 +208,7 @@ export function screenSamples() {
     s('report', { categories: CATEGORIES, selected: ['ทะเลาะวิวาท'], note: 'ม.2', photo: { kind: 'scan', img }, error: '' }),
     s('report', { categories: CATEGORIES, selected: [], note: '', photo: null, error: 'ยังไม่มีรูปตอนสแกน' }, 'report empty'),
     s('reportDone', { cats: ['ทะเลาะวิวาท'], note: 'แยกแล้ว', time: '07:10' }),
-    s('my', { r: myResult(), month: '2026-11', currentMonth: '2026-11' }),
+    s('my', { r: myResult(), month: '2026-11', currentMonth: '2026-11', today: '2026-11-19' }),
     s('my', { r: Object.assign(myResult(), { next: null, days: [], canSelfChange: true }), month: '2026-10', currentMonth: '2026-11' }, 'my empty')
   ];
 }

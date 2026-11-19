@@ -5,7 +5,7 @@ import { withTitle, firstWithTitle } from './names.js';
 // ฟังก์ชันที่ export แต่ไม่ใช่หน้าจอ
 // kept for one release so an old cached app.js (which still calls V.header) keeps working
 export const header = () => '';
-export const HELPERS = ['header', 'reportButton', 'firstName', 'placeFull', 'placeShort'];
+export const HELPERS = ['header', 'reportButton', 'firstName', 'placeFull', 'placeShort', 'relDay'];
 
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const hmd = (hhmm) => esc(String(hhmm || '').replace(':', '.'));
@@ -335,32 +335,54 @@ export function reportDone(st) {
 
 const shiftMonth = (ym, n) => { const [y, m] = ymdParts(ym); const t = y * 12 + (m - 1) + n; const mm = t % 12 + 1; return Math.floor(t / 12) + '-' + (mm < 10 ? '0' : '') + mm; };
 
-// ป้ายสถานะของแถววันเวร: [ข้อความ, คลาสสี]
-const DAY_STATUS = { 'มา': ['✓ มา', 'ok'], 'ไปแทน': ['✓ มา', 'ok'], 'สาย': SHOW_LATE ? ['สาย', 'late'] : ['✓ มา', 'ok'], 'ลา': ['ลา', 'leavec'], 'ขาด': ['ขาด', 'miss'], 'มีคนมาแทน': ['มีคนมาแทน', 'late'] };
+// ป้ายสถานะของแถววันเวร: [ข้อความ, คลาสสี] · หน้าครูไม่มีคำว่า สาย/ขาด (หลังบ้านยังเก็บไว้ให้แอดมิน/ผู้บริหาร)
+const DAY_STATUS = {
+  'มา': ['มา', 'ok'], 'สาย': SHOW_LATE ? ['สาย', 'late'] : ['มา', 'ok'], 'ไปแทน': ['ไปแทน', 'ok'],
+  'ลา': ['ลา', 'muted'], 'มีคนมาแทน': ['มีคนแทน', 'muted'], 'ขาด': ['ไม่มีบันทึก', 'muted'],
+  'ยังไม่ถึง': ['ยังไม่ถึง', 'up'], 'รอลงเวร': ['รอลงเวร', 'up']
+};
+const DAY_NOTE = ['ไปแทน', 'ลา', 'มีคนมาแทน']; // หมายเหตุที่แสดงต่อท้ายชื่อจุด (ไม่แสดง เพื่อนลงชื่อให้ / หัวหน้าเวรเช็คให้)
 
-// st: {r (my), month 'YYYY-MM', currentMonth 'YYYY-MM'}
-// สรุป: backend นับ present = ตรงเวลา + สาย · SHOW_LATE ปิด = แสดง "มา" = present · เปิด = "ตรงเวลา" = present − late และ "สาย" แยก
+// ระยะห่างจากวันนี้ถึงวันเวร นับวันตามปฏิทิน · ไม่รู้วันนี้ = null
+export function relDay(today, ymd) {
+  if (!today || !ymd) return null;
+  const utc = (x) => { const [y, m, d] = ymdParts(x); return Date.UTC(y, m - 1, d); };
+  const n = Math.round((utc(ymd) - utc(today)) / 86400000);
+  if (!Number.isFinite(n) || n < 0) return null;
+  if (n === 0) return { text: 'วันนี้', strong: true };
+  if (n === 1) return { text: 'พรุ่งนี้', strong: true };
+  return { text: 'อีก ' + n + ' วัน', strong: false };
+}
+
+const DOW_SHORT = ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'];
+const dowOf = (ymd) => { const [y, m, d] = ymdParts(ymd); return new Date(Date.UTC(y, m - 1, d)).getUTCDay(); };
+
+// st: {r (my), month 'YYYY-MM', currentMonth 'YYYY-MM', today 'YYYY-MM-DD' (ไม่มีก็ได้)}
 export function my(st) {
-  const r = st.r, s = r.summary, next = r.next;
+  const r = st.r, next = r.next;
   const month = st.month, canNext = st.currentMonth && month < st.currentMonth;
-  const today = r.isToday && next ? next.date : '';
   const dayRow = (d) => {
-    const [text, cls] = DAY_STATUS[d.status] || [d.status, 'muted idle'];
-    const where = esc(d.place || d.label || d.duty_code) + (d.status === 'ไปแทน' ? ' · ไปแทน' : '');
-    return `<div class="drow${d.date === today ? ' today' : ''}"><span class="dt num">${dayMonth(d.date)}</span><span class="dwhere muted">${where}</span><span class="dst ${cls}">${esc(text)}</span></div>`;
+    const [text, cls] = DAY_STATUS[d.status] || [d.status, 'muted'];
+    const note = DAY_NOTE.includes(d.status) && d.note ? ' · <span class="dnote">' + esc(d.note) + '</span>' : '';
+    const [, m, dd] = ymdParts(d.date);
+    return `<div class="drow"><span class="dt num">${DOW_SHORT[dowOf(d.date)]} ${dd} ${TMON[m - 1]}</span><span class="dwhere">${esc(d.place || d.label || d.duty_code)}${note}</span><span class="dst ${cls}">${esc(text)}</span></div>`;
   };
-  const rows = r.days.length ? r.days.map(dayRow).join('') : '<p class="small muted">เดือนนี้ไม่มีวันเวร</p>';
-  const stat = (n, label, cls) => `<div><b class="num${cls && Number(n) > 0 ? ' ' + cls : ''}">${Number(n) || 0}</b><small class="statl">${label}</small></div>`;
+  const rows = r.days.length ? r.days.map(dayRow).join('') : '<p class="muted drow-none">เดือนนี้ไม่มีวันเวร</p>';
+  let nextHtml = '<p class="muted">ยังไม่มีเวรที่กำหนด</p>';
+  if (next) {
+    const [, m, d] = ymdParts(next.date);
+    const rel = relDay(st.today, next.date);
+    nextHtml = `<div class="nextd"><div class="cal" aria-label="${esc(thaiDay(next.date))}"><div class="w">${DOW[dowOf(next.date)]}</div><div class="n num">${d}</div><div class="mo">${TMON[m - 1]}</div></div>
+     <div><p class="nx">${esc(placeShort(next.duty))}</p><p class="nx2 muted num">${rng(next.duty)} น.</p>${rel ? `<p class="when${rel.strong ? ' strong' : ''}">${rel.text}</p>` : ''}</div></div>`;
+  }
+  const headLink = r.canHead ? '<button class="link" data-act="toHead">เปิดใบเช็คหัวหน้าเวร</button>' : '';
   const nameChange = r.canSelfChange ? '<button class="sublink" data-act="pickChange">เลือกชื่อผิด? เปลี่ยนชื่อ</button>' : '';
-  const headBtn = r.canHead ? '<button class="btn pri" data-act="toHead">ตรวจเวรวันนี้</button>' : '';
-  return `<div class="pad top"><p class="muted">${esc(kru(r.teacher.name))}</p>${headBtn}
-   <div class="next"><p class="nlbl">${r.isToday ? 'เวรวันนี้' : 'เวรถัดไป'}</p>
-    <p class="${next ? 'nday' : 'nday none'}">${next ? thaiDay(next.date) : 'ยังไม่มีเวรในช่วงนี้'}</p>${next ? `<p class="nwhere muted num">${esc(placeShort(next.duty))} · ${rng(next.duty)}</p>` : ''}</div>
-   <div class="monthnav"><button class="arrow" data-act="myMonth" data-m="${shiftMonth(month, -1)}" aria-label="เดือนก่อน">${ICON.chevL}</button>
+  return `<div class="pad top myd"><h1 class="mhd">เวรของฉัน</h1><p class="muted who">${esc(kru(r.teacher.name))}</p>
+   <div class="sec"><h2>เวรครั้งถัดไป</h2></div>${nextHtml}
+   <div class="sec"><h2>รายการเวร</h2><div class="mnav"><button class="arrow" data-act="myMonth" data-m="${shiftMonth(month, -1)}" aria-label="เดือนก่อน">${ICON.chevL}</button>
     <b class="mname">${thaiMonth(month)}</b>
-    <button class="arrow" data-act="myMonth" data-m="${shiftMonth(month, 1)}" aria-label="เดือนถัดไป"${canNext ? '' : ' disabled'}>${ICON.chevR}</button></div>
+    <button class="arrow" data-act="myMonth" data-m="${shiftMonth(month, 1)}" aria-label="เดือนถัดไป"${canNext ? '' : ' disabled'}>${ICON.chevR}</button></div></div>
    <div>${rows}</div>
-   <div class="stats${SHOW_LATE ? '' : ' three'}">${SHOW_LATE ? stat(s.present - s.late, 'ตรงเวลา') + stat(s.late, 'สาย', 'late') : stat(s.present, 'มา')}${stat(s.leave, 'ลา')}${stat(s.absent, 'ขาด')}</div>
-   ${nameChange}
+   ${headLink}${nameChange}
   </div>`;
 }
