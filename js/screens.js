@@ -371,7 +371,8 @@ export function my(st) {
   let nextHtml = '<p class="muted">ยังไม่มีเวรที่กำหนด</p>';
   if (next) {
     const [, m, d] = ymdParts(next.date);
-    const rel = relDay(st.today, next.date);
+    // isToday จากหลังบ้านเชื่อถือกว่าวันที่ใน config (config โหลดครั้งเดียว ถ้าเปิดหน้าค้างข้ามคืนจะเก่า)
+    const rel = r.isToday ? { text: 'วันนี้', strong: true } : relDay(st.today, next.date);
     nextHtml = `<div class="nextd"><div class="cal" aria-label="${esc(thaiDay(next.date))}"><div class="w">${DOW[dowOf(next.date)]}</div><div class="n num">${d}</div><div class="mo">${TMON[m - 1]}</div></div>
      <div><p class="nx">${esc(placeShort(next.duty))}</p><p class="nx2 muted num">${rng(next.duty)} น.</p>${rel ? `<p class="when${rel.strong ? ' strong' : ''}">${rel.text}</p>` : ''}</div></div>`;
   }
