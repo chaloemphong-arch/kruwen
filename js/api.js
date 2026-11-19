@@ -10,6 +10,19 @@ export function retryDelay(attempt) {
 
 let identity = {};
 let transport = null;
+
+// บัตรผ่านของระบบ: หลังบ้านออกให้หลังตรวจกับ LINE แล้ว ส่งกลับไปพร้อม idToken
+// ครั้งต่อไปจะได้ไม่ต้องถาม LINE ใหม่ (เก็บในเครื่อง ถ้าเก็บไม่ได้ก็แค่ช้าลงเท่าเดิม)
+const SESSION_KEY = 'duty.session';
+let session = '';
+try { session = (typeof localStorage !== 'undefined' && localStorage.getItem(SESSION_KEY)) || ''; } catch (e) { session = ''; }
+function keepSession(v) {
+  session = v || '';
+  try {
+    if (typeof localStorage === 'undefined') return;
+    if (session) localStorage.setItem(SESSION_KEY, session); else localStorage.removeItem(SESSION_KEY);
+  } catch (e) { /* เก็บไม่ได้ ไม่เป็นไร */ }
+}
 const waiters = new Set();
 
 // {idToken, deviceId} หรือ {deviceId, teacherId} (โหมดสำรอง)
@@ -48,12 +61,17 @@ export const NETWORK_FAIL = { ok: false, code: 'network', message: 'สัญญ
 // opts: onRetry(attempt) เมื่อเน็ตล้มเหลวครั้งที่ attempt, retries (จำนวนครั้งที่ลองใหม่ ค่าเริ่มต้นไม่จำกัด),
 // shouldContinue() → false = หยุดลอง คืน NETWORK_FAIL
 export async function call(action, payload = {}, opts = {}) {
-  const body = Object.assign({ action }, identity, payload);
+  const withPass = session && identity.idToken && action !== 'config' ? { session } : {};
+  const body = Object.assign({ action }, identity, withPass, payload);
   const retries = opts.retries === undefined ? Infinity : opts.retries;
   for (let attempt = 0; ; attempt++) {
     try {
       const r = await (transport || httpTransport)(body);
-      if (r && typeof r === 'object') return r;
+      if (r && typeof r === 'object') {
+        if (typeof r.session === 'string' && r.session) keepSession(r.session);
+        else if (r.code === 'auth' && body.session) keepSession('');
+        return r;
+      }
       throw new Error('bad response');
     } catch (e) {
       if (attempt >= retries) return NETWORK_FAIL;
