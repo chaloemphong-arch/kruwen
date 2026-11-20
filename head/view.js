@@ -185,8 +185,9 @@ function dayNav(view) {
   return '<div class="dnav">' + btn(nav.prev, 'วันก่อน', '‹') + '<span class="dl">' + esc(label) + '</span>' + btn(nav.next, 'วันถัดไป', '›') + '</div>';
 }
 
+// ไม่แสดง: เวลาเวรที่หัวกลุ่ม และแถบ "ล็อกแล้ว" (20 พ.ย. 2569: ซ่อนไว้ก่อน)
 export function renderPage(view, ui = {}) {
-  const banners = (ui.stale ? '<p class="bar warn">ข้อมูลอาจไม่ล่าสุด · เช็คสัญญาณอินเทอร์เน็ต</p>' : '') + (view.banners || []).map((b) =>
+  const banners = (ui.stale ? '<p class="bar warn">ข้อมูลอาจไม่ล่าสุด · เช็คสัญญาณอินเทอร์เน็ต</p>' : '') + (view.banners || []).filter((b) => b.tone !== 'lock').map((b) =>
     '<p class="bar ' + (BAR_TONES.includes(b.tone) ? b.tone : 'info') + '">' + esc(b.text) + '</p>').join('');
   let body = '';
   if (view.message && !(view.sessions || []).length) {
@@ -206,7 +207,7 @@ export function renderPage(view, ui = {}) {
         const g = rows.filter((r) => r.dutyCode === cd);
         return '<div class="sub"><span>' + esc(g[0].place || 'เวร ' + cd) + '</span><span>' + g.length + ' คน</span></div>' + g.map((r) => renderRow(r, rowUi)).join('');
       }).join('');
-      return '<section><h2 class="grph"><span>' + esc(s.label) + '</span><span>' + esc(s.timeText) + '</span></h2>' + grouped + '</section>';
+      return '<section><h2 class="grph"><span>' + esc(s.label) + '</span></h2>' + grouped + '</section>';
     }).join('');
     if (!body) body = '<div class="pad mid center"><p>ไม่มีรายการที่ต้องดู</p></div>';
   }

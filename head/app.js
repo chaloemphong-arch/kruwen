@@ -25,8 +25,8 @@ export function authReloadAllowed(last, now, gapMs = AUTH_RELOAD_GAP_MS) {
   return now - t >= gapMs || now < t;
 }
 
-// ใครเห็นคำว่า "สาย" ในใบเช็ค: แอดมิน หรือผู้บริหาร (เปิดดูได้แต่ไม่ใช่หัวหน้าเวรวันนี้) · หัวหน้าเวรเห็นแค่เวลา
-export function lateVisible(home) { return !!(home && (home.isAdmin || (home.canView && !home.isHeadToday))); }
+// คำว่า "สาย" ในใบเช็ค: 20 พ.ย. 2569 ไม่แสดงให้ใครเลย (แอดมินด้วย) เห็นแค่เวลา · เรื่องสายไว้ในรายงานสรุปทีหลัง
+export function lateVisible() { return false; }
 
 const $ = (id) => document.getElementById(id);
 const root = () => $('app');
