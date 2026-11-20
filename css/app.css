@@ -46,6 +46,7 @@ p{margin:0}
 
 .btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:var(--button-h);border-radius:12px;border:1px solid var(--border);background:var(--card);
   font-weight:600;font-size:17px;text-align:center;padding:6px 12px;width:100%}
+a.btn{text-decoration:none}
 .btn.pri{background:var(--brand);border:0;color:var(--on-brand);font-size:18px}
 .btn.sm{min-height:48px;font-size:16px}
 .btn:disabled{opacity:.45;cursor:not-allowed}
