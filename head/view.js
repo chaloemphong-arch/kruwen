@@ -96,7 +96,7 @@ const BX_OF_PILL = { 'p-ok': ['ok', '✓'], 'p-head': ['head', '✓'], 'p-leave'
 function option(o, row) {
   const bx = (o.action ? BX[o.action] : BX_OF_PILL[(row.pill || {}).cls]) || ['pending', '›'];
   const tapHint = o.hint && o.disabled && !o.current;
-  return '<button class="opt" data-act="opt" data-a="' + esc(o.action) + '"' +
+  return '<button class="opt" data-act="opt" data-a="' + esc(o.action) + '"' + (o.leaveType ? ' data-t="' + esc(o.leaveType) + '"' : '') +
     (o.current ? ' aria-pressed="true"' : '') + (tapHint ? ' aria-disabled="true"' : o.disabled ? ' disabled' : '') + '>' +
     '<span class="bx ' + bx[0] + '" aria-hidden="true">' + bx[1] + '</span>' +
     '<span class="ol"><b>' + esc(o.label) + '</b></span>' +

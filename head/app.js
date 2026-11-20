@@ -163,16 +163,17 @@ function applyView(view, fromServer) {
 // เลือกสถานะ: ปิดแผ่นทันที แถวขึ้นป้ายที่จะได้ (option.next จากหลังบ้าน) + "กำลังบันทึก…" ทันที
 // สำเร็จ = ใช้ view จากหลังบ้าน แล้วแถบแจ้งผลได้ปุ่มเลิกทำ · ไม่สำเร็จ = แถวกลับเป็นเดิม (หรือ view ที่หลังบ้านส่งมา)
 // ไม่ลองซ้ำเอง (กันเขียนซ้อน) · แถวที่กำลังบันทึกแตะเปิดไม่ได้ (openSheet)
-async function choose(action) {
+// leaveType: ประเภทลาของปุ่มที่แตะ (มีเมื่อ Settings leave_types มีค่า เช่น ลากิจ/ลาป่วย/กิจกรรม)
+async function choose(action, leaveType = '') {
   const row = rowByKey(H.sheetKey);
   if (!row || !action) return;
-  const opt = (row.options || []).find((o) => o.action === action);
+  const opt = (row.options || []).find((o) => o.action === action && (o.leaveType || '') === leaveType);
   if (opt && opt.disabled && !opt.current && opt.hint) return showToast(opt.hint);
   if (!opt || opt.disabled) return;
   closeSheet();
   showToast(withTitle(row.name) + ': ' + opt.label, null, true);
   const res = await save(row.key, opt.next, 'headSet', {
-    date: H.view.date, dutyCode: row.dutyCode, teacherId: row.teacherId, setAction: action, expectSig: row.sig
+    date: H.view.date, dutyCode: row.dutyCode, teacherId: row.teacherId, setAction: action, leaveType, expectSig: row.sig
   });
   if (!res) return;
   showToast(res.ok ? res.toast : res.message, res.ok ? { token: res.undoToken, key: row.key, prev: row.pill } : null);
@@ -240,7 +241,7 @@ async function refresh(force) {
 const ACTIONS = {
   row: (d) => openSheet(d.key),
   close: () => closeSheet(),
-  opt: (d) => choose(d.a),
+  opt: (d) => choose(d.a, d.t || ''),
   // แตะ "เฉพาะที่ต้องดู" = ตรึงชุดแถวที่ต้องดูตอนนี้ไว้ (แตะซ้ำเพื่อคำนวณใหม่) · "ทั้งหมด" = เลิกตรึง
   filter: (d) => {
     H.filter = d.f === 'needs' ? 'needs' : 'all';
