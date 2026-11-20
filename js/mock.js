@@ -165,6 +165,7 @@ export function screenSamples() {
   const s = (screen, state, label) => ({ screen, state, label: label || screen });
   return [
     s('loading', { title: 'กำลังบันทึก' }),
+    s('openInLine', { href: 'https://liff.line.me/ID?p=gate1' }),
     s('welcome', { school: 'โรงเรียนอุบลรัตน์พิทยาคม' }),
     s('pick', { mode: 'scan', candidates: [FRIEND, ME], query: '', results: null }, 'pick scan'),
     s('pick', { mode: 'my', candidates: [], query: 'สม', results: [FRIEND] }, 'pick my'),

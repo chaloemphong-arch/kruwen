@@ -28,6 +28,23 @@ function loadScript(src) {
   });
 }
 
+// ลิงก์เปิดหน้าเดิมในแอป LINE (เก็บ ?p=&k=&v= ไว้ ตัดพารามิเตอร์ของ LIFF/การเข้าสู่ระบบทิ้ง)
+// Android ใช้ intent (ถ้าเปิดแอปไม่ได้ ไปลิงก์ liff.line.me แทน) · iPhone ใช้ line:// · อื่น ๆ ใช้ liff.line.me
+export function lineLinks(liffId, search, ua) {
+  const q = new URLSearchParams(search || '');
+  [...q.keys()].forEach((k) => { if (/^liff\./.test(k) || k === 'code' || k === 'state') q.delete(k); });
+  const qs = q.toString() ? '?' + q.toString() : '';
+  const url = 'https://liff.line.me/' + liffId + qs;
+  const agent = String(ua || '');
+  let open = url;
+  if (/Android/i.test(agent)) {
+    open = 'intent://app/' + liffId + qs + '#Intent;scheme=line;package=jp.naver.line.android;S.browser_fallback_url=' + encodeURIComponent(url) + ';end';
+  } else if (/iPhone|iPad|iPod/i.test(agent)) {
+    open = 'line://app/' + liffId + qs;
+  }
+  return { url, open };
+}
+
 export async function initIdentity() {
   if (mockScenario(location.search) !== null) return { mock: true };
   try {
@@ -36,6 +53,11 @@ export async function initIdentity() {
     const liff = window.liff;
     await liff.init({ liffId: LIFF_ID });
     if (!liff.isLoggedIn()) {
+      // เปิดนอกแอป LINE (เช่น กดลิงก์ในแชทเฟส): ให้เลือกเปิดใน LINE ก่อน ไม่พาไปหน้าเข้าสู่ระบบทันที
+      if (!liff.isInClient()) {
+        const links = lineLinks(LIFF_ID, location.search, navigator.userAgent);
+        return { outside: true, href: links.open, login: () => liff.login({ redirectUri: location.href }) };
+      }
       liff.login({ redirectUri: location.href });
       return new Promise(() => {}); // กำลังพาไปเข้าสู่ระบบ LINE
     }

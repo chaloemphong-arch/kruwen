@@ -295,6 +295,12 @@ export function fail(st) {
     foot: dock('<button class="btn pri" data-act="retryNow">ลองอีกครั้งตอนนี้</button>') });
 }
 
+// เปิดลิงก์นอกแอป LINE · st: {href}
+export function openInLine(st = {}) {
+  return notice({ ring: 'info', icon: ICON.users, title: 'เปิดใน LINE เพื่อใช้งาน',
+    foot: dock(`<a class="btn pri" href="${esc(st.href || '')}">เปิดใน LINE</a><button class="btn" data-act="lineLogin">เข้าสู่ระบบ LINE ในหน้านี้</button>`) });
+}
+
 // st: {message, back, retry}
 export function error(st) {
   return notice({ ring: 'err', icon: ICON.alert, title: 'ทำรายการไม่สำเร็จ', lines: `<p class="lead">${esc(st.message || 'ระบบขัดข้อง ลองอีกครั้ง')}</p>`,

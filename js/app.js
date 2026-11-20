@@ -484,11 +484,19 @@ function deviceId() {
   return id;
 }
 
+// เปิดนอกแอป LINE: ปุ่มเปิดใน LINE (ลิงก์) หรือเข้าสู่ระบบ LINE ในหน้านี้ (แบบเดิม)
+function showOpenInLine(id) {
+  root().innerHTML = V.openInLine({ href: id.href });
+  const btn = root().querySelector('[data-act="lineLogin"]');
+  if (btn) btn.addEventListener('click', () => { show('loading', { title: 'กำลังเปิด' }); id.login(); });
+}
+
 export async function start() {
   // ?v=head = หน้าหัวหน้าเวร (ใบเช็ค) แยกตัวควบคุม โหลดเฉพาะเมื่อเปิดหน้านี้ (อ่านจาก liff.state ด้วย)
   if (viewParam(location.search) === 'head') {
     show('loading', { title: 'กำลังเปิด' });
     const [{ startHead }, id] = await Promise.all([import('../head/app.js'), initIdentity()]);
+    if (id.outside) return showOpenInLine(id);
     return startHead(id);
   }
   root().addEventListener('click', (e) => {
@@ -506,6 +514,7 @@ export async function start() {
   }
   show('loading', { title: 'กำลังเปิด' });
   const id = await initIdentity();
+  if (id.outside) return showOpenInLine(id);
   const dev = deviceId();
   if (id.idToken) {
     A.line = true;
