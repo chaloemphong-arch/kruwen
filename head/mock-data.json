@@ -289,6 +289,17 @@
         }
        },
        {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       },
+       {
         "action": "clear",
         "label": "ล้างค่า กลับเป็นยังว่าง",
         "hint": "",
@@ -408,6 +419,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -453,6 +475,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        },
        {
@@ -520,6 +553,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -565,6 +609,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -612,6 +667,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -657,6 +723,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -962,6 +1039,17 @@
         }
        },
        {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       },
+       {
         "action": "clear",
         "label": "ล้างค่า กลับเป็นยังว่าง",
         "hint": "",
@@ -1086,6 +1174,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -1131,6 +1230,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        },
        {
@@ -1198,6 +1308,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -1243,6 +1364,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -1290,6 +1422,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -1335,6 +1478,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -1669,6 +1823,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -1714,6 +1879,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -1761,6 +1937,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -1806,6 +1993,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -2111,6 +2309,17 @@
         }
        },
        {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       },
+       {
         "action": "clear",
         "label": "ล้างค่า กลับเป็นยังว่าง",
         "hint": "",
@@ -2235,6 +2444,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -2280,6 +2500,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        },
        {
@@ -2347,6 +2578,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -2392,6 +2634,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -2439,6 +2692,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -2484,6 +2748,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -2623,6 +2898,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -2720,6 +3006,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -2765,6 +3062,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -2812,6 +3120,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -2858,6 +3177,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -2903,6 +3233,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -2959,6 +3300,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -3004,6 +3356,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -3051,6 +3414,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -3096,6 +3470,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
+        "current": false,
+        "disabled": true,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -3584,6 +3969,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -3629,6 +4025,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -3676,6 +4083,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -3721,6 +4139,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -3768,6 +4197,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -3813,6 +4253,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -3860,6 +4311,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -3905,6 +4367,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -3952,6 +4425,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -3997,6 +4481,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -4044,6 +4539,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -4089,6 +4595,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -4136,6 +4653,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -4181,6 +4709,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -4228,6 +4767,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -4273,6 +4823,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -4320,6 +4881,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -4365,6 +4937,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -4412,6 +4995,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -4457,6 +5051,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -4504,6 +5109,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -4549,6 +5165,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -4596,6 +5223,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -4641,6 +5279,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -4688,6 +5337,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -4733,6 +5393,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -4780,6 +5451,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -4825,6 +5507,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -4872,6 +5565,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -4917,6 +5621,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -4964,6 +5679,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -5009,6 +5735,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],
@@ -5056,6 +5793,17 @@
          "cls": "p-leave",
          "text": "ลา"
         }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
        }
       ],
       "reports": [],
@@ -5101,6 +5849,17 @@
         "next": {
          "cls": "p-leave",
          "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "",
+        "current": false,
+        "disabled": false,
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
         }
        }
       ],

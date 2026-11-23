@@ -66,7 +66,7 @@ export function renderRow(row, ui = {}) {
 
 // วงสีหน้าตัวเลือก: สีเดียวกับป้ายที่จะได้
 const BX = {
-  head: ['ok', '✓'], leave: ['leave', 'ลา'], notfound: ['miss', '✗'], standin: ['head', 'แทน'],
+  head: ['ok', '✓'], leave: ['leave', 'ลา'], notfound: ['miss', '✗'], absent: ['miss', '✗'], standin: ['head', 'แทน'],
   restore: ['ok', '↺'], uncover: ['pending', '↺'], clear: ['pending', '↺']
 };
 const BX_OF_PILL = { 'p-ok': ['ok', '✓'], 'p-head': ['head', '✓'], 'p-leave': ['leave', 'ลา'], 'p-miss': ['miss', '✗'], 'p-idle': ['pending', '–'] };
