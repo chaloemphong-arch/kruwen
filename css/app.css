@@ -8,7 +8,7 @@
   --leave:#3F4E8C;--leave-bg:#E1EAF7;--idle:#55627A;--idle-bg:#E3E8F0;
   --shade:rgba(15,27,45,.5);
   --tap-min:48px;--button-h:56px;--app-max:560px;--gut:24px;
-  --font:"Sarabun","Leelawadee UI","Thonburi",system-ui,sans-serif;
+  --font:"Krub","Sarabun","Leelawadee UI","Thonburi",system-ui,sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box}
 html,body{min-height:100%;margin:0}
