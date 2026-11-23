@@ -224,7 +224,7 @@ async function choose(action, leaveType = '') {
   if (opt && opt.disabled && !opt.current && opt.hint) return showToast(opt.hint);
   if (!opt || opt.disabled) return;
   closeSheet();
-  showToast(withTitle(row.name) + ': ' + opt.label, null, true);
+  showToast(withTitle(row.name) + ': ' + (action === 'head' ? 'หัวหน้าเวรเช็ค' : opt.label), null, true);
   const res = await save(row.key, opt.next, 'headSet', {
     date: H.view.date, dutyCode: row.dutyCode, teacherId: row.teacherId, setAction: action, leaveType, expectSig: row.sig
   });
@@ -362,6 +362,10 @@ function bindEvents() {
 export async function startHead(identity) {
   try { document.title = 'สถานะเวร'; } catch (e) { /* ไม่เป็นไร */ }
   bindEvents();
+  try {
+    let rt = null;
+    window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => syncPager(false), 100); });
+  } catch (e) { /* ไม่เป็นไร */ }
   H.mock = mockScenario(location.search);
   if (H.mock !== null) {
     setTransport(headMockTransport(H.mock || 'morning'));

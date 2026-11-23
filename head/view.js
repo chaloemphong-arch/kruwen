@@ -180,7 +180,7 @@ function tabBar(view, tab) {
   const ss = view.sessions || [];
   if (ss.length < 2) return '';
   return '<div class="stabs" role="tablist">' + ss.map((s, i) =>
-    '<button class="stab" role="tab" data-act="tab" data-i="' + i + '" aria-selected="' + (i === tab) + '">' + icon(s) +
+    '<button class="stab" role="tab" tabindex="' + (i === tab ? '0' : '-1') + '" data-act="tab" data-i="' + i + '" aria-selected="' + (i === tab) + '">' + icon(s) +
     '<span class="sl">' + esc(s.label) + '</span>' +
     (s.rows.some((r) => r.needs) ? '<span class="need" aria-label="มีรายการที่ต้องดู"></span>' : '') +
     '<small>' + esc(s.timeText) + '</small><span class="sbar"></span></button>').join('') + '</div>';

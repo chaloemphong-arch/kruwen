@@ -10,13 +10,12 @@ const fail = (code, message, extra) => Object.assign({ ok: false, code, message 
 
 // ตัวเลือกของแถวยังว่าง (ตรงกับ headOptions ของหลังบ้าน)
 const OPEN_OPTIONS = [
-  { action: 'head', label: 'มา (หัวหน้าเวรเช็ค)', hint: 'มาที่จุดแต่ไม่ได้สแกน', next: { cls: 'p-head', text: '✓ หัวหน้าเวรเช็ค' } },
-  { action: 'leave', label: 'ลา', hint: 'ไม่นับเป็นขาด', next: { cls: 'p-leave', text: 'ลา' } },
-  { action: 'standin', label: 'หัวหน้าเวรยืนแทน', hint: '', next: { cls: 'p-miss', text: 'ขาด' } }
+  { action: 'head', label: 'มา', hint: '', next: { cls: 'p-head', text: '✓ หัวหน้าเวรเช็ค' } },
+  { action: 'leave', label: 'ลา', hint: '', next: { cls: 'p-leave', text: 'ลา' } }
 ];
 const PILL = {
   head: { cls: 'p-head', text: '✓ หัวหน้าเวรเช็ค' }, leave: { cls: 'p-leave', text: 'ลา' },
-  notfound: { cls: 'p-miss', text: 'ไม่พบตัว' }, standin: { cls: 'p-miss', text: 'ขาด' },
+  notfound: { cls: 'p-miss', text: 'ไม่พบตัว' },
   clear: { cls: 'p-idle', text: 'ยังว่าง' }, uncover: { cls: 'p-idle', text: 'ยังว่าง' }
 };
 
@@ -52,7 +51,7 @@ function applyMock(row, opt, original) {
     return row;
   }
   row.needs = action === 'leave' || action === 'notfound';
-  row.note = action === 'standin' ? 'หัวหน้าเวรยืนแทน (โหมดทดลอง)' : '';
+  row.note = '';
   const opts = row.options.filter((o) => o.action).map((o) => Object.assign({}, o, {
     current: o.action === action, disabled: o.action === action || (o.disabled && !o.current)
   }));
@@ -101,7 +100,7 @@ export function headMockCall(scenario, data) {
         undo.set(token, clone(view));
         applyMock(row, opt, original[key]);
         recount(view);
-        return { ok: true, kind: 'head_done', view: clone(view), undoToken: token, toast: 'ครู' + row.name + ': ' + opt.label };
+        return { ok: true, kind: 'head_done', view: clone(view), undoToken: token, toast: 'ครู' + row.name + ': ' + (opt.action === 'head' ? 'หัวหน้าเวรเช็ค' : opt.label) };
       }
       case 'headUndo': {
         const prev = undo.get(body.undoToken);
