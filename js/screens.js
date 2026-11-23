@@ -19,6 +19,8 @@ const kruFirst = (name) => withTitle(firstName(name));
 const rng = (d) => `${hmd(d.start)}–${hmd(d.end)}`;
 const TMON = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
 const DOW = ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'];
+// ชื่อช่วงเวรที่ครูเห็น (23 พ.ย. 2569: ตรงกับแท็บใบเช็ค) · ค่า session ในข้อมูลยังเป็น เช้า/เย็น
+const SESSION_NAME = { 'เช้า': 'ช่วงเช้า', 'เย็น': 'หลังเลิกเรียน' };
 const ymdParts = (ymd) => String(ymd).split('-').map(Number);
 const dayMonth = (ymd) => { const [, m, d] = ymdParts(ymd); return d + ' ' + TMON[m - 1]; };
 const thaiDay = (ymd) => { const [y, m, d] = ymdParts(ymd); return DOW[new Date(Date.UTC(y, m - 1, d)).getUTCDay()] + ' ' + d + ' ' + TMON[m - 1]; };
@@ -381,7 +383,7 @@ export function my(st) {
     // isToday จากหลังบ้านเชื่อถือกว่าวันที่ใน config (config โหลดครั้งเดียว ถ้าเปิดหน้าค้างข้ามคืนจะเก่า)
     const rel = r.isToday ? { text: 'วันนี้', strong: true } : relDay(st.today, next.date);
     nextHtml = `<div class="nextd"><div class="cal" aria-label="${esc(thaiDay(next.date))}"><div class="w">${DOW[dowOf(next.date)]}</div><div class="n num">${d}</div><div class="mo">${TMON[m - 1]}</div></div>
-     <div><p class="nx">${esc(placeShort(next.duty))}</p>${next.session ? `<p class="nx2 muted">เวร${esc(next.session)}</p>` : ''}${rel ? `<p class="when${rel.strong ? ' strong' : ''}">${rel.text}</p>` : ''}</div></div>`;
+     <div><p class="nx">${esc(placeShort(next.duty))}</p>${next.session ? `<p class="nx2 muted">${esc(SESSION_NAME[next.session] || 'เวร' + next.session)}</p>` : ''}${rel ? `<p class="when${rel.strong ? ' strong' : ''}">${rel.text}</p>` : ''}</div></div>`;
   }
   const headLink = r.canHead ? '<button class="link" data-act="toHead">เปิดใบเช็คหัวหน้าเวร</button>' : '';
   const nameChange = r.canSelfChange ? '<button class="sublink" data-act="pickChange">เลือกชื่อผิด? เปลี่ยนชื่อ</button>' : '';
