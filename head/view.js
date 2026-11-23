@@ -15,33 +15,37 @@ const PILLS = ['p-ok', 'p-head', 'p-leave', 'p-miss', 'p-idle'];
 // รูปจาก headPhoto (data:image/...;base64) เท่านั้น
 function safeImg(url) { return /^data:image\/(jpeg|png|webp|gif|svg\+xml);base64,[A-Za-z0-9+/=]+$/.test(String(url || '')) ? url : ''; }
 
-function lum(hex) {
-  let h = hex.slice(1);
-  if (h.length === 3) h = h.split('').map((c) => c + c).join('');
-  const ch = [0, 2, 4].map((i) => {
-    const v = parseInt(h.slice(i, i + 2), 16) / 255;
-    return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
-  });
-  return 0.2126 * ch[0] + 0.7152 * ch[1] + 0.0722 * ch[2];
-}
-
-// สีตัวหนังสือรหัสเวรจาก Duties.color: รับเฉพาะ #rgb/#rrggbb แล้วทำให้เข้มขึ้นจนความต่างบนพื้นขาวอย่างน้อย 4.5 · อื่นๆ คืน ''
-export function codeInk(color) {
-  const c = String(color || '').trim();
-  if (!/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(c)) return '';
+const HEX = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i;
+function rgbOf(c) {
   let h = c.slice(1).toLowerCase();
   if (h.length === 3) h = h.split('').map((x) => x + x).join('');
-  let rgb = [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16));
-  const hex = (a) => '#' + a.map((v) => v.toString(16).padStart(2, '0')).join('');
-  for (let i = 0; i < 60 && 1.05 / (lum(hex(rgb)) + 0.05) < 4.5; i++) rgb = rgb.map((v) => Math.floor(v * 0.9));
-  return hex(rgb);
+  return [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16));
+}
+function lum(rgb) {
+  const ch = rgb.map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); });
+  return 0.2126 * ch[0] + 0.7152 * ch[1] + 0.0722 * ch[2];
+}
+function ratio(a, b) { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); }
+const hex6 = (a) => '#' + a.map((v) => Math.round(v).toString(16).padStart(2, '0')).join('');
+
+// เลขจุดจากรหัสเวร: ตัดวงเล็บกะท้ายออก '1(1)' -> '1'
+export function pointNo(dutyCode) { return String(dutyCode || '').split('(')[0].trim(); }
+
+// สีป้ายเลขจุดจาก Duties.color: พื้นพาสเทล (ผสมขาว 72%) + ตัวเลขเข้มจนความต่างบนพื้นนั้นอย่างน้อย 4.5 · ไม่ใช่ hex คืน null
+export function badgeColors(color) {
+  const c = String(color === undefined || color === null ? '' : color).trim();
+  if (!HEX.test(c)) return null;
+  const rgb = rgbOf(c);
+  const tint = rgb.map((v) => v + (255 - v) * 0.72);
+  let ink = rgb.slice();
+  for (let i = 0; i < 60 && ratio(ink, tint) < 4.5; i++) ink = ink.map((v) => v * 0.88);
+  return { bg: hex6(tint), ink: hex6(ink) };
 }
 
-// รหัสเวรสีตามจุด (เอากลับมา 20 พ.ย.: ไม่มีรหัสแล้วแถวดูปนกัน) เช่น 1(1) ประตู 1 เช้า · 3 ตรวจอาคารเรียน · 4 กิจกรรมหน้าเสาธง
-function code(row) {
-  if (!row.dutyCode) return '';
-  const ink = codeInk(row.color);
-  return '<span class="code' + (ink ? '' : ' muted') + '"' + (ink ? ' style="color:' + ink + '"' : '') + '>' + esc(row.dutyCode) + '</span>';
+// ป้ายเลขจุด (แทนรหัสเวรเดิม): สีเดียวกับจุดนั้นทั้งเช้าและเย็น
+function pno(row) {
+  const bc = badgeColors(row.color);
+  return '<span class="pno"' + (bc ? ' style="--tint:' + bc.bg + ';--ink:' + bc.ink + '"' : '') + '>' + esc(pointNo(row.dutyCode)) + '</span>';
 }
 
 function subLine(sub) {
@@ -79,9 +83,9 @@ export function renderRow(row, ui = {}) {
   const marked = !!(sv && sv.next); // ป้ายที่จะได้ขึ้นแล้ว: บอกในบรรทัดรองว่ายังบันทึกอยู่
   return '<div class="nrow" role="button" tabindex="0" data-act="row" data-key="' + esc(row.key) + '"' +
     ' aria-label="' + esc(row.name + ' ' + p.text + (p.late ? ' สาย' : '') + (marked ? ' ' + SAVING : '') + ' แตะเพื่อเลือกสถานะ') + '">' +
-    code(row) +
+    pno(row) +
     '<span class="nm"><b>' + esc(row.name) + '</b><small>' +
-    [row.place && !ui.noPlace ? '<span class="place">' + esc(row.place) + '</span>' : '', marked ? '<span class="muted saving">' + SAVING + '</span>' : '', subLine(row.sub)].filter(Boolean).join(' · ') + '</small></span>' +
+    [marked ? '<span class="muted saving">' + SAVING + '</span>' : '', subLine(row.sub)].filter(Boolean).join(' · ') + '</small></span>' +
     '<span class="st ' + p.cls + (p.late ? ' two' : '') + '">' + esc(p.text) + (p.late ? '<small class="late">(สาย)</small>' : '') + '</span></div>';
 }
 
@@ -118,7 +122,7 @@ export function renderSheet(row, sheetUi = {}) {
   return '<div class="shade" data-act="close"></div>' +
     '<div class="sheet" role="dialog" aria-modal="true" aria-label="' + esc(row.name) + '">' +
     '<div class="grab"></div>' +
-    '<div class="shhd">' + code(row) + '<div class="minw"><p class="shname">' + esc(row.name) + '</p></div></div>' +
+    '<div class="shhd">' + pno(row) + '<div class="minw"><p class="shname">' + esc(row.name) + '</p></div></div>' +
     (row.detail || []).map((d) => '<p class="small' + (TONES.includes(d.tone) ? ' ' + d.tone : '') + '">' + esc(d.text) + '</p>').join('') +
     (row.note ? '<p class="small">' + esc(row.note) + '</p>' : '') +
     (row.deviceFlag ? '<p class="bar warn rounded">เครื่องเดียวกันลงหลายชื่อวันนี้</p>' : '') +
@@ -141,39 +145,56 @@ export function renderMessage(title, text, link) {
     (link ? '<a class="btn pri" href="' + esc(link.href) + '">' + esc(link.label) + '</a>' : '') + '</div>';
 }
 
-// แท็บตามจุด (จากชื่อจุดของแถว) · ไม่ขึ้นถ้ามีจุดเดียว
-function pointsOf(rows) {
-  const out = [];
-  rows.forEach((r) => {
-    if (!r.pointId) return;
-    let o = out.find((x) => x.id === r.pointId);
-    if (!o) { o = { id: r.pointId, name: r.place || r.dutyCode, n: 0 }; out.push(o); }
-    o.n++;
-  });
-  return out;
-}
-function pointTabs(rows, ui, c, f) {
-  const pts = pointsOf(rows);
-  if (pts.length < 2) return '';
-  const cur = pts.some((x) => x.id === ui.point) ? ui.point : '';
-  return '<div class="ptabs" role="tablist">' +
-    '<button class="pt" data-act="point" data-p="" aria-pressed="' + (cur === '') + '">ทั้งหมด</button>' +
-    pts.map((x) => '<button class="pt" data-act="point" data-p="' + esc(x.id) + '" aria-pressed="' + (cur === x.id) + '">' + esc(x.name) + '</button>').join('') +
-    '</div>';
+// ชื่อหน้า: วันนี้ / ย้อนหลัง / วันที่กำลังจะมาถึง (หลังบ้านใส่ preview ให้วันอนาคต)
+export function pageTitle(view) {
+  if (view && view.isToday === false) return view.preview ? 'เวรที่กำลังจะมาถึง' : 'สถานะเวรย้อนหลัง';
+  return 'สถานะเวรวันนี้';
 }
 
-function header(view, ui) {
-  const c = view.counts || {};
-  const rows = (view.sessions || []).flatMap((s) => s.rows);
-  const f = ui.filter === 'needs' ? 'needs' : 'all';
-  const tabs = pointTabs(rows, ui, c, f);
+// แท็บเริ่มต้น: วันอื่น = ช่วงแรก · วันนี้ = ช่วงแรกที่ยังไม่จบ (เวลาจบ > nowHHMM) · จบหมดแล้ว = ช่วงสุดท้าย
+export function defaultTab(view) {
+  const ss = (view && view.sessions) || [];
+  if (!ss.length || view.isToday === false) return 0;
+  const now = String(view.nowHHMM || '').replace(':', '.');
+  const i = ss.findIndex((s) => { const end = String(s.timeText || '').split('–')[1]; return end && end > now; });
+  return i < 0 ? ss.length - 1 : i;
+}
+
+export function clampTab(tab, view) {
+  const n = ((view && view.sessions) || []).length;
+  return Number.isInteger(tab) && tab >= 0 && tab < n ? tab : 0;
+}
+
+// ไอคอน lucide: เช้า = sun · เย็น = house
+const ICON = {
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>',
+  house: '<path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>'
+};
+function icon(session) {
+  return '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    ICON[session.session === 'เย็น' ? 'house' : 'sun'] + '</svg>';
+}
+
+// แท็บช่วงเวร (ขึ้นเมื่อมีตั้งแต่ 2 ช่วง) · จุดแดง = มีแถวในช่วงนั้นที่หัวหน้าเวรต้องดู
+function tabBar(view, tab) {
+  const ss = view.sessions || [];
+  if (ss.length < 2) return '';
+  return '<div class="stabs" role="tablist">' + ss.map((s, i) =>
+    '<button class="stab" role="tab" data-act="tab" data-i="' + i + '" aria-selected="' + (i === tab) + '">' + icon(s) +
+    '<span class="sl">' + esc(s.label) + '</span>' +
+    (s.rows.some((r) => r.needs) ? '<span class="need" aria-label="มีรายการที่ต้องดู"></span>' : '') +
+    '<small>' + esc(s.timeText) + '</small><span class="sbar"></span></button>').join('') + '</div>';
+}
+
+function header(view) {
+  const title = pageTitle(view);
   return '<header class="hdr">' +
     (view.nav
-      ? '<div class="r1"><b>' + (view.isToday === false ? 'สถานะเวร' : 'สถานะเวรวันนี้') + '</b>' +
+      ? '<div class="r1"><b>' + title + '</b>' +
         (view.isToday === false ? '<button class="dtoday" data-act="today">กลับวันนี้</button>' : '') + '</div>' + dayNav(view)
-      : '<div class="r1"><b>สถานะเวรวันนี้</b><span class="muted">' + esc(view.dateThai) + ' · ' + esc(view.nowHHMM) + '</span></div>') +
-    (view.canClearAll ? '<button class="clr" data-act="clearall">' + (ui.point ? 'ล้างสถานะจุดนี้' : 'ล้างสถานะทั้งหมด') + '</button>' : '') +
-    tabs + '</header>';
+      : '<div class="r1"><b>' + title + '</b><span class="muted">' + esc(view.dateThai) + ' · ' + esc(view.nowHHMM) + '</span></div>') +
+    (view.canClearAll ? '<button class="clr" data-act="clearall">ล้างสถานะทั้งหมด</button>' : '') +
+    '</header>';
 }
 
 // ลูกศร ‹ › เลื่อนวัน (หลังบ้านคำนวณวันก่อน/ถัดไปตามสิทธิ์: แอดมินทีละวัน หัวหน้าเวรทีละสัปดาห์) · วันอื่นมีปุ่มกลับวันนี้
@@ -185,7 +206,9 @@ function dayNav(view) {
   return '<div class="dnav">' + btn(nav.prev, 'วันก่อน', '‹') + '<span class="dl">' + esc(label) + '</span>' + btn(nav.next, 'วันถัดไป', '›') + '</div>';
 }
 
-// ไม่แสดง: เวลาเวรที่หัวกลุ่ม และแถบ "ล็อกแล้ว" (20 พ.ย. 2569: ซ่อนไว้ก่อน)
+// ไม่แสดง: แถบ "ล็อกแล้ว" (20 พ.ย. 2569: ซ่อนไว้ก่อน) และ สาย/ตรงเวลา
+// ui.tab = ช่วงที่เลือก (ตัวเลข) · หนึ่งช่วง = หนึ่ง panel · หนึ่งจุด = การ์ดหนึ่งใบ (จัดกลุ่มตาม dutyCode ตามลำดับหลังบ้าน)
+// ไม่มีตัวเลขสรุปและบรรทัดชื่อหัวหน้าเวร (20 พ.ย.): สรุปข้อมูลทำแยกทีหลัง
 export function renderPage(view, ui = {}) {
   const banners = (ui.stale ? '<p class="bar warn">ข้อมูลอาจไม่ล่าสุด · เช็คสัญญาณอินเทอร์เน็ต</p>' : '') + (view.banners || []).filter((b) => b.tone !== 'lock').map((b) =>
     '<p class="bar ' + (BAR_TONES.includes(b.tone) ? b.tone : 'info') + '">' + esc(b.text) + '</p>').join('');
@@ -193,24 +216,22 @@ export function renderPage(view, ui = {}) {
   if (view.message && !(view.sessions || []).length) {
     body = '<div class="pad mid center"><p class="title">' + esc(view.message) + '</p></div>';
   } else {
-    body = (view.sessions || []).map((s) => {
-      // ตัวกรอง "เฉพาะที่ต้องดู" ตรึงชุดแถวที่เห็นตอนแตะ: แถวที่เพิ่งเปลี่ยนไม่หายใต้นิ้ว (แถวไม่สลับที่)
-      const pinned = ui.filter === 'needs' && Array.isArray(ui.needsKeys) ? ui.needsKeys : null;
-      const base = pinned ? s.rows.filter((r) => pinned.includes(r.key)) : filterRows(s.rows, ui.filter);
-      const rows = ui.point ? base.filter((r) => r.pointId === ui.point) : base;
-      if (!rows.length) return '';
+    // ตัวกรอง "เฉพาะที่ต้องดู" ตรึงชุดแถวที่เห็นตอนแตะ: แถวที่เพิ่งเปลี่ยนไม่หายใต้นิ้ว (แถวไม่สลับที่)
+    const pinned = ui.filter === 'needs' && Array.isArray(ui.needsKeys) ? ui.needsKeys : null;
+    const panels = (view.sessions || []).map((s, i) => {
+      const rows = pinned ? s.rows.filter((r) => pinned.includes(r.key)) : filterRows(s.rows, ui.filter);
       const codes = [];
       rows.forEach((r) => { if (!codes.includes(r.dutyCode)) codes.push(r.dutyCode); });
-      // ชื่อจุดอยู่ที่หัวกลุ่มหรือปุ่มกรองจุดแล้ว: ไม่ต้องเขียนซ้ำใต้ชื่อครู
-      const rowUi = Object.assign({}, ui, { noPlace: codes.length >= 2 || !!ui.point });
-      const grouped = codes.length < 2 ? rows.map((r) => renderRow(r, rowUi)).join('') : codes.map((cd) => {
+      const cards = codes.map((cd) => {
         const g = rows.filter((r) => r.dutyCode === cd);
-        return '<div class="sub"><span>' + esc(g[0].place || 'เวร ' + cd) + '</span><span>' + g.length + ' คน</span></div>' + g.map((r) => renderRow(r, rowUi)).join('');
+        // เวลาที่หัวการ์ดขึ้นเฉพาะเมื่อต่างจากเวลาของช่วง
+        const tm = g[0].timeText && g[0].timeText !== s.timeText ? '<span class="tm">' + esc(g[0].timeText) + '</span>' : '';
+        return '<div class="grp"><div class="sub"><span class="pn">' + esc(g[0].place || 'เวร ' + cd) + '</span>' + tm + '</div><div class="card">' +
+          g.map((r) => renderRow(r, ui)).join('') + '</div></div>';
       }).join('');
-      return '<section><h2 class="grph"><span>' + esc(s.label) + '</span></h2>' + grouped + '</section>';
+      return '<section class="panel" data-i="' + i + '" role="tabpanel">' + (cards || '<div class="pad mid center"><p>ไม่มีรายการที่ต้องดู</p></div>') + '</section>';
     }).join('');
-    if (!body) body = '<div class="pad mid center"><p>ไม่มีรายการที่ต้องดู</p></div>';
+    body = tabBar(view, clampTab(ui.tab, view)) + '<div class="pager" id="hpager">' + panels + '</div>';
   }
-  // ไม่มีตัวเลขสรุปและบรรทัดชื่อหัวหน้าเวร (20 พ.ย.): สรุปข้อมูลทำแยกทีหลัง
-  return header(view, ui) + banners + '<div class="rows">' + body + '</div>';
+  return header(view) + banners + body;
 }
