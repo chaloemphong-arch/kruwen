@@ -97,7 +97,9 @@ function syncPager(smooth) {
   const p = pagerEl();
   if (!p || H.tab === null) return;
   const left = H.tab * p.clientWidth;
-  if (smooth && p.scrollTo) p.scrollTo({ left, behavior: 'smooth' }); else p.scrollLeft = left;
+  // ผู้ใช้ตั้งลดการเคลื่อนไหว → เลื่อนทันทีไม่มีแอนิเมชัน
+  const reduce = typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (smooth && !reduce && p.scrollTo) p.scrollTo({ left, behavior: 'smooth' }); else p.scrollLeft = left;
   syncHeight();
 }
 
