@@ -13,9 +13,42 @@
 <body>
 <main id="app" class="app" aria-live="polite"></main>
 <noscript><p class="pad">ต้องเปิด JavaScript จึงจะใช้งานได้</p></noscript>
-<script type="module">
-import { start } from './js/app.js';
-start();
+<script>
+// โหลดไฟล์ด้วยเลขเวอร์ชันจาก version.json (อ่านแบบไม่ใช้แคชทุกครั้ง) ไฟล์ใหม่จึงขึ้นทันทีหลัง deploy
+// version.json อ่านไม่ได้ (เน็ตหลุด) หรือช้าเกิน 4 วินาที = โหลดแบบเดิมไม่มีเลขเวอร์ชัน
+(function () {
+  var started = false;
+  function boot(ver) {
+    if (started) return;
+    started = true;
+    var v = ver && /^[0-9a-f]{6,40}$/.test(ver.v) ? ver.v : '';
+    if (v) {
+      var map = { imports: {} };
+      (ver.files || []).forEach(function (f) { map.imports['./' + f] = './' + f + '?v=' + v; });
+      var im = document.createElement('script');
+      im.type = 'importmap';
+      im.textContent = JSON.stringify(map);
+      document.head.appendChild(im);
+      ['css/app.css', 'head/head.css'].forEach(function (c) {
+        var l = document.createElement('link');
+        l.rel = 'stylesheet';
+        l.href = c + '?v=' + v;
+        document.head.appendChild(l);
+      });
+    }
+    var m = document.createElement('script');
+    m.type = 'module';
+    m.textContent = "import { start } from './js/app.js'; start();";
+    document.body.appendChild(m);
+  }
+  setTimeout(function () { boot(null); }, 4000);
+  try {
+    fetch('version.json?t=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .catch(function () { return null; })
+      .then(boot);
+  } catch (e) { boot(null); }
+})();
 </script>
 </body>
 </html>

@@ -1,0 +1,18 @@
+{
+  "v": "ded0499ba1",
+  "files": [
+    "config.js",
+    "head/app.js",
+    "head/mock-data.json",
+    "head/mock.js",
+    "head/view.js",
+    "js/api.js",
+    "js/app.js",
+    "js/camera.js",
+    "js/gps.js",
+    "js/liff.js",
+    "js/mock.js",
+    "js/names.js",
+    "js/screens.js"
+  ]
+}

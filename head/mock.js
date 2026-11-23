@@ -121,7 +121,8 @@ export function headMockTransport(scenario) {
   let callP = null, views = 0;
   const load = () => {
     if (!callP) {
-      callP = fetch(new URL('./mock-data.json', import.meta.url)).then((r) => r.json()).then((data) => headMockCall(scenario, data));
+      // ใช้ ?v= เดียวกับไฟล์นี้ (ไฟล์ใหม่หลัง deploy ไม่ติดแคช)
+      callP = fetch(new URL('./mock-data.json' + new URL(import.meta.url).search, import.meta.url)).then((r) => r.json()).then((data) => headMockCall(scenario, data));
     }
     return callP;
   };
