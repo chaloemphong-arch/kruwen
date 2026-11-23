@@ -3,7 +3,7 @@
 import { call, setIdentity, setTransport } from '../js/api.js';
 import { mockScenario } from '../js/liff.js';
 import { withTitle, setAddKru } from '../js/names.js';
-import { renderPage, renderRow, renderSheet, renderToast, renderMessage, mergeNeedsKeys } from './view.js';
+import { renderPage, renderRow, renderSheet, renderToast, renderMessage, mergeNeedsKeys, defaultTab, clampTab } from './view.js';
 import { headMockTransport } from './mock.js';
 
 const TOAST_MS = 8000;
@@ -13,7 +13,7 @@ const AUTH_RELOAD_GAP_MS = 120000;
 
 // seq = รุ่นของจอ (ผลรีเฟรชที่ออกก่อนรุ่นนี้ทิ้ง) · req/appliedReq = ลำดับคำขอบันทึก/เลิกทำ (ผลที่ตอบช้ากว่าไม่ทับผลใหม่)
 const H = {
-  view: null, point: '', canPreview: false, previewDate: '', filter: 'all', saving: {}, full: {}, fullFail: {},
+  view: null, tab: null, canPreview: false, previewDate: '', filter: 'all', saving: {}, full: {}, fullFail: {},
   needsKeys: null, seq: 0, req: 0, appliedReq: 0, stale: false,
   sheetKey: null, toast: null, toastTimer: null, pending: 0, mock: null, showLate: false
 };
@@ -34,7 +34,7 @@ const root = () => $('app');
 function allRows() { return H.view ? (H.view.sessions || []).flatMap((s) => s.rows) : []; }
 function rowByKey(key) { return allRows().find((r) => r.key === key) || null; }
 function rowEl(key) { return Array.from(document.querySelectorAll('[data-act="row"]')).find((el) => el.dataset.key === key) || null; }
-function ui() { return { filter: H.filter, needsKeys: H.needsKeys, saving: H.saving, stale: H.stale, showLate: H.showLate, point: H.point }; }
+function ui() { return { filter: H.filter, needsKeys: H.needsKeys, saving: H.saving, stale: H.stale, showLate: H.showLate, tab: H.tab }; }
 
 // ลิงก์ "เวรของฉัน" = หน้าเดิมไม่มี ?v (โหมดทดลองไปหน้า mock=my)
 function myDutyHref() { return location.pathname + (H.mock !== null ? '?mock=my' : ''); }
@@ -77,6 +77,55 @@ function mountShell() {
 function drawPage() {
   if (!$('hpage')) mountShell();
   $('hpage').innerHTML = renderPage(H.view, ui());
+  syncPager(false);
+}
+
+// ---------- แท็บช่วงเวร (แตะหรือปัดซ้าย-ขวา) ----------
+const pagerEl = () => $('hpager');
+function panelCount() { const p = pagerEl(); return p ? p.querySelectorAll('.panel').length : 0; }
+
+// ความสูงของ pager = ความสูงของช่วงที่เลือก (ช่วงอื่นสูงกว่าก็ไม่ดันหน้ายาว)
+function syncHeight() {
+  const p = pagerEl();
+  if (!p || H.tab === null) return;
+  const panel = p.querySelector('.panel[data-i="' + H.tab + '"]');
+  if (panel) p.style.height = panel.offsetHeight + 'px';
+}
+
+// วาดหน้าใหม่แล้ว: เลื่อน pager ไปช่วงที่เลือกทันที (ไม่มีแอนิเมชัน) + ตั้งความสูง
+function syncPager(smooth) {
+  const p = pagerEl();
+  if (!p || H.tab === null) return;
+  const left = H.tab * p.clientWidth;
+  if (smooth && p.scrollTo) p.scrollTo({ left, behavior: 'smooth' }); else p.scrollLeft = left;
+  syncHeight();
+}
+
+// เลือกช่วง i: ปรับแท็บ (aria-selected/tabIndex) แล้วเลื่อน pager · smooth=false = มาจากการปัด ไม่ต้องเลื่อนซ้ำ
+function selectTab(i, smooth) {
+  const n = panelCount();
+  if (!n || !Number.isInteger(i)) return;
+  i = Math.max(0, Math.min(n - 1, i));
+  H.tab = i;
+  document.querySelectorAll('.stab').forEach((b) => {
+    const on = Number(b.dataset.i) === i;
+    b.setAttribute('aria-selected', String(on));
+    b.tabIndex = on ? 0 : -1;
+  });
+  if (smooth) { syncPager(true); window.scrollTo(0, 0); } else syncHeight();
+}
+
+let swipeTimer = null;
+function onPagerScroll(e) {
+  const p = pagerEl();
+  if (!p || e.target !== p) return;
+  clearTimeout(swipeTimer);
+  swipeTimer = setTimeout(() => {
+    const q = pagerEl();
+    if (!q || !q.clientWidth) return;
+    const i = Math.round(q.scrollLeft / q.clientWidth);
+    if (i !== H.tab) selectTab(i, false);
+  }, 60);
 }
 
 // แทนเฉพาะแถวนั้น ไม่วาดทั้งหน้า (คงตำแหน่งเลื่อนและโฟกัส)
@@ -88,6 +137,7 @@ function drawRow(key) {
   tmp.innerHTML = renderRow(row, ui());
   const fresh = tmp.firstElementChild;
   el.replaceWith(fresh);
+  syncHeight();
   if (focused) fresh.focus({ preventScroll: true });
 }
 
@@ -157,6 +207,7 @@ function applyView(view, fromServer) {
   H.view = view;
   if (fromServer && H.filter === 'needs') H.needsKeys = mergeNeedsKeys(H.needsKeys, view);
   if (H.sheetKey && !rowByKey(H.sheetKey)) closeSheet(false);
+  H.tab = H.tab === null ? defaultTab(view) : clampTab(H.tab, view);
   drawPage();
 }
 
@@ -248,7 +299,7 @@ const ACTIONS = {
     H.needsKeys = H.filter === 'needs' ? allRows().filter((r) => r.needs).map((r) => r.key) : null;
     drawPage();
   },
-  point: (d) => { H.point = d.p || ''; drawPage(); },
+  tab: (d) => selectTab(Number(d.i), true),
   undo: () => undo(),
   clearall: () => clearAll(),
   // ลูกศร ‹ › เลื่อนวัน (วันที่มาจาก view.nav ของหลังบ้าน) · กลับวันนี้ = ไม่ส่งวันที่
@@ -260,31 +311,25 @@ async function goDate(date) {
   if (H.pending > 0 || !H.view || (date && date === H.view.date)) return;
   const res = await call('headView', date ? { date } : {}, { retries: 1 });
   if (!res.ok) return showToast(res.message || 'เปิดไม่สำเร็จ ลองอีกครั้ง');
-  H.previewDate = res.isToday ? '' : res.date; H.point = ''; H.filter = 'all'; H.needsKeys = null; H.stale = false;
+  H.previewDate = res.isToday ? '' : res.date; H.tab = null; H.filter = 'all'; H.needsKeys = null; H.stale = false;
   closeSheet(false);
   applyView(res, false);
   window.scrollTo(0, 0);
 }
 
-// แอดมิน (เมื่อเปิด allow_clear_all): ล้างสถานะทุกคนของวันนั้นครั้งเดียว หรือเฉพาะจุดที่เลือกอยู่ · ไม่มีเลิกทำ จึงถามยืนยันก่อน
+// แอดมิน (เมื่อเปิด allow_clear_all): ล้างสถานะทุกคนของวันนั้นครั้งเดียว · ไม่มีเลิกทำ จึงถามยืนยันก่อน
 async function clearAll() {
   if (H.pending > 0 || !H.view) return;
-  const pt = H.point ? pointName(H.point) : '';
-  if (!window.confirm('ล้างสถานะ' + (pt ? 'ของจุด ' + pt : 'ทุกคน') + ' ให้กลับเป็นยังไม่สแกน?\nทำแล้วเลิกทำไม่ได้')) return;
+  if (!window.confirm('ล้างสถานะทุกคน ให้กลับเป็นยังไม่สแกน?\nทำแล้วเลิกทำไม่ได้')) return;
   H.seq++;
   const req = ++H.req;
   H.pending++;
   showToast('กำลังล้างสถานะ…', null, true);
-  const res = await call('headClearAll', { date: H.view.date, pointId: H.point || '' }, { retries: 0 });
+  const res = await call('headClearAll', { date: H.view.date, pointId: '' }, { retries: 0 });
   H.pending--;
   if (res.code === 'auth') return reloadForAuth(res);
   takeView(req, res.view);
   showToast(res.ok ? res.toast : res.message);
-}
-
-function pointName(id) {
-  const r = allRows().find((x) => x.pointId === id);
-  return r ? r.place : '';
 }
 
 function bindEvents() {
@@ -294,8 +339,19 @@ function bindEvents() {
     const fn = ACTIONS[el.dataset.act];
     if (fn) fn(el.dataset);
   });
+  // scroll ไม่ลอยขึ้น (bubble) จึงดักตอนจับ · pager ถูกวาดใหม่ได้ จึงผูกที่ root
+  root().addEventListener('scroll', onPagerScroll, { capture: true, passive: true });
   root().addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && H.sheetKey) return closeSheet();
+    const st = e.target.closest && e.target.closest('.stab');
+    if (st && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+      e.preventDefault();
+      const i = Math.max(0, Math.min(panelCount() - 1, Number(st.dataset.i) + (e.key === 'ArrowRight' ? 1 : -1)));
+      selectTab(i, true);
+      const nb = document.querySelector('.stab[data-i="' + i + '"]');
+      if (nb) nb.focus({ preventScroll: true });
+      return;
+    }
     const el = e.target.closest && e.target.closest('[data-act="row"]');
     if (el && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openSheet(el.dataset.key); }
   });
