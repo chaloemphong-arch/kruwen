@@ -55,7 +55,7 @@ function notice({ ring, icon, title, lines, foot }) {
 }
 
 export function loading(st = {}) {
-  return `<div class="pad"><div class="mid"><div class="spin"></div><p style="font-size:24px;font-weight:600;line-height:1.4">${esc(st.title || 'กำลังโหลด')}</p></div></div>`;
+  return `<div class="pad"><div class="mid"><div class="spin"></div><p class="loadtxt">${esc(st.title || 'กำลังโหลด')}</p></div></div>`;
 }
 
 export function welcome(st = {}) {

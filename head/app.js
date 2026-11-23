@@ -66,7 +66,7 @@ function reloadForAuth(res) {
 }
 
 function showLoading(text) {
-  root().innerHTML = '<div class="pad mid center"><div class="spin" aria-hidden="true"></div><p>' + text + '</p></div>';
+  root().innerHTML = '<div class="pad mid center"><div class="spin" aria-hidden="true"></div><p class="loadtxt">' + text + '</p></div>';
 }
 
 // ---------- วาด ----------

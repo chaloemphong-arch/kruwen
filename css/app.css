@@ -63,6 +63,8 @@ a.btn{text-decoration:none}
 .err{background:var(--miss-bg);color:var(--miss);border-radius:12px;padding:12px 14px;font-size:16px}
 
 .spin{width:56px;height:56px;border-radius:50%;border:5px solid var(--line);border-top-color:var(--brand);margin:0 auto}
+/* ข้อความใต้ไอคอนโหลด: ขนาดเดียวทุกหน้า เว้นจากไอคอน */
+.loadtxt{font-size:20px;font-weight:600;line-height:1.4;margin:16px 0 0}
 @media (prefers-reduced-motion:no-preference){.spin{animation:sp 1s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}}
 
 .wel{font-size:32px}
