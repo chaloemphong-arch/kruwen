@@ -26,7 +26,7 @@
   "sessions": [
    {
     "session": "เช้า",
-    "label": "เวรเช้า",
+    "label": "ช่วงเช้า",
     "locked": false,
     "timeText": "07.00–08.30",
     "rows": [
@@ -35,10 +35,11 @@
       "dutyCode": "1(1)",
       "teacherId": "t01",
       "sig": "self|||",
-      "color": "#c9cdd3",
+      "color": "#8b5cf6",
       "name": "สมชาย ใจดี",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "07.00–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -82,10 +83,11 @@
       "dutyCode": "1(1)",
       "teacherId": "t02",
       "sig": "proxy|||",
-      "color": "#c9cdd3",
+      "color": "#8b5cf6",
       "name": "สมหญิง สุขสันต์",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "07.00–08.30",
       "sub": [],
       "detail": [
        {
@@ -127,6 +129,7 @@
       "name": "วิชัย รักเรียน",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "07.00–08.30",
       "sub": [
        {
         "text": "ครูณัฐธิดา แทน",
@@ -193,6 +196,7 @@
       "name": "วิภา มั่นคง",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "07.00–08.30",
       "sub": [],
       "detail": [
        {
@@ -241,10 +245,11 @@
       "dutyCode": "3",
       "teacherId": "t05",
       "sig": "leave|||",
-      "color": "#26863f",
+      "color": "#0891b2",
       "name": "ประเสริฐ แก้วมณี",
       "pointId": "p3",
       "place": "จุดที่ 3 ตู้สแกน อุตสาหกรรม",
+      "timeText": "07.30–08.30",
       "sub": [
        {
         "text": "ไม่มีคนแทน",
@@ -317,6 +322,7 @@
       "name": "ประภา ทองดี",
       "pointId": "p4",
       "place": "จุดที่ 4 โรงอาหาร ห้องน้ำ",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [
        {
@@ -380,6 +386,7 @@
       "name": "สุรชัย เจริญสุข",
       "pointId": "p5",
       "place": "จุดที่ 5 ตู้สแกน ประชาสัมพันธ์",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -436,6 +443,7 @@
       "name": "สุนิสา พึ่งบุญ",
       "pointId": "flag",
       "place": "จุดที่ 6 หน้าเสาธง",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -487,7 +495,7 @@
    },
    {
     "session": "เย็น",
-    "label": "เวรเย็น",
+    "label": "หลังเลิกเรียน",
     "locked": false,
     "timeText": "15.30–16.30",
     "rows": [
@@ -496,10 +504,11 @@
       "dutyCode": "1(2)",
       "teacherId": "t09",
       "sig": "none",
-      "color": "#1f5fbf",
+      "color": "#8b5cf6",
       "name": "อนุชา ศรีสว่าง",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "15.30–16.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -552,10 +561,11 @@
       "dutyCode": "1(2)",
       "teacherId": "t10",
       "sig": "none",
-      "color": "#1f5fbf",
+      "color": "#8b5cf6",
       "name": "อรทัย บุญมา",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "15.30–16.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -608,10 +618,11 @@
       "dutyCode": "2(2)",
       "teacherId": "t11",
       "sig": "none",
-      "color": "#f0a23a",
+      "color": "#f2dc3b",
       "name": "กิตติ ใจดี",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "15.30–16.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -664,10 +675,11 @@
       "dutyCode": "2(2)",
       "teacherId": "t12",
       "sig": "none",
-      "color": "#f0a23a",
+      "color": "#f2dc3b",
       "name": "กัลยา สุขสันต์",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "15.30–16.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -745,13 +757,13 @@
   "banners": [
    {
     "tone": "warn",
-    "text": "เวรเช้าจะล็อก 09.30 น. (อีก 25 นาที) · ยังว่าง 2 คน"
+    "text": "ช่วงเช้าจะล็อก 09.30 น. (อีก 25 นาที) · ยังว่าง 2 คน"
    }
   ],
   "sessions": [
    {
     "session": "เช้า",
-    "label": "เวรเช้า",
+    "label": "ช่วงเช้า",
     "locked": false,
     "timeText": "07.00–08.30",
     "rows": [
@@ -760,10 +772,11 @@
       "dutyCode": "1(1)",
       "teacherId": "t01",
       "sig": "self|||",
-      "color": "#c9cdd3",
+      "color": "#8b5cf6",
       "name": "สมชาย ใจดี",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "07.00–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -807,10 +820,11 @@
       "dutyCode": "1(1)",
       "teacherId": "t02",
       "sig": "proxy|||",
-      "color": "#c9cdd3",
+      "color": "#8b5cf6",
       "name": "สมหญิง สุขสันต์",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "07.00–08.30",
       "sub": [],
       "detail": [
        {
@@ -852,6 +866,7 @@
       "name": "วิชัย รักเรียน",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "07.00–08.30",
       "sub": [
        {
         "text": "ครูณัฐธิดา แทน",
@@ -918,6 +933,7 @@
       "name": "วิภา มั่นคง",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "07.00–08.30",
       "sub": [],
       "detail": [
        {
@@ -966,10 +982,11 @@
       "dutyCode": "3",
       "teacherId": "t05",
       "sig": "leave|||",
-      "color": "#26863f",
+      "color": "#0891b2",
       "name": "ประเสริฐ แก้วมณี",
       "pointId": "p3",
       "place": "จุดที่ 3 ตู้สแกน อุตสาหกรรม",
+      "timeText": "07.30–08.30",
       "sub": [
        {
         "text": "ไม่มีคนแทน",
@@ -1042,6 +1059,7 @@
       "name": "ประภา ทองดี",
       "pointId": "p4",
       "place": "จุดที่ 4 โรงอาหาร ห้องน้ำ",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [
        {
@@ -1105,6 +1123,7 @@
       "name": "สุรชัย เจริญสุข",
       "pointId": "p5",
       "place": "จุดที่ 5 ตู้สแกน ประชาสัมพันธ์",
+      "timeText": "07.30–08.30",
       "sub": [
        {
         "text": "ไม่มีคนแทน",
@@ -1166,6 +1185,7 @@
       "name": "สุนิสา พึ่งบุญ",
       "pointId": "flag",
       "place": "จุดที่ 6 หน้าเสาธง",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -1217,7 +1237,7 @@
    },
    {
     "session": "เย็น",
-    "label": "เวรเย็น",
+    "label": "หลังเลิกเรียน",
     "locked": false,
     "timeText": "15.30–16.30",
     "rows": [
@@ -1226,10 +1246,11 @@
       "dutyCode": "1(2)",
       "teacherId": "t09",
       "sig": "none",
-      "color": "#1f5fbf",
+      "color": "#8b5cf6",
       "name": "อนุชา ศรีสว่าง",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "15.30–16.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -1282,10 +1303,11 @@
       "dutyCode": "1(2)",
       "teacherId": "t10",
       "sig": "none",
-      "color": "#1f5fbf",
+      "color": "#8b5cf6",
       "name": "อรทัย บุญมา",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "15.30–16.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -1338,10 +1360,11 @@
       "dutyCode": "2(2)",
       "teacherId": "t11",
       "sig": "none",
-      "color": "#f0a23a",
+      "color": "#f2dc3b",
       "name": "กิตติ ใจดี",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "15.30–16.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -1394,10 +1417,11 @@
       "dutyCode": "2(2)",
       "teacherId": "t12",
       "sig": "none",
-      "color": "#f0a23a",
+      "color": "#f2dc3b",
       "name": "กัลยา สุขสันต์",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "15.30–16.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -1475,13 +1499,13 @@
   "banners": [
    {
     "tone": "lock",
-    "text": "เวรเช้าล็อกแล้ว 09.30 น. ถ้าต้องแก้ ให้แอดมินปลดล็อก"
+    "text": "ช่วงเช้าล็อกแล้ว 09.30 น. ถ้าต้องแก้ ให้แอดมินปลดล็อก"
    }
   ],
   "sessions": [
    {
     "session": "เช้า",
-    "label": "เวรเช้า",
+    "label": "ช่วงเช้า",
     "locked": true,
     "timeText": "07.00–08.30",
     "rows": [
@@ -1490,10 +1514,11 @@
       "dutyCode": "1(1)",
       "teacherId": "t01",
       "sig": "self|||",
-      "color": "#c9cdd3",
+      "color": "#8b5cf6",
       "name": "สมชาย ใจดี",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "07.00–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -1514,10 +1539,11 @@
       "dutyCode": "1(1)",
       "teacherId": "t02",
       "sig": "proxy|||",
-      "color": "#c9cdd3",
+      "color": "#8b5cf6",
       "name": "สมหญิง สุขสันต์",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "07.00–08.30",
       "sub": [],
       "detail": [
        {
@@ -1547,6 +1573,7 @@
       "name": "วิชัย รักเรียน",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "07.00–08.30",
       "sub": [
        {
         "text": "ครูณัฐธิดา แทน",
@@ -1579,6 +1606,7 @@
       "name": "วิภา มั่นคง",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "07.00–08.30",
       "sub": [],
       "detail": [
        {
@@ -1603,10 +1631,11 @@
       "dutyCode": "3",
       "teacherId": "t05",
       "sig": "leave|||",
-      "color": "#26863f",
+      "color": "#0891b2",
       "name": "ประเสริฐ แก้วมณี",
       "pointId": "p3",
       "place": "จุดที่ 3 ตู้สแกน อุตสาหกรรม",
+      "timeText": "07.30–08.30",
       "sub": [
        {
         "text": "ไม่มีคนแทน",
@@ -1634,6 +1663,7 @@
       "name": "ประภา ทองดี",
       "pointId": "p4",
       "place": "จุดที่ 4 โรงอาหาร ห้องน้ำ",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [
        {
@@ -1674,6 +1704,7 @@
       "name": "สุรชัย เจริญสุข",
       "pointId": "p5",
       "place": "จุดที่ 5 ตู้สแกน ประชาสัมพันธ์",
+      "timeText": "07.30–08.30",
       "sub": [
        {
         "text": "ไม่มีคนแทน",
@@ -1701,6 +1732,7 @@
       "name": "สุนิสา พึ่งบุญ",
       "pointId": "flag",
       "place": "จุดที่ 6 หน้าเสาธง",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -1718,7 +1750,7 @@
    },
    {
     "session": "เย็น",
-    "label": "เวรเย็น",
+    "label": "หลังเลิกเรียน",
     "locked": false,
     "timeText": "15.30–16.30",
     "rows": [
@@ -1727,10 +1759,11 @@
       "dutyCode": "1(2)",
       "teacherId": "t09",
       "sig": "none",
-      "color": "#1f5fbf",
+      "color": "#8b5cf6",
       "name": "อนุชา ศรีสว่าง",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "15.30–16.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -1783,10 +1816,11 @@
       "dutyCode": "1(2)",
       "teacherId": "t10",
       "sig": "none",
-      "color": "#1f5fbf",
+      "color": "#8b5cf6",
       "name": "อรทัย บุญมา",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "15.30–16.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -1839,10 +1873,11 @@
       "dutyCode": "2(2)",
       "teacherId": "t11",
       "sig": "none",
-      "color": "#f0a23a",
+      "color": "#f2dc3b",
       "name": "กิตติ ใจดี",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "15.30–16.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -1895,10 +1930,11 @@
       "dutyCode": "2(2)",
       "teacherId": "t12",
       "sig": "none",
-      "color": "#f0a23a",
+      "color": "#f2dc3b",
       "name": "กัลยา สุขสันต์",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "15.30–16.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -1976,13 +2012,13 @@
   "banners": [
    {
     "tone": "info",
-    "text": "เวรเช้าปลดล็อกชั่วคราวถึง 11:00 น."
+    "text": "ช่วงเช้าปลดล็อกชั่วคราวถึง 11:00 น."
    }
   ],
   "sessions": [
    {
     "session": "เช้า",
-    "label": "เวรเช้า",
+    "label": "ช่วงเช้า",
     "locked": false,
     "timeText": "07.00–08.30",
     "rows": [
@@ -1991,10 +2027,11 @@
       "dutyCode": "1(1)",
       "teacherId": "t01",
       "sig": "self|||",
-      "color": "#c9cdd3",
+      "color": "#8b5cf6",
       "name": "สมชาย ใจดี",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "07.00–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -2038,10 +2075,11 @@
       "dutyCode": "1(1)",
       "teacherId": "t02",
       "sig": "proxy|||",
-      "color": "#c9cdd3",
+      "color": "#8b5cf6",
       "name": "สมหญิง สุขสันต์",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "07.00–08.30",
       "sub": [],
       "detail": [
        {
@@ -2083,6 +2121,7 @@
       "name": "วิชัย รักเรียน",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "07.00–08.30",
       "sub": [
        {
         "text": "ครูณัฐธิดา แทน",
@@ -2149,6 +2188,7 @@
       "name": "วิภา มั่นคง",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "07.00–08.30",
       "sub": [],
       "detail": [
        {
@@ -2197,10 +2237,11 @@
       "dutyCode": "3",
       "teacherId": "t05",
       "sig": "leave|||",
-      "color": "#26863f",
+      "color": "#0891b2",
       "name": "ประเสริฐ แก้วมณี",
       "pointId": "p3",
       "place": "จุดที่ 3 ตู้สแกน อุตสาหกรรม",
+      "timeText": "07.30–08.30",
       "sub": [
        {
         "text": "ไม่มีคนแทน",
@@ -2273,6 +2314,7 @@
       "name": "ประภา ทองดี",
       "pointId": "p4",
       "place": "จุดที่ 4 โรงอาหาร ห้องน้ำ",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [
        {
@@ -2336,6 +2378,7 @@
       "name": "สุรชัย เจริญสุข",
       "pointId": "p5",
       "place": "จุดที่ 5 ตู้สแกน ประชาสัมพันธ์",
+      "timeText": "07.30–08.30",
       "sub": [
        {
         "text": "ไม่มีคนแทน",
@@ -2397,6 +2440,7 @@
       "name": "สุนิสา พึ่งบุญ",
       "pointId": "flag",
       "place": "จุดที่ 6 หน้าเสาธง",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -2448,7 +2492,7 @@
    },
    {
     "session": "เย็น",
-    "label": "เวรเย็น",
+    "label": "หลังเลิกเรียน",
     "locked": false,
     "timeText": "15.30–16.30",
     "rows": [
@@ -2457,10 +2501,11 @@
       "dutyCode": "1(2)",
       "teacherId": "t09",
       "sig": "none",
-      "color": "#1f5fbf",
+      "color": "#8b5cf6",
       "name": "อนุชา ศรีสว่าง",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "15.30–16.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -2513,10 +2558,11 @@
       "dutyCode": "1(2)",
       "teacherId": "t10",
       "sig": "none",
-      "color": "#1f5fbf",
+      "color": "#8b5cf6",
       "name": "อรทัย บุญมา",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "15.30–16.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -2569,10 +2615,11 @@
       "dutyCode": "2(2)",
       "teacherId": "t11",
       "sig": "none",
-      "color": "#f0a23a",
+      "color": "#f2dc3b",
       "name": "กิตติ ใจดี",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "15.30–16.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -2625,10 +2672,11 @@
       "dutyCode": "2(2)",
       "teacherId": "t12",
       "sig": "none",
-      "color": "#f0a23a",
+      "color": "#f2dc3b",
       "name": "กัลยา สุขสันต์",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "15.30–16.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -2712,7 +2760,7 @@
   "sessions": [
    {
     "session": "เช้า",
-    "label": "เวรเช้า",
+    "label": "ช่วงเช้า",
     "locked": false,
     "timeText": "07.00–08.30",
     "rows": [
@@ -2721,10 +2769,11 @@
       "dutyCode": "1(1)",
       "teacherId": "t13",
       "sig": "self|||",
-      "color": "#c9cdd3",
+      "color": "#8b5cf6",
       "name": "ธนากร รักเรียน",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "07.00–08.30",
       "sub": [],
       "detail": [
        {
@@ -2771,10 +2820,11 @@
       "dutyCode": "1(1)",
       "teacherId": "t14",
       "sig": "none",
-      "color": "#c9cdd3",
+      "color": "#8b5cf6",
       "name": "ธิดารัตน์ มั่นคง",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "07.00–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -2831,6 +2881,7 @@
       "name": "นพดล แก้วมณี",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "07.00–08.30",
       "sub": [],
       "detail": [
        {
@@ -2881,6 +2932,7 @@
       "name": "นภา ทองดี",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "07.00–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -2933,10 +2985,11 @@
       "dutyCode": "3",
       "teacherId": "t17",
       "sig": "none",
-      "color": "#26863f",
+      "color": "#0891b2",
       "name": "บุญเรือง เจริญสุข",
       "pointId": "p3",
       "place": "จุดที่ 3 ตู้สแกน อุตสาหกรรม",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -2993,6 +3046,7 @@
       "name": "บุษบา พึ่งบุญ",
       "pointId": "p4",
       "place": "จุดที่ 4 โรงอาหาร ห้องน้ำ",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3049,6 +3103,7 @@
       "name": "ปรีชา ศรีสว่าง",
       "pointId": "p5",
       "place": "จุดที่ 5 ตู้สแกน ประชาสัมพันธ์",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3105,6 +3160,7 @@
       "name": "ปราณี บุญมา",
       "pointId": "flag",
       "place": "จุดที่ 6 หน้าเสาธง",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3156,7 +3212,7 @@
    },
    {
     "session": "เย็น",
-    "label": "เวรเย็น",
+    "label": "หลังเลิกเรียน",
     "locked": false,
     "timeText": "15.30–16.30",
     "rows": [
@@ -3165,10 +3221,11 @@
       "dutyCode": "1(2)",
       "teacherId": "t21",
       "sig": "none",
-      "color": "#1f5fbf",
+      "color": "#8b5cf6",
       "name": "พงศกร ใจดี",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "15.30–16.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3221,10 +3278,11 @@
       "dutyCode": "1(2)",
       "teacherId": "t22",
       "sig": "none",
-      "color": "#1f5fbf",
+      "color": "#8b5cf6",
       "name": "พิมพ์ใจ สุขสันต์",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "15.30–16.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3277,10 +3335,11 @@
       "dutyCode": "2(2)",
       "teacherId": "t23",
       "sig": "none",
-      "color": "#f0a23a",
+      "color": "#f2dc3b",
       "name": "ภานุ รักเรียน",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "15.30–16.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3333,10 +3392,11 @@
       "dutyCode": "2(2)",
       "teacherId": "t24",
       "sig": "none",
-      "color": "#f0a23a",
+      "color": "#f2dc3b",
       "name": "ภัทรา มั่นคง",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "15.30–16.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3415,7 +3475,7 @@
   "sessions": [
    {
     "session": "เช้า",
-    "label": "เวรเช้า",
+    "label": "ช่วงเช้า",
     "locked": false,
     "timeText": "07.00–08.30",
     "rows": [
@@ -3424,10 +3484,11 @@
       "dutyCode": "1(1)",
       "teacherId": "t01",
       "sig": "self|||",
-      "color": "#c9cdd3",
+      "color": "#8b5cf6",
       "name": "สมชาย ใจดี",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "07.00–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3448,10 +3509,11 @@
       "dutyCode": "1(1)",
       "teacherId": "t02",
       "sig": "proxy|||",
-      "color": "#c9cdd3",
+      "color": "#8b5cf6",
       "name": "สมหญิง สุขสันต์",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "07.00–08.30",
       "sub": [],
       "detail": [
        {
@@ -3481,6 +3543,7 @@
       "name": "วิชัย รักเรียน",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "07.00–08.30",
       "sub": [
        {
         "text": "ครูณัฐธิดา แทน",
@@ -3513,6 +3576,7 @@
       "name": "วิภา มั่นคง",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "07.00–08.30",
       "sub": [],
       "detail": [
        {
@@ -3537,10 +3601,11 @@
       "dutyCode": "3",
       "teacherId": "t05",
       "sig": "leave|||",
-      "color": "#26863f",
+      "color": "#0891b2",
       "name": "ประเสริฐ แก้วมณี",
       "pointId": "p3",
       "place": "จุดที่ 3 ตู้สแกน อุตสาหกรรม",
+      "timeText": "07.30–08.30",
       "sub": [
        {
         "text": "ไม่มีคนแทน",
@@ -3568,6 +3633,7 @@
       "name": "ประภา ทองดี",
       "pointId": "p4",
       "place": "จุดที่ 4 โรงอาหาร ห้องน้ำ",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [
        {
@@ -3608,6 +3674,7 @@
       "name": "สุรชัย เจริญสุข",
       "pointId": "p5",
       "place": "จุดที่ 5 ตู้สแกน ประชาสัมพันธ์",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3630,6 +3697,7 @@
       "name": "สุนิสา พึ่งบุญ",
       "pointId": "flag",
       "place": "จุดที่ 6 หน้าเสาธง",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3647,7 +3715,7 @@
    },
    {
     "session": "เย็น",
-    "label": "เวรเย็น",
+    "label": "หลังเลิกเรียน",
     "locked": false,
     "timeText": "15.30–16.30",
     "rows": [
@@ -3656,10 +3724,11 @@
       "dutyCode": "1(2)",
       "teacherId": "t09",
       "sig": "none",
-      "color": "#1f5fbf",
+      "color": "#8b5cf6",
       "name": "อนุชา ศรีสว่าง",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "15.30–16.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3678,10 +3747,11 @@
       "dutyCode": "1(2)",
       "teacherId": "t10",
       "sig": "none",
-      "color": "#1f5fbf",
+      "color": "#8b5cf6",
       "name": "อรทัย บุญมา",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "15.30–16.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3700,10 +3770,11 @@
       "dutyCode": "2(2)",
       "teacherId": "t11",
       "sig": "none",
-      "color": "#f0a23a",
+      "color": "#f2dc3b",
       "name": "กิตติ ใจดี",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "15.30–16.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3722,10 +3793,11 @@
       "dutyCode": "2(2)",
       "teacherId": "t12",
       "sig": "none",
-      "color": "#f0a23a",
+      "color": "#f2dc3b",
       "name": "กัลยา สุขสันต์",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "15.30–16.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3820,6 +3892,7 @@
       "name": "นักเรียน 01 (ตัวอย่าง)",
       "pointId": "flag",
       "place": "หน้าเสาธง",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3876,6 +3949,7 @@
       "name": "นักเรียน 02 (ตัวอย่าง)",
       "pointId": "flag",
       "place": "หน้าเสาธง",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3932,6 +4006,7 @@
       "name": "นักเรียน 03 (ตัวอย่าง)",
       "pointId": "flag",
       "place": "หน้าเสาธง",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -3988,6 +4063,7 @@
       "name": "นักเรียน 04 (ตัวอย่าง)",
       "pointId": "flag",
       "place": "หน้าเสาธง",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -4044,6 +4120,7 @@
       "name": "นักเรียน 05 (ตัวอย่าง)",
       "pointId": "flag",
       "place": "หน้าเสาธง",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -4100,6 +4177,7 @@
       "name": "นักเรียน 06 (ตัวอย่าง)",
       "pointId": "flag",
       "place": "หน้าเสาธง",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -4156,6 +4234,7 @@
       "name": "นักเรียน 07 (ตัวอย่าง)",
       "pointId": "flag",
       "place": "หน้าเสาธง",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -4212,6 +4291,7 @@
       "name": "นักเรียน 08 (ตัวอย่าง)",
       "pointId": "flag",
       "place": "หน้าเสาธง",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -4268,6 +4348,7 @@
       "name": "นักเรียน 09 (ตัวอย่าง)",
       "pointId": "flag",
       "place": "หน้าเสาธง",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -4324,6 +4405,7 @@
       "name": "นักเรียน 10 (ตัวอย่าง)",
       "pointId": "flag",
       "place": "หน้าเสาธง",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -4380,6 +4462,7 @@
       "name": "นักเรียน 11 (ตัวอย่าง)",
       "pointId": "flag",
       "place": "หน้าเสาธง",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -4436,6 +4519,7 @@
       "name": "นักเรียน 12 (ตัวอย่าง)",
       "pointId": "flag",
       "place": "หน้าเสาธง",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -4492,6 +4576,7 @@
       "name": "นักเรียน 13 (ตัวอย่าง)",
       "pointId": "flag",
       "place": "หน้าเสาธง",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -4548,6 +4633,7 @@
       "name": "นักเรียน 14 (ตัวอย่าง)",
       "pointId": "flag",
       "place": "หน้าเสาธง",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -4604,6 +4690,7 @@
       "name": "นักเรียน 15 (ตัวอย่าง)",
       "pointId": "flag",
       "place": "หน้าเสาธง",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -4656,10 +4743,11 @@
       "dutyCode": "1(1)",
       "teacherId": "s16",
       "sig": "none",
-      "color": "#c9cdd3",
+      "color": "#8b5cf6",
       "name": "นักเรียน 16 (ตัวอย่าง)",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -4712,10 +4800,11 @@
       "dutyCode": "1(1)",
       "teacherId": "s17",
       "sig": "none",
-      "color": "#c9cdd3",
+      "color": "#8b5cf6",
       "name": "นักเรียน 17 (ตัวอย่าง)",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -4768,10 +4857,11 @@
       "dutyCode": "1(1)",
       "teacherId": "s18",
       "sig": "none",
-      "color": "#c9cdd3",
+      "color": "#8b5cf6",
       "name": "นักเรียน 18 (ตัวอย่าง)",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -4824,10 +4914,11 @@
       "dutyCode": "1(1)",
       "teacherId": "s19",
       "sig": "none",
-      "color": "#c9cdd3",
+      "color": "#8b5cf6",
       "name": "นักเรียน 19 (ตัวอย่าง)",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -4880,10 +4971,11 @@
       "dutyCode": "1(1)",
       "teacherId": "s20",
       "sig": "none",
-      "color": "#c9cdd3",
+      "color": "#8b5cf6",
       "name": "นักเรียน 20 (ตัวอย่าง)",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -4936,10 +5028,11 @@
       "dutyCode": "1(1)",
       "teacherId": "s21",
       "sig": "none",
-      "color": "#c9cdd3",
+      "color": "#8b5cf6",
       "name": "นักเรียน 21 (ตัวอย่าง)",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -4992,10 +5085,11 @@
       "dutyCode": "1(1)",
       "teacherId": "s22",
       "sig": "none",
-      "color": "#c9cdd3",
+      "color": "#8b5cf6",
       "name": "นักเรียน 22 (ตัวอย่าง)",
       "pointId": "gate1",
       "place": "ประตู 1",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -5052,6 +5146,7 @@
       "name": "นักเรียน 23 (ตัวอย่าง)",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -5108,6 +5203,7 @@
       "name": "นักเรียน 24 (ตัวอย่าง)",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -5164,6 +5260,7 @@
       "name": "นักเรียน 25 (ตัวอย่าง)",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -5220,6 +5317,7 @@
       "name": "นักเรียน 26 (ตัวอย่าง)",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -5276,6 +5374,7 @@
       "name": "นักเรียน 27 (ตัวอย่าง)",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -5332,6 +5431,7 @@
       "name": "นักเรียน 28 (ตัวอย่าง)",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -5388,6 +5488,7 @@
       "name": "นักเรียน 29 (ตัวอย่าง)",
       "pointId": "gate2",
       "place": "ประตู 2",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -5440,10 +5541,11 @@
       "dutyCode": "3",
       "teacherId": "s30",
       "sig": "none",
-      "color": "#26863f",
+      "color": "#0891b2",
       "name": "นักเรียน 30 (ตัวอย่าง)",
       "pointId": "p3",
       "place": "ตรวจอาคาร",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -5496,10 +5598,11 @@
       "dutyCode": "3",
       "teacherId": "s31",
       "sig": "none",
-      "color": "#26863f",
+      "color": "#0891b2",
       "name": "นักเรียน 31 (ตัวอย่าง)",
       "pointId": "p3",
       "place": "ตรวจอาคาร",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -5552,10 +5655,11 @@
       "dutyCode": "3",
       "teacherId": "s32",
       "sig": "none",
-      "color": "#26863f",
+      "color": "#0891b2",
       "name": "นักเรียน 32 (ตัวอย่าง)",
       "pointId": "p3",
       "place": "ตรวจอาคาร",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -5608,10 +5712,11 @@
       "dutyCode": "3",
       "teacherId": "s33",
       "sig": "none",
-      "color": "#26863f",
+      "color": "#0891b2",
       "name": "นักเรียน 33 (ตัวอย่าง)",
       "pointId": "p3",
       "place": "ตรวจอาคาร",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
@@ -5664,10 +5769,11 @@
       "dutyCode": "3",
       "teacherId": "s34",
       "sig": "none",
-      "color": "#26863f",
+      "color": "#0891b2",
       "name": "นักเรียน 34 (ตัวอย่าง)",
       "pointId": "p3",
       "place": "ตรวจอาคาร",
+      "timeText": "07.30–08.30",
       "sub": [],
       "detail": [],
       "pill": {
