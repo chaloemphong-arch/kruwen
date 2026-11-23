@@ -29,6 +29,7 @@
     "label": "ช่วงเช้า",
     "locked": false,
     "timeText": "07.00–08.30",
+    "shownTime": "07.30–08.15",
     "rows": [
      {
       "key": "1(1)|t01",
@@ -476,6 +477,7 @@
     "label": "หลังเลิกเรียน",
     "locked": false,
     "timeText": "15.30–16.30",
+    "shownTime": "15.50–16.30",
     "rows": [
      {
       "key": "1(2)|t09",
@@ -700,6 +702,7 @@
     "label": "ช่วงเช้า",
     "locked": false,
     "timeText": "07.00–08.30",
+    "shownTime": "07.30–08.15",
     "rows": [
      {
       "key": "1(1)|t01",
@@ -1152,6 +1155,7 @@
     "label": "หลังเลิกเรียน",
     "locked": false,
     "timeText": "15.30–16.30",
+    "shownTime": "15.50–16.30",
     "rows": [
      {
       "key": "1(2)|t09",
@@ -1376,6 +1380,7 @@
     "label": "ช่วงเช้า",
     "locked": true,
     "timeText": "07.00–08.30",
+    "shownTime": "07.30–08.15",
     "rows": [
      {
       "key": "1(1)|t01",
@@ -1621,6 +1626,7 @@
     "label": "หลังเลิกเรียน",
     "locked": false,
     "timeText": "15.30–16.30",
+    "shownTime": "15.50–16.30",
     "rows": [
      {
       "key": "1(2)|t09",
@@ -1845,6 +1851,7 @@
     "label": "ช่วงเช้า",
     "locked": false,
     "timeText": "07.00–08.30",
+    "shownTime": "07.30–08.15",
     "rows": [
      {
       "key": "1(1)|t01",
@@ -2297,6 +2304,7 @@
     "label": "หลังเลิกเรียน",
     "locked": false,
     "timeText": "15.30–16.30",
+    "shownTime": "15.50–16.30",
     "rows": [
      {
       "key": "1(2)|t09",
@@ -2521,6 +2529,7 @@
     "label": "ช่วงเช้า",
     "locked": false,
     "timeText": "07.00–08.30",
+    "shownTime": "07.30–08.15",
     "rows": [
      {
       "key": "1(1)|t13",
@@ -2907,6 +2916,7 @@
     "label": "หลังเลิกเรียน",
     "locked": false,
     "timeText": "15.30–16.30",
+    "shownTime": "15.50–16.30",
     "rows": [
      {
       "key": "1(2)|t21",
@@ -3126,6 +3136,7 @@
     "label": "ช่วงเช้า",
     "locked": false,
     "timeText": "07.00–08.30",
+    "shownTime": "07.30–08.15",
     "rows": [
      {
       "key": "1(1)|t01",
@@ -3366,6 +3377,7 @@
     "label": "หลังเลิกเรียน",
     "locked": false,
     "timeText": "15.30–16.30",
+    "shownTime": "15.50–16.30",
     "rows": [
      {
       "key": "1(2)|t09",

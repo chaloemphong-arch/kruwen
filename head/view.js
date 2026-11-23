@@ -15,37 +15,12 @@ const PILLS = ['p-ok', 'p-head', 'p-leave', 'p-miss', 'p-idle'];
 // รูปจาก headPhoto (data:image/...;base64) เท่านั้น
 function safeImg(url) { return /^data:image\/(jpeg|png|webp|gif|svg\+xml);base64,[A-Za-z0-9+/=]+$/.test(String(url || '')) ? url : ''; }
 
-const HEX = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i;
-function rgbOf(c) {
-  let h = c.slice(1).toLowerCase();
-  if (h.length === 3) h = h.split('').map((x) => x + x).join('');
-  return [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16));
-}
-function lum(rgb) {
-  const ch = rgb.map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); });
-  return 0.2126 * ch[0] + 0.7152 * ch[1] + 0.0722 * ch[2];
-}
-function ratio(a, b) { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); }
-const hex6 = (a) => '#' + a.map((v) => Math.round(v).toString(16).padStart(2, '0')).join('');
-
 // เลขจุดจากรหัสเวร: ตัดวงเล็บกะท้ายออก '1(1)' -> '1'
 export function pointNo(dutyCode) { return String(dutyCode || '').split('(')[0].trim(); }
 
-// สีป้ายเลขจุดจาก Duties.color: พื้นพาสเทล (ผสมขาว 72%) + ตัวเลขเข้มจนความต่างบนพื้นนั้นอย่างน้อย 4.5 · ไม่ใช่ hex คืน null
-export function badgeColors(color) {
-  const c = String(color === undefined || color === null ? '' : color).trim();
-  if (!HEX.test(c)) return null;
-  const rgb = rgbOf(c);
-  const tint = rgb.map((v) => v + (255 - v) * 0.72);
-  let ink = rgb.slice();
-  for (let i = 0; i < 60 && ratio(ink, tint) < 4.5; i++) ink = ink.map((v) => v * 0.88);
-  return { bg: hex6(tint), ink: hex6(ink) };
-}
-
-// ป้ายเลขจุด (แทนรหัสเวรเดิม): สีเดียวกับจุดนั้นทั้งเช้าและเย็น
+// ป้ายเลขจุด (แทนรหัสเวรเดิม): สี่เหลี่ยมเทา เลขดำ เหมือนกันทุกจุด (23 พ.ย. 2569: ไม่ใช้สีจุดแล้ว)
 function pno(row) {
-  const bc = badgeColors(row.color);
-  return '<span class="pno"' + (bc ? ' style="--tint:' + bc.bg + ';--ink:' + bc.ink + '"' : '') + '>' + esc(pointNo(row.dutyCode)) + '</span>';
+  return '<span class="pno">' + esc(pointNo(row.dutyCode)) + '</span>';
 }
 
 function subLine(sub) {
@@ -180,10 +155,12 @@ function tabBar(view, tab) {
   const ss = view.sessions || [];
   if (ss.length < 2) return '';
   return '<div class="stabs" role="tablist">' + ss.map((s, i) =>
-    '<button class="stab" role="tab" tabindex="' + (i === tab ? '0' : '-1') + '" data-act="tab" data-i="' + i + '" aria-selected="' + (i === tab) + '">' + icon(s) +
-    '<span class="sl">' + esc(s.label) + '</span>' +
-    (s.rows.some((r) => r.needs) ? '<span class="need" aria-label="มีรายการที่ต้องดู"></span>' : '') +
-    '<small>' + esc(s.timeText) + '</small><span class="sbar"></span></button>').join('') + '</div>';
+    '<button class="stab" role="tab" tabindex="' + (i === tab ? '0' : '-1') + '" data-act="tab" data-i="' + i + '" aria-selected="' + (i === tab) + '">' +
+    // ไอคอนกับจุดแดงลอยข้างชื่อ ชื่อช่วงกับเวลาจึงอยู่กึ่งกลางตรงกัน
+    '<span class="tl">' + icon(s) + '<span class="sl">' + esc(s.label) + '</span>' +
+    (s.rows.some((r) => r.needs) ? '<span class="need" aria-label="มีรายการที่ต้องดู"></span>' : '') + '</span>' +
+    // เวลาที่โชว์บนแท็บ (shownTime จากค่าตั้ง) อาจต่างจากเวลาสแกนจริง (timeText)
+    '<small>' + esc(s.shownTime || s.timeText) + '</small><span class="sbar"></span></button>').join('') + '</div>';
 }
 
 function header(view) {

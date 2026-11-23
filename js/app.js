@@ -421,15 +421,18 @@ async function doMy(month) {
   show('my', { r, month: m, currentMonth: current || m, today });
 }
 
-function toHead() {
+// push = แตะปุ่มเปิดเอง: เก็บหน้าเดิมไว้ในประวัติ กดย้อนกลับแล้วกลับมาหน้าเวรของฉัน (ไม่ปิดหน้าทั้งหมด)
+// ไปเองอัตโนมัติ (ไม่มีเวรของตัวเอง) = แทนที่หน้าเดิม
+function toHead(push) {
   show('loading', { title: 'กำลังเปิด' });
-  location.replace(location.pathname + '?v=head' + (A.mock !== null ? '&mock=morning' : ''));
+  const url = location.pathname + '?v=head' + (A.mock !== null ? '&mock=morning' : '');
+  if (push) location.assign(url); else location.replace(url);
 }
 
 // ---------- ปุ่มทั้งหมด ----------
 const ACTIONS = {
   my: () => doMy(),
-  toHead: () => toHead(),
+  toHead: () => toHead(true),
   myMonth: (d) => doMy(d.m),
   pickFromMy: () => startPick('my'),
   pickChange: () => startPick('change'),
