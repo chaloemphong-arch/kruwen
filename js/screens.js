@@ -261,7 +261,7 @@ export function wrongPoint(st) {
     foot: myLink });
 }
 
-const MY_STATUS = { self: 'ลงเวรแล้ว', proxy: 'เพื่อนลงชื่อให้', head: 'หัวหน้าเวรเช็คให้', leave: 'ลา', notfound: 'ไม่พบตัวที่จุดเวร', absent: 'ขาด', missing: 'ไม่ได้ลงเวร' };
+const MY_STATUS = { self: 'ลงเวรแล้ว', proxy: 'เพื่อนลงชื่อให้', head: 'หัวหน้าเวรเช็คให้', leave: 'ลา', absent: 'ขาด', missing: 'ไม่ได้ลงเวร' };
 
 // st: {r (outside), nowMin (เวลาเซิร์ฟเวอร์เป็นนาที)}
 export function outside(st) {
