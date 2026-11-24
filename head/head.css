@@ -139,6 +139,8 @@
 /* แผ่นเลือกสถานะแบบวงกลม (24 พ.ย. 2569): คัดจาก ออกแบบมินิมอล/HeadOptions.mock.html (ขอบ b6 · ลาสีอำพัน y3 · ปุ่มปิด x1) */
 .rounds{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:4px 0}
 .rnd{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:18px;font-weight:600;text-align:center}
+/* คำใต้วงกลมเป็นสีตัวหนังสือปกติ (กฎ .ok/.miss ทั่วไปใน app.css ไม่ให้ทับ) · สีอยู่ที่ไอคอนใน .cir เท่านั้น */
+.rounds .rnd{color:var(--text)}
 .rnd .cir{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;border:1px solid #DDE3EA;background:#E8ECF2}
 .ico{width:26px;height:26px;flex:none;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 .rnd .cir .ico{width:32px;height:32px}
