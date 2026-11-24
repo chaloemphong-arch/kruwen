@@ -302,10 +302,10 @@ export function openInLine(st = {}) {
     foot: dock(`<a class="btn pri" href="${esc(st.href || '')}">เปิดใน LINE</a><button class="btn" data-act="lineLogin">เข้าสู่ระบบ LINE ในหน้านี้</button>`) });
 }
 
-// st: {message, back, retry}
+// st: {message, back (true = กลับหน้าแรก, 'my' = กลับหน้าเวรปฏิบัติหน้าที่), retry}
 export function error(st) {
   return notice({ ring: 'err', icon: ICON.alert, title: 'ทำรายการไม่สำเร็จ', lines: `<p class="lead">${esc(st.message || 'ระบบขัดข้อง ลองอีกครั้ง')}</p>`,
-    foot: st.retry ? dock('<button class="btn pri" data-act="rescan">ลองอีกครั้ง</button>') : st.back ? dock('<button class="btn" data-act="toHome">กลับ</button>') : '' });
+    foot: st.retry ? dock('<button class="btn pri" data-act="rescan">ลองอีกครั้ง</button>') : st.back ? dock(`<button class="btn" data-act="${st.back === 'my' ? 'my' : 'toHome'}">กลับ</button>`) : '' });
 }
 
 export function reportButton(st) {

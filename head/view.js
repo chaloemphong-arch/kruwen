@@ -74,17 +74,28 @@ const SI = {
 function ico(k) { return '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true">' + SI[k] + '</svg>'; }
 const SLOT_LABEL = { ok: 'มา', leave: 'ลา', miss: 'ขาด' };
 
+// ตัวเลือกของแถว: หลังบ้านเก่า (ตอน deploy) ไม่ส่ง slot ให้ → เดาจาก action (action ว่าง = ค่าปัจจุบัน ดูจากป้ายของแถว)
+const SLOT_OF = { head: 'ok', leave: 'leave', absent: 'miss', notfound: 'miss', clear: 'link', restore: 'link', uncover: 'link' };
+const SLOT_OF_PILL = { 'p-ok': 'ok', 'p-head': 'ok', 'p-leave': 'leave', 'p-miss': 'miss' };
+function optsOf(row) {
+  return (row.options || []).map((o) => o.slot ? o : Object.assign({}, o, {
+    slot: SLOT_OF[o.action] || (!o.action ? SLOT_OF_PILL[row.pill && row.pill.cls] : '') || ''
+  }));
+}
+
 // วงกลมหนึ่งช่อง: usable = data-act opt (หรือ leaveOpen ถ้าลามีประเภท) · ปิดอยู่แต่มีเหตุผล = data-act hint (แตะแล้วขึ้นแจ้ง) · ไม่มีตัวเลือก/เป็นค่าปัจจุบัน = ไม่มี data-act
 function circle(slot, row, sheetUi) {
-  const opts = (row.options || []).filter((o) => o.slot === slot);
+  const all = optsOf(row);
+  const opts = all.filter((o) => o.slot === slot);
   const types = slot === 'leave' ? opts.filter((o) => o.leaveType) : [];
   const open = !!sheetUi.leaveOpen && types.length > 0;
-  const cur = opts.find((o) => o.current);
+  // แถวเป็นลาแต่ประเภทที่บันทึกไว้ไม่มี/ไม่อยู่ในรายการแล้ว: ไม่มีตัวเลือกไหนเป็นค่าปัจจุบัน → ถือว่าช่องลากดอยู่ตามป้ายของแถว
+  const cur = opts.find((o) => o.current) || (slot === 'leave' && row.pill && row.pill.cls === 'p-leave' ? { leaveType: '' } : null);
   const hintOpt = opts.length && opts.every((o) => o.disabled && o.hintKind) ? opts[0] : null;
   const usable = opts.find((o) => !o.disabled);
   let attrs = '';
   // แผ่นที่ล็อก: ช่องที่ไม่มีตัวเลือกก็แตะแล้วขึ้นแจ้งล็อกเหมือนช่องอื่น (app.js หาข้อความล็อกจากตัวเลือกอื่นของแถว)
-  const locked = (row.options || []).some((o) => o.hintKind === 'lock');
+  const locked = all.some((o) => o.hintKind === 'lock');
   if (!opts.length) attrs = locked ? ' data-act="hint" data-s="' + slot + '" aria-disabled="true"' : ' aria-disabled="true"';
   else if (hintOpt) attrs = ' data-act="hint" data-s="' + slot + '" aria-disabled="true"';
   else if (types.length && (usable || cur)) attrs = ' data-act="leaveOpen"';
@@ -100,14 +111,14 @@ function circle(slot, row, sheetUi) {
 
 // ประเภทลา (แคปซูล): ขึ้นเมื่อแตะวงลา · ประเภทที่บันทึกไว้ = ปุ่มที่กดอยู่ (ไม่มี data-act)
 function leavePills(row) {
-  return '<div class="pills">' + (row.options || []).filter((o) => o.slot === 'leave' && o.leaveType).map((o) =>
+  return '<div class="pills">' + optsOf(row).filter((o) => o.slot === 'leave' && o.leaveType).map((o) =>
     '<button class="p"' + (o.current ? ' aria-pressed="true"' : o.disabled ? ' aria-disabled="true"' : ' data-act="opt" data-a="' + esc(o.action) + '" data-t="' + esc(o.leaveType) + '"') + '>' +
     esc(o.leaveType) + '</button>').join('') + '</div>';
 }
 
 // sheetUi: { full: dataUrl ของรูปใหญ่ (ยังไม่มี = กำลังโหลด), failed: true = โหลดรูปไม่สำเร็จ, leaveOpen: true = เปิดรายการประเภทลา }
 export function renderSheet(row, sheetUi = {}) {
-  const opts = row.options || [];
+  const opts = optsOf(row);
   const full = safeImg(sheetUi.full);
   let photo = '';
   if (row.photo) {
@@ -128,7 +139,8 @@ export function renderSheet(row, sheetUi = {}) {
     (row.note ? '<p class="small">' + esc(row.note) + '</p>' : '') +
     (row.deviceFlag ? '<p class="bar warn rounded">เครื่องเดียวกันลงหลายชื่อวันนี้</p>' : '') +
     photo +
-    '<div class="rounds">' + ['ok', 'leave', 'miss'].map((k) => circle(k, row, sheetUi)).join('') + '</div>' +
+    // ผู้บริหารที่ดูอย่างเดียวไม่มีตัวเลือกเลย: ไม่วาดแถววงกลม
+    (opts.length ? '<div class="rounds">' + ['ok', 'leave', 'miss'].map((k) => circle(k, row, sheetUi)).join('') + '</div>' : '') +
     (sheetUi.leaveOpen && hasTypes ? leavePills(row) : '') +
     links +
     (reports ? '<div class="reps"><p class="label">รายงานเหตุการณ์</p><ul>' + reports + '</ul></div>' : '') +

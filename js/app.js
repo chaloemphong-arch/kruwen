@@ -94,7 +94,7 @@ function showError(res, back, retry) {
   const screen = routeFor(res);
   if (screen === 'welcome') return show('welcome', { school: A.school });
   if (screen === 'taken') return show('taken', { name: A.picked ? A.picked.name : '' });
-  return show('error', { message: res.message, back: !!back, retry: !!retry });
+  return show('error', { message: res.message, back: back === 'my' ? 'my' : !!back, retry: !!retry });
 }
 
 // รหัสรายงานหนึ่งรหัสต่อหนึ่งฟอร์ม: ส่งซ้ำตอนเน็ตหลุดแล้วหลังบ้านไม่สร้างรายงานซ้ำ
@@ -429,7 +429,7 @@ async function doMy(month) {
 async function doTeam() {
   show('loading', { title: 'กำลังโหลด' });
   const r = await call('teamView', {}, loadingRetry);
-  if (!r.ok) return showError(r, true);
+  if (!r.ok) return showError(r, 'my');
   show('team', { r, tab: Math.max(0, r.sessions.findIndex((x) => x.mine)) });
 }
 
