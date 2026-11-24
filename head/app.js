@@ -3,7 +3,8 @@
 import { call, setIdentity, setTransport } from '../js/api.js';
 import { mockScenario } from '../js/liff.js';
 import { withTitle, setAddKru } from '../js/names.js';
-import { renderPage, renderRow, renderSheet, renderToast, renderMessage, renderCalendar, mergeNeedsKeys, defaultTab, clampTab } from './view.js';
+import { renderPage, renderRow, renderSheet, renderToast, renderMessage, renderCalendar, mergeNeedsKeys, defaultTab, clampTab, renderHeadCam, renderHeadPreview, needsEvidence } from './view.js';
+import { openLiveCamera, capture, stop as stopCamera } from '../js/camera.js';
 import { headMockTransport } from './mock.js';
 
 const UNDO_MS = 4000; // แถบที่มีปุ่มเลิกทำ
@@ -148,10 +149,21 @@ function drawRow(key) {
 // ---------- รูป ----------
 function dataUrl(r) { return r && r.ok && /^image\//.test(String(r.mime)) && r.base64 ? 'data:' + r.mime + ';base64,' + r.base64 : ''; }
 
+// รูปในแผ่น: แถว notfound ที่มีรูปหลักฐานโหลดรูปหลักฐาน (which:'evidence') แทนรูปตอนสแกน · คีย์แคชแยกกัน
+export function sheetPhotoKey(row) {
+  if (row && row.evidence && row.evidence.checkinId) return { id: row.evidence.checkinId, cache: 'e:' + row.evidence.checkinId, which: 'evidence' };
+  if (row && row.photo && row.photo.checkinId) return { id: row.photo.checkinId, cache: row.photo.checkinId, which: '' };
+  return null;
+}
+
 async function loadFull(row) {
-  const id = row.photo.checkinId;
+  const k = sheetPhotoKey(row);
+  if (!k) return;
+  const id = k.cache;
   if (H.full[id]) return;
-  const url = dataUrl(await call('headPhoto', { checkinId: id, size: 'full' }, { retries: 1 }));
+  const body = { checkinId: k.id, size: 'full' };
+  if (k.which) body.which = k.which;
+  const url = dataUrl(await call('headPhoto', body, { retries: 1 }));
   if (!url) {
     H.fullFail[id] = true;
     if (H.sheetKey === row.key) drawSheet(false);
@@ -191,7 +203,8 @@ function drawSheet(focus) {
   const row = rowByKey(H.sheetKey);
   if (!row) return closeSheet(false);
   const box = $('hsheet');
-  const id = row.photo ? row.photo.checkinId : null;
+  const k = sheetPhotoKey(row);
+  const id = k ? k.cache : null;
   box.innerHTML = renderSheet(row, { full: id ? H.full[id] : '', failed: id ? !!H.fullFail[id] : false, leaveOpen: H.leaveOpen });
   box.hidden = false;
   if (focus) {
@@ -205,10 +218,11 @@ function openSheet(key) {
   if (!row || H.saving[key]) return;
   H.sheetKey = key;
   H.leaveOpen = false;
-  if (row.photo) delete H.fullFail[row.photo.checkinId]; // เปิดใหม่ = ลองโหลดรูปอีกครั้ง
+  const pk = sheetPhotoKey(row);
+  if (pk) delete H.fullFail[pk.cache]; // เปิดใหม่ = ลองโหลดรูปอีกครั้ง
   document.body.style.overflow = 'hidden';
   drawSheet(true);
-  if (row.photo) loadFull(row);
+  if (pk) loadFull(row);
 }
 
 function closeSheet(refocus = true) {
@@ -252,15 +266,85 @@ async function choose(action, leaveType = '') {
   const opt = (row.options || []).find((o) => o.action === action && (o.leaveType || '') === leaveType);
   if (opt && opt.disabled && !opt.current && opt.hint) return showToast(opt.hint, null, false, opt.hintKind);
   if (!opt || opt.disabled) return;
+  if (needsEvidence(row, action)) return startEvidence(row, opt, leaveType);
+  return commit(row, opt, action, leaveType, null);
+}
+
+async function commit(row, opt, action, leaveType, photo) {
   closeSheet();
   showToast(withTitle(row.name) + ': ' + (action === 'head' ? 'หัวหน้าเวรเช็ค' : opt.label), null, true);
   const res = await save(row.key, opt.next, 'headSet', {
-    date: H.view.date, dutyCode: row.dutyCode, teacherId: row.teacherId, setAction: action, leaveType, expectSig: row.sig
+    date: H.view.date, dutyCode: row.dutyCode, teacherId: row.teacherId, setAction: action, leaveType, expectSig: row.sig, ...(photo ? { photo } : {})
   });
   if (!res) return;
   showToast(res.ok ? res.toast : res.message, res.ok ? { token: res.undoToken, key: row.key, prev: row.pill } : null);
   if (res.code === 'locked') refresh(true);
 }
+
+// ---------- กล้องหลักฐาน (✗ ที่แถวที่สแกนแล้ว) ----------
+// เปิดกล้องสด: ล้มเหลว (ไม่มีกล้อง/ไม่ได้สิทธิ์/ error) = { ok:false, message } ไม่บันทึกอะไร · open ฉีดเข้ามาเพื่อเทสต์
+export async function openEvidenceCamera(video, open = openLiveCamera) {
+  try {
+    const stream = await open(video, 'environment');
+    return stream ? { ok: true } : { ok: false, message: 'เปิดกล้องไม่ได้' };
+  } catch (e) {
+    return { ok: false, message: 'เปิดกล้องไม่ได้' };
+  }
+}
+
+const CAM = { on: false, row: null, opt: null, leaveType: '', img: '', sending: false };
+const camBox = () => $('hcam');
+
+function leaveCamera(msg) {
+  stopCamera();
+  CAM.on = false; CAM.row = null; CAM.opt = null; CAM.img = ''; CAM.sending = false;
+  const box = camBox();
+  if (box) box.remove();
+  if (!H.sheetKey && !H.calMonth) document.body.style.overflow = '';
+  if (msg) showToast(msg);
+}
+
+async function liveView() {
+  const box = camBox();
+  if (!box) return;
+  CAM.img = '';
+  box.innerHTML = renderHeadCam();
+  const r = await openEvidenceCamera($('hvideo'));
+  if (!CAM.on || camBox() !== box) { stopCamera(); return; } // ยกเลิกระหว่างรอกล้อง
+  if (!r.ok) leaveCamera(r.message);
+}
+
+function startEvidence(row, opt, leaveType) {
+  closeSheet(false);
+  showToast(null);
+  CAM.on = true; CAM.row = row; CAM.opt = opt; CAM.leaveType = leaveType;
+  const box = document.createElement('div');
+  box.id = 'hcam';
+  box.className = 'camlayer';
+  root().appendChild(box);
+  document.body.style.overflow = 'hidden';
+  return liveView();
+}
+
+function shoot() {
+  const video = $('hvideo');
+  const b64 = video ? capture(video) : null;
+  if (!b64) return leaveCamera('เปิดกล้องไม่ได้');
+  stopCamera(); // ได้รูปแล้ว ปิดกล้องทันที (ถ่ายใหม่ = เปิดใหม่)
+  CAM.img = 'data:image/jpeg;base64,' + b64;
+  camBox().innerHTML = renderHeadPreview(CAM.img, false);
+}
+
+async function useEvidence() {
+  if (!CAM.on || !CAM.img || CAM.sending) return;
+  const { row, opt, leaveType } = CAM;
+  const base64 = CAM.img.split(',')[1];
+  leaveCamera(); // ปิดชั้นกล้อง แถวขึ้นป้าย "กำลังบันทึก…" ตามกติกาเดิม
+  await commit(row, opt, 'notfound', leaveType, { base64 });
+}
+
+// หน้าถูกซ่อน/ปิดระหว่างถ่าย → ปิดกล้องและชั้นกล้อง (ไม่บันทึก)
+function onHidden() { if (CAM.on) leaveCamera(); }
 
 // บันทึก/เลิกทำหนึ่งครั้ง: แถว key ขึ้นป้าย next ระหว่างรอ · คืน res หรือ null เมื่อออกจากหน้า (auth/not_head/not_bound)
 // H.saving ทับแถวไว้จนผลมา: รีเฟรชไม่วิ่งระหว่างนี้ (pending) และ drawPage/drawRow จากผลอื่นก็ยังวาดป้ายที่กำลังบันทึก
@@ -308,7 +392,7 @@ function setStale(on) {
 
 // รีเฟรชเงียบ ๆ เมื่อเปิดหน้าอยู่ ไม่มีแผ่นเปิด และไม่มีงานบันทึกค้าง
 async function refresh(force) {
-  const idle = () => !H.sheetKey && !H.calMonth && H.pending === 0;
+  const idle = () => !H.sheetKey && !H.calMonth && !CAM.on && H.pending === 0;
   if (!force && (document.visibilityState !== 'visible' || !idle())) return;
   // ผลรีเฟรชที่ออกไปก่อนการบันทึก/เลิกทำ/วาดใหม่ ทิ้งไป (กันข้อมูลเก่าทับผลที่ใหม่กว่า)
   const seq = H.seq;
@@ -349,7 +433,11 @@ const ACTIONS = {
   cal: () => openCal(),
   calMonth: (d) => { H.calMonth = d.m; drawCal(); },
   calDay: (d) => { closeCal(false); goDate(d.d); },
-  calClose: () => closeCal()
+  calClose: () => closeCal(),
+  hcShot: () => shoot(),
+  hcCancel: () => leaveCamera(),
+  hcRetake: () => { if (CAM.on) liveView(); },
+  hcUse: () => useEvidence()
 };
 
 async function goDate(date) {
@@ -387,6 +475,7 @@ function bindEvents() {
   // scroll ไม่ลอยขึ้น (bubble) จึงดักตอนจับ · pager ถูกวาดใหม่ได้ จึงผูกที่ root
   root().addEventListener('scroll', onPagerScroll, { capture: true, passive: true });
   root().addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && CAM.on) return leaveCamera();
     if (e.key === 'Escape' && H.calMonth) return closeCal();
     if (e.key === 'Escape' && H.sheetKey) return closeSheet();
     const st = e.target.closest && e.target.closest('.stab');
@@ -439,5 +528,6 @@ export async function startHead(identity) {
   mountShell();
   applyView(view);
   setInterval(() => refresh(false), REFRESH_MS);
-  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') refresh(false); });
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') onHidden(); else refresh(false); });
+  window.addEventListener('pagehide', onHidden);
 }

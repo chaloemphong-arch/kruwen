@@ -190,3 +190,8 @@
 .csheet .d.duty{background:#E8ECF2}
 .csheet .d.today::after{content:"";position:absolute;bottom:3px;left:50%;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:#F59E0B}
 .csheet .d.sel{background:var(--text);color:#fff}
+
+/* กล้องหลักฐาน ✗ (ใช้ .camv/.vf/.cambar/.shutter/.pvimg/.btn จาก app.css) · ชั้นเต็มจอเหนือแผ่น/แถบแจ้ง */
+.camlayer{position:fixed;inset:0;z-index:20}
+.camlayer .camv{z-index:20}
+.hprev{position:fixed;inset:0;z-index:20;background:var(--card);display:flex;flex-direction:column;max-width:560px;margin:0 auto}

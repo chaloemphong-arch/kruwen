@@ -121,7 +121,8 @@ export function renderSheet(row, sheetUi = {}) {
   const opts = optsOf(row);
   const full = safeImg(sheetUi.full);
   let photo = '';
-  if (row.photo) {
+  // แถว notfound ที่มีรูปหลักฐาน: แสดงรูปหลักฐานแทนรูปตอนสแกน (app.js ส่ง full เป็นรูปที่ตรงกับแถวนี้)
+  if (row.photo || row.evidence) {
     photo = full ? '<img class="bigphoto" src="' + full + '" alt="รูปที่จุดเวรของ ' + esc(row.name) + '">'
       : '<div class="phbox">' + (sheetUi.failed ? 'เปิดรูปไม่ได้' : 'กำลังโหลดรูป…') + '</div>';
   }
@@ -298,4 +299,27 @@ export function renderPage(view, ui = {}) {
     body = tabBar(view, clampTab(ui.tab, view)) + '<div class="pager" id="hpager">' + panels + '</div>';
   }
   return header(view) + banners + body;
+}
+
+// ---------- ✗ ที่แถวที่สแกนแล้ว: กล้องสด + ตรวจรูปก่อนบันทึก (หน้าตาเดียวกับ cam()/preview() ของหน้าครู ใช้ CSS .camv/.vf/.cambar/.shutter/.pvimg/.btn จาก app.css) ----------
+// true เฉพาะ action notfound ที่ตัวเลือกกดได้ (แถวล็อก/กดไม่ได้ = ไม่เปิดกล้อง)
+export function needsEvidence(row, action) {
+  if (action !== 'notfound' || !row) return false;
+  const o = (row.options || []).find((x) => x.action === 'notfound');
+  return !!o && !o.disabled;
+}
+
+export function renderHeadCam() {
+  return '<div class="camv"><div class="vf"><video id="hvideo" playsinline muted autoplay></video><div class="tip">ถ่ายรูปที่จุดเวร</div></div>' +
+    '<div class="cambar"><button class="l" data-act="hcCancel">ยกเลิก</button>' +
+    '<button class="shutter" data-act="hcShot" aria-label="ถ่ายรูป"></button><span></span></div></div>';
+}
+
+export function renderHeadPreview(img, sending) {
+  const src = safeImg(img);
+  return '<div class="hprev"><div class="pad top"><p class="h1">ตรวจรูปก่อนบันทึก</p>' +
+    (src ? '<img class="pvimg" src="' + src + '" alt="รูปที่ถ่าย">' : '') +
+    (sending ? '<div class="pbar"><i></i></div><p class="small muted center">กำลังบันทึก</p>'
+      : '<button class="btn pri" data-act="hcUse">ใช้รูปนี้</button><button class="btn" data-act="hcRetake">ถ่ายใหม่</button>') +
+    '</div></div>';
 }

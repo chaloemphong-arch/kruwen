@@ -16,9 +16,9 @@
   "headName": "สมชาย ใจดี",
   "canClearAll": false,
   "counts": {
-   "came": 6,
+   "came": 5,
    "total": 12,
-   "needs": 2,
+   "needs": 3,
    "leave": 1,
    "upcoming": 4
   },
@@ -351,13 +351,18 @@
       "key": "4|t06",
       "dutyCode": "4",
       "teacherId": "t06",
-      "sig": "self|||",
+      "sig": "notfound|||self",
       "color": "#2e77ba",
       "name": "ประภา ทองดี",
       "pointId": "p4",
       "place": "จุดที่ 4 โรงอาหาร ห้องน้ำ",
       "timeText": "07.30–08.30",
-      "sub": [],
+      "sub": [
+       {
+        "text": "ไม่มีคนแทน",
+        "tone": "red"
+       }
+      ],
       "detail": [
        {
         "text": "ไม่มีรูป",
@@ -369,38 +374,40 @@
        }
       ],
       "pill": {
-       "cls": "p-ok",
-       "text": "✓ 07:33"
+       "cls": "p-miss",
+       "text": "ไม่พบตัวที่จุดเวร"
       },
-      "needs": false,
+      "needs": true,
       "photo": null,
-      "evidence": null,
-      "note": "",
+      "evidence": {
+       "checkinId": "c7"
+      },
+      "note": "สแกน 07:33 แต่หัวหน้าเวรไม่พบตัวที่จุด",
       "options": [
        {
         "action": "",
-        "label": "มา",
-        "hint": "สแกนเวลา 07:33",
-        "current": true,
-        "disabled": true,
-        "slot": "ok",
-        "hintKind": "",
-        "next": {
-         "cls": "p-ok",
-         "text": "✓ 07:33"
-        }
-       },
-       {
-        "action": "notfound",
         "label": "ไม่พบตัวที่จุดเวร",
         "hint": "",
-        "current": false,
-        "disabled": false,
+        "current": true,
+        "disabled": true,
         "slot": "miss",
         "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ไม่พบตัวที่จุดเวร"
+        }
+       },
+       {
+        "action": "restore",
+        "label": "ยกเลิก กลับเป็นสแกนเอง",
+        "hint": "สแกนเวลา 07:33",
+        "current": false,
+        "disabled": false,
+        "slot": "link",
+        "hintKind": "",
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ 07:33"
         }
        }
       ],
@@ -850,9 +857,9 @@
   "headName": "สมชาย ใจดี",
   "canClearAll": false,
   "counts": {
-   "came": 6,
+   "came": 5,
    "total": 12,
-   "needs": 2,
+   "needs": 3,
    "leave": 1,
    "upcoming": 4
   },
@@ -1185,13 +1192,18 @@
       "key": "4|t06",
       "dutyCode": "4",
       "teacherId": "t06",
-      "sig": "self|||",
+      "sig": "notfound|||self",
       "color": "#2e77ba",
       "name": "ประภา ทองดี",
       "pointId": "p4",
       "place": "จุดที่ 4 โรงอาหาร ห้องน้ำ",
       "timeText": "07.30–08.30",
-      "sub": [],
+      "sub": [
+       {
+        "text": "ไม่มีคนแทน",
+        "tone": "red"
+       }
+      ],
       "detail": [
        {
         "text": "ไม่มีรูป",
@@ -1203,38 +1215,40 @@
        }
       ],
       "pill": {
-       "cls": "p-ok",
-       "text": "✓ 07:33"
+       "cls": "p-miss",
+       "text": "ไม่พบตัวที่จุดเวร"
       },
-      "needs": false,
+      "needs": true,
       "photo": null,
-      "evidence": null,
-      "note": "",
+      "evidence": {
+       "checkinId": "c7"
+      },
+      "note": "สแกน 07:33 แต่หัวหน้าเวรไม่พบตัวที่จุด",
       "options": [
        {
         "action": "",
-        "label": "มา",
-        "hint": "สแกนเวลา 07:33",
-        "current": true,
-        "disabled": true,
-        "slot": "ok",
-        "hintKind": "",
-        "next": {
-         "cls": "p-ok",
-         "text": "✓ 07:33"
-        }
-       },
-       {
-        "action": "notfound",
         "label": "ไม่พบตัวที่จุดเวร",
         "hint": "",
-        "current": false,
-        "disabled": false,
+        "current": true,
+        "disabled": true,
         "slot": "miss",
         "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ไม่พบตัวที่จุดเวร"
+        }
+       },
+       {
+        "action": "restore",
+        "label": "ยกเลิก กลับเป็นสแกนเอง",
+        "hint": "สแกนเวลา 07:33",
+        "current": false,
+        "disabled": false,
+        "slot": "link",
+        "hintKind": "",
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ 07:33"
         }
        }
       ],
@@ -1689,9 +1703,9 @@
   "headName": "สมชาย ใจดี",
   "canClearAll": false,
   "counts": {
-   "came": 6,
+   "came": 5,
    "total": 12,
-   "needs": 2,
+   "needs": 3,
    "leave": 1,
    "upcoming": 4
   },
@@ -2024,13 +2038,18 @@
       "key": "4|t06",
       "dutyCode": "4",
       "teacherId": "t06",
-      "sig": "self|||",
+      "sig": "notfound|||self",
       "color": "#2e77ba",
       "name": "ประภา ทองดี",
       "pointId": "p4",
       "place": "จุดที่ 4 โรงอาหาร ห้องน้ำ",
       "timeText": "07.30–08.30",
-      "sub": [],
+      "sub": [
+       {
+        "text": "ไม่มีคนแทน",
+        "tone": "red"
+       }
+      ],
       "detail": [
        {
         "text": "ไม่มีรูป",
@@ -2042,38 +2061,40 @@
        }
       ],
       "pill": {
-       "cls": "p-ok",
-       "text": "✓ 07:33"
+       "cls": "p-miss",
+       "text": "ไม่พบตัวที่จุดเวร"
       },
-      "needs": false,
+      "needs": true,
       "photo": null,
-      "evidence": null,
-      "note": "",
+      "evidence": {
+       "checkinId": "c7"
+      },
+      "note": "สแกน 07:33 แต่หัวหน้าเวรไม่พบตัวที่จุด",
       "options": [
        {
         "action": "",
-        "label": "มา",
-        "hint": "สถานะถูกล็อก",
-        "current": true,
-        "disabled": true,
-        "slot": "ok",
-        "hintKind": "lock",
-        "next": {
-         "cls": "p-ok",
-         "text": "✓ 07:33"
-        }
-       },
-       {
-        "action": "notfound",
         "label": "ไม่พบตัวที่จุดเวร",
         "hint": "สถานะถูกล็อก",
-        "current": false,
+        "current": true,
         "disabled": true,
         "slot": "miss",
         "hintKind": "lock",
         "next": {
          "cls": "p-miss",
          "text": "ไม่พบตัวที่จุดเวร"
+        }
+       },
+       {
+        "action": "restore",
+        "label": "ยกเลิก กลับเป็นสแกนเอง",
+        "hint": "สถานะถูกล็อก",
+        "current": false,
+        "disabled": true,
+        "slot": "link",
+        "hintKind": "lock",
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ 07:33"
         }
        }
       ],
@@ -2528,9 +2549,9 @@
   "headName": "สมชาย ใจดี",
   "canClearAll": false,
   "counts": {
-   "came": 6,
+   "came": 5,
    "total": 12,
-   "needs": 2,
+   "needs": 3,
    "leave": 1,
    "upcoming": 4
   },
@@ -2863,13 +2884,18 @@
       "key": "4|t06",
       "dutyCode": "4",
       "teacherId": "t06",
-      "sig": "self|||",
+      "sig": "notfound|||self",
       "color": "#2e77ba",
       "name": "ประภา ทองดี",
       "pointId": "p4",
       "place": "จุดที่ 4 โรงอาหาร ห้องน้ำ",
       "timeText": "07.30–08.30",
-      "sub": [],
+      "sub": [
+       {
+        "text": "ไม่มีคนแทน",
+        "tone": "red"
+       }
+      ],
       "detail": [
        {
         "text": "ไม่มีรูป",
@@ -2881,38 +2907,40 @@
        }
       ],
       "pill": {
-       "cls": "p-ok",
-       "text": "✓ 07:33"
+       "cls": "p-miss",
+       "text": "ไม่พบตัวที่จุดเวร"
       },
-      "needs": false,
+      "needs": true,
       "photo": null,
-      "evidence": null,
-      "note": "",
+      "evidence": {
+       "checkinId": "c7"
+      },
+      "note": "สแกน 07:33 แต่หัวหน้าเวรไม่พบตัวที่จุด",
       "options": [
        {
         "action": "",
-        "label": "มา",
-        "hint": "สแกนเวลา 07:33",
-        "current": true,
-        "disabled": true,
-        "slot": "ok",
-        "hintKind": "",
-        "next": {
-         "cls": "p-ok",
-         "text": "✓ 07:33"
-        }
-       },
-       {
-        "action": "notfound",
         "label": "ไม่พบตัวที่จุดเวร",
         "hint": "",
-        "current": false,
-        "disabled": false,
+        "current": true,
+        "disabled": true,
         "slot": "miss",
         "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ไม่พบตัวที่จุดเวร"
+        }
+       },
+       {
+        "action": "restore",
+        "label": "ยกเลิก กลับเป็นสแกนเอง",
+        "hint": "สแกนเวลา 07:33",
+        "current": false,
+        "disabled": false,
+        "slot": "link",
+        "hintKind": "",
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ 07:33"
         }
        }
       ],
@@ -4175,9 +4203,9 @@
   "headName": "สมชาย ใจดี",
   "canClearAll": false,
   "counts": {
-   "came": 6,
+   "came": 5,
    "total": 12,
-   "needs": 2,
+   "needs": 3,
    "leave": 1,
    "upcoming": 4
   },
@@ -4348,13 +4376,18 @@
       "key": "4|t06",
       "dutyCode": "4",
       "teacherId": "t06",
-      "sig": "self|||",
+      "sig": "notfound|||self",
       "color": "#2e77ba",
       "name": "ประภา ทองดี",
       "pointId": "p4",
       "place": "จุดที่ 4 โรงอาหาร ห้องน้ำ",
       "timeText": "07.30–08.30",
-      "sub": [],
+      "sub": [
+       {
+        "text": "ไม่มีคนแทน",
+        "tone": "red"
+       }
+      ],
       "detail": [
        {
         "text": "ไม่มีรูป",
@@ -4366,13 +4399,15 @@
        }
       ],
       "pill": {
-       "cls": "p-ok",
-       "text": "✓ 07:33"
+       "cls": "p-miss",
+       "text": "ไม่พบตัวที่จุดเวร"
       },
-      "needs": false,
+      "needs": true,
       "photo": null,
-      "evidence": null,
-      "note": "ดูอย่างเดียว",
+      "evidence": {
+       "checkinId": "c7"
+      },
+      "note": "สแกน 07:33 แต่หัวหน้าเวรไม่พบตัวที่จุด · ดูอย่างเดียว",
       "options": [],
       "leaveType": "",
       "reports": [

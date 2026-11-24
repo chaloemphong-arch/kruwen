@@ -16,7 +16,7 @@ const OPEN_OPTIONS = [
 ];
 const PILL = {
   head: { cls: 'p-head', text: '✓ หัวหน้าเวรเช็ค' }, leave: { cls: 'p-leave', text: 'ลา' },
-  notfound: { cls: 'p-miss', text: 'ขาด' }, absent: { cls: 'p-miss', text: 'ขาด' },
+  notfound: { cls: 'p-miss', text: 'ไม่พบตัวที่จุดเวร' }, absent: { cls: 'p-miss', text: 'ขาด' },
   clear: { cls: 'p-idle', text: 'ยังว่าง' }, uncover: { cls: 'p-idle', text: 'ยังว่าง' }
 };
 
@@ -98,9 +98,11 @@ export function headMockCall(scenario, data) {
         if (scenario === 'stale') return fail('stale', 'ข้อมูลของครู' + row.name + ' เพิ่งเปลี่ยน ดูอีกครั้งแล้วเลือกใหม่', { view: clone(view) });
         const opt = row.options.find((o) => o.action && o.action === body.setAction);
         if (!opt || opt.current || opt.disabled) return fail('bad_action', 'ตอนนี้เลือกสถานะนี้ไม่ได้ ดูอีกครั้งแล้วเลือกใหม่', { view: clone(view) });
+        if (opt.action === 'notfound' && !(body.photo && body.photo.base64)) return fail('no_photo', 'ต้องถ่ายรูปที่จุดเวรก่อน จึงจะบันทึกได้');
         const token = 'mock-u' + ++seq;
         undo.set(token, clone(view));
         applyMock(row, opt, original[key]);
+        row.evidence = opt.action === 'notfound' ? { checkinId: 'mock-ev-' + seq } : null;
         recount(view);
         return { ok: true, kind: 'head_done', view: clone(view), undoToken: token, toast: 'ครู' + row.name + ': ' + (opt.action === 'head' ? 'หัวหน้าเวรเช็ค' : opt.label) };
       }
