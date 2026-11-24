@@ -9,6 +9,9 @@ import { withTitle, setAddKru } from './names.js';
 import { mockTransport, mockStreamSource } from './mock.js';
 
 // ผลจากหลังบ้าน → ชื่อหน้าจอ
+// สถานการณ์ทดลองที่เปิดหน้าเวรของฉัน/ต้อนรับเลย ไม่มีจุดสแกน
+export const noGateMock = (m) => m === 'my' || m === 'my_council' || m === 'welcome';
+
 export function routeFor(res, opts = {}) {
   if (!res || !res.ok) {
     const code = res && res.code;
@@ -540,8 +543,8 @@ export async function start() {
   const q = new URLSearchParams(location.search);
   A.P = q.get('p') || '';
   A.K = q.get('k') || '';
-  if (A.mock !== null && !A.P && A.mock !== 'my' && A.mock !== 'welcome') { A.P = 'gate1'; A.K = 'tok-gate1'; }
-  if (A.mock === 'my' || A.mock === 'welcome') A.P = '';
+  if (A.mock !== null && !A.P && !noGateMock(A.mock)) { A.P = 'gate1'; A.K = 'tok-gate1'; }
+  if (noGateMock(A.mock)) A.P = '';
   A.timer = setInterval(tick, 30000);
   if (A.P) doScan(); else doMy();
 }
