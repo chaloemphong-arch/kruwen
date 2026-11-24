@@ -19,12 +19,10 @@ const kruFirst = (name) => withTitle(firstName(name));
 const rng = (d) => `${hmd(d.start)}–${hmd(d.end)}`;
 const TMON = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
 const DOW = ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'];
-// ชื่อช่วงเวรที่ครูเห็น (23 พ.ย. 2569: ตรงกับแท็บใบเช็ค) · ค่า session ในข้อมูลยังเป็น เช้า/เย็น
-const SESSION_NAME = { 'เช้า': 'ช่วงเช้า', 'เย็น': 'หลังเลิกเรียน' };
+const TMON_FULL = ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
 const ymdParts = (ymd) => String(ymd).split('-').map(Number);
 const dayMonth = (ymd) => { const [, m, d] = ymdParts(ymd); return d + ' ' + TMON[m - 1]; };
 const thaiDay = (ymd) => { const [y, m, d] = ymdParts(ymd); return DOW[new Date(Date.UTC(y, m - 1, d)).getUTCDay()] + ' ' + d + ' ' + TMON[m - 1]; };
-const thaiMonth = (ym) => { const [y, m] = ymdParts(ym); return TMON[m - 1] + ' ' + (y + 543); };
 
 const ICON = {
   checkS: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
@@ -32,6 +30,7 @@ const ICON = {
   chev: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A96AA" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>',
   chevL: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>',
   chevR: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>',
+  cal: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
   users: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.3-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><path d="M16 4.8a3.5 3.5 0 010 6.4M18 14.8c2 .7 3.2 2.4 3.5 5.2"/></svg>',
   alert: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9.5 17h-19z"/><path d="M12 10v4.5M12 17.5v.2"/></svg>',
   cam: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h4l2-3h6l2 3h4v11H3z"/><circle cx="12" cy="13" r="3.5"/></svg>',
@@ -343,13 +342,13 @@ export function reportDone(st) {
 
 const shiftMonth = (ym, n) => { const [y, m] = ymdParts(ym); const t = y * 12 + (m - 1) + n; const mm = t % 12 + 1; return Math.floor(t / 12) + '-' + (mm < 10 ? '0' : '') + mm; };
 
-// ป้ายสถานะของแถววันเวร: [ข้อความ, คลาสสี] · หน้าครูไม่มีคำว่า สาย/ขาด (หลังบ้านยังเก็บไว้ให้แอดมิน/ผู้บริหาร)
+// ป้ายสถานะของแถวในรายการเวร: [ข้อความ, คลาสสี] · หน้าครูไม่มีคำว่า สาย/ขาด (หลังบ้านยังเก็บไว้ให้แอดมิน/ผู้บริหาร)
 const DAY_STATUS = {
-  'มา': ['มา', 'ok'], 'สาย': SHOW_LATE ? ['สาย', 'late'] : ['มา', 'ok'], 'ไปแทน': ['ไปแทน', 'ok'],
-  'ลา': ['ลา', 'muted'], 'มีคนมาแทน': ['มีคนแทน', 'muted'], 'ขาด': ['ไม่มีบันทึก', 'muted'],
-  'ยังไม่ถึง': ['ยังไม่ถึง', 'up'], 'รอลงเวร': ['รอลงเวร', 'up']
+  'มา': ['มา', 'ok'], 'สาย': ['มา', 'ok'], 'ไปแทน': ['ไปแทน', 'ok'],
+  'ลา': ['ลา', 'muted'], 'มีคนมาแทน': ['มีคนแทน', 'muted'], 'ขาด': ['ยังไม่ได้เช็ค', 'muted'],
+  'ยังไม่ถึง': ['ยังไม่ถึง', 'muted'], 'รอลงเวร': ['รอลงเวร', 'muted']
 };
-const DAY_NOTE = ['ไปแทน', 'ลา', 'มีคนมาแทน']; // หมายเหตุที่แสดงต่อท้ายชื่อจุด (ไม่แสดง เพื่อนลงชื่อให้ / หัวหน้าเวรเช็คให้)
+const DAY_NOTE = ['ไปแทน', 'ลา', 'มีคนมาแทน']; // หมายเหตุที่แสดงต่อท้ายเวลา (ไม่แสดง เพื่อนลงชื่อให้ / หัวหน้าเวรเช็คให้)
 
 // ระยะห่างจากวันนี้ถึงวันเวร นับวันตามปฏิทิน · ไม่รู้วันนี้ = null
 export function relDay(today, ymd) {
@@ -365,34 +364,63 @@ export function relDay(today, ymd) {
 const DOW_SHORT = ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'];
 const dowOf = (ymd) => { const [y, m, d] = ymdParts(ymd); return new Date(Date.UTC(y, m - 1, d)).getUTCDay(); };
 
+// การ์ดบน: สถานะของเวรวันนี้ [ข้อความ, คลาส]
+const todayStatus = (d) => {
+  const note = d.note ? ' · ' + d.note : '';
+  switch (d.status) {
+    case 'รอลงเวร': return ['รอลงเวร', 'wait'];
+    case 'มา': case 'สาย': case 'ไปแทน': return ['✓ ลงเวรแล้ว', 'ok'];
+    case 'ลา': case 'มีคนมาแทน': return [d.status + note, 'muted'];
+    case 'ขาด': return ['ยังไม่ได้เช็ค', 'muted'];
+    default: return [d.status || '', 'muted'];
+  }
+};
+
+// วันที่ใหญ่ในการ์ดบน: วันเต็ม / เลขวัน / เดือนย่อ
+const bigDate = (ymd, today) => {
+  const [, m, d] = ymdParts(ymd);
+  return `<div class="big${today ? ' today' : ''}"><span class="w">${DOW[dowOf(ymd)]}</span><span class="n">${d}</span><span class="m">${TMON[m - 1]}</span></div>`;
+};
+
 // st: {r (my), month 'YYYY-MM', currentMonth 'YYYY-MM', today 'YYYY-MM-DD' (ไม่มีก็ได้)}
 export function my(st) {
-  const r = st.r, next = r.next;
+  const r = st.r, next = r.next, todays = r.today || [];
   const month = st.month, canNext = st.currentMonth && month < st.currentMonth;
+  const [yy_, mm_] = ymdParts(month + '-01');
+  const monthFull = TMON_FULL[mm_ - 1] + ' ' + (yy_ + 543);
+  const header = `<header class="myhd"><small>เวรปฏิบัติหน้าที่ประจำวัน</small><b>${esc(kru(r.teacher.name))}</b>
+    <div class="mpill"><button class="arrow" data-act="myMonth" data-m="${shiftMonth(month, -1)}" aria-label="เดือนก่อน">${ICON.chevL}</button><span class="ml">${ICON.cal}${monthFull}</span><button class="arrow" data-act="myMonth" data-m="${shiftMonth(month, 1)}" aria-label="เดือนถัดไป"${canNext ? '' : ' disabled'}>${ICON.chevR}</button></div></header>`;
+
+  const timeP = (t) => (t ? `<p class="tm">${esc(t)}</p>` : '');
+  let top;
+  if (todays.length === 1) {
+    const d = todays[0], [text, cls] = todayStatus(d);
+    top = `<div class="grp topc"><div class="sub">เวรวันนี้</div><div class="nextd">${bigDate(d.date, true)}<div><p class="nx">${esc(d.place)}</p>${timeP(d.time)}<p class="tst ${cls}">${esc(text)}</p></div></div></div>`;
+  } else if (todays.length > 1) {
+    const lines = todays.map((d) => {
+      const [text, cls] = todayStatus(d);
+      return `<div class="ln"><div><p class="nx">${esc(d.place)}</p>${timeP(d.time)}</div><p class="tst ${cls}">${esc(text)}</p></div>`;
+    }).join('');
+    top = `<div class="grp topc"><div class="sub">เวรวันนี้</div><div class="nextd two">${bigDate(todays[0].date, true)}<div>${lines}</div></div></div>`;
+  } else if (next) {
+    const rel = relDay(st.today, next.date);
+    const relHtml = rel ? `<span class="rel${rel.strong ? ' strong' : ''}">${rel.strong ? '<i class="dot"></i>' : ''}${rel.text}</span>` : '';
+    top = `<div class="grp topc"><div class="sub">เวรครั้งถัดไป${relHtml}</div><div class="nextd">${bigDate(next.date, false)}<div><p class="nx">${esc(next.place || placeShort(next.duty))}</p>${timeP(next.time)}</div></div></div>`;
+  } else {
+    top = '<div class="grp topc"><div class="sub">เวรครั้งถัดไป</div><p class="none">ยังไม่มีเวรที่กำหนด</p></div>';
+  }
+
   const dayRow = (d) => {
     const [text, cls] = DAY_STATUS[d.status] || [d.status, 'muted'];
-    const note = DAY_NOTE.includes(d.status) && d.note ? ' · <span class="dnote">' + esc(d.note) + '</span>' : '';
+    const sub = [d.time, DAY_NOTE.includes(d.status) ? d.note : ''].filter(Boolean).map(esc).join(' · ');
     const [, m, dd] = ymdParts(d.date);
-    const ses = d.session ? ' (' + esc(d.session) + ')' : '';
-    return `<div class="drow"><span class="dt num">${DOW_SHORT[dowOf(d.date)]} ${dd} ${TMON[m - 1]}</span><span class="dwhere">${esc(d.place || d.label || d.duty_code)}${ses}${note}</span><span class="dst ${cls}">${esc(text)}</span></div>`;
+    const date = r.showWeekday
+      ? `<span class="w wd${dowOf(d.date)}">${DOW_SHORT[dowOf(d.date)]}</span><span class="n">${dd}</span>`
+      : `<span class="n">${dd}</span><span class="m">${TMON[m - 1]}</span>`;
+    return `<div class="nrow${st.today && d.date === st.today ? ' today' : ''}"><span class="dd">${date}</span><span class="nm"><b>${esc(d.place || d.label || d.duty_code)}</b>${sub ? `<small>${sub}</small>` : ''}</span><span class="dst ${cls}">${esc(text)}</span></div>`;
   };
-  const rows = r.days.length ? r.days.map(dayRow).join('') : '<p class="muted drow-none">เดือนนี้ไม่มีวันเวร</p>';
-  let nextHtml = '<p class="muted">ยังไม่มีเวรที่กำหนด</p>';
-  if (next) {
-    const [, m, d] = ymdParts(next.date);
-    // isToday จากหลังบ้านเชื่อถือกว่าวันที่ใน config (config โหลดครั้งเดียว ถ้าเปิดหน้าค้างข้ามคืนจะเก่า)
-    const rel = r.isToday ? { text: 'วันนี้', strong: true } : relDay(st.today, next.date);
-    nextHtml = `<div class="nextd"><div class="cal" aria-label="${esc(thaiDay(next.date))}"><div class="w">${DOW[dowOf(next.date)]}</div><div class="n num">${d}</div><div class="mo">${TMON[m - 1]}</div></div>
-     <div><p class="nx">${esc(placeShort(next.duty))}</p>${next.session ? `<p class="nx2 muted">${esc(SESSION_NAME[next.session] || 'เวร' + next.session)}</p>` : ''}${rel ? `<p class="when${rel.strong ? ' strong' : ''}">${rel.text}</p>` : ''}</div></div>`;
-  }
+  const rows = r.days.length ? r.days.map(dayRow).join('') : '<p class="none">เดือนนี้ไม่มีวันเวร</p>';
   const headLink = r.canHead ? '<button class="link" data-act="toHead">เปิดใบเช็คหัวหน้าเวร</button>' : '';
   const nameChange = r.canSelfChange ? '<button class="sublink" data-act="pickChange">เลือกชื่อผิด? เปลี่ยนชื่อ</button>' : '';
-  return `<div class="pad top myd"><h1 class="mhd">เวรของฉัน</h1><p class="muted who">${esc(kru(r.teacher.name))}</p>
-   <div class="sec"><h2>เวรครั้งถัดไป</h2></div>${nextHtml}
-   <div class="sec"><h2>รายการเวร</h2><div class="mnav"><button class="arrow" data-act="myMonth" data-m="${shiftMonth(month, -1)}" aria-label="เดือนก่อน">${ICON.chevL}</button>
-    <b class="mname">${thaiMonth(month)}</b>
-    <button class="arrow" data-act="myMonth" data-m="${shiftMonth(month, 1)}" aria-label="เดือนถัดไป"${canNext ? '' : ' disabled'}>${ICON.chevR}</button></div></div>
-   <div>${rows}</div>
-   ${headLink}${nameChange}
-  </div>`;
+  return `<div class="myd">${header}<div class="mybody">${top}<div class="grp list"><div class="sub">รายการเวร</div>${rows}</div>${headLink}${nameChange}</div></div>`;
 }

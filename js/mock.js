@@ -3,7 +3,7 @@
 
 export const SCENARIOS = ['first', 'checked_in', 'late', 'nocamera', 'photofail', 'random_hit', 'random_miss', 'menu',
   'menu_nophoto', 'proxied', 'stood_by_other', 'ask_sub', 'wrong_point', 'outside_before', 'outside_after',
-  'outside_holiday', 'on_leave', 'taken', 'netfail', 'my', 'welcome', 'long'];
+  'outside_holiday', 'on_leave', 'taken', 'netfail', 'my', 'my_council', 'welcome', 'long'];
 
 const ME = { teacher_id: 't02', name: 'สมหญิง สุขสันต์' };
 const FRIEND = { teacher_id: 't01', name: 'สมชาย ใจดี' };
@@ -71,14 +71,28 @@ function scanResult(scenario) {
 }
 
 function myResult() {
-  const day = (date, status, note, code = '1(1)', place = '') => ({ date, duty_code: code, label: code, place: place || (code === '2(1)' ? 'ประตู 2' : 'ประตู 1'), session: 'เช้า', status, note });
+  const day = (date, status, note, code = '1(1)', place = '') => ({ date, duty_code: code, label: code, place: place || (code === '2(1)' ? 'ประตู 2' : 'ประตู 1'), session: 'เช้า', time: '07.30–08.15', status, note });
   return withKind('my', {
-    teacher: ME, canSelfChange: false, canHead: false,
-    next: { date: '2026-11-27', duty: summary(DUTY), session: 'เช้า' }, isToday: false,
+    teacher: ME, canSelfChange: false, canHead: false, showWeekday: false,
+    today: [],
+    next: { date: '2026-11-27', duty: summary(DUTY), session: 'เช้า', place: 'ประตู 1', time: '07.30–08.15' },
     days: [day('2026-11-06', 'มา', 'หัวหน้าเวรเช็คให้'), day('2026-11-11', 'ไปแทน', 'แทนครูวิชัย รักเรียน', '2(1)'),
-      day('2026-11-13', 'สาย', ''), day('2026-11-18', 'มา', '', '3', 'จุดที่ 3 ตู้สแกน อุตสาหกรรม'), day('2026-11-20', 'มา', 'เพื่อนลงชื่อให้'), day('2026-11-27', 'ยังไม่ถึง', '')],
+      day('2026-11-13', 'สาย', ''), day('2026-11-18', 'มา', '', '3', 'ตู้สแกน อุตสาหกรรม'), day('2026-11-20', 'มา', 'เพื่อนลงชื่อให้'), day('2026-11-27', 'ยังไม่ถึง', '')],
     summary: { present: 4, late: 1, leave: 0, absent: 0, subbed: 1 },
     headChecks: 1, proxied: 1
+  });
+}
+
+// สภานักเรียน: แสดงวันในสัปดาห์ · วันละช่วงเดียว หลายวัน คนละที่
+function myCouncilResult() {
+  const AM = '07.30–08.15', PM = '15.50–16.30';
+  const day = (date, place, time, status, note = '') => ({ date, duty_code: place === 'ประตู 2' ? '2(1)' : '1(1)', label: '1(1)', place, session: time === PM ? 'เย็น' : 'เช้า', time, status, note });
+  return Object.assign(myResult(), {
+    showWeekday: true,
+    today: [{ date: '2026-11-24', duty_code: '2(1)', place: 'ประตู 2', session: 'เย็น', time: PM, status: 'รอลงเวร', note: '' }],
+    next: null,
+    days: [day('2026-11-09', 'ประตู 1', AM, 'มา'), day('2026-11-17', 'ประตู 2', PM, 'มา'), day('2026-11-18', 'ประตู 1', AM, 'ลา'),
+      day('2026-11-19', 'ประตู 2', AM, 'ขาด'), day('2026-11-20', 'ประตู 1', PM, 'มา'), day('2026-11-24', 'ประตู 2', PM, 'รอลงเวร')]
   });
 }
 
@@ -117,7 +131,7 @@ export function mockCall(scenario, action, payload = {}) {
     }
     case 'my':
       if (scenario === 'welcome' && !bound[scenario]) return fail('not_bound', 'LINE นี้ยังไม่ได้ผูกชื่อ ให้สแกนป้ายแล้วเลือกชื่อของคุณ');
-      return myResult();
+      return scenario === 'my_council' ? myCouncilResult() : myResult();
     default: return fail('bad_action', 'ไม่รู้จักคำสั่งนี้ ให้รีเฟรชหน้าแล้วลองอีกครั้ง');
   }
 }
