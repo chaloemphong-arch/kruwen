@@ -76,7 +76,8 @@ export function headMockCall(scenario, data) {
       case 'headHome':
         if (!base.ok) return clone(base);
         return { ok: true, kind: 'head_home', name: base.headName || '', today: base.date, isHeadToday: scenario !== 'exec' && !base.actingFor && base.canEdit,
-          isAdmin: !!base.actingFor, canView: true, headNameToday: base.headName, nameAddKru: true };
+          isAdmin: !!base.actingFor, canView: true, headNameToday: base.headName, nameAddKru: true,
+          dates: ((data.dates || {})[base.actingFor ? 'admin' : 'head'] || []).slice() };
       case 'headView': {
         // โหมดตัวอย่าง: เลื่อนวันได้ (รายชื่อชุดเดิม) ให้เห็นลูกศรกับหัวข้อทำงาน · ของจริงหลังบ้านคำนวณเอง
         const v = clone(view);

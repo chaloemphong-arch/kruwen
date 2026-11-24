@@ -3,7 +3,7 @@
 import { call, setIdentity, setTransport } from '../js/api.js';
 import { mockScenario } from '../js/liff.js';
 import { withTitle, setAddKru } from '../js/names.js';
-import { renderPage, renderRow, renderSheet, renderToast, renderMessage, mergeNeedsKeys, defaultTab, clampTab } from './view.js';
+import { renderPage, renderRow, renderSheet, renderToast, renderMessage, renderCalendar, mergeNeedsKeys, defaultTab, clampTab } from './view.js';
 import { headMockTransport } from './mock.js';
 
 const UNDO_MS = 4000; // แถบที่มีปุ่มเลิกทำ
@@ -17,7 +17,7 @@ const AUTH_RELOAD_GAP_MS = 120000;
 const H = {
   view: null, tab: null, canPreview: false, previewDate: '', filter: 'all', saving: {}, full: {}, fullFail: {},
   needsKeys: null, seq: 0, req: 0, appliedReq: 0, stale: false,
-  sheetKey: null, leaveOpen: false, toast: null, toastTimer: null, pending: 0, mock: null, showLate: false
+  sheetKey: null, leaveOpen: false, dates: [], today: '', calMonth: null, toast: null, toastTimer: null, pending: 0, mock: null, showLate: false
 };
 
 // โทเคน LINE หมดอายุ (หน้าเปิดค้างนาน) → โหลดหน้าใหม่ได้ครั้งเดียวต่อช่วง กันวนโหลดไม่รู้จบ
@@ -73,7 +73,7 @@ function showLoading(text) {
 
 // ---------- วาด ----------
 function mountShell() {
-  root().innerHTML = '<div id="hpage"></div><div id="hsheet" class="sheetwrap" hidden></div><div id="htoast" class="toastwrap" aria-live="polite"></div>';
+  root().innerHTML = '<div id="hpage"></div><div id="hsheet" class="sheetwrap" hidden></div><div id="hcal" class="sheetwrap" hidden></div><div id="htoast" class="toastwrap" aria-live="polite"></div>';
 }
 
 function drawPage() {
@@ -159,6 +159,31 @@ async function loadFull(row) {
   }
   H.full[id] = url;
   if (H.sheetKey === row.key) drawSheet(false);
+}
+
+// ---------- ปฏิทินเลือกวัน ----------
+function drawCal() {
+  const box = $('hcal');
+  if (!box || !H.view || !H.calMonth) return;
+  box.innerHTML = renderCalendar(H.calMonth, H.dates, H.today || (H.view.isToday ? H.view.date : ''), H.view.date);
+  box.hidden = false;
+}
+
+function openCal() {
+  if (!H.view || H.sheetKey) return;
+  H.calMonth = String(H.view.date).slice(0, 7);
+  document.body.style.overflow = 'hidden';
+  drawCal();
+  const first = $('hcal').querySelector('.d.sel') || $('hcal').querySelector('.shclose');
+  if (first) first.focus({ preventScroll: true });
+}
+
+function closeCal(refocus = true) {
+  H.calMonth = null;
+  document.body.style.overflow = '';
+  const box = $('hcal');
+  if (box) { box.hidden = true; box.innerHTML = ''; }
+  if (refocus) { const el = document.querySelector('.dl[data-act="cal"]'); if (el) el.focus({ preventScroll: true }); }
 }
 
 // ---------- แผ่นเลือกสถานะ ----------
@@ -283,7 +308,7 @@ function setStale(on) {
 
 // รีเฟรชเงียบ ๆ เมื่อเปิดหน้าอยู่ ไม่มีแผ่นเปิด และไม่มีงานบันทึกค้าง
 async function refresh(force) {
-  const idle = () => !H.sheetKey && H.pending === 0;
+  const idle = () => !H.sheetKey && !H.calMonth && H.pending === 0;
   if (!force && (document.visibilityState !== 'visible' || !idle())) return;
   // ผลรีเฟรชที่ออกไปก่อนการบันทึก/เลิกทำ/วาดใหม่ ทิ้งไป (กันข้อมูลเก่าทับผลที่ใหม่กว่า)
   const seq = H.seq;
@@ -320,7 +345,11 @@ const ACTIONS = {
   clearall: () => clearAll(),
   // ลูกศร ‹ › เลื่อนวัน (วันที่มาจาก view.nav ของหลังบ้าน) · กลับวันนี้ = ไม่ส่งวันที่
   day: (d) => goDate(d.d),
-  today: () => goDate('')
+  // แตะวันที่ = ปฏิทินวันเวร (กดได้เฉพาะวันในรายการ) · เลือกวัน = ปิดแล้วไปวันนั้น
+  cal: () => openCal(),
+  calMonth: (d) => { H.calMonth = d.m; drawCal(); },
+  calDay: (d) => { closeCal(false); goDate(d.d); },
+  calClose: () => closeCal()
 };
 
 async function goDate(date) {
@@ -358,6 +387,7 @@ function bindEvents() {
   // scroll ไม่ลอยขึ้น (bubble) จึงดักตอนจับ · pager ถูกวาดใหม่ได้ จึงผูกที่ root
   root().addEventListener('scroll', onPagerScroll, { capture: true, passive: true });
   root().addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && H.calMonth) return closeCal();
     if (e.key === 'Escape' && H.sheetKey) return closeSheet();
     const st = e.target.closest && e.target.closest('.stab');
     if (st && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
@@ -395,6 +425,8 @@ export async function startHead(identity) {
   if (!home.ok) return showError(home);
   H.showLate = lateVisible(home);
   H.canPreview = !!home.isAdmin;
+  H.dates = home.dates || [];
+  H.today = home.today || '';
   setAddKru(home.nameAddKru);
   let view = await call('headView', {}, { onRetry, retries: 5 });
   if (!view.ok) return showError(view);

@@ -81,7 +81,6 @@
 .dnav .dl{text-align:center;font-size:17px;font-weight:600;font-variant-numeric:tabular-nums}
 .dn{width:48px;height:48px;display:grid;place-items:center;font-size:28px;line-height:1;color:var(--brand);border-radius:var(--radius-md)}
 .dn:disabled{color:var(--line);cursor:default}
-.dtoday{min-height:48px;padding:0 4px;font-size:16px;font-weight:600;color:var(--brand)}
 .clr{justify-self:start;min-height:48px;padding:0 18px;border-radius:var(--radius-pill);border:1px solid #b42318;color:#b42318;font-size:16px;font-weight:600;background:var(--card)}
 
 /* ใบเช็คแบบแท็บ (23 พ.ย. 2569): หัวขาว · แท็บเส้นใต้ · การ์ดตามจุดบนพื้นเทาอ่อน (ต้นแบบ ออกแบบมินิมอล/HeadLight.mock.html) */
@@ -162,3 +161,32 @@
 .toast.two{flex-direction:column;gap:2px;text-align:center;padding:10px 16px}
 .toast.two .l1{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:600}
 .toast.two .l2{font-size:14px;color:#D5DCE5;line-height:1.35}
+
+/* หัวมุมล่างโค้ง + แคปซูลวันที่ + ปฏิทิน (24 พ.ย. 2569): คัดจาก ออกแบบมินิมอล/HeadHeader.mock.html แบบ ฉ (.vF + .o6) */
+.hdr{padding:22px var(--gut) 14px;gap:10px}
+.hdr .r1 b{font-size:24px}
+.dnav{margin:0;background:#E8ECF2;border-radius:999px;grid-template-columns:44px 1fr 44px;height:44px}
+.dnav .dn{width:44px;height:44px;font-size:24px}
+.dnav .dl{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:44px;cursor:pointer;font-size:16px;font-weight:600}
+.dl .cal{width:18px;height:18px;flex:none;color:var(--muted)}
+.stabs{border-bottom:0;border-radius:0 0 22px 22px;box-shadow:0 8px 16px -10px rgba(15,27,45,.25)}
+.hdr.solo{border-radius:0 0 22px 22px;box-shadow:0 8px 16px -10px rgba(15,27,45,.25)}
+.panel{padding-top:14px}
+/* ป้ายลาในรายชื่อ: โทนอำพัน ให้ตรงกับปุ่มลาในแผ่นเลือกสถานะ */
+#hpage .st.p-leave{background:#FDEBC8;color:#92400E}
+
+/* ปฏิทินเลือกวัน: แผ่นจากล่างเหมือนแผ่นเลือกสถานะ */
+.csheet{position:absolute;left:0;right:0;bottom:0;margin:0 auto;max-width:var(--app-max);max-height:92vh;max-height:92dvh;overflow-y:auto;background:#fff;border-radius:24px 24px 0 0;padding:12px 20px calc(20px + env(safe-area-inset-bottom,0px));display:grid;gap:10px}
+@media (prefers-reduced-motion:no-preference){.csheet{animation:shup .2s ease-out}}
+.csheet .mrow{display:grid;grid-template-columns:44px 1fr 44px;align-items:center}
+.csheet .mrow b{text-align:center;font-size:19px;font-weight:700}
+.csheet .mrow button{width:44px;height:44px;border-radius:12px;background:#E8ECF2;font-size:24px;line-height:1;display:grid;place-items:center}
+.csheet .mrow button:disabled{opacity:.35}
+.csheet .wk,.csheet .days{display:grid;grid-template-columns:repeat(7,1fr);text-align:center}
+.csheet .wk span{font-size:14px;font-weight:600;color:var(--muted);padding:2px 0}
+.csheet .days{row-gap:4px}
+.csheet .d{position:relative;justify-self:center;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-size:17px;font-weight:600;font-variant-numeric:tabular-nums}
+.csheet .d.off{color:#B8C0CC;font-weight:400;cursor:default}
+.csheet .d.duty{background:#E8ECF2}
+.csheet .d.today::after{content:"";position:absolute;bottom:3px;left:50%;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:#F59E0B}
+.csheet .d.sel{background:var(--text);color:#fff}

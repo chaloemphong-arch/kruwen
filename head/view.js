@@ -9,7 +9,6 @@ const ESC = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;
 export function esc(s) { return String(s === undefined || s === null ? '' : s).replace(/[&<>"']/g, (c) => ESC[c]); }
 
 const TONES = ['red', 'orange', 'blue'];
-const BAR_TONES = ['info', 'warn', 'lock', 'err'];
 const PILLS = ['p-ok', 'p-head', 'p-leave', 'p-miss', 'p-idle'];
 
 // รูปจาก headPhoto (data:image/...;base64) เท่านั้น
@@ -199,30 +198,72 @@ function tabBar(view, tab) {
 
 function header(view) {
   const title = pageTitle(view);
-  return '<header class="hdr">' +
+  const solo = (view.sessions || []).length < 2;
+  return '<header class="hdr' + (solo ? ' solo' : '') + '">' +
     (view.nav
-      ? '<div class="r1"><b>' + title + '</b>' +
-        (view.isToday === false ? '<button class="dtoday" data-act="today">กลับวันนี้</button>' : '') + '</div>' + dayNav(view)
+      ? '<div class="r1"><b>' + title + '</b></div>' + dayNav(view)
       : '<div class="r1"><b>' + title + '</b><span class="muted">' + esc(view.dateThai) + ' · ' + esc(view.nowHHMM) + '</span></div>') +
     (view.canClearAll ? '<button class="clr" data-act="clearall">ล้างสถานะทั้งหมด</button>' : '') +
     '</header>';
 }
 
-// ลูกศร ‹ › เลื่อนวัน (หลังบ้านคำนวณวันก่อน/ถัดไปตามสิทธิ์: แอดมินทีละวัน หัวหน้าเวรทีละสัปดาห์) · วันอื่นมีปุ่มกลับวันนี้
+// ไอคอนปฏิทิน (คัดจาก HeadHeader.mock.html)
+const CAL = '<svg class="cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>';
+
+// แคปซูลวันที่สีเทา: ‹ วันเวรก่อน · แตะวันที่ = เปิดปฏิทิน · วันเวรถัดไป › (วันก่อน/ถัดไปหลังบ้านคำนวณจากรายการวันเวรของผู้ใช้)
 function dayNav(view) {
   const nav = view.nav;
   if (!nav) return '';
   const btn = (d, label, ch) => '<button class="dn" data-act="day" data-d="' + esc(d || '') + '" aria-label="' + label + '"' + (d ? '' : ' disabled') + '>' + ch + '</button>';
   const label = view.isToday === false ? (view.weekdayThai ? view.weekdayThai + ' ' : '') + view.dateThai : view.dateThai + ' · ' + view.nowHHMM;
-  return '<div class="dnav">' + btn(nav.prev, 'วันก่อน', '‹') + '<span class="dl">' + esc(label) + '</span>' + btn(nav.next, 'วันถัดไป', '›') + '</div>';
+  return '<div class="dnav">' + btn(nav.prev, 'วันก่อน', '‹') +
+    '<button class="dl" data-act="cal" aria-haspopup="dialog">' + CAL + esc(label) + '</button>' + btn(nav.next, 'วันถัดไป', '›') + '</div>';
+}
+
+const TH_MONTH = ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
+const TH_WEEK = ['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'];
+
+// 'YYYY-MM' เลื่อนทีละเดือน
+export function shiftMonth(ym, n) {
+  const [y, m] = String(ym).split('-').map(Number);
+  const t = y * 12 + (m - 1) + n;
+  return Math.floor(t / 12) + '-' + String((t % 12) + 1).padStart(2, '0');
+}
+
+// ปฏิทินเลือกวัน (แผ่นจากล่าง): กดได้เฉพาะวันในรายการวันเวร (dates) · จุดอำพัน = วันนี้ · วงดำ = วันที่เปิดอยู่ · มีแต่ปุ่มปิด
+export function renderCalendar(month, dates, today, selected) {
+  const [y, mo] = String(month).split('-').map(Number);
+  const list = dates || [];
+  const first = new Date(Date.UTC(y, mo - 1, 1)).getUTCDay();
+  const n = new Date(Date.UTC(y, mo, 0)).getUTCDate();
+  const head = String(month) + '-01';
+  const has = (pred) => list.some(pred);
+  const monthBtn = (m, label, ch, off) => '<button data-act="calMonth" data-m="' + m + '" aria-label="' + label + '"' + (off ? ' disabled' : '') + '>' + ch + '</button>';
+  let cells = '';
+  for (let i = 0; i < first; i++) cells += '<span></span>';
+  for (let d = 1; d <= n; d++) {
+    const k = month + '-' + String(d).padStart(2, '0');
+    const duty = list.includes(k);
+    cells += '<button class="d ' + (duty ? 'duty' : 'off') + (k === today ? ' today' : '') + (k === selected ? ' sel' : '') + '"' +
+      (duty ? ' data-act="calDay" data-d="' + k + '"' : ' disabled') + '>' + d + '</button>';
+  }
+  return '<div class="shade" data-act="calClose"></div>' +
+    '<div class="csheet" role="dialog" aria-modal="true" aria-label="เลือกวันที่">' +
+    '<div class="grab"></div>' +
+    '<div class="mrow">' + monthBtn(shiftMonth(month, -1), 'เดือนก่อน', '‹', !has((d) => d < head)) +
+    '<b>' + TH_MONTH[mo - 1] + ' ' + (y + 543) + '</b>' +
+    monthBtn(shiftMonth(month, 1), 'เดือนถัดไป', '›', !has((d) => d >= shiftMonth(month, 1) + '-01')) + '</div>' +
+    '<div class="wk">' + TH_WEEK.map((w) => '<span>' + w + '</span>').join('') + '</div>' +
+    '<div class="days">' + cells + '</div>' +
+    '<button class="shclose" data-act="calClose">ปิด</button></div>';
 }
 
 // ไม่แสดง: แถบ "ล็อกแล้ว" (20 พ.ย. 2569: ซ่อนไว้ก่อน) และ สาย/ตรงเวลา
 // ui.tab = ช่วงที่เลือก (ตัวเลข) · หนึ่งช่วง = หนึ่ง panel · หนึ่งจุด = การ์ดหนึ่งใบ (จัดกลุ่มตาม dutyCode ตามลำดับหลังบ้าน)
 // ไม่มีตัวเลขสรุปและบรรทัดชื่อหัวหน้าเวร (20 พ.ย.): สรุปข้อมูลทำแยกทีหลัง
 export function renderPage(view, ui = {}) {
-  const banners = (ui.stale ? '<p class="bar warn">ข้อมูลอาจไม่ล่าสุด · เช็คสัญญาณอินเทอร์เน็ต</p>' : '') + (view.banners || []).filter((b) => b.tone !== 'lock').map((b) =>
-    '<p class="bar ' + (BAR_TONES.includes(b.tone) ? b.tone : 'info') + '">' + esc(b.text) + '</p>').join('');
+  // หลังบ้านไม่ส่งแถบแจ้งแล้ว: เหลือแถบ "ข้อมูลอาจไม่ล่าสุด" ของหน้าเว็บเอง
+  const banners = ui.stale ? '<p class="bar warn">ข้อมูลอาจไม่ล่าสุด · เช็คสัญญาณอินเทอร์เน็ต</p>' : '';
   let body = '';
   if (view.message && !(view.sessions || []).length) {
     body = '<div class="pad mid center"><p class="title">' + esc(view.message) + '</p></div>';
