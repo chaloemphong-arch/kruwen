@@ -1,5 +1,5 @@
 {
-  "v": "483bf3b03b",
+  "v": "7c5bc721e5",
   "files": [
     "config.js",
     "head/app.js",
@@ -13,6 +13,7 @@
     "js/liff.js",
     "js/mock.js",
     "js/names.js",
-    "js/screens.js"
+    "js/screens.js",
+    "js/team.js"
   ]
 }

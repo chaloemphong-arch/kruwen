@@ -74,7 +74,7 @@ function myResult() {
   const day = (date, status, note, code = '1(1)', place = '') => ({ date, duty_code: code, label: code, place: place || (code === '2(1)' ? 'ประตู 2' : 'ประตู 1'), session: 'เช้า', time: '07.30–08.15', status, note });
   return withKind('my', {
     teacher: ME, canSelfChange: false, canHead: false, showWeekday: false,
-    today: [],
+    today: [{ date: '2026-11-20', duty_code: '1(1)', place: 'ประตู 1', session: 'เช้า', time: '07.30–08.15', status: 'มา', note: 'เพื่อนลงชื่อให้' }],
     next: { date: '2026-11-27', duty: summary(DUTY), session: 'เช้า', place: 'ประตู 1', time: '07.30–08.15' },
     days: [day('2026-11-06', 'มา', 'หัวหน้าเวรเช็คให้'), day('2026-11-11', 'ไปแทน', 'แทนครูวิชัย รักเรียน', '2(1)'),
       day('2026-11-13', 'สาย', ''), day('2026-11-18', 'มา', '', '3', 'ตู้สแกน อุตสาหกรรม'), day('2026-11-20', 'มา', 'เพื่อนลงชื่อให้'), day('2026-11-27', 'ยังไม่ถึง', '')],
@@ -89,11 +89,26 @@ function myCouncilResult() {
   const day = (date, place, time, status, note = '') => ({ date, duty_code: place === 'ประตู 2' ? '2(1)' : '1(1)', label: '1(1)', place, session: time === PM ? 'เย็น' : 'เช้า', time, status, note });
   return Object.assign(myResult(), {
     showWeekday: true,
-    today: [{ date: '2026-11-24', duty_code: '2(1)', place: 'ประตู 2', session: 'เย็น', time: PM, status: 'รอลงเวร', note: '' }],
+    today: [{ date: '2026-11-20', duty_code: '2(1)', place: 'ประตู 2', session: 'เย็น', time: PM, status: 'รอลงเวร', note: '' }],
     next: null,
     days: [day('2026-11-09', 'ประตู 1', AM, 'มา'), day('2026-11-17', 'ประตู 2', PM, 'มา'), day('2026-11-18', 'ประตู 1', AM, 'ลา'),
-      day('2026-11-19', 'ประตู 2', AM, 'ขาด'), day('2026-11-20', 'ประตู 1', PM, 'มา'), day('2026-11-24', 'ประตู 2', PM, 'รอลงเวร')]
+      day('2026-11-19', 'ประตู 2', AM, 'ขาด'), day('2026-11-20', 'ประตู 2', PM, 'รอลงเวร')]
   });
+}
+
+// teamView ของหลังบ้าน (Team.js): ใบเช็คเวรวันนี้ของลูกเวร
+function teamResult() {
+  const row = (key, dutyCode, place, name, kind, by = '', extra = {}) => Object.assign({ key, dutyCode, place, name, me: false, sub: '', mark: { kind, by } }, extra);
+  const P1 = 'จุดที่ 1 ประตู 1', P3 = 'จุดที่ 3 ตรวจอาคาร';
+  return withKind('team', { date: '2026-11-20', dateThai: '20 พ.ย. 2569', weekdayThai: 'ศุกร์', sessions: [
+    { session: 'เช้า', label: 'ช่วงเช้า', time: '07.30–08.15', mine: true, rows: [
+      row('1|a', '1(1)', P1, 'ศิริพร (ฝน)', 'tick'),
+      row('1|b', '1(1)', P1, 'สมหญิง (หญิง)', 'tick', 'หัวหน้าเวรเช็ค', { me: true, sub: 'ครูเกศินี แทน' }),
+      row('3|c', '3', P3, 'ชลธิชา (น้ำหวาน)', 'pending'),
+      row('3|d', '3', P3, 'วรรณวิสา (ข้าวฟ่าง)', 'leave'),
+      row('3|e', '3', P3, 'สุภาวดี (ส้ม)', 'blank')] },
+    { session: 'เย็น', label: 'หลังเลิกเรียน', time: '15.50–16.30', mine: false, rows: [
+      row('2|f', '2(2)', 'จุดที่ 2 ประตู 2', 'กมลชนก (มิ้นท์)', 'blank')] }] });
 }
 
 const bound = {};
@@ -132,6 +147,7 @@ export function mockCall(scenario, action, payload = {}) {
     case 'my':
       if (scenario === 'welcome' && !bound[scenario]) return fail('not_bound', 'LINE นี้ยังไม่ได้ผูกชื่อ ให้สแกนป้ายแล้วเลือกชื่อของคุณ');
       return scenario === 'my_council' ? myCouncilResult() : myResult();
+    case 'teamView': return teamResult();
     default: return fail('bad_action', 'ไม่รู้จักคำสั่งนี้ ให้รีเฟรชหน้าแล้วลองอีกครั้ง');
   }
 }
@@ -224,6 +240,8 @@ export function screenSamples() {
     s('report', { categories: CATEGORIES, selected: [], note: '', photo: null, error: 'ยังไม่มีรูปตอนสแกน' }, 'report empty'),
     s('reportDone', { cats: ['ทะเลาะวิวาท'], note: 'แยกแล้ว', time: '07:10' }),
     s('my', { r: myResult(), month: '2026-11', currentMonth: '2026-11', today: '2026-11-19' }),
+    s('team', { r: teamResult(), tab: 0 }),
+    s('team', { r: teamResult(), tab: 1 }, 'team evening'),
     s('my', { r: Object.assign(myResult(), { next: null, days: [], canSelfChange: true }), month: '2026-10', currentMonth: '2026-11' }, 'my empty')
   ];
 }

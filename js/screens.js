@@ -22,9 +22,9 @@ const DOW = ['อาทิตย์', 'จันทร์', 'อังคาร'
 const TMON_FULL = ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
 const ymdParts = (ymd) => String(ymd).split('-').map(Number);
 const dayMonth = (ymd) => { const [, m, d] = ymdParts(ymd); return d + ' ' + TMON[m - 1]; };
-const thaiDay = (ymd) => { const [y, m, d] = ymdParts(ymd); return DOW[new Date(Date.UTC(y, m - 1, d)).getUTCDay()] + ' ' + d + ' ' + TMON[m - 1]; };
 
 const ICON = {
+  list: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>',
   checkS: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
   checkBig: '<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
   chev: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A96AA" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>',
@@ -383,6 +383,8 @@ const bigDate = (ymd, today) => {
 };
 
 // st: {r (my), month 'YYYY-MM', currentMonth 'YYYY-MM', today 'YYYY-MM-DD' (ไม่มีก็ได้)}
+const SHEET_BTN = `<button class="sheetbtn" data-act="team">${ICON.list}<span>ใบเช็คเวรวันนี้</span><span class="chev">›</span></button>`;
+
 export function my(st) {
   const r = st.r, next = r.next, todays = r.today || [];
   const month = st.month, canNext = st.currentMonth && month < st.currentMonth;
@@ -395,13 +397,13 @@ export function my(st) {
   let top;
   if (todays.length === 1) {
     const d = todays[0], [text, cls] = todayStatus(d);
-    top = `<div class="grp topc"><div class="sub">เวรวันนี้</div><div class="nextd">${bigDate(d.date, true)}<div><p class="nx">${esc(d.place)}</p>${timeP(d.time)}<p class="tst ${cls}">${esc(text)}</p></div></div></div>`;
+    top = `<div class="grp topc"><div class="sub">เวรวันนี้</div><div class="nextd">${bigDate(d.date, true)}<div><p class="nx">${esc(d.place)}</p>${timeP(d.time)}<p class="tst ${cls}">${esc(text)}</p></div></div>${SHEET_BTN}</div>`;
   } else if (todays.length > 1) {
     const lines = todays.map((d) => {
       const [text, cls] = todayStatus(d);
       return `<div class="ln"><div><p class="nx">${esc(d.place)}</p>${timeP(d.time)}</div><p class="tst ${cls}">${esc(text)}</p></div>`;
     }).join('');
-    top = `<div class="grp topc"><div class="sub">เวรวันนี้</div><div class="nextd two">${bigDate(todays[0].date, true)}<div>${lines}</div></div></div>`;
+    top = `<div class="grp topc"><div class="sub">เวรวันนี้</div><div class="nextd two">${bigDate(todays[0].date, true)}<div>${lines}</div></div>${SHEET_BTN}</div>`;
   } else if (next) {
     const rel = relDay(st.today, next.date);
     const relHtml = rel ? `<span class="rel${rel.strong ? ' strong' : ''}">${rel.strong ? '<i class="dot"></i>' : ''}${rel.text}</span>` : '';
@@ -424,3 +426,5 @@ export function my(st) {
   const nameChange = r.canSelfChange ? '<button class="sublink" data-act="pickChange">เลือกชื่อผิด? เปลี่ยนชื่อ</button>' : '';
   return `<div class="myd">${header}<div class="mybody">${top}<div class="grp list"><div class="sub">รายการเวร</div>${rows}</div>${headLink}${nameChange}</div></div>`;
 }
+
+export { renderTeam as team } from './team.js';

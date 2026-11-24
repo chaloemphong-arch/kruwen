@@ -37,6 +37,7 @@ export function routeFor(res, opts = {}) {
     case 'renamed': return 'success';
     case 'my': return 'my';
     case 'bound': return 'my';
+    case 'team': return 'team';
     default: return 'error';
   }
 }
@@ -417,11 +418,19 @@ async function doMy(month) {
   if (!r.ok) return showError(r);
   rememberTeacher(r.teacher);
   const current = cfg && cfg.ok && cfg.serverTime ? cfg.serverTime.slice(0, 7) : '';
-  const m = month || current || (r.next ? r.next.date.slice(0, 7) : '');
+  const m = month || current || (r.today && r.today[0] ? r.today[0].date.slice(0, 7) : '') || (r.next ? r.next.date.slice(0, 7) : '');
   // คนที่เปิดใบเช็คได้และไม่มีเวรของตัวเองเลย (ไม่มีทั้งวันนี้ ครั้งถัดไป และในเดือนนี้) ไปหน้าตรวจเวรทันที
   if (!month && r.canHead && !r.next && !(r.today || []).length && !(r.days || []).length) return toHead();
   const today = cfg && cfg.ok && cfg.serverTime ? cfg.serverTime.slice(0, 10) : '';
   show('my', { r, month: m, currentMonth: current || m, today });
+}
+
+// ใบเช็คเวรวันนี้ (ดูอย่างเดียว) จากปุ่มในหน้าเวรปฏิบัติหน้าที่ประจำวัน
+async function doTeam() {
+  show('loading', { title: 'กำลังโหลด' });
+  const r = await call('teamView', {}, loadingRetry);
+  if (!r.ok) return showError(r, true);
+  show('team', { r, tab: Math.max(0, r.sessions.findIndex((x) => x.mine)) });
 }
 
 // push = แตะปุ่มเปิดเอง: เก็บหน้าเดิมไว้ในประวัติ กดย้อนกลับแล้วกลับมาหน้าเวรของฉัน (ไม่ปิดหน้าทั้งหมด)
@@ -437,6 +446,8 @@ const ACTIONS = {
   my: () => doMy(),
   toHead: () => toHead(true),
   myMonth: (d) => doMy(d.m),
+  team: () => doTeam(),
+  teamTab: (d) => show('team', Object.assign({}, A.st, { tab: Number(d.i) })),
   pickFromMy: () => startPick('my'),
   pickChange: () => startPick('change'),
   rename: () => startPick('rename'),

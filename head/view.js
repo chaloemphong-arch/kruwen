@@ -178,7 +178,7 @@ const ICON = {
   sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>',
   house: '<path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>'
 };
-function icon(session) {
+export function sessionIcon(session) {
   return '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
     ICON[session.session === 'เย็น' ? 'house' : 'sun'] + '</svg>';
 }
@@ -190,7 +190,7 @@ function tabBar(view, tab) {
   return '<div class="stabs" role="tablist">' + ss.map((s, i) =>
     '<button class="stab" role="tab" tabindex="' + (i === tab ? '0' : '-1') + '" data-act="tab" data-i="' + i + '" aria-selected="' + (i === tab) + '">' +
     // ไอคอนกับจุดแดงลอยข้างชื่อ ชื่อช่วงกับเวลาจึงอยู่กึ่งกลางตรงกัน
-    '<span class="tl">' + icon(s) + '<span class="sl">' + esc(s.label) + '</span>' +
+    '<span class="tl">' + sessionIcon(s) + '<span class="sl">' + esc(s.label) + '</span>' +
     (s.rows.some((r) => r.needs) ? '<span class="need" aria-label="มีรายการที่ต้องดู"></span>' : '') + '</span>' +
     // เวลาที่โชว์บนแท็บ (shownTime จากค่าตั้ง) อาจต่างจากเวลาสแกนจริง (timeText)
     '<small>' + esc(s.shownTime || s.timeText) + '</small><span class="sbar"></span></button>').join('') + '</div>';
