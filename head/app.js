@@ -6,6 +6,8 @@ import { withTitle, setAddKru } from '../js/names.js';
 import { renderPage, renderRow, renderSheet, renderToast, renderMessage, mergeNeedsKeys, defaultTab, clampTab } from './view.js';
 import { headMockTransport } from './mock.js';
 
+const UNDO_MS = 4000; // แถบที่มีปุ่มเลิกทำ
+const HINT_MS = 3000; // แถบแจ้งเหตุผลที่ปุ่มกดไม่ได้ (ยังไม่ถึงเวลา / ล็อก)
 const TOAST_MS = 8000;
 const REFRESH_MS = 60000;
 const AUTH_KEY = 'head.authReload';
@@ -15,7 +17,7 @@ const AUTH_RELOAD_GAP_MS = 120000;
 const H = {
   view: null, tab: null, canPreview: false, previewDate: '', filter: 'all', saving: {}, full: {}, fullFail: {},
   needsKeys: null, seq: 0, req: 0, appliedReq: 0, stale: false,
-  sheetKey: null, toast: null, toastTimer: null, pending: 0, mock: null, showLate: false
+  sheetKey: null, leaveOpen: false, toast: null, toastTimer: null, pending: 0, mock: null, showLate: false
 };
 
 // โทเคน LINE หมดอายุ (หน้าเปิดค้างนาน) → โหลดหน้าใหม่ได้ครั้งเดียวต่อช่วง กันวนโหลดไม่รู้จบ
@@ -165,10 +167,10 @@ function drawSheet(focus) {
   if (!row) return closeSheet(false);
   const box = $('hsheet');
   const id = row.photo ? row.photo.checkinId : null;
-  box.innerHTML = renderSheet(row, { full: id ? H.full[id] : '', failed: id ? !!H.fullFail[id] : false });
+  box.innerHTML = renderSheet(row, { full: id ? H.full[id] : '', failed: id ? !!H.fullFail[id] : false, leaveOpen: H.leaveOpen });
   box.hidden = false;
   if (focus) {
-    const first = box.querySelector('.opt:not(:disabled)') || box.querySelector('[data-act="close"].btn');
+    const first = box.querySelector('.rnd[data-act="opt"],.rnd[data-act="leaveOpen"]') || box.querySelector('.shclose');
     if (first) first.focus();
   }
 }
@@ -177,6 +179,7 @@ function openSheet(key) {
   const row = rowByKey(key);
   if (!row || H.saving[key]) return;
   H.sheetKey = key;
+  H.leaveOpen = false;
   if (row.photo) delete H.fullFail[row.photo.checkinId]; // เปิดใหม่ = ลองโหลดรูปอีกครั้ง
   document.body.style.overflow = 'hidden';
   drawSheet(true);
@@ -195,12 +198,13 @@ function closeSheet(refocus = true) {
 // ---------- แถบแจ้งผล + เลิกทำ ----------
 // undo = { token, key, prev }: ปุ่มเลิกทำ (prev = ป้ายของแถวก่อนเลือก ใช้ขึ้นทันทีตอนแตะเลิกทำ)
 // sticky = ค้างไว้จนกว่าผลบันทึกจะมา (ยังไม่มีปุ่มเลิกทำ ยังไม่นับเวลา)
-function showToast(text, undo, sticky) {
+// kind: 'time' | 'lock' = แจ้งเหตุผลที่กดไม่ได้ (ไอคอน + ขึ้นสั้นกว่า)
+function showToast(text, undo, sticky, kind) {
   clearTimeout(H.toastTimer);
-  H.toast = text ? { text, undo: !!(undo && undo.token), undoInfo: undo && undo.token ? undo : null } : null;
+  H.toast = text ? { text, undo: !!(undo && undo.token), undoInfo: undo && undo.token ? undo : null, kind: kind || '' } : null;
   const box = $('htoast');
   if (box) box.innerHTML = renderToast(H.toast);
-  if (H.toast && !sticky) H.toastTimer = setTimeout(() => showToast(null), TOAST_MS);
+  if (H.toast && !sticky) H.toastTimer = setTimeout(() => showToast(null), H.toast.undo ? UNDO_MS : kind ? HINT_MS : TOAST_MS);
 }
 
 // fromServer = รีเฟรชจากหลังบ้าน (ไม่ใช่ผลการบันทึกของหัวหน้าเวรเอง): ตัวกรองต้องดูเพิ่มแถวที่เพิ่งต้องดู
@@ -221,7 +225,7 @@ async function choose(action, leaveType = '') {
   const row = rowByKey(H.sheetKey);
   if (!row || !action) return;
   const opt = (row.options || []).find((o) => o.action === action && (o.leaveType || '') === leaveType);
-  if (opt && opt.disabled && !opt.current && opt.hint) return showToast(opt.hint);
+  if (opt && opt.disabled && !opt.current && opt.hint) return showToast(opt.hint, null, false, opt.hintKind);
   if (!opt || opt.disabled) return;
   closeSheet();
   showToast(withTitle(row.name) + ': ' + (action === 'head' ? 'หัวหน้าเวรเช็ค' : opt.label), null, true);
@@ -295,6 +299,16 @@ const ACTIONS = {
   row: (d) => openSheet(d.key),
   close: () => closeSheet(),
   opt: (d) => choose(d.a, d.t || ''),
+  // วงลาที่มีประเภทลา: แตะ = เปิด/ปิดรายการประเภท
+  leaveOpen: () => { H.leaveOpen = !H.leaveOpen; drawSheet(false); },
+  // วงที่กดไม่ได้แต่มีเหตุผล: ขึ้นแถบแจ้ง (ช่องที่ไม่มีตัวเลือกในแผ่นที่ล็อก ใช้ข้อความล็อกของตัวเลือกอื่น)
+  hint: (d) => {
+    const row = rowByKey(H.sheetKey);
+    if (!row) return;
+    const os = row.options || [];
+    const o = os.find((x) => x.slot === d.s && x.hint) || os.find((x) => x.hintKind === 'lock' && x.hint);
+    if (o) showToast(o.hint, null, false, o.hintKind);
+  },
   // แตะ "เฉพาะที่ต้องดู" = ตรึงชุดแถวที่ต้องดูตอนนี้ไว้ (แตะซ้ำเพื่อคำนวณใหม่) · "ทั้งหมด" = เลิกตรึง
   filter: (d) => {
     H.filter = d.f === 'needs' ? 'needs' : 'all';

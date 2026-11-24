@@ -64,36 +64,63 @@ export function renderRow(row, ui = {}) {
     '<span class="st ' + p.cls + (p.late ? ' two' : '') + '">' + esc(p.text) + (p.late ? '<small class="late">(สาย)</small>' : '') + '</span></div>';
 }
 
-// วงสีหน้าตัวเลือก: สีเดียวกับป้ายที่จะได้
-const BX = {
-  head: ['ok', '✓'], leave: ['leave', 'ลา'], notfound: ['miss', '✗'], absent: ['miss', '✗'], standin: ['head', 'แทน'],
-  restore: ['ok', '↺'], uncover: ['pending', '↺'], clear: ['pending', '↺']
+// ไอคอน lucide ของแผ่นเลือกสถานะ (คัดจาก HeadOptions.mock.html): ถูก · ใบลา · กากบาท · นาฬิกา · แม่กุญแจ
+const SI = {
+  ok: '<path d="M20 6 9 17l-5-5"/>',
+  miss: '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
+  leave: '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M8 13h8"/><path d="M8 17h5"/>',
+  clock: '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+  lock: '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>'
 };
-const BX_OF_PILL = { 'p-ok': ['ok', '✓'], 'p-head': ['head', '✓'], 'p-leave': ['leave', 'ลา'], 'p-miss': ['miss', '✗'], 'p-idle': ['pending', '–'] };
+function ico(k) { return '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true">' + SI[k] + '</svg>'; }
+const SLOT_LABEL = { ok: 'มา', leave: 'ลา', miss: 'ขาด' };
 
-// ตัวเลือกที่ยังกดไม่ได้แต่มีเหตุผล (เช่น ยังไม่ถึงเวลา): ไม่เขียนเหตุผลใต้ปุ่ม แตะแล้วขึ้นแถบแจ้งแทน (app.js choose)
-function option(o, row) {
-  const bx = (o.action ? BX[o.action] : BX_OF_PILL[(row.pill || {}).cls]) || ['pending', '›'];
-  const tapHint = o.hint && o.disabled && !o.current;
-  return '<button class="opt" data-act="opt" data-a="' + esc(o.action) + '"' + (o.leaveType ? ' data-t="' + esc(o.leaveType) + '"' : '') +
-    (o.current ? ' aria-pressed="true"' : '') + (tapHint ? ' aria-disabled="true"' : o.disabled ? ' disabled' : '') + '>' +
-    '<span class="bx ' + bx[0] + '" aria-hidden="true">' + bx[1] + '</span>' +
-    '<span class="ol"><b>' + esc(o.label) + '</b></span>' +
-    '</button>';
+// วงกลมหนึ่งช่อง: usable = data-act opt (หรือ leaveOpen ถ้าลามีประเภท) · ปิดอยู่แต่มีเหตุผล = data-act hint (แตะแล้วขึ้นแจ้ง) · ไม่มีตัวเลือก/เป็นค่าปัจจุบัน = ไม่มี data-act
+function circle(slot, row, sheetUi) {
+  const opts = (row.options || []).filter((o) => o.slot === slot);
+  const types = slot === 'leave' ? opts.filter((o) => o.leaveType) : [];
+  const open = !!sheetUi.leaveOpen && types.length > 0;
+  const cur = opts.find((o) => o.current);
+  const hintOpt = opts.length && opts.every((o) => o.disabled && o.hintKind) ? opts[0] : null;
+  const usable = opts.find((o) => !o.disabled);
+  let attrs = '';
+  // แผ่นที่ล็อก: ช่องที่ไม่มีตัวเลือกก็แตะแล้วขึ้นแจ้งล็อกเหมือนช่องอื่น (app.js หาข้อความล็อกจากตัวเลือกอื่นของแถว)
+  const locked = (row.options || []).some((o) => o.hintKind === 'lock');
+  if (!opts.length) attrs = locked ? ' data-act="hint" data-s="' + slot + '" aria-disabled="true"' : ' aria-disabled="true"';
+  else if (hintOpt) attrs = ' data-act="hint" data-s="' + slot + '" aria-disabled="true"';
+  else if (types.length && (usable || cur)) attrs = ' data-act="leaveOpen"';
+  else if (usable) attrs = ' data-act="opt" data-a="' + esc(usable.action) + '"';
+  // เปิดรายการประเภทลาอยู่ = มีแต่ปุ่มลาที่เต็มสี ปุ่มอื่นไม่เต็ม
+  const pressed = !!cur && !(sheetUi.leaveOpen && slot !== 'leave');
+  const pressedAttr = pressed && !open ? ' aria-pressed="true"' : '';
+  const caption = slot === 'leave' && cur && !open && (row.leaveType || cur.leaveType)
+    ? '<small>(' + esc(row.leaveType || cur.leaveType) + ')</small>' : '';
+  return '<button class="rnd ' + slot + '"' + attrs + (open ? ' aria-expanded="true"' : '') + pressedAttr + '>' +
+    '<span class="cir">' + ico(slot) + '</span>' + SLOT_LABEL[slot] + caption + '</button>';
 }
 
-// sheetUi: { full: dataUrl ของรูปใหญ่ (ยังไม่มี = กำลังโหลด), failed: true = โหลดรูปไม่สำเร็จ }
+// ประเภทลา (แคปซูล): ขึ้นเมื่อแตะวงลา · ประเภทที่บันทึกไว้ = ปุ่มที่กดอยู่ (ไม่มี data-act)
+function leavePills(row) {
+  return '<div class="pills">' + (row.options || []).filter((o) => o.slot === 'leave' && o.leaveType).map((o) =>
+    '<button class="p"' + (o.current ? ' aria-pressed="true"' : o.disabled ? ' aria-disabled="true"' : ' data-act="opt" data-a="' + esc(o.action) + '" data-t="' + esc(o.leaveType) + '"') + '>' +
+    esc(o.leaveType) + '</button>').join('') + '</div>';
+}
+
+// sheetUi: { full: dataUrl ของรูปใหญ่ (ยังไม่มี = กำลังโหลด), failed: true = โหลดรูปไม่สำเร็จ, leaveOpen: true = เปิดรายการประเภทลา }
 export function renderSheet(row, sheetUi = {}) {
   const opts = row.options || [];
   const full = safeImg(sheetUi.full);
   let photo = '';
   if (row.photo) {
     photo = full ? '<img class="bigphoto" src="' + full + '" alt="รูปที่จุดเวรของ ' + esc(row.name) + '">'
-      : '<p class="small muted">' + (sheetUi.failed ? 'เปิดรูปไม่ได้' : 'กำลังโหลดรูป…') + '</p>';
+      : '<div class="phbox">' + (sheetUi.failed ? 'เปิดรูปไม่ได้' : 'กำลังโหลดรูป…') + '</div>';
   }
   const reports = (row.reports || []).map((r) =>
     '<li>' + esc((r.categories || []).join(', ')) + (r.note ? (r.categories && r.categories.length ? ' · ' : '') + esc(r.note) : '') +
     (r.hasPhoto ? ' <span class="muted">(มีรูป)</span>' : '') + '</li>').join('');
+  const hasTypes = opts.some((o) => o.slot === 'leave' && o.leaveType);
+  const links = opts.filter((o) => o.slot === 'link' && !o.disabled).map((o) =>
+    '<button class="clear" data-act="opt" data-a="' + esc(o.action) + '">' + esc(o.label) + '</button>').join('');
   return '<div class="shade" data-act="close"></div>' +
     '<div class="sheet" role="dialog" aria-modal="true" aria-label="' + esc(row.name) + '">' +
     '<div class="grab"></div>' +
@@ -102,14 +129,21 @@ export function renderSheet(row, sheetUi = {}) {
     (row.note ? '<p class="small">' + esc(row.note) + '</p>' : '') +
     (row.deviceFlag ? '<p class="bar warn rounded">เครื่องเดียวกันลงหลายชื่อวันนี้</p>' : '') +
     photo +
-    opts.map((o) => option(o, row)).join('') +
+    '<div class="rounds">' + ['ok', 'leave', 'miss'].map((k) => circle(k, row, sheetUi)).join('') + '</div>' +
+    (sheetUi.leaveOpen && hasTypes ? leavePills(row) : '') +
+    links +
     (reports ? '<div class="reps"><p class="label">รายงานเหตุการณ์</p><ul>' + reports + '</ul></div>' : '') +
     '<button class="shclose" data-act="close">ปิด</button></div>';
 }
 
-// toast: { text, undo: boolean }
+// toast: { text, undo: boolean, kind: 'time' | 'lock' | undefined }
 export function renderToast(toast) {
   if (!toast) return '';
+  if (toast.kind === 'time') return '<div class="toast fit" role="status">' + ico('clock') + '<span>' + esc(toast.text) + '</span></div>';
+  if (toast.kind === 'lock') {
+    return '<div class="toast fit two" role="status"><span class="l1">' + ico('lock') + esc(toast.text) +
+      '</span><span class="l2">กรุณาติดต่อแอดมินเพื่อทำการแก้ไข</span></div>';
+  }
   return '<div class="toast" role="status"><span>' + esc(toast.text) + '</span>' +
     (toast.undo ? '<button data-act="undo">เลิกทำ</button>' : '') + '</div>';
 }

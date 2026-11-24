@@ -10,13 +10,13 @@ const fail = (code, message, extra) => Object.assign({ ok: false, code, message 
 
 // ตัวเลือกของแถวยังว่าง (ตรงกับ headOptions ของหลังบ้าน)
 const OPEN_OPTIONS = [
-  { action: 'head', label: 'มา', hint: '', next: { cls: 'p-head', text: '✓ หัวหน้าเวรเช็ค' } },
-  { action: 'leave', label: 'ลา', hint: '', next: { cls: 'p-leave', text: 'ลา' } },
-  { action: 'absent', label: 'ขาด', hint: '', next: { cls: 'p-miss', text: 'ขาด' } }
+  { action: 'head', slot: 'ok', hintKind: '', label: 'มา', hint: '', next: { cls: 'p-head', text: '✓ หัวหน้าเวรเช็ค' } },
+  { action: 'leave', slot: 'leave', hintKind: '', label: 'ลา', hint: '', next: { cls: 'p-leave', text: 'ลา' } },
+  { action: 'absent', slot: 'miss', hintKind: '', label: 'ขาด', hint: '', next: { cls: 'p-miss', text: 'ขาด' } }
 ];
 const PILL = {
   head: { cls: 'p-head', text: '✓ หัวหน้าเวรเช็ค' }, leave: { cls: 'p-leave', text: 'ลา' },
-  notfound: { cls: 'p-miss', text: 'ไม่พบตัว' }, absent: { cls: 'p-miss', text: 'ขาด' },
+  notfound: { cls: 'p-miss', text: 'ขาด' }, absent: { cls: 'p-miss', text: 'ขาด' },
   clear: { cls: 'p-idle', text: 'ยังว่าง' }, uncover: { cls: 'p-idle', text: 'ยังว่าง' }
 };
 
@@ -57,7 +57,7 @@ function applyMock(row, opt, original) {
     current: o.action === action, disabled: o.action === action || (o.disabled && !o.current)
   }));
   if (!opts.some((o) => o.action === 'clear' || o.action === 'restore' || o.action === 'uncover')) {
-    opts.push({ action: 'restore', label: 'ยกเลิก กลับเป็นสถานะเดิม', hint: '', current: false, disabled: false, next: clone(original.pill) });
+    opts.push({ action: 'restore', slot: 'link', hintKind: '', label: 'ยกเลิก กลับเป็นสถานะเดิม', hint: '', current: false, disabled: false, next: clone(original.pill) });
   }
   row.options = opts;
   return row;

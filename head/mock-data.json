@@ -22,7 +22,6 @@
    "leave": 1,
    "upcoming": 4
   },
-  "banners": [],
   "sessions": [
    {
     "session": "เช้า",
@@ -59,6 +58,8 @@
         "hint": "สแกนเวลา 07:02",
         "current": true,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-ok",
          "text": "✓ 07:02"
@@ -66,16 +67,19 @@
        },
        {
         "action": "notfound",
-        "label": "ไม่พบตัวที่จุดเวร",
+        "label": "ขาด",
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
-         "text": "ไม่พบตัว"
+         "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -112,12 +116,15 @@
         "hint": "ลงชื่อให้โดย ครูสมชาย ใจดี 07:05",
         "current": true,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-ok",
          "text": "✓ 07:05"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -157,6 +164,8 @@
         "hint": "สแกนเวลา 07:08",
         "current": true,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-ok",
          "text": "✓ 07:08"
@@ -165,9 +174,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -175,16 +186,19 @@
        },
        {
         "action": "notfound",
-        "label": "ไม่พบตัวที่จุดเวร",
+        "label": "ขาด",
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
-         "text": "ไม่พบตัว"
+         "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -220,6 +234,8 @@
         "hint": "สแกนเวลา 07:24",
         "current": true,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-ok",
          "text": "✓ 07:24",
@@ -228,16 +244,19 @@
        },
        {
         "action": "notfound",
-        "label": "ไม่พบตัวที่จุดเวร",
+        "label": "ขาด",
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
-         "text": "ไม่พบตัว"
+         "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -264,7 +283,7 @@
       },
       "needs": true,
       "photo": null,
-      "note": "บันทึกลาโดย ครูสมชาย ใจดี",
+      "note": "",
       "options": [
        {
         "action": "head",
@@ -272,6 +291,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -280,9 +301,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": true,
         "disabled": true,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -294,6 +317,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
@@ -305,12 +330,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "link",
+        "hintKind": "",
         "next": {
          "cls": "p-idle",
          "text": "ยังว่าง"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -349,6 +377,8 @@
         "hint": "สแกนเวลา 07:33",
         "current": true,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-ok",
          "text": "✓ 07:33"
@@ -356,16 +386,19 @@
        },
        {
         "action": "notfound",
-        "label": "ไม่พบตัวที่จุดเวร",
+        "label": "ขาด",
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
-         "text": "ไม่พบตัว"
+         "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [
        {
         "id": "r1",
@@ -404,6 +437,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -412,9 +447,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -426,12 +463,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -461,6 +501,8 @@
         "hint": "",
         "current": true,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -469,9 +511,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -483,6 +527,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
@@ -494,12 +540,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "link",
+        "hintKind": "",
         "next": {
          "cls": "p-idle",
          "text": "ยังว่าง"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      }
@@ -538,6 +587,8 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "time",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -546,9 +597,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -560,12 +613,15 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "miss",
+        "hintKind": "time",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -595,6 +651,8 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "time",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -603,9 +661,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -617,12 +677,15 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "miss",
+        "hintKind": "time",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -652,6 +715,8 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "time",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -660,9 +725,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -674,12 +741,15 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "miss",
+        "hintKind": "time",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -709,6 +779,8 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "time",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -717,9 +789,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -731,12 +805,15 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "miss",
+        "hintKind": "time",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      }
@@ -767,12 +844,6 @@
    "leave": 1,
    "upcoming": 4
   },
-  "banners": [
-   {
-    "tone": "warn",
-    "text": "ช่วงเช้าจะล็อก 09.30 น. (อีก 25 นาที) · ยังว่าง 2 คน"
-   }
-  ],
   "sessions": [
    {
     "session": "เช้า",
@@ -809,6 +880,8 @@
         "hint": "สแกนเวลา 07:02",
         "current": true,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-ok",
          "text": "✓ 07:02"
@@ -816,16 +889,19 @@
        },
        {
         "action": "notfound",
-        "label": "ไม่พบตัวที่จุดเวร",
+        "label": "ขาด",
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
-         "text": "ไม่พบตัว"
+         "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -862,12 +938,15 @@
         "hint": "ลงชื่อให้โดย ครูสมชาย ใจดี 07:05",
         "current": true,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-ok",
          "text": "✓ 07:05"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -907,6 +986,8 @@
         "hint": "สแกนเวลา 07:08",
         "current": true,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-ok",
          "text": "✓ 07:08"
@@ -915,9 +996,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -925,16 +1008,19 @@
        },
        {
         "action": "notfound",
-        "label": "ไม่พบตัวที่จุดเวร",
+        "label": "ขาด",
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
-         "text": "ไม่พบตัว"
+         "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -970,6 +1056,8 @@
         "hint": "สแกนเวลา 07:24",
         "current": true,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-ok",
          "text": "✓ 07:24",
@@ -978,16 +1066,19 @@
        },
        {
         "action": "notfound",
-        "label": "ไม่พบตัวที่จุดเวร",
+        "label": "ขาด",
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
-         "text": "ไม่พบตัว"
+         "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -1014,7 +1105,7 @@
       },
       "needs": true,
       "photo": null,
-      "note": "บันทึกลาโดย ครูสมชาย ใจดี",
+      "note": "",
       "options": [
        {
         "action": "head",
@@ -1022,6 +1113,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -1030,9 +1123,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": true,
         "disabled": true,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -1044,6 +1139,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
@@ -1055,12 +1152,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "link",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -1099,6 +1199,8 @@
         "hint": "สแกนเวลา 07:33",
         "current": true,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-ok",
          "text": "✓ 07:33"
@@ -1106,16 +1208,19 @@
        },
        {
         "action": "notfound",
-        "label": "ไม่พบตัวที่จุดเวร",
+        "label": "ขาด",
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
-         "text": "ไม่พบตัว"
+         "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [
        {
         "id": "r1",
@@ -1159,6 +1264,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -1167,9 +1274,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -1181,12 +1290,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -1216,6 +1328,8 @@
         "hint": "",
         "current": true,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -1224,9 +1338,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -1238,6 +1354,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
@@ -1249,12 +1367,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "link",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      }
@@ -1293,6 +1414,8 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "time",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -1301,9 +1424,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -1315,12 +1440,15 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "miss",
+        "hintKind": "time",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -1350,6 +1478,8 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "time",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -1358,9 +1488,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -1372,12 +1504,15 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "miss",
+        "hintKind": "time",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -1407,6 +1542,8 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "time",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -1415,9 +1552,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -1429,12 +1568,15 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "miss",
+        "hintKind": "time",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -1464,6 +1606,8 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "time",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -1472,9 +1616,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -1486,12 +1632,15 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "miss",
+        "hintKind": "time",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      }
@@ -1522,12 +1671,6 @@
    "leave": 1,
    "upcoming": 4
   },
-  "banners": [
-   {
-    "tone": "lock",
-    "text": "ช่วงเช้าล็อกแล้ว 09.30 น. ถ้าต้องแก้ ให้แอดมินปลดล็อก"
-   }
-  ],
   "sessions": [
    {
     "session": "เช้า",
@@ -1556,8 +1699,36 @@
       "photo": {
        "checkinId": "c1"
       },
-      "note": "ข้อมูลช่วงนี้ล็อกแล้ว ถ้าต้องแก้ ให้แอดมินปลดล็อก",
-      "options": [],
+      "note": "",
+      "options": [
+       {
+        "action": "",
+        "label": "มา",
+        "hint": "สถานะถูกล็อก",
+        "current": true,
+        "disabled": true,
+        "slot": "ok",
+        "hintKind": "lock",
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ 07:02"
+        }
+       },
+       {
+        "action": "notfound",
+        "label": "ขาด",
+        "hint": "สถานะถูกล็อก",
+        "current": false,
+        "disabled": true,
+        "slot": "miss",
+        "hintKind": "lock",
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -1586,8 +1757,23 @@
       "photo": {
        "checkinId": "c2"
       },
-      "note": "ข้อมูลช่วงนี้ล็อกแล้ว ถ้าต้องแก้ ให้แอดมินปลดล็อก",
-      "options": [],
+      "note": "",
+      "options": [
+       {
+        "action": "",
+        "label": "มา",
+        "hint": "สถานะถูกล็อก",
+        "current": true,
+        "disabled": true,
+        "slot": "ok",
+        "hintKind": "lock",
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ 07:05"
+        }
+       }
+      ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -1619,8 +1805,49 @@
       },
       "needs": false,
       "photo": null,
-      "note": "ครูณัฐธิดา พึ่งบุญ มาแทน (สแกนเวลา 07:08) · ข้อมูลช่วงนี้ล็อกแล้ว ถ้าต้องแก้ ให้แอดมินปลดล็อก",
-      "options": [],
+      "note": "ครูณัฐธิดา พึ่งบุญ มาแทน (สแกนเวลา 07:08)",
+      "options": [
+       {
+        "action": "",
+        "label": "มา",
+        "hint": "สถานะถูกล็อก",
+        "current": true,
+        "disabled": true,
+        "slot": "ok",
+        "hintKind": "lock",
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ 07:08"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา",
+        "hint": "สถานะถูกล็อก",
+        "current": false,
+        "disabled": true,
+        "slot": "leave",
+        "hintKind": "lock",
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "notfound",
+        "label": "ขาด",
+        "hint": "สถานะถูกล็อก",
+        "current": false,
+        "disabled": true,
+        "slot": "miss",
+        "hintKind": "lock",
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -1648,8 +1875,37 @@
       },
       "needs": false,
       "photo": null,
-      "note": "ข้อมูลช่วงนี้ล็อกแล้ว ถ้าต้องแก้ ให้แอดมินปลดล็อก",
-      "options": [],
+      "note": "",
+      "options": [
+       {
+        "action": "",
+        "label": "มา",
+        "hint": "สถานะถูกล็อก",
+        "current": true,
+        "disabled": true,
+        "slot": "ok",
+        "hintKind": "lock",
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ 07:24",
+         "late": true
+        }
+       },
+       {
+        "action": "notfound",
+        "label": "ขาด",
+        "hint": "สถานะถูกล็อก",
+        "current": false,
+        "disabled": true,
+        "slot": "miss",
+        "hintKind": "lock",
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -1676,8 +1932,62 @@
       },
       "needs": true,
       "photo": null,
-      "note": "บันทึกลาโดย ครูสมชาย ใจดี · ข้อมูลช่วงนี้ล็อกแล้ว ถ้าต้องแก้ ให้แอดมินปลดล็อก",
-      "options": [],
+      "note": "",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา",
+        "hint": "สถานะถูกล็อก",
+        "current": false,
+        "disabled": true,
+        "slot": "ok",
+        "hintKind": "lock",
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา",
+        "hint": "สถานะถูกล็อก",
+        "current": true,
+        "disabled": true,
+        "slot": "leave",
+        "hintKind": "lock",
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "สถานะถูกล็อก",
+        "current": false,
+        "disabled": true,
+        "slot": "miss",
+        "hintKind": "lock",
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       },
+       {
+        "action": "clear",
+        "label": "ล้างค่า กลับเป็นยังว่าง",
+        "hint": "สถานะถูกล็อก",
+        "current": false,
+        "disabled": true,
+        "slot": "link",
+        "hintKind": "lock",
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -1708,8 +2018,36 @@
       },
       "needs": false,
       "photo": null,
-      "note": "ข้อมูลช่วงนี้ล็อกแล้ว ถ้าต้องแก้ ให้แอดมินปลดล็อก",
-      "options": [],
+      "note": "",
+      "options": [
+       {
+        "action": "",
+        "label": "มา",
+        "hint": "สถานะถูกล็อก",
+        "current": true,
+        "disabled": true,
+        "slot": "ok",
+        "hintKind": "lock",
+        "next": {
+         "cls": "p-ok",
+         "text": "✓ 07:33"
+        }
+       },
+       {
+        "action": "notfound",
+        "label": "ขาด",
+        "hint": "สถานะถูกล็อก",
+        "current": false,
+        "disabled": true,
+        "slot": "miss",
+        "hintKind": "lock",
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "leaveType": "",
       "reports": [
        {
         "id": "r1",
@@ -1745,8 +2083,49 @@
       },
       "needs": true,
       "photo": null,
-      "note": "เลยเวลาแล้ว ยังไม่มีการลงเวร · ข้อมูลช่วงนี้ล็อกแล้ว ถ้าต้องแก้ ให้แอดมินปลดล็อก",
-      "options": [],
+      "note": "เลยเวลาแล้ว ยังไม่มีการลงเวร",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา",
+        "hint": "สถานะถูกล็อก",
+        "current": false,
+        "disabled": true,
+        "slot": "ok",
+        "hintKind": "lock",
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา",
+        "hint": "สถานะถูกล็อก",
+        "current": false,
+        "disabled": true,
+        "slot": "leave",
+        "hintKind": "lock",
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "สถานะถูกล็อก",
+        "current": false,
+        "disabled": true,
+        "slot": "miss",
+        "hintKind": "lock",
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -1768,8 +2147,62 @@
       },
       "needs": false,
       "photo": null,
-      "note": "หัวหน้าเวรเช็ค (ครูสมชาย ใจดี 07:38) · ข้อมูลช่วงนี้ล็อกแล้ว ถ้าต้องแก้ ให้แอดมินปลดล็อก",
-      "options": [],
+      "note": "หัวหน้าเวรเช็ค (ครูสมชาย ใจดี 07:38)",
+      "options": [
+       {
+        "action": "head",
+        "label": "มา",
+        "hint": "สถานะถูกล็อก",
+        "current": true,
+        "disabled": true,
+        "slot": "ok",
+        "hintKind": "lock",
+        "next": {
+         "cls": "p-head",
+         "text": "✓ หัวหน้าเวรเช็ค"
+        }
+       },
+       {
+        "action": "leave",
+        "label": "ลา",
+        "hint": "สถานะถูกล็อก",
+        "current": false,
+        "disabled": true,
+        "slot": "leave",
+        "hintKind": "lock",
+        "next": {
+         "cls": "p-leave",
+         "text": "ลา"
+        }
+       },
+       {
+        "action": "absent",
+        "label": "ขาด",
+        "hint": "สถานะถูกล็อก",
+        "current": false,
+        "disabled": true,
+        "slot": "miss",
+        "hintKind": "lock",
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       },
+       {
+        "action": "clear",
+        "label": "ล้างค่า กลับเป็นยังว่าง",
+        "hint": "สถานะถูกล็อก",
+        "current": false,
+        "disabled": true,
+        "slot": "link",
+        "hintKind": "lock",
+        "next": {
+         "cls": "p-miss",
+         "text": "ขาด"
+        }
+       }
+      ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      }
@@ -1808,6 +2241,8 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "time",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -1816,9 +2251,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -1830,12 +2267,15 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "miss",
+        "hintKind": "time",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -1865,6 +2305,8 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "time",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -1873,9 +2315,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -1887,12 +2331,15 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "miss",
+        "hintKind": "time",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -1922,6 +2369,8 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "time",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -1930,9 +2379,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -1944,12 +2395,15 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "miss",
+        "hintKind": "time",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -1979,6 +2433,8 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "time",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -1987,9 +2443,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -2001,12 +2459,15 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "miss",
+        "hintKind": "time",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      }
@@ -2037,12 +2498,6 @@
    "leave": 1,
    "upcoming": 4
   },
-  "banners": [
-   {
-    "tone": "info",
-    "text": "ช่วงเช้าปลดล็อกชั่วคราวถึง 11:00 น."
-   }
-  ],
   "sessions": [
    {
     "session": "เช้า",
@@ -2079,6 +2534,8 @@
         "hint": "สแกนเวลา 07:02",
         "current": true,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-ok",
          "text": "✓ 07:02"
@@ -2086,16 +2543,19 @@
        },
        {
         "action": "notfound",
-        "label": "ไม่พบตัวที่จุดเวร",
+        "label": "ขาด",
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
-         "text": "ไม่พบตัว"
+         "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -2132,12 +2592,15 @@
         "hint": "ลงชื่อให้โดย ครูสมชาย ใจดี 07:05",
         "current": true,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-ok",
          "text": "✓ 07:05"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -2177,6 +2640,8 @@
         "hint": "สแกนเวลา 07:08",
         "current": true,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-ok",
          "text": "✓ 07:08"
@@ -2185,9 +2650,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -2195,16 +2662,19 @@
        },
        {
         "action": "notfound",
-        "label": "ไม่พบตัวที่จุดเวร",
+        "label": "ขาด",
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
-         "text": "ไม่พบตัว"
+         "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -2240,6 +2710,8 @@
         "hint": "สแกนเวลา 07:24",
         "current": true,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-ok",
          "text": "✓ 07:24",
@@ -2248,16 +2720,19 @@
        },
        {
         "action": "notfound",
-        "label": "ไม่พบตัวที่จุดเวร",
+        "label": "ขาด",
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
-         "text": "ไม่พบตัว"
+         "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -2284,7 +2759,7 @@
       },
       "needs": true,
       "photo": null,
-      "note": "บันทึกลาโดย ครูสมชาย ใจดี",
+      "note": "",
       "options": [
        {
         "action": "head",
@@ -2292,6 +2767,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -2300,9 +2777,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": true,
         "disabled": true,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -2314,6 +2793,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
@@ -2325,12 +2806,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "link",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -2369,6 +2853,8 @@
         "hint": "สแกนเวลา 07:33",
         "current": true,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-ok",
          "text": "✓ 07:33"
@@ -2376,16 +2862,19 @@
        },
        {
         "action": "notfound",
-        "label": "ไม่พบตัวที่จุดเวร",
+        "label": "ขาด",
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
-         "text": "ไม่พบตัว"
+         "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [
        {
         "id": "r1",
@@ -2429,6 +2918,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -2437,9 +2928,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -2451,12 +2944,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -2486,6 +2982,8 @@
         "hint": "",
         "current": true,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -2494,9 +2992,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -2508,6 +3008,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
@@ -2519,12 +3021,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "link",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      }
@@ -2563,6 +3068,8 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "time",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -2571,9 +3078,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -2585,12 +3094,15 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "miss",
+        "hintKind": "time",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -2620,6 +3132,8 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "time",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -2628,9 +3142,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -2642,12 +3158,15 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "miss",
+        "hintKind": "time",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -2677,6 +3196,8 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "time",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -2685,9 +3206,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -2699,12 +3222,15 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "miss",
+        "hintKind": "time",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -2734,6 +3260,8 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "time",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -2742,9 +3270,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -2756,12 +3286,15 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "miss",
+        "hintKind": "time",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      }
@@ -2792,12 +3325,6 @@
    "leave": 0,
    "upcoming": 4
   },
-  "banners": [
-   {
-    "tone": "info",
-    "text": "คุณกำลังทำหน้าที่แทนหัวหน้าเวร (ครูธนากร รักเรียน)"
-   }
-  ],
   "sessions": [
    {
     "session": "เช้า",
@@ -2837,6 +3364,8 @@
         "hint": "สแกนเวลา 07:03",
         "current": true,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-ok",
          "text": "✓ 07:03"
@@ -2844,16 +3373,19 @@
        },
        {
         "action": "notfound",
-        "label": "ไม่พบตัวที่จุดเวร",
+        "label": "ขาด",
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
-         "text": "ไม่พบตัว"
+         "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -2883,6 +3415,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -2891,9 +3425,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -2905,12 +3441,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -2945,6 +3484,8 @@
         "hint": "สแกนเวลา 07:06",
         "current": true,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-ok",
          "text": "✓ 07:06"
@@ -2952,16 +3493,19 @@
        },
        {
         "action": "notfound",
-        "label": "ไม่พบตัวที่จุดเวร",
+        "label": "ขาด",
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
-         "text": "ไม่พบตัว"
+         "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -2991,6 +3535,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -2999,9 +3545,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -3013,12 +3561,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -3048,6 +3599,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -3056,9 +3609,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -3070,12 +3625,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -3105,6 +3663,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -3113,9 +3673,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -3127,12 +3689,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -3162,6 +3727,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -3170,9 +3737,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -3184,12 +3753,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -3219,6 +3791,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -3227,9 +3801,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -3241,12 +3817,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      }
@@ -3285,6 +3864,8 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "time",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -3293,9 +3874,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -3307,12 +3890,15 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "miss",
+        "hintKind": "time",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -3342,6 +3928,8 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "time",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -3350,9 +3938,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -3364,12 +3954,15 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "miss",
+        "hintKind": "time",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -3399,6 +3992,8 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "time",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -3407,9 +4002,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -3421,12 +4018,15 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "miss",
+        "hintKind": "time",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -3456,6 +4056,8 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "ok",
+        "hintKind": "time",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -3464,9 +4066,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -3478,12 +4082,15 @@
         "hint": "ยังไม่ถึงเวลา เลือกได้ตั้งแต่ 15.30 น.",
         "current": false,
         "disabled": true,
+        "slot": "miss",
+        "hintKind": "time",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      }
@@ -3514,7 +4121,6 @@
    "leave": 1,
    "upcoming": 4
   },
-  "banners": [],
   "sessions": [
    {
     "session": "เช้า",
@@ -3545,6 +4151,7 @@
       },
       "note": "ดูอย่างเดียว",
       "options": [],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -3575,6 +4182,7 @@
       },
       "note": "ดูอย่างเดียว",
       "options": [],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -3608,6 +4216,7 @@
       "photo": null,
       "note": "ครูณัฐธิดา พึ่งบุญ มาแทน (สแกนเวลา 07:08) · ดูอย่างเดียว",
       "options": [],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -3637,6 +4246,7 @@
       "photo": null,
       "note": "ดูอย่างเดียว",
       "options": [],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -3663,8 +4273,9 @@
       },
       "needs": true,
       "photo": null,
-      "note": "บันทึกลาโดย ครูสมชาย ใจดี · ดูอย่างเดียว",
+      "note": "ดูอย่างเดียว",
       "options": [],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -3697,6 +4308,7 @@
       "photo": null,
       "note": "ดูอย่างเดียว",
       "options": [],
+      "leaveType": "",
       "reports": [
        {
         "id": "r1",
@@ -3729,6 +4341,7 @@
       "photo": null,
       "note": "ดูอย่างเดียว",
       "options": [],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -3752,6 +4365,7 @@
       "photo": null,
       "note": "หัวหน้าเวรเช็ค (ครูสมชาย ใจดี 07:38) · ดูอย่างเดียว",
       "options": [],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      }
@@ -3784,6 +4398,7 @@
       "photo": null,
       "note": "ดูอย่างเดียว",
       "options": [],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -3807,6 +4422,7 @@
       "photo": null,
       "note": "ดูอย่างเดียว",
       "options": [],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -3830,6 +4446,7 @@
       "photo": null,
       "note": "ดูอย่างเดียว",
       "options": [],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -3853,6 +4470,7 @@
       "photo": null,
       "note": "ดูอย่างเดียว",
       "options": [],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      }
@@ -3893,7 +4511,6 @@
    "leave": 0,
    "upcoming": 0
   },
-  "banners": [],
   "sessions": [],
   "message": "วันนี้ไม่มีเวร"
  },
@@ -3920,7 +4537,6 @@
    "leave": 0,
    "upcoming": 34
   },
-  "banners": [],
   "sessions": [
    {
     "session": "เช้า",
@@ -3954,6 +4570,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -3962,9 +4580,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -3976,12 +4596,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -4011,6 +4634,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -4019,9 +4644,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -4033,12 +4660,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -4068,6 +4698,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -4076,9 +4708,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -4090,12 +4724,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -4125,6 +4762,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -4133,9 +4772,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -4147,12 +4788,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -4182,6 +4826,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -4190,9 +4836,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -4204,12 +4852,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -4239,6 +4890,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -4247,9 +4900,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -4261,12 +4916,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -4296,6 +4954,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -4304,9 +4964,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -4318,12 +4980,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -4353,6 +5018,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -4361,9 +5028,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -4375,12 +5044,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -4410,6 +5082,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -4418,9 +5092,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -4432,12 +5108,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -4467,6 +5146,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -4475,9 +5156,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -4489,12 +5172,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -4524,6 +5210,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -4532,9 +5220,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -4546,12 +5236,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -4581,6 +5274,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -4589,9 +5284,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -4603,12 +5300,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -4638,6 +5338,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -4646,9 +5348,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -4660,12 +5364,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -4695,6 +5402,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -4703,9 +5412,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -4717,12 +5428,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -4752,6 +5466,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -4760,9 +5476,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -4774,12 +5492,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -4809,6 +5530,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -4817,9 +5540,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -4831,12 +5556,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -4866,6 +5594,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -4874,9 +5604,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -4888,12 +5620,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -4923,6 +5658,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -4931,9 +5668,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -4945,12 +5684,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -4980,6 +5722,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -4988,9 +5732,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -5002,12 +5748,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -5037,6 +5786,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -5045,9 +5796,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -5059,12 +5812,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -5094,6 +5850,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -5102,9 +5860,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -5116,12 +5876,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -5151,6 +5914,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -5159,9 +5924,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -5173,12 +5940,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -5208,6 +5978,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -5216,9 +5988,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -5230,12 +6004,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -5265,6 +6042,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -5273,9 +6052,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -5287,12 +6068,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -5322,6 +6106,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -5330,9 +6116,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -5344,12 +6132,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -5379,6 +6170,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -5387,9 +6180,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -5401,12 +6196,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -5436,6 +6234,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -5444,9 +6244,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -5458,12 +6260,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -5493,6 +6298,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -5501,9 +6308,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -5515,12 +6324,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -5550,6 +6362,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -5558,9 +6372,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -5572,12 +6388,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -5607,6 +6426,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -5615,9 +6436,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -5629,12 +6452,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -5664,6 +6490,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -5672,9 +6500,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -5686,12 +6516,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -5721,6 +6554,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -5729,9 +6564,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -5743,12 +6580,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -5778,6 +6618,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -5786,9 +6628,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -5800,12 +6644,15 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      },
@@ -5835,6 +6682,8 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "ok",
+        "hintKind": "",
         "next": {
          "cls": "p-head",
          "text": "✓ หัวหน้าเวรเช็ค"
@@ -5843,9 +6692,11 @@
        {
         "action": "leave",
         "label": "ลา",
-        "hint": "ไม่นับเป็นขาด",
+        "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "leave",
+        "hintKind": "",
         "next": {
          "cls": "p-leave",
          "text": "ลา"
@@ -5857,17 +6708,21 @@
         "hint": "",
         "current": false,
         "disabled": false,
+        "slot": "miss",
+        "hintKind": "",
         "next": {
          "cls": "p-miss",
          "text": "ขาด"
         }
        }
       ],
+      "leaveType": "",
       "reports": [],
       "deviceFlag": false
      }
     ]
    }
-  ]
+  ],
+  "banners": []
  }
 }
