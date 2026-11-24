@@ -43,6 +43,7 @@ function ui() { return { filter: H.filter, needsKeys: H.needsKeys, saving: H.sav
 function myDutyHref() { return location.pathname + (H.mock !== null ? '?mock=my' : ''); }
 
 function showMessage(title, text, withLink) {
+  if (CAM.on) leaveCamera();
   closeSheet(false);
   root().innerHTML = renderMessage(title, text, withLink ? { href: myDutyHref(), label: 'ไปหน้าเวรปฏิบัติหน้าที่ประจำวัน' } : null);
 }
@@ -156,6 +157,15 @@ export function sheetPhotoKey(row) {
   return null;
 }
 
+// ล้างแคชรูปหลักฐานของแถวที่ไม่มีหลักฐานแล้ว (เช่น คืนค่า/เลิกทำ) · กันรูปเก่าโผล่เมื่อ ✗ ครั้งใหม่
+export function pruneEvidenceCache(full, fail, view) {
+  const keep = {};
+  ((view && view.sessions) || []).forEach((s) => (s.rows || []).forEach((r) => {
+    if (r && r.evidence && r.evidence.checkinId) keep['e:' + r.evidence.checkinId] = true;
+  }));
+  [full, fail].forEach((m) => Object.keys(m).forEach((k) => { if (k.slice(0, 2) === 'e:' && !keep[k]) delete m[k]; }));
+}
+
 async function loadFull(row) {
   const k = sheetPhotoKey(row);
   if (!k) return;
@@ -250,6 +260,7 @@ function showToast(text, undo, sticky, kind) {
 function applyView(view, fromServer) {
   H.seq++;
   H.view = view;
+  pruneEvidenceCache(H.full, H.fullFail, view);
   if (fromServer && H.filter === 'needs') H.needsKeys = mergeNeedsKeys(H.needsKeys, view);
   if (H.sheetKey && !rowByKey(H.sheetKey)) closeSheet(false);
   H.tab = H.tab === null ? defaultTab(view) : clampTab(H.tab, view);
@@ -329,7 +340,7 @@ function startEvidence(row, opt, leaveType) {
 function shoot() {
   const video = $('hvideo');
   const b64 = video ? capture(video) : null;
-  if (!b64) return leaveCamera('เปิดกล้องไม่ได้');
+  if (!b64) return; // ยังไม่มีเฟรมแรก: ไม่ทำอะไร (เหมือนแอปครู)
   stopCamera(); // ได้รูปแล้ว ปิดกล้องทันที (ถ่ายใหม่ = เปิดใหม่)
   CAM.img = 'data:image/jpeg;base64,' + b64;
   camBox().innerHTML = renderHeadPreview(CAM.img, false);
@@ -344,7 +355,7 @@ async function useEvidence() {
 }
 
 // หน้าถูกซ่อน/ปิดระหว่างถ่าย → ปิดกล้องและชั้นกล้อง (ไม่บันทึก)
-function onHidden() { if (CAM.on) leaveCamera(); }
+function onHidden() { if (CAM.on && !CAM.img) leaveCamera(); } // หน้าพรีวิว (กล้องปิดแล้ว) เก็บไว้ ไม่ให้รูปหาย
 
 // บันทึก/เลิกทำหนึ่งครั้ง: แถว key ขึ้นป้าย next ระหว่างรอ · คืน res หรือ null เมื่อออกจากหน้า (auth/not_head/not_bound)
 // H.saving ทับแถวไว้จนผลมา: รีเฟรชไม่วิ่งระหว่างนี้ (pending) และ drawPage/drawRow จากผลอื่นก็ยังวาดป้ายที่กำลังบันทึก
