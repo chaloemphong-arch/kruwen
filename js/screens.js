@@ -41,7 +41,7 @@ const ICON = {
   flip: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9a8 8 0 0114-3l2 2M20 4v4h-4M20 15a8 8 0 01-14 3l-2-2M4 20v-4h4"/></svg>'
 };
 
-const myLink = '<button class="link" data-act="my">ดูเวรของฉัน</button>';
+const myLink = '<button class="link" data-act="my">ดูเวรปฏิบัติหน้าที่ประจำวัน</button>';
 const dock = (inner) => `<div class="dock">${inner}</div>`;
 const who = (name) => (kruFirst(name) ? kruFirst(name) + ' ' : 'มีคน');
 const NOT_RECORDED = '<p class="small muted">ยังไม่ได้บันทึกการลงเวร</p>';
@@ -136,7 +136,7 @@ export function success(st) {
    ${st.renamed && st.teacherName ? line('muted', `เปลี่ยนเป็น ${esc(kru(st.teacherName))} แล้ว`) : ''}
    ${photo}${extra}
   </div>
-  ${row}<button class="link" data-act="my">ดูเวรของฉัน</button>${st.canRename ? '<button class="sublink" data-act="rename">เลือกชื่อผิด? เปลี่ยนชื่อ</button>' : ''}
+  ${row}<button class="link" data-act="my">ดูเวรปฏิบัติหน้าที่ประจำวัน</button>${st.canRename ? '<button class="sublink" data-act="rename">เลือกชื่อผิด? เปลี่ยนชื่อ</button>' : ''}
   </div>`;
 }
 
@@ -159,7 +159,7 @@ export function menu(st) {
    <span class="bal" style="font-size:17px;font-weight:500">${esc(placeFull(d))}</span></span></div>
   <div class="pad">${body}
    ${st.photoSent ? '<p class="ok" style="font-size:16px">ส่งรูปแล้ว</p>' : ''}${st.error ? `<div class="err">${esc(st.error)}</div>` : ''}
-   <div class="fill"></div>${st.canRename ? '<button class="sublink" data-act="rename">เลือกชื่อผิด? เปลี่ยนชื่อ</button>' : ''}<button class="link" data-act="my">ดูเวรของฉัน</button></div>`;
+   <div class="fill"></div>${st.canRename ? '<button class="sublink" data-act="rename">เลือกชื่อผิด? เปลี่ยนชื่อ</button>' : ''}<button class="link" data-act="my">ดูเวรปฏิบัติหน้าที่ประจำวัน</button></div>`;
 }
 
 const camBar = (left) => `<div class="cambar">${left}<button class="shutter" data-act="shoot" aria-label="ถ่ายรูป"></button>

@@ -41,7 +41,7 @@ function myDutyHref() { return location.pathname + (H.mock !== null ? '?mock=my'
 
 function showMessage(title, text, withLink) {
   closeSheet(false);
-  root().innerHTML = renderMessage(title, text, withLink ? { href: myDutyHref(), label: 'ไปหน้าเวรของฉัน' } : null);
+  root().innerHTML = renderMessage(title, text, withLink ? { href: myDutyHref(), label: 'ไปหน้าเวรปฏิบัติหน้าที่ประจำวัน' } : null);
 }
 
 function showError(res) {
