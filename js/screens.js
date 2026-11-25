@@ -154,7 +154,7 @@ export function menu(st) {
     if (c.photoRequired && !c.hasPhoto && !st.photoSent && st.photoOpen) rows.push(mrow('photo', ICON.cam, 'ถ่ายรูปเวร'));
     body = `<div class="mlist">${rows.join('')}</div>`;
   }
-  const head = st.viaProxy ? `นับว่ามาแล้ว ${esc(st.viaProxy.time)}` : `ลงเวรแล้ว ${esc(c.time)}`;
+  const head = st.viaProxy ? `นับว่ามาแล้ว ${esc(st.viaProxy.time)}` : `ลงเวลาปฏิบัติหน้าที่แล้ว ${esc(c.time)}`;
   return `<div class="strip num">${ICON.checkS}<span><span class="ok" style="font-size:24px;font-weight:600">${head}</span>
    <span class="bal" style="font-size:17px;font-weight:500">${esc(placeFull(d))}</span></span></div>
   <div class="pad">${body}
@@ -169,7 +169,7 @@ const viewfinder = (tip) => `<div class="vf"><video id="video" playsinline muted
 // กล้องหลังสแกน st: {c, mode:'live'|'ask'} (ask = โหมดสุ่ม แสดงหน้าขอรูปก่อนเปิดกล้อง)
 export function scanCam(st) {
   const c = st.c;
-  const done = `ลงเวรแล้ว ${esc(c.time)}${lateMark(c.late, ' (สาย)')}`;
+  const done = `ลงเวลาปฏิบัติหน้าที่แล้ว ${esc(c.time)}${lateMark(c.late, ' (สาย)')}`;
   if (st.mode === 'ask') {
     return `<div class="pad"><div class="mid"><div class="ring info">${ICON.cam}</div>
     <p class="big bal">วันนี้ขอรูปจุดเวร 1 รูป</p><p class="ok lead">${done}</p></div></div>
@@ -261,7 +261,7 @@ export function wrongPoint(st) {
     foot: myLink });
 }
 
-const MY_STATUS = { self: 'ลงเวรแล้ว', proxy: 'เพื่อนลงชื่อให้', head: 'หัวหน้าเวรเช็คให้', leave: 'ลา', absent: 'ขาด', missing: 'ไม่ได้ลงเวร' };
+const MY_STATUS = { self: 'ลงเวลาปฏิบัติหน้าที่แล้ว', proxy: 'เพื่อนลงชื่อให้', head: 'หัวหน้าเวรเช็คให้', leave: 'ลา', absent: 'ขาด', missing: 'ไม่ได้ลงเวร' };
 
 // st: {r (outside), nowMin (เวลาเซิร์ฟเวอร์เป็นนาที)}
 export function outside(st) {
@@ -278,7 +278,7 @@ export function outside(st) {
     title = 'ยังไม่ถึงเวลาเวรของคุณ';
     lines = `${place}<p class="lead">เริ่ม ${hmd(d.start)} น.${left > 0 ? ` · <b>อีก ${left} นาที</b>` : ''}</p>${NOT_RECORDED}`;
   } else if (r.reason === 'after' && mine) {
-    const status = r.myTime ? ['ok', `✓ ลงเวรแล้ว ${esc(r.myTime)}`]
+    const status = r.myTime ? ['ok', `✓ ลงเวลาปฏิบัติหน้าที่แล้ว ${esc(r.myTime)}`]
       : MY_STATUS[r.myStatus] ? [r.myStatus === 'head' || r.myStatus === 'proxy' ? 'ok' : r.myStatus === 'leave' ? 'leavec' : 'miss', MY_STATUS[r.myStatus]] : null;
     title = 'เวรของคุณวันนี้จบแล้ว';
     lines = `${place}<p class="lead">จบ ${hmd(d.end)} น.</p>${status ? `<p class="lead strong ${status[0]}">${status[1]}</p>` : ''}`;
@@ -369,7 +369,7 @@ const todayStatus = (d) => {
   const note = d.note ? ' · ' + d.note : '';
   switch (d.status) {
     case 'รอลงเวร': return ['รอลงเวร', 'wait'];
-    case 'มา': case 'สาย': case 'ไปแทน': return ['✓ ลงเวรแล้ว', 'ok'];
+    case 'มา': case 'สาย': case 'ไปแทน': return ['✓ ลงเวลาปฏิบัติหน้าที่แล้ว', 'ok'];
     case 'ลา': case 'มีคนมาแทน': return [d.status + note, 'muted'];
     case 'ขาด': return ['ยังไม่ได้เช็ค', 'muted'];
     default: return [d.status || '', 'muted'];
