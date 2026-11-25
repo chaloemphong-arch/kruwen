@@ -151,8 +151,10 @@ export function pickSheet(sh) {
     list = open + done;
   }
   const off = sh.requireOne && !draft.length ? ' disabled' : '';
+  const dead = sh.error || (!sh.loading && !friends.length);
+  const act = dead ? '<button class="btn pri" data-act="sheetClose">ปิด</button>' : `<button class="btn pri" data-act="pickDone"${off}>เสร็จ</button>`;
   return `<div class="shade" data-act="sheetClose"></div><div class="bs" role="dialog" aria-modal="true"><div class="grab"></div><p class="q">เพิ่มชื่อ</p><p class="qs">เลือกคนที่อยู่ในรูปนี้</p>
-  <div class="list">${list}</div><div class="acts"><button class="btn pri" data-act="pickDone"${off}>เสร็จ</button></div></div>`;
+  <div class="list">${list}</div><div class="acts">${act}</div></div>`;
 }
 export function confirmSheet(sh) {
   const names = sh.names || [];
@@ -169,7 +171,7 @@ export function success(st) {
   const sent = st.photoSent || c.hasPhoto;
   const pill = sent ? '<span class="ph">ส่งรูปแล้ว</span>' : (c.photoRequired ? '<span class="ph warn">ยังไม่มีรูปถ่ายรายงาน</span>' : '');
   const sub = (cls, text) => `<p class="${cls}">${text}</p>`;
-  return `<div class="ap"><div class="scroll"><header class="hdr okhd"><div class="ring">${ICON2.checkT}</div><p class="lb">ลงเวลาปฏิบัติหน้าที่แล้ว</p>
+  return `<div class="ap"><div class="scroll"><header class="ahd okhd"><div class="ring">${ICON2.checkT}</div><p class="lb">ลงเวลาปฏิบัติหน้าที่แล้ว</p>
    <p class="tt">${fmtT(c.time)}</p><p class="pl bal">${esc(placeFull(d))}</p><p class="rg">${rng(d)}</p>
    ${c.asSubstituteFor ? sub('rg', `มาแทน ${esc(kru(c.asSubstituteFor.name))}`) : ''}${st.renamed && st.teacherName ? sub('rg', `เปลี่ยนเป็น ${esc(kru(st.teacherName))} แล้ว`) : ''}
    ${pill}${np && np.retrying && st.photoOpen ? sub('rg', 'กำลังลองส่งรูปใหม่') : ''}</header>
@@ -183,7 +185,7 @@ export function menu(st) {
     ? `<p class="lb">นับว่ามาแล้ว ${fmtT(st.viaProxy.time)}</p><p class="ml">${esc(who(st.viaProxy.name))}ลงชื่อให้คุณแล้ว</p><p class="ml sm">ไม่ต้องทำอะไรเพิ่ม</p>`
     : `<p class="lb">ลงเวลาปฏิบัติหน้าที่แล้ว</p><p class="ml">${fmtT(c.time)} · ${esc(placeShort(d))}</p>`;
   const photoDot = !!(c.photoRequired && !c.hasPhoto && !st.photoSent && st.photoOpen);
-  return `<div class="ap"><div class="scroll"><header class="hdr mhd"><div class="ring">${ICON2.checkT}</div><div>${head}</div></header>
+  return `<div class="ap"><div class="scroll"><header class="ahd mhd"><div class="ring">${ICON2.checkT}</div><div>${head}</div></header>
    ${st.error ? `<div class="err">${esc(st.error)}</div>` : ''}
    ${st.viaProxy ? '' : signedCard(st) + actCard({ actionsOpen: st.actionsOpen, photoDot })}${navCard()}${renameLink(st)}</div>${sheetHtml(st.sheet)}</div>`;
 }
@@ -220,9 +222,9 @@ export function preview(st) {
   const acts = st.sending
     ? '<div class="pbar"><i></i></div><p class="small muted center">กำลังส่งรูป</p>'
     : `<button class="btn pri" data-act="sendPhoto">${isReport ? 'ใช้รูปนี้' : 'ส่งรูป'}</button>${add}<button class="txt" data-act="retake">ถ่ายใหม่</button>`;
-  return `<div class="ap"><div class="scroll"><header class="hdr"><p class="ttl">ตรวจรูปก่อนส่ง</p>${place}</header>
-   <div class="pcard"><img class="pvimg2" src="${esc(st.img)}" alt="รูปที่ถ่าย"></div>${chosen}${st.error ? `<div class="err">${esc(st.error)}</div>` : ''}</div>
-   <div class="dock">${acts}</div>${sheetHtml(st.sheet)}</div>`;
+  return `<div class="ap"><div class="scroll"><header class="ahd"><p class="ttl">ตรวจรูปก่อนส่ง</p>${place}</header>
+   <div class="pcard"><img class="pvimg2" src="${esc(st.img)}" alt="รูปที่ถ่าย"></div>${chosen}</div>
+   <div class="dock">${st.error ? `<div class="err">${esc(st.error)}</div>` : ''}${acts}</div>${sheetHtml(st.sheet)}</div>`;
 }
 
 // st: {r (proxied)}

@@ -358,7 +358,7 @@ function groupConfirm() {
 function noteSigned(r) {
   const added = nameOf(r.friends);
   A.signed = A.signed.concat(added.filter((n) => !A.signed.includes(n)));
-  A.skipped = nameOf(r.skipped);
+  A.skipped = nameOf((r.skipped || []).filter((s) => s.reason === 'already'));
   A.group = [];
   A.cands = null; // รายชื่อที่เช็คแล้วเปลี่ยน โหลดใหม่ครั้งหน้า
 }
@@ -402,7 +402,7 @@ async function sendScanPhoto(b64) {
 
 // ---------- ลงชื่อให้เพื่อน ----------
 function startProxy() {
-  A.pickFor = 'proxy'; A.group = [];
+  A.pickFor = 'proxy'; A.group = []; A.cands = null;
   return openPick('home');
 }
 
@@ -672,4 +672,4 @@ export async function start() {
 }
 
 // เฉพาะเทสต์: เข้าถึงสถานะและปุ่มโดยไม่ต้องมี DOM จริง
-export const __test = { A, act: (name, data) => ACTIONS[name](data || {}), start };
+export const __test = { A, act: (name, data) => ACTIONS[name](data || {}), start, noteSigned };

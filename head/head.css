@@ -126,7 +126,7 @@
 /* ป้ายเลขจุด: สี่เหลี่ยมเทา เลขดำ เหมือนกันทุกจุด */
 .pno{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-size:17px;font-weight:600;font-variant-numeric:tabular-nums;background:#E8ECF2;color:#374151}
 
-/* มาตามปกติ: ตัวเขียวไม่มีกรอบ · ลา/หัวหน้าเวรเช็ค/ขาด/ยังว่าง ยังมีกรอบ จึงเด่นกว่า */
+/* มาตามปกติ: ตัวเขียวไม่มีกรอบ · ลา/หัวหน้าเวรเช็ค/ขาด/ยังไม่ได้เช็ค ยังมีกรอบ จึงเด่นกว่า */
 #hpage .st.p-ok{background:transparent;padding:4px 0}
 
 /* ระยะบรรทัด (23 พ.ย. 2569): ชื่อครูกับบรรทัดรองห่างขึ้น · บรรทัดรองเล็กลง 15px (ข้อยกเว้นกฎ 16px ที่ผู้ใช้ขอ) */
