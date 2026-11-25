@@ -224,32 +224,6 @@ export function preview(st) {
    <div class="dock">${acts}</div>${sheetHtml(st.sheet)}</div>`;
 }
 
-// st: {r (proxy_candidates), c}
-export function proxyPick(st) {
-  const list = st.r.friends || [];
-  const body = list.length
-    ? list.map((t) => `<button class="prow" data-act="proxyTo" data-id="${esc(t.teacher_id)}" data-name="${esc(t.name)}"><span>${esc(kru(t.name))}</span>${ICON.chev}</button>`).join('')
-    : `<p class="lead">${esc(st.r.message || 'ลงเวรครบแล้ว')}</p>`;
-  return `<div class="pad top"><p class="h1">เลือกชื่อ</p><div class="plist2">${body}</div><div class="fill"></div></div>
-   ${dock('<button class="btn" data-act="toHome">กลับ</button>')}`;
-}
-
-// st: {r (proxy_done), img, c}
-export function proxyDone(st) {
-  const r = st.r, d = st.c ? st.c.duty : null;
-  if (r.already) {
-    // คำขอที่ลองใหม่แต่ถึงเซิร์ฟเวอร์ไปแล้ว (code 'already'): เพื่อนมีบันทึกแล้ว
-    return `<div class="pad"><div class="mid"><div class="ring ok">${ICON.checkBig}</div>
-    <p class="big bal">${esc(who(r.friendName))}มีบันทึกเวรแล้ว</p><p class="small muted">ไม่ต้องลงชื่อให้ซ้ำ</p></div></div>
-  ${dock('<button class="btn" data-act="toHome">กลับ</button>')}`;
-  }
-  return `<div class="pad"><div class="mid"><div class="ring ok">${ICON.checkBig}</div>
-   <p class="hd28">ลงชื่อให้แล้ว</p><p class="num t56">${esc(r.time)}</p>${lateMark(r.late, '<p class="late nm20">(สาย)</p>')}
-   <p class="nm20 bal">${esc(kru(r.friendName))}</p>${d ? `<p class="small muted bal">${esc(placeShort(d))}</p>` : ''}
-   ${st.img ? `<img class="thumbs" src="${esc(st.img)}" alt="รูปยืนยัน">` : ''}</div></div>
-  ${dock('<button class="btn" data-act="toHome">กลับ</button>')}`;
-}
-
 // st: {r (proxied)}
 export function proxied(st) {
   const r = st.r;

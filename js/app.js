@@ -5,7 +5,7 @@ import { initIdentity, mockScenario, viewParam } from './liff.js';
 import * as camera from './camera.js';
 import { getGps } from './gps.js';
 import * as V from './screens.js';
-import { withTitle, setAddKru } from './names.js';
+import { setAddKru } from './names.js';
 import { mockTransport, mockStreamSource } from './mock.js';
 
 // ผลจากหลังบ้าน → ชื่อหน้าจอ
@@ -30,8 +30,6 @@ export function routeFor(res, opts = {}) {
     case 'wrong_point': return 'wrongPoint';
     case 'outside': return 'outside';
     case 'need_bind': return 'pick';
-    case 'proxy_candidates': return 'proxyPick';
-    case 'proxy_done': return 'proxyDone';
     case 'report_done': return 'reportDone';
     case 'photo_done': return 'success';
     case 'renamed': return 'success';
@@ -45,6 +43,7 @@ export function routeFor(res, opts = {}) {
 const toMin = (hhmm) => { const p = String(hhmm).split(':'); return Number(p[0]) * 60 + Number(p[1]); };
 const minToHHMM = (m) => String(Math.floor(m / 60) % 24).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
 const CAM_SCREENS = ['scanCam', 'cam'];
+const SHEET_SCREENS = ['preview', 'success', 'menu'];
 
 // ---------- สถานะของหน้า ----------
 const A = {
@@ -52,7 +51,7 @@ const A = {
   screen: '', st: null,
   c: null, home: 'success', viaProxy: null, noPhoto: null, photoSent: false, localPhoto: null, localB64: null,
   teacherName: '', renamed: false, photoGen: 0,
-  pick: null, picked: null, friend: null, camFor: null, shot: null, rep: null, my: null, menuError: '',
+  pick: null, picked: null, camFor: null, group: [], signed: [], skipped: [], cands: null, sheet: null, pickFor: null, pickFrom: null, teamFrom: null, shot: null, rep: null, my: null, menuError: '',
   config: null, configP: null, waitConfig: false, clock: null, timer: null, searchTimer: null, searchSeq: 0
 };
 
@@ -75,6 +74,7 @@ function root() { return document.getElementById('app'); }
 
 function show(screen, st) {
   if (CAM_SCREENS.includes(A.screen) && !CAM_SCREENS.includes(screen)) camera.stop();
+  if (!SHEET_SCREENS.includes(screen)) A.sheet = null;
   A.screen = screen;
   A.st = st || {};
   const html = V[screen](A.st);
@@ -126,10 +126,11 @@ function ensureConfig() {
 function homeState() {
   const c = A.c;
   if (A.home === 'menu') {
-    return { c, actionsOpen: actionsOpen(c), photoOpen: photoOpen(c), canRename: canRename(c), viaProxy: A.viaProxy, photoSent: A.photoSent, error: A.menuError };
+    return { c, actionsOpen: actionsOpen(c), photoOpen: photoOpen(c), canRename: canRename(c), viaProxy: A.viaProxy, photoSent: A.photoSent, error: A.menuError,
+      signed: A.signed, skipped: A.skipped, sheet: A.sheet };
   }
   return { c, actionsOpen: actionsOpen(c), photoOpen: photoOpen(c), canRename: canRename(c), noPhoto: A.noPhoto, photoSent: A.photoSent,
-    teacherName: A.teacherName, renamed: A.renamed };
+    teacherName: A.teacherName, renamed: A.renamed, signed: A.signed, skipped: A.skipped, sheet: A.sheet };
 }
 function showHome() {
   if (!A.c) return doMy();
@@ -190,6 +191,7 @@ function handleScan(res) {
 
 function goMenu(c, viaProxy) {
   A.c = c; A.home = 'menu'; A.viaProxy = viaProxy; A.photoSent = false; A.menuError = '';
+  A.signed = []; A.skipped = []; A.group = []; A.sheet = null; A.cands = null;
   show('menu', homeState());
   // ผล menu ไม่มีเวลาปัจจุบัน: ยังไม่รู้เวลาเซิร์ฟเวอร์ → ขอ config เงียบ ๆ แล้ววาดเมนูใหม่ (ปุ่มเปลี่ยนชื่อต้องเทียบ renameUntil กับเวลาเซิร์ฟเวอร์)
   if (!A.clock) ensureConfig().then(() => { if (A.screen === 'menu') show('menu', homeState()); });
@@ -198,6 +200,7 @@ function goMenu(c, viaProxy) {
 function afterCheckin(c) {
   A.c = c; A.home = 'success'; A.viaProxy = null; A.noPhoto = null; A.photoSent = false;
   A.localPhoto = null; A.localB64 = null; A.renamed = false;
+  A.signed = []; A.skipped = []; A.group = []; A.sheet = null; A.cands = null;
   setClock(c.time);
   if (routeFor(c) === 'success') return showHome();
   if (c.photoMode === 'สุ่ม') return show('scanCam', { c, mode: 'ask' });
@@ -212,6 +215,7 @@ async function startCamera() {
 
 async function openScanCam() {
   A.camFor = 'scan';
+  if (!A.cands) A.cands = loadCands();
   show('scanCam', { c: A.c, mode: 'live' });
   const s = await startCamera();
   if (s || A.screen !== 'scanCam') return;
@@ -238,40 +242,141 @@ function shoot() {
   if (!b64) return;
   camera.stop();
   A.shot = b64;
-  show('preview', { img: 'data:image/jpeg;base64,' + b64, purpose: A.camFor, sending: false });
+  show('preview', previewState());
 }
 
 function retake() {
   if (A.camFor === 'scan') return openScanCam();
-  if (A.camFor === 'proxy') return openCam('proxy', proxyTip());
+  if (A.camFor === 'proxy') return openCam('proxy', PROXY_TIP);
   return openCam('report', 'ถ่ายรูปเหตุการณ์');
 }
 
 function skipPhoto() {
   camera.stop();
+  A.group = [];
   if (A.home === 'menu') return showHome();
   A.noPhoto = { reason: 'skipped' };
   showHome();
 }
 
+// ---------- หน้าตรวจรูป / เลือกชื่อเพื่อน ----------
+const PROXY_TIP = 'ถ่ายรูปทุกคนที่จุดเวร';
+const shotUrl = () => 'data:image/jpeg;base64,' + A.shot;
+const groupIds = () => A.group.map((t) => t.teacher_id);
+const groupNames = () => A.group.map((t) => t.name);
+const nameOf = (list) => (list || []).map((t) => t.name);
+
+function previewState(extra) {
+  return Object.assign({ img: shotUrl(), purpose: A.camFor, group: A.camFor === 'report' ? [] : A.group, c: A.camFor === 'scan' ? A.c : null,
+    sending: false, error: '', sheet: A.sheet }, extra);
+}
+
+// วาดหน้าเดิมใหม่ (หน้าตรวจรูป หรือหน้าหลักหลังสแกน) ตาม A.sheet
+function rerender() {
+  if (A.screen === 'preview') return show('preview', previewState());
+  return showHome();
+}
+
+// รายชื่อที่ยังไม่เช็ค: โหลดล่วงหน้าตอนเปิดกล้อง ใช้ซ้ำตอนเปิดแผ่นเลือก (ล้มเหลว = ไม่เก็บ ให้ลองโหลดใหม่ครั้งหน้า)
+function loadCands() {
+  const p = call('proxyCandidates', { pointId: A.P }, { retries: 1 }).then((r) => { if (!r.ok && A.cands === p) A.cands = null; return r; });
+  return p;
+}
+
+async function openPick(from) {
+  A.pickFrom = from;
+  const draft = from === 'home' ? [] : groupIds();
+  const sheet = { kind: 'pick', friends: [], checked: [], draft, loading: true, requireOne: from === 'home' || A.pickFor === 'proxy' };
+  A.sheet = sheet;
+  if (!A.cands) A.cands = loadCands();
+  rerender();
+  const r = await A.cands;
+  if (A.sheet !== sheet) return;
+  if (!r.ok) {
+    A.sheet = null;
+    if (from === 'preview') return show('preview', previewState({ error: r.message }));
+    A.menuError = r.message; return showHome();
+  }
+  sheet.friends = r.friends || []; sheet.checked = r.checked || []; sheet.loading = false;
+  rerender();
+}
+
+// เปลี่ยนวงกลมกับปุ่มเสร็จตรงจุด (วาดใหม่ทั้งแผ่นแล้วรายชื่อเลื่อนกลับไปบนสุด)
+function syncPick() {
+  const sh = A.sheet;
+  if (!sh || sh.kind !== 'pick') return;
+  root().querySelectorAll('[data-act="pickToggle"]').forEach((b) => b.setAttribute('aria-pressed', String(sh.draft.includes(b.dataset.id))));
+  const done = root().querySelector('[data-act="pickDone"]');
+  if (done) done.disabled = !!(sh.requireOne && !sh.draft.length);
+}
+
+function pickToggle(d) {
+  const sh = A.sheet;
+  if (!sh || sh.kind !== 'pick') return;
+  sh.draft = sh.draft.includes(d.id) ? sh.draft.filter((x) => x !== d.id) : sh.draft.concat([d.id]);
+  syncPick();
+}
+
+function pickDone() {
+  const sh = A.sheet;
+  if (!sh || sh.kind !== 'pick' || sh.loading) return;
+  if (sh.requireOne && !sh.draft.length) return;
+  const known = new Map(A.group.map((t) => [t.teacher_id, t]));
+  sh.friends.forEach((t) => known.set(t.teacher_id, t));
+  A.group = sh.draft.map((id) => known.get(id)).filter(Boolean).map((t) => ({ teacher_id: t.teacher_id, name: t.name }));
+  A.sheet = null;
+  if (A.pickFrom === 'home') return openCam('proxy', PROXY_TIP);
+  show('preview', previewState());
+}
+
+function sheetClose() {
+  A.sheet = null;
+  rerender();
+}
+
 function sendPhoto() {
+  if (A.camFor === 'report') {
+    A.rep.photo = { kind: 'new', img: shotUrl(), b64: A.shot };
+    A.rep.error = '';
+    return show('report', A.rep);
+  }
+  if (A.group.length) {
+    A.sheet = { kind: 'confirm', img: shotUrl(), names: groupNames() };
+    return show('preview', previewState());
+  }
   if (A.camFor === 'scan') return sendScanPhoto(A.shot);
-  if (A.camFor === 'proxy') return sendProxy(A.shot);
-  A.rep.photo = { kind: 'new', img: 'data:image/jpeg;base64,' + A.shot, b64: A.shot };
-  A.rep.error = '';
-  show('report', A.rep);
+  // ลงชื่อให้เพื่อนต้องมีอย่างน้อยหนึ่งคน
+  A.pickFor = 'proxy';
+  return openPick('preview');
+}
+
+function groupConfirm() {
+  A.sheet = null;
+  return A.camFor === 'proxy' ? sendProxy(A.shot) : sendScanPhoto(A.shot);
+}
+
+function noteSigned(r) {
+  const added = nameOf(r.friends);
+  A.signed = A.signed.concat(added.filter((n) => !A.signed.includes(n)));
+  A.skipped = nameOf(r.skipped);
+  A.group = [];
+  A.cands = null; // รายชื่อที่เช็คแล้วเปลี่ยน โหลดใหม่ครั้งหน้า
 }
 
 // รูปหลังสแกน: การลงเวรบันทึกแล้ว เน็ตล้มเหลว → ไปหน้าสำเร็จทันที แล้วลองส่งใหม่เบื้องหลัง
+// มีรายชื่อเพื่อนด้วย: รอผลจริงก่อน (ไม่ข้ามไปหน้าหลัก) ล้มเหลวแล้วอยู่หน้าตรวจรูปพร้อมรายชื่อเดิม
 async function sendScanPhoto(b64) {
   const gen = ++A.photoGen;
   const url = 'data:image/jpeg;base64,' + b64;
   A.localPhoto = url; A.localB64 = b64;
-  show('preview', { img: url, purpose: 'scan', sending: true });
+  const withFriends = A.group.length > 0;
+  show('preview', previewState({ sending: true }));
+  const payload = { pointId: A.P, token: A.K, photo: { base64: b64 } };
+  if (withFriends) { payload.friendIds = groupIds(); payload.gps = await scanGps(); }
   let movedOn = false;
-  const res = await call('photo', { pointId: A.P, token: A.K, photo: { base64: b64 } }, {
+  const res = await call('photo', payload, {
     onRetry: () => {
-      if (movedOn || gen !== A.photoGen) return;
+      if (withFriends || movedOn || gen !== A.photoGen) return;
       movedOn = true;
       A.noPhoto = { reason: 'send', retrying: true };
       if (A.home === 'menu') A.menuError = 'ส่งรูปไม่สำเร็จ ระบบกำลังลองส่งใหม่เอง';
@@ -280,10 +385,12 @@ async function sendScanPhoto(b64) {
     shouldContinue: () => gen === A.photoGen
   });
   if (gen !== A.photoGen) return;
+  if (withFriends && !res.ok) return show('preview', previewState({ error: res.message }));
   const onHome = !movedOn || A.screen === A.home;
   if (res.ok) {
     A.c = Object.assign({}, A.c, { hasPhoto: true });
     A.noPhoto = null; A.photoSent = true; A.menuError = '';
+    if (withFriends) noteSigned(res);
   } else {
     A.noPhoto = { reason: 'send', message: res.code === 'network' ? '' : res.message };
     if (A.home === 'menu') A.menuError = res.message;
@@ -292,24 +399,19 @@ async function sendScanPhoto(b64) {
 }
 
 // ---------- ลงชื่อให้เพื่อน ----------
-export const proxyTip = () => { const f = A.friend ? V.firstName(A.friend.name) : ''; return f ? `ถ่ายรูป${withTitle(f)}ที่จุดเวร` : 'ถ่ายรูปเพื่อนที่จุดเวร'; };
-
-async function startProxy() {
-  show('loading', { title: 'กำลังโหลดรายชื่อ' });
-  const r = await call('proxyCandidates', { pointId: A.P }, loadingRetry);
-  if (!r.ok) return showError(r, true);
-  show('proxyPick', { r, c: A.c });
+function startProxy() {
+  A.pickFor = 'proxy'; A.group = [];
+  return openPick('home');
 }
 
 async function sendProxy(b64) {
-  const img = 'data:image/jpeg;base64,' + b64;
-  show('preview', { img, purpose: 'proxy', sending: true });
+  show('preview', previewState({ sending: true }));
   const gps = await scanGps();
-  const r = await call('proxy', { pointId: A.P, token: A.K, friendId: A.friend.teacher_id, photo: { base64: b64 }, gps }, retrying);
-  // ลองใหม่หลังคำขอแรกถึงเซิร์ฟเวอร์แล้ว → 'already' = ลงชื่อให้ไปแล้ว
-  if (!r.ok && r.code === 'already') return show('proxyDone', { r: { friendName: A.friend.name, already: true }, c: A.c });
-  if (!r.ok) return showError(r, true);
-  show('proxyDone', { r, img, c: A.c });
+  const r = await call('proxy', { pointId: A.P, token: A.K, friendIds: groupIds(), photo: { base64: b64 }, gps }, retrying);
+  // ทุกคนมีบันทึกแล้ว/ไม่ใช่เวรเดียวกัน → ข้อความของหลังบ้านขึ้นที่หน้าตรวจรูป
+  if (!r.ok) return show('preview', previewState({ error: r.message }));
+  noteSigned(r);
+  showHome();
 }
 
 // ---------- รายงานเหตุการณ์ ----------
@@ -446,7 +548,8 @@ const ACTIONS = {
   my: () => doMy(),
   toHead: () => toHead(true),
   myMonth: (d) => doMy(d.m),
-  team: () => doTeam(),
+  team: () => { A.teamFrom = A.screen; return doTeam(); },
+  teamBack: () => (A.teamFrom === 'success' || A.teamFrom === 'menu' ? showHome() : doMy()),
   teamTab: (d) => show('team', Object.assign({}, A.st, { tab: Number(d.i) })),
   pickFromMy: () => startPick('my'),
   pickChange: () => startPick('change'),
@@ -461,14 +564,18 @@ const ACTIONS = {
   toHome: () => showHome(),
   toMenu: () => { A.home = 'menu'; showHome(); },
   proxy: startProxy,
-  proxyTo: (d) => { A.friend = { teacher_id: d.id, name: d.name }; openCam('proxy', proxyTip()); },
+  addName: () => { A.pickFor = A.camFor; return openPick('preview'); },
+  pickToggle,
+  pickDone,
+  sheetClose,
+  groupConfirm,
   report: startReport,
   photo: () => openScanCam(),
   camScan: () => openScanCam(),
   skipPhoto,
   shoot,
   flip: () => camera.switchFacing(),
-  camCancel: () => { camera.stop(); if (A.camFor === 'report') show('report', A.rep); else startProxy(); },
+  camCancel: () => { camera.stop(); if (A.camFor === 'report') show('report', A.rep); else { A.group = []; showHome(); } },
   retake,
   sendPhoto,
   cat: (d) => {
@@ -559,3 +666,6 @@ export async function start() {
   A.timer = setInterval(tick, 30000);
   if (A.P) doScan(); else doMy();
 }
+
+// เฉพาะเทสต์: เข้าถึงสถานะและปุ่มโดยไม่ต้องมี DOM จริง
+export const __test = { A, act: (name, data) => ACTIONS[name](data || {}), start };

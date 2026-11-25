@@ -7,6 +7,7 @@ export const SCENARIOS = ['first', 'checked_in', 'late', 'nocamera', 'photofail'
 
 const ME = { teacher_id: 't02', name: 'สมหญิง สุขสันต์' };
 const FRIEND = { teacher_id: 't01', name: 'สมชาย ใจดี' };
+const FRIEND2 = { teacher_id: 't03', name: 'วิชัย รักเรียน' };
 const HEAD = 'สมชาย ใจดี';
 const TEACHERS = [FRIEND, ME, { teacher_id: 't03', name: 'วิชัย รักเรียน' }, { teacher_id: 't04', name: 'วิภา มั่นคง' },
   { teacher_id: 't05', name: 'ประเสริฐ แก้วมณี' }, { teacher_id: 't06', name: 'ประภา ทองดี' },
@@ -29,6 +30,7 @@ function checkinData(o = {}) {
     photoMode: o.photoMode || 'ทุกครั้ง', actionsUntil: DUTY.end, photoUntil: addMin(time, 10), renameUntil: addMin(time, 15), headName: HEAD
   };
 }
+const friendsOf = (ids, fallback) => (Array.isArray(ids) && ids.length ? ids.map((id) => { const t = TEACHERS.find((x) => x.teacher_id === id); return { teacher_id: String(id), name: t ? t.name : 'ครูทดลอง ' + id }; }) : fallback);
 const withKind = (kind, data) => Object.assign({ ok: true, kind }, data);
 
 function scanResult(scenario) {
@@ -135,11 +137,16 @@ export function mockCall(scenario, action, payload = {}) {
       const t = TEACHERS.find((x) => x.teacher_id === payload.teacherId) || ME;
       return withKind('bound', { teacher: { teacher_id: t.teacher_id, name: t.name } });
     }
-    case 'proxyCandidates': return withKind('proxy_candidates', { friends: [FRIEND], checked: [{ name: FRIEND.name }] });
-    case 'proxy':
-      return withKind('proxy_done', { friendName: FRIEND.name, time: '07:06', late: false, photo_url: PHOTO_URL, headName: HEAD, friends: [FRIEND], skipped: [] });
+    case 'proxyCandidates': return withKind('proxy_candidates', { friends: [FRIEND, FRIEND2, TEACHERS[3]], checked: [{ name: ME.name }] });
+    case 'proxy': {
+      const fr = friendsOf(payload.friendIds, [FRIEND]);
+      return withKind('proxy_done', { friendName: fr[0].name, time: '07:06', late: false, photo_url: PHOTO_URL, headName: HEAD, friends: fr, skipped: [] });
+    }
     case 'report': return withKind('report_done', { report_id: 'mock-r1', count: (payload.categories || []).length || 1 });
-    case 'photo': return withKind('photo_done', { photo_url: PHOTO_URL, time: '07:06', friends: [], skipped: [] });
+    case 'photo':
+      // photofail + มีรายชื่อเพื่อน: ล้มเหลวที่ฝั่งเซิร์ฟเวอร์ (ข้อความ) ไม่ใช่เน็ตหลุด
+      if (scenario === 'photofail' && (payload.friendIds || []).length) return fail('server_error', 'ส่งรูปไม่สำเร็จ ลองอีกครั้ง');
+      return withKind('photo_done', { photo_url: PHOTO_URL, time: '07:06', friends: friendsOf(payload.friendIds, []), skipped: [] });
     case 'rename': {
       const t = TEACHERS.find((x) => x.teacher_id === payload.newTeacherId) || FRIEND;
       return withKind('renamed', { teacher: { teacher_id: t.teacher_id, name: t.name }, checkin_id: 'mock-c1' });
@@ -158,7 +165,7 @@ export function mockTransport(scenario) {
   return async (body) => {
     await new Promise((r) => setTimeout(r, 350));
     if (scenario === 'netfail' && body.action === 'scan' && scanFails < 3) { scanFails++; throw new Error('mock network'); }
-    if (scenario === 'photofail' && body.action === 'photo') throw new Error('mock network');
+    if (scenario === 'photofail' && body.action === 'photo' && !(body.friendIds || []).length) throw new Error('mock network');
     return mockCall(scenario, body.action, body);
   };
 }
@@ -218,10 +225,12 @@ export function screenSamples() {
     s('cam', { tip: 'ถ่ายรูปเพื่อนที่จุดเวร' }),
     s('preview', { img, purpose: 'scan', sending: false }),
     s('preview', { img, purpose: 'report', sending: true }, 'preview sending'),
-    s('proxyPick', { r: mockCall('x', 'proxyCandidates'), c }),
-    s('proxyPick', { r: { ok: true, kind: 'proxy_candidates', friends: [], message: 'คนที่ลืมโทรศัพท์ให้หัวหน้าเวรเช็คให้' }, c }, 'proxyPick alone'),
-    s('proxyDone', { r: mockCall('x', 'proxy'), img, c }),
-    s('proxyDone', { r: { friendName: FRIEND.name, already: true }, c }, 'proxyDone already'),
+    s('preview', { img, purpose: 'scan', group: [FRIEND, FRIEND2], c, sending: false }, 'preview group'),
+    s('preview', { img, purpose: 'scan', group: [], c, sending: false, sheet: { kind: 'pick', friends: [FRIEND, FRIEND2], checked: [{ name: ME.name }], draft: [FRIEND.teacher_id], loading: false, requireOne: false } }, 'preview pick'),
+    s('preview', { img, purpose: 'scan', group: [FRIEND], c, sending: false, error: 'ส่งรูปไม่สำเร็จ', sheet: { kind: 'confirm', img, names: [FRIEND.name] } }, 'preview confirm'),
+    s('preview', { img, purpose: 'proxy', group: [FRIEND, FRIEND2], sending: true }, 'preview proxy'),
+    s('success', { c, actionsOpen: true, photoOpen: false, canRename: false, noPhoto: null, photoSent: true, signed: [FRIEND.name, FRIEND2.name], skipped: [ME.name] }, 'success signed'),
+    s('menu', { c: menuC, actionsOpen: true, photoOpen: true, canRename: false, signed: [FRIEND.name], sheet: { kind: 'pick', friends: [FRIEND, FRIEND2], checked: [], draft: [], loading: false, requireOne: true } }, 'menu pick'),
     s('fail', { attempt: 1, load: true }, 'fail load'),
     s('proxied', { r: scanResult('proxied') }),
     s('covered', { r: scanResult('stood_by_other') }),

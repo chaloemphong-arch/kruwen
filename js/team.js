@@ -14,7 +14,7 @@ const row = (x) => `<div class="nrow${x.me ? ' me' : ''}"><span class="pno">${es
 export function renderTeam(st) {
   const r = st.r, ss = r.sessions || [];
   const tab = Math.min(Math.max(0, Number(st.tab) || 0), Math.max(0, ss.length - 1));
-  const head = `<header class="thd${ss.length < 2 ? ' solo' : ''}"><button class="back" data-act="my">‹ กลับ</button><b>สถานะเวรวันนี้</b><span class="dl">${esc(r.weekdayThai)} ${esc(r.dateThai)}</span></header>`;
+  const head = `<header class="thd${ss.length < 2 ? ' solo' : ''}"><button class="back" data-act="teamBack">‹ กลับ</button><b>สถานะเวรวันนี้</b><span class="dl">${esc(r.weekdayThai)} ${esc(r.dateThai)}</span></header>`;
   const tabs = ss.length < 2 ? '' : '<div class="stabs" role="tablist">' + ss.map((s, i) =>
     `<button class="stab" role="tab" tabindex="${i === tab ? 0 : -1}" data-act="teamTab" data-i="${i}" aria-selected="${i === tab}"><span class="tl">${sessionIcon(s)}<span class="sl">${esc(s.label)}</span></span><small>${esc(s.time)}</small></button>`).join('') + '</div>';
   const s = ss[tab], groups = [];
