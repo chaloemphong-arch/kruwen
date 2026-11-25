@@ -135,11 +135,11 @@ export function mockCall(scenario, action, payload = {}) {
       const t = TEACHERS.find((x) => x.teacher_id === payload.teacherId) || ME;
       return withKind('bound', { teacher: { teacher_id: t.teacher_id, name: t.name } });
     }
-    case 'proxyCandidates': return withKind('proxy_candidates', { friends: [FRIEND] });
+    case 'proxyCandidates': return withKind('proxy_candidates', { friends: [FRIEND], checked: [{ name: FRIEND.name }] });
     case 'proxy':
-      return withKind('proxy_done', { friendName: FRIEND.name, time: '07:06', late: false, photo_url: PHOTO_URL, headName: HEAD });
+      return withKind('proxy_done', { friendName: FRIEND.name, time: '07:06', late: false, photo_url: PHOTO_URL, headName: HEAD, friends: [FRIEND], skipped: [] });
     case 'report': return withKind('report_done', { report_id: 'mock-r1', count: (payload.categories || []).length || 1 });
-    case 'photo': return withKind('photo_done', { photo_url: PHOTO_URL, time: '07:06' });
+    case 'photo': return withKind('photo_done', { photo_url: PHOTO_URL, time: '07:06', friends: [], skipped: [] });
     case 'rename': {
       const t = TEACHERS.find((x) => x.teacher_id === payload.newTeacherId) || FRIEND;
       return withKind('renamed', { teacher: { teacher_id: t.teacher_id, name: t.name }, checkin_id: 'mock-c1' });
