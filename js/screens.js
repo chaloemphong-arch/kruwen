@@ -5,7 +5,7 @@ import { withTitle, firstWithTitle } from './names.js';
 // ฟังก์ชันที่ export แต่ไม่ใช่หน้าจอ
 // kept for one release so an old cached app.js (which still calls V.header) keeps working
 export const header = () => '';
-export const HELPERS = ['header', 'reportButton', 'firstName', 'placeFull', 'placeShort', 'relDay'];
+export const HELPERS = ['header', 'pickSheet', 'confirmSheet', 'reportButton', 'firstName', 'placeFull', 'placeShort', 'relDay'];
 
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const hmd = (hhmm) => esc(String(hhmm || '').replace(':', '.'));
@@ -112,54 +112,79 @@ export function taken(st) {
 export const SHOW_LATE = false;
 const lateMark = (late, html) => (SHOW_LATE && late ? html : '');
 
-// st: {c (ผล checked_in/menu), actionsOpen, photoOpen, canRename, noPhoto:{reason,retrying?,message?}|null, photoSent, teacherName, renamed}
+// ---- หน้าหลังสแกน (หน้าตรวจรูป / แผ่นเลือกชื่อ / สำเร็จ / สแกนซ้ำ) หน้าตาเดียวกับหน้าเวรปฏิบัติหน้าที่ ----
+const IC = (d) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const ICON2 = {
+  checkT: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+  userPlus: IC('<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.3-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><path d="M19 8v6M16 11h6"/>'),
+  users: IC('<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.3-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><path d="M16 4.8a3.5 3.5 0 010 6.4M18 14.8c2 .7 3.2 2.4 3.5 5.2"/>'),
+  alert: IC('<path d="M12 3l9.5 17h-19z"/><path d="M12 10v4.5M12 17.5v.2"/>'),
+  list: IC('<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2.8h6V4M8.5 12l2 2 4-4.5"/>'),
+  cam: IC('<path d="M3 8h4l2-3h6l2 3h4v12H3z"/><circle cx="12" cy="13.5" r="3.8"/>'),
+  cal: IC('<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>')
+};
+const fmtT = (t) => hmd(t);
+const miniRow = (name) => `<div class="fr mini">${ICON2.checkT}<span class="nmx">${esc(kru(name))}</span></div>`;
+const rowB = (act, icon, label, dot) => `<button class="rowbtn" data-act="${act}">${icon}<span>${label}</span>${dot ? '<i class="dot" aria-label="ยังไม่ได้ทำ"></i>' : ''}<span class="chev">›</span></button>`;
+// st: {actionsOpen, photoDot}
+const actCard = (st) => (st.actionsOpen
+  ? `<div class="grp">${st.photoDot ? rowB('photo', ICON2.cam, 'ถ่ายรูปรายงาน', true) : ''}${rowB('proxy', ICON2.users, 'ลงเวลาให้...')}${rowB('report', ICON2.alert, 'รายงานเหตุการณ์')}</div>` : '');
+const navCard = () => `<div class="grp">${rowB('team', ICON2.list, 'ใบเช็คเวรวันนี้')}${rowB('my', ICON2.cal, 'ดูเวรปฏิบัติหน้าที่ประจำวัน')}</div>`;
+const signedCard = (st) => {
+  const signed = st.signed || [], skipped = st.skipped || [];
+  if (!signed.length) return '';
+  return `<div class="grp"><div class="sub">ลงเวลาให้แล้ว<span class="cnt">${signed.length} คน</span></div>${signed.map(miniRow).join('')}${skipped.length ? `<p class="skip">${esc(skipped.map(kru).join(', '))} เช็คแล้ว ไม่ได้ลงซ้ำ</p>` : ''}</div>`;
+};
+const renameLink = (st) => (st.canRename ? '<button class="sublink" data-act="rename">เลือกชื่อผิด? เปลี่ยนชื่อ</button>' : '');
+
+// แผ่นล่าง: sheet = {kind:'pick'|'confirm', ...} | null
+export function pickSheet(sh) {
+  const friends = sh.friends || [], checked = sh.checked || [], draft = sh.draft || [];
+  let list;
+  if (sh.loading) list = '<p class="sheetmsg">กำลังโหลดรายชื่อ</p>';
+  else if (!friends.length) list = '<p class="sheetmsg">ทุกคนในเวรนี้เช็คแล้ว</p>';
+  else {
+    const open = friends.map((t) => `<button class="fr" data-act="pickToggle" data-id="${esc(t.teacher_id)}" aria-pressed="${draft.includes(t.teacher_id)}"><span class="cir">${ICON2.check}</span><span class="nmx">${esc(kru(t.name))}</span><span class="rt"></span></button>`).join('');
+    const done = checked.length ? `<div class="sep"></div>${checked.map((t) => `<div class="fr done"><span class="cir">${ICON2.check}</span><span class="nmx">${esc(kru(t.name))}</span><span class="rt">เช็คแล้ว</span></div>`).join('')}` : '';
+    list = open + done;
+  }
+  const off = sh.requireOne && !draft.length ? ' disabled' : '';
+  return `<div class="shade" data-act="sheetClose"></div><div class="bs" role="dialog" aria-modal="true"><div class="grab"></div><p class="q">เพิ่มชื่อ</p><p class="qs">เลือกคนที่อยู่ในรูปนี้</p>
+  <div class="list">${list}</div><div class="acts"><button class="btn pri" data-act="pickDone"${off}>เสร็จ</button></div></div>`;
+}
+export function confirmSheet(sh) {
+  const names = sh.names || [];
+  return `<div class="shade" data-act="sheetClose"></div><div class="bs" role="dialog" aria-modal="true"><div class="grab"></div><p class="q">ลงชื่อให้ ${names.length} คนนี้?</p><p class="qs">ทุกคนต้องอยู่ในรูปนี้</p>
+  <div class="who"><img class="thumb" src="${esc(sh.img)}" alt="รูปที่ถ่าย"><ul>${names.map((n) => `<li>${ICON2.checkT}${esc(kru(n))}</li>`).join('')}</ul></div>
+  <div class="acts"><button class="btn pri" data-act="groupConfirm">ยืนยัน ส่งรูป</button><button class="btn sec" data-act="sheetClose">กลับไปแก้</button></div></div>`;
+}
+const sheetHtml = (sh) => (sh ? (sh.kind === 'pick' ? pickSheet(sh) : sh.kind === 'confirm' ? confirmSheet(sh) : '') : '');
+
+// st: {c (ผล checked_in/menu), actionsOpen, photoOpen, canRename, noPhoto:{reason,retrying?}|null, photoSent, teacherName, renamed, signed, skipped, sheet}
 export function success(st) {
   const c = st.c, d = c.duty, np = st.noPhoto;
-  const line = (cls, text) => `<p class="${cls}" style="font-size:16px">${text}</p>`;
-  let photo = '';
-  if (st.photoSent) photo = '<p class="ok" style="font-size:17px;font-weight:600;margin-top:12px">ส่งรูปแล้ว</p>';
-  else if (np && st.photoOpen) {
-    photo = `<p class="late" style="font-size:17px;font-weight:600;margin-top:12px">ยังไม่มีรูป · ถ่ายได้ถึง ${esc(c.photoUntil)}</p>${np.retrying ? line('muted', 'กำลังลองส่งรูปใหม่') : ''}`;
-  } else if (np) photo = '<p class="muted" style="font-size:17px;font-weight:600;margin-top:12px">ไม่มีรูป</p>';
-  const extra = np && np.message ? line('muted', esc(np.message)) : '';
-  const photoFirst = st.noPhoto && st.photoOpen && c.photoRequired && !c.hasPhoto;
-  const row = st.actionsOpen
-    ? `<div class="row2">${photoFirst ? '<button class="btn" data-act="photo">ถ่ายรูปเวร</button>' : '<button class="btn" data-act="proxy">ลงชื่อเพิ่ม</button>'}<button class="btn" data-act="report">รายงานเหตุการณ์</button></div>`
-    : '<p class="muted center" style="font-size:16px">หมดเวลาเวรแล้ว</p>';
-  return `<div class="pad"><div class="mid">
-   <div class="ring ok">${ICON.checkBig}</div>
-   <div class="num" style="font-size:72px;font-weight:700;line-height:1;letter-spacing:-1px">${esc(c.time)}</div>
-   ${lateMark(c.late, '<div class="late" style="font-size:20px;font-weight:600">(สาย)</div>')}
-   <div class="bal" style="font-size:24px;font-weight:600;margin-top:8px">${esc(placeFull(d))}</div>
-   <div class="muted num" style="font-size:16px">${rng(d)}</div>
-   ${c.asSubstituteFor ? line('muted', `มาแทน ${esc(kru(c.asSubstituteFor.name))}`) : ''}
-   ${st.renamed && st.teacherName ? line('muted', `เปลี่ยนเป็น ${esc(kru(st.teacherName))} แล้ว`) : ''}
-   ${photo}${extra}
-  </div>
-  ${row}<button class="link" data-act="my">ดูเวรปฏิบัติหน้าที่ประจำวัน</button>${st.canRename ? '<button class="sublink" data-act="rename">เลือกชื่อผิด? เปลี่ยนชื่อ</button>' : ''}
-  </div>`;
+  const photoFirst = !!(np && st.photoOpen && c.photoRequired && !c.hasPhoto);
+  const sent = st.photoSent || c.hasPhoto;
+  const pill = sent ? '<span class="ph">ส่งรูปแล้ว</span>' : (c.photoRequired ? '<span class="ph warn">ยังไม่มีรูปถ่ายรายงาน</span>' : '');
+  const sub = (cls, text) => `<p class="${cls}">${text}</p>`;
+  return `<div class="ap"><div class="scroll"><header class="hdr okhd"><div class="ring">${ICON2.checkT}</div><p class="lb">ลงเวลาปฏิบัติหน้าที่แล้ว</p>
+   <p class="tt">${fmtT(c.time)}</p><p class="pl bal">${esc(placeFull(d))}</p><p class="rg">${rng(d)}</p>
+   ${c.asSubstituteFor ? sub('rg', `มาแทน ${esc(kru(c.asSubstituteFor.name))}`) : ''}${st.renamed && st.teacherName ? sub('rg', `เปลี่ยนเป็น ${esc(kru(st.teacherName))} แล้ว`) : ''}
+   ${pill}${np && np.retrying && st.photoOpen ? sub('rg', 'กำลังลองส่งรูปใหม่') : ''}</header>
+   ${signedCard(st)}${actCard({ actionsOpen: st.actionsOpen, photoDot: photoFirst })}${navCard()}${renameLink(st)}</div>${sheetHtml(st.sheet)}</div>`;
 }
 
-// st: {c, actionsOpen, photoOpen, canRename, viaProxy:{name,time}|null, photoSent, error}
+// st: {c, actionsOpen, photoOpen, canRename, viaProxy:{name,time}|null, photoSent, error, signed, skipped, sheet}
 export function menu(st) {
   const c = st.c, d = c.duty;
-  const mrow = (act, icon, label) => `<button class="mrow" data-act="${act}">${icon}<span>${label}</span>${ICON.chev}</button>`;
-  let body = '';
-  if (st.viaProxy) {
-    body = `<p style="font-size:18px">${esc(who(st.viaProxy.name))}ลงชื่อให้คุณแล้ว</p><p class="muted" style="font-size:16px">ไม่ต้องทำอะไรเพิ่ม</p>`;
-  } else if (!st.actionsOpen) {
-    body = '<p class="muted" style="font-size:16px">หมดเวลาเวรแล้ว</p>';
-  } else {
-    const rows = [mrow('proxy', ICON.users, 'ลงชื่อเพิ่ม'), mrow('report', ICON.alert, 'รายงานเหตุการณ์')];
-    if (c.photoRequired && !c.hasPhoto && !st.photoSent && st.photoOpen) rows.push(mrow('photo', ICON.cam, 'ถ่ายรูปเวร'));
-    body = `<div class="mlist">${rows.join('')}</div>`;
-  }
-  const head = st.viaProxy ? `นับว่ามาแล้ว ${esc(st.viaProxy.time)}` : `ลงเวลาปฏิบัติหน้าที่แล้ว ${esc(c.time)}`;
-  return `<div class="strip num">${ICON.checkS}<span><span class="ok" style="font-size:24px;font-weight:600">${head}</span>
-   <span class="bal" style="font-size:17px;font-weight:500">${esc(placeFull(d))}</span></span></div>
-  <div class="pad">${body}
-   ${st.photoSent ? '<p class="ok" style="font-size:16px">ส่งรูปแล้ว</p>' : ''}${st.error ? `<div class="err">${esc(st.error)}</div>` : ''}
-   <div class="fill"></div>${st.canRename ? '<button class="sublink" data-act="rename">เลือกชื่อผิด? เปลี่ยนชื่อ</button>' : ''}<button class="link" data-act="my">ดูเวรปฏิบัติหน้าที่ประจำวัน</button></div>`;
+  const head = st.viaProxy
+    ? `<p class="lb">นับว่ามาแล้ว ${fmtT(st.viaProxy.time)}</p><p class="ml">${esc(who(st.viaProxy.name))}ลงชื่อให้คุณแล้ว</p><p class="ml sm">ไม่ต้องทำอะไรเพิ่ม</p>`
+    : `<p class="lb">ลงเวลาปฏิบัติหน้าที่แล้ว</p><p class="ml">${fmtT(c.time)} · ${esc(placeShort(d))}</p>`;
+  const photoDot = !!(c.photoRequired && !c.hasPhoto && !st.photoSent && st.photoOpen);
+  return `<div class="ap"><div class="scroll"><header class="hdr mhd"><div class="ring">${ICON2.checkT}</div><div>${head}</div></header>
+   ${st.error ? `<div class="err">${esc(st.error)}</div>` : ''}
+   ${st.viaProxy ? '' : signedCard(st) + actCard({ actionsOpen: st.actionsOpen, photoDot })}${navCard()}${renameLink(st)}</div></div>`;
 }
 
 const camBar = (left) => `<div class="cambar">${left}<button class="shutter" data-act="shoot" aria-label="ถ่ายรูป"></button>
@@ -184,12 +209,19 @@ export function cam(st) {
   return `<div class="camv">${viewfinder(st.tip)}${camBar('<button class="l" data-act="camCancel">ยกเลิก</button>')}</div>`;
 }
 
-// st: {img (data URL), purpose:'scan'|'proxy'|'report', sending}
+// st: {img (data URL), purpose:'scan'|'proxy'|'report', sending, error, group:[{teacher_id,name}], c, sheet}
 export function preview(st) {
-  const send = st.purpose === 'report' ? 'ใช้รูปนี้' : 'ส่งรูป';
-  return `<div class="pad top"><p class="h1">ตรวจรูปก่อนส่ง</p>
-  <img class="pvimg" src="${esc(st.img)}" alt="รูปที่ถ่าย">
-  ${st.sending ? '<div class="pbar"><i></i></div><p class="small muted center">กำลังส่งรูป</p>' : `<button class="btn pri" data-act="sendPhoto">${send}</button><button class="btn" data-act="retake">ถ่ายใหม่</button>`}</div>`;
+  const isReport = st.purpose === 'report', isScan = st.purpose === 'scan';
+  const group = st.group || [];
+  const place = isScan && st.c && st.c.duty ? `<p class="s">${esc(placeShort(st.c.duty))} · ${fmtT(st.c.time)} น.</p>` : '';
+  const chosen = group.length ? `<div class="grp"><div class="sub">ลงชื่อให้ด้วย<button class="ed" data-act="addName">แก้</button></div>${group.map((t) => miniRow(t.name)).join('')}</div>` : '';
+  const add = isScan ? `<button class="btn sec" data-act="addName">${ICON2.userPlus}เพิ่มชื่อ${group.length ? ` <span class="n">· ${group.length} คน</span>` : ''}</button>` : '';
+  const acts = st.sending
+    ? '<div class="pbar"><i></i></div><p class="small muted center">กำลังส่งรูป</p>'
+    : `<button class="btn pri" data-act="sendPhoto">${isReport ? 'ใช้รูปนี้' : 'ส่งรูป'}</button>${add}<button class="txt" data-act="retake">ถ่ายใหม่</button>`;
+  return `<div class="ap"><div class="scroll"><header class="hdr"><p class="ttl">ตรวจรูปก่อนส่ง</p>${place}</header>
+   <div class="pcard"><img class="pvimg2" src="${esc(st.img)}" alt="รูปที่ถ่าย"></div>${chosen}${st.error ? `<div class="err">${esc(st.error)}</div>` : ''}</div>
+   <div class="dock">${acts}</div>${sheetHtml(st.sheet)}</div>`;
 }
 
 // st: {r (proxy_candidates), c}
