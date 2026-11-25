@@ -51,7 +51,7 @@ const A = {
   screen: '', st: null,
   c: null, home: 'success', viaProxy: null, noPhoto: null, photoSent: false, localPhoto: null, localB64: null,
   teacherName: '', renamed: false, photoGen: 0,
-  pick: null, picked: null, camFor: null, group: [], signed: [], skipped: [], cands: null, sheet: null, pickFor: null, pickFrom: null, teamFrom: null, shot: null, rep: null, my: null, menuError: '',
+  pick: null, picked: null, camFor: null, group: [], signed: [], skipped: [], cands: null, sheet: null, pickFor: null, pickFrom: null, teamFrom: null, proxyGen: 0, shot: null, rep: null, my: null, menuError: '',
   config: null, configP: null, waitConfig: false, clock: null, timer: null, searchTimer: null, searchSeq: 0
 };
 
@@ -409,9 +409,9 @@ function startProxy() {
 async function sendProxy(b64) {
   show('preview', previewState({ sending: true }));
   const gps = await scanGps();
-  const gen = ++A.photoGen;
-  const r = await call('proxy', { pointId: A.P, token: A.K, friendIds: groupIds(), photo: { base64: b64 }, gps }, { retries: 2, shouldContinue: () => gen === A.photoGen });
-  if (gen !== A.photoGen) return;
+  const gen = ++A.proxyGen;
+  const r = await call('proxy', { pointId: A.P, token: A.K, friendIds: groupIds(), photo: { base64: b64 }, gps }, { retries: 2, shouldContinue: () => gen === A.proxyGen });
+  if (gen !== A.proxyGen) return;
   // เน็ตหลุด/ทุกคนมีบันทึกแล้ว/ไม่ใช่เวรเดียวกัน → ข้อความขึ้นที่หน้าตรวจรูป รายชื่อเดิมยังอยู่ ส่งซ้ำได้
   if (!r.ok) return show('preview', previewState({ error: r.message }));
   noteSigned(r);
