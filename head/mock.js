@@ -8,7 +8,7 @@ const SAVE_DELAY_MS = 1500; // ใกล้เวลาบันทึกจร�
 const clone = (x) => JSON.parse(JSON.stringify(x));
 const fail = (code, message, extra) => Object.assign({ ok: false, code, message }, extra || {});
 
-// ตัวเลือกของแถวยังว่าง (ตรงกับ headOptions ของหลังบ้าน)
+// ตัวเลือกของแถวยังไม่ได้เช็ค (ตรงกับ headOptions ของหลังบ้าน)
 const OPEN_OPTIONS = [
   { action: 'head', slot: 'ok', hintKind: '', label: 'มา', hint: '', next: { cls: 'p-head', text: '✓ หัวหน้าเวรเช็ค' } },
   { action: 'leave', slot: 'leave', hintKind: '', label: 'ลา', hint: '', next: { cls: 'p-leave', text: 'ลา' } },
@@ -17,7 +17,7 @@ const OPEN_OPTIONS = [
 const PILL = {
   head: { cls: 'p-head', text: '✓ หัวหน้าเวรเช็ค' }, leave: { cls: 'p-leave', text: 'ลา' },
   notfound: { cls: 'p-miss', text: 'ไม่พบตัวที่จุดเวร' }, absent: { cls: 'p-miss', text: 'ขาด' },
-  clear: { cls: 'p-idle', text: 'ยังว่าง' }, uncover: { cls: 'p-idle', text: 'ยังว่าง' }
+  clear: { cls: 'p-idle', text: 'ยังไม่ได้เช็ค' }, uncover: { cls: 'p-idle', text: 'ยังไม่ได้เช็ค' }
 };
 
 // รูปจำลอง (SVG ตัวอักษร ASCII ล้วน)
