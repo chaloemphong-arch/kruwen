@@ -143,6 +143,7 @@ export function pickSheet(sh) {
   const friends = sh.friends || [], checked = sh.checked || [], draft = sh.draft || [];
   let list;
   if (sh.loading) list = '<p class="sheetmsg">กำลังโหลดรายชื่อ</p>';
+  else if (sh.error) list = `<p class="sheetmsg err">${esc(sh.error)}</p>`;
   else if (!friends.length) list = '<p class="sheetmsg">ทุกคนในเวรนี้เช็คแล้ว</p>';
   else {
     const open = friends.map((t) => `<button class="fr" data-act="pickToggle" data-id="${esc(t.teacher_id)}" aria-pressed="${draft.includes(t.teacher_id)}"><span class="cir">${ICON2.check}</span><span class="nmx">${esc(kru(t.name))}</span><span class="rt"></span></button>`).join('');

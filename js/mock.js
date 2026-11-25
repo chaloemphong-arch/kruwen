@@ -1,7 +1,7 @@
 // โหมดทดลอง ?mock=<scenario>: คืน Result รูปร่างเดียวกับหลังบ้านจริง (backend/Scan.js, Proxy.js, Reports.js,
 // Rename.js, MyDuty.js, Binding.js, Api.js) ไม่ต่อเน็ต ไม่โหลด LIFF
 
-export const SCENARIOS = ['first', 'checked_in', 'late', 'nocamera', 'photofail', 'random_hit', 'random_miss', 'menu',
+export const SCENARIOS = ['first', 'checked_in', 'late', 'nocamera', 'photofail', 'photoserver', 'candfail', 'random_hit', 'random_miss', 'menu',
   'menu_nophoto', 'proxied', 'stood_by_other', 'ask_sub', 'wrong_point', 'outside_before', 'outside_after',
   'outside_holiday', 'on_leave', 'taken', 'netfail', 'my', 'my_council', 'welcome', 'long'];
 
@@ -137,7 +137,9 @@ export function mockCall(scenario, action, payload = {}) {
       const t = TEACHERS.find((x) => x.teacher_id === payload.teacherId) || ME;
       return withKind('bound', { teacher: { teacher_id: t.teacher_id, name: t.name } });
     }
-    case 'proxyCandidates': return withKind('proxy_candidates', { friends: [FRIEND, FRIEND2, TEACHERS[3]], checked: [{ name: ME.name }] });
+    case 'proxyCandidates':
+      if (scenario === 'candfail') return fail('server_error', 'โหลดรายชื่อไม่สำเร็จ ลองอีกครั้ง');
+      return withKind('proxy_candidates', { friends: [FRIEND, FRIEND2, TEACHERS[3]], checked: [{ name: ME.name }] });
     case 'proxy': {
       const fr = friendsOf(payload.friendIds, [FRIEND]);
       return withKind('proxy_done', { friendName: fr[0].name, time: '07:06', late: false, photo_url: PHOTO_URL, headName: HEAD, friends: fr, skipped: [] });
@@ -145,7 +147,7 @@ export function mockCall(scenario, action, payload = {}) {
     case 'report': return withKind('report_done', { report_id: 'mock-r1', count: (payload.categories || []).length || 1 });
     case 'photo':
       // photofail + มีรายชื่อเพื่อน: ล้มเหลวที่ฝั่งเซิร์ฟเวอร์ (ข้อความ) ไม่ใช่เน็ตหลุด
-      if (scenario === 'photofail' && (payload.friendIds || []).length) return fail('server_error', 'ส่งรูปไม่สำเร็จ ลองอีกครั้ง');
+      if (scenario === 'photoserver' && (payload.friendIds || []).length) return fail('server_error', 'ส่งรูปไม่สำเร็จ ลองอีกครั้ง');
       return withKind('photo_done', { photo_url: PHOTO_URL, time: '07:06', friends: friendsOf(payload.friendIds, []), skipped: [] });
     case 'rename': {
       const t = TEACHERS.find((x) => x.teacher_id === payload.newTeacherId) || FRIEND;
@@ -165,7 +167,7 @@ export function mockTransport(scenario) {
   return async (body) => {
     await new Promise((r) => setTimeout(r, 350));
     if (scenario === 'netfail' && body.action === 'scan' && scanFails < 3) { scanFails++; throw new Error('mock network'); }
-    if (scenario === 'photofail' && body.action === 'photo' && !(body.friendIds || []).length) throw new Error('mock network');
+    if (scenario === 'photofail' && (body.action === 'photo' || body.action === 'proxy')) throw new Error('mock network');
     return mockCall(scenario, body.action, body);
   };
 }

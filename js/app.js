@@ -293,9 +293,9 @@ async function openPick(from) {
   const r = await A.cands;
   if (A.sheet !== sheet) return;
   if (!r.ok) {
-    A.sheet = null;
-    if (from === 'preview') return show('preview', previewState({ error: r.message }));
-    A.menuError = r.message; return showHome();
+    // เปิดแผ่นค้างไว้พร้อมข้อความ (หน้าสำเร็จไม่มีที่แสดงข้อผิดพลาด) ปิดแผ่นแล้วเปิดใหม่ = โหลดอีกครั้ง
+    sheet.loading = false; sheet.error = r.message;
+    return rerender();
   }
   sheet.friends = r.friends || []; sheet.checked = r.checked || []; sheet.loading = false;
   rerender();
@@ -374,7 +374,9 @@ async function sendScanPhoto(b64) {
   const payload = { pointId: A.P, token: A.K, photo: { base64: b64 } };
   if (withFriends) { payload.friendIds = groupIds(); payload.gps = await scanGps(); }
   let movedOn = false;
+  // มีเพื่อน: ลองใหม่จำกัด (เน็ตหลุดแล้วขึ้นข้อความที่หน้าตรวจรูป ส่งซ้ำได้) · ไม่มีเพื่อน: ลองไม่จำกัดเหมือนเดิม
   const res = await call('photo', payload, {
+    retries: withFriends ? 2 : undefined,
     onRetry: () => {
       if (withFriends || movedOn || gen !== A.photoGen) return;
       movedOn = true;
@@ -407,8 +409,10 @@ function startProxy() {
 async function sendProxy(b64) {
   show('preview', previewState({ sending: true }));
   const gps = await scanGps();
-  const r = await call('proxy', { pointId: A.P, token: A.K, friendIds: groupIds(), photo: { base64: b64 }, gps }, retrying);
-  // ทุกคนมีบันทึกแล้ว/ไม่ใช่เวรเดียวกัน → ข้อความของหลังบ้านขึ้นที่หน้าตรวจรูป
+  const gen = ++A.photoGen;
+  const r = await call('proxy', { pointId: A.P, token: A.K, friendIds: groupIds(), photo: { base64: b64 }, gps }, { retries: 2, shouldContinue: () => gen === A.photoGen });
+  if (gen !== A.photoGen) return;
+  // เน็ตหลุด/ทุกคนมีบันทึกแล้ว/ไม่ใช่เวรเดียวกัน → ข้อความขึ้นที่หน้าตรวจรูป รายชื่อเดิมยังอยู่ ส่งซ้ำได้
   if (!r.ok) return show('preview', previewState({ error: r.message }));
   noteSigned(r);
   showHome();
