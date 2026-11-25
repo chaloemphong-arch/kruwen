@@ -184,7 +184,7 @@ export function menu(st) {
   const photoDot = !!(c.photoRequired && !c.hasPhoto && !st.photoSent && st.photoOpen);
   return `<div class="ap"><div class="scroll"><header class="hdr mhd"><div class="ring">${ICON2.checkT}</div><div>${head}</div></header>
    ${st.error ? `<div class="err">${esc(st.error)}</div>` : ''}
-   ${st.viaProxy ? '' : signedCard(st) + actCard({ actionsOpen: st.actionsOpen, photoDot })}${navCard()}${renameLink(st)}</div></div>`;
+   ${st.viaProxy ? '' : signedCard(st) + actCard({ actionsOpen: st.actionsOpen, photoDot })}${navCard()}${renameLink(st)}</div>${sheetHtml(st.sheet)}</div>`;
 }
 
 const camBar = (left) => `<div class="cambar">${left}<button class="shutter" data-act="shoot" aria-label="ถ่ายรูป"></button>
