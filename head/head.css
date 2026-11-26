@@ -162,15 +162,15 @@
 .toast.two .l1{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:600}
 .toast.two .l2{font-size:14px;color:#D5DCE5;line-height:1.35}
 
-/* หัวมุมล่างโค้ง + แคปซูลวันที่ + ปฏิทิน (24 พ.ย. 2569): คัดจาก ออกแบบมินิมอล/HeadHeader.mock.html แบบ ฉ (.vF + .o6) */
+/* หัวปลายตรงมีเงา (26 พ.ย.: เดิมมุมล่างโค้ง) + แคปซูลวันที่ + ปฏิทิน (24 พ.ย. 2569): คัดจาก ออกแบบมินิมอล/HeadHeader.mock.html แบบ ฉ (.vF + .o6) */
 .hdr{padding:22px var(--gut) 14px;gap:10px}
 .hdr .r1 b{font-size:24px}
 .dnav{margin:0;background:#E8ECF2;border-radius:999px;grid-template-columns:44px 1fr 44px;height:44px}
 .dnav .dn{width:44px;height:44px;font-size:24px}
 .dnav .dl{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:44px;cursor:pointer;font-size:16px;font-weight:600}
 .dl .cal{width:18px;height:18px;flex:none;color:var(--muted)}
-.stabs{border-bottom:0;border-radius:0 0 22px 22px;box-shadow:0 8px 16px -10px rgba(15,27,45,.25)}
-.hdr.solo{border-radius:0 0 22px 22px;box-shadow:0 8px 16px -10px rgba(15,27,45,.25)}
+.stabs{border-bottom:0;border-radius:0;box-shadow:0 4px 12px -4px rgba(15,27,45,.22)}
+.hdr.solo{border-radius:0;box-shadow:0 4px 12px -4px rgba(15,27,45,.22)}
 .panel{padding-top:14px}
 /* ป้ายลาในรายชื่อ: โทนอำพัน ให้ตรงกับปุ่มลาในแผ่นเลือกสถานะ */
 #hpage .st.p-leave{background:#FDEBC8;color:#92400E}

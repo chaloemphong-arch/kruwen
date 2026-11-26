@@ -121,7 +121,7 @@ textarea{width:100%;min-height:90px;border:1px solid var(--line);border-radius:1
 
 /* เวรปฏิบัติหน้าที่ประจำวัน (24 พ.ย.: หน้าตาเดียวกับใบเช็คหัวหน้า · หัวติดบน การ์ดบน + รายการเวร) */
 .myd{flex:1;background:#F1F3F6;padding-bottom:24px;color:var(--text)}
-.myd .myhd{display:grid;gap:0;text-align:center;background:#fff;border-radius:0 0 22px 22px;box-shadow:0 8px 16px -10px rgba(15,27,45,.25);padding:22px 16px 18px}
+.myd .myhd{display:grid;gap:0;text-align:center;background:#fff;border-radius:0;box-shadow:0 4px 12px -4px rgba(15,27,45,.22);padding:22px 16px 18px}
 .myd .myhd small{font-size:15px;font-weight:600;color:var(--muted);line-height:1.4}
 .myd .myhd b{margin-top:2px;font-size:24px;font-weight:700;color:#111111;line-height:1.3;overflow-wrap:anywhere}
 .myd .mpill{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;height:44px;margin-top:16px;background:#E8ECF2;border-radius:999px}
@@ -150,11 +150,12 @@ textarea{width:100%;min-height:90px;border:1px solid var(--line);border-radius:1
 .myd .two .nx{font-size:18px}
 .myd .two .tm{font-size:16px;color:#374151}
 .myd .two .tst{margin-top:0;white-space:nowrap}
-.myd .big{width:76px;flex:none;padding-right:14px;border-right:3px solid var(--line);text-align:center;line-height:1.15;font-size:inherit;font-weight:inherit}
-.myd .big.today{border-right-color:#F59E0B}
-.myd .big .w{display:block;font-size:16px;font-weight:600;color:#374151}
-.myd .big .n{display:block;font-size:34px;font-weight:700;color:#111111;font-variant-numeric:tabular-nums}
-.myd .big .m{display:block;font-size:16px;color:var(--muted)}
+/* ปฏิทินฉีก (26 พ.ย.: ออกแบบมินิมอล/DateTear.mock.html แบบ 1): ไม่มีกรอบ กล่องเทาทึบ แถบวันเทาเข้ม · วันนี้แถบอำพัน */
+.myd .big{width:72px;flex:none;border-radius:14px;overflow:hidden;background:#E8ECF2;text-align:center;line-height:1;font-size:inherit;font-weight:inherit}
+.myd .big .w{display:block;background:#374151;color:#fff;font-size:16px;font-weight:600;line-height:26px}
+.myd .big.today .w{background:#F59E0B;color:#111111}
+.myd .big .n{display:block;font-size:30px;font-weight:700;line-height:40px;color:#111111;font-variant-numeric:tabular-nums}
+.myd .big .m{display:block;font-size:15px;color:#374151;padding-bottom:8px}
 .myd .nrow{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;padding:8px 14px;min-height:60px;border-bottom:1px solid var(--line)}
 .myd .nrow:last-child{border-bottom:0}
 .myd .nrow.today{background:#F3F8FE}
@@ -188,9 +189,9 @@ textarea{width:100%;min-height:90px;border:1px solid var(--line);border-radius:1
 .team .thd{position:relative;background:#fff;padding:22px var(--gut) 14px;display:grid;gap:6px;text-align:center}
 .team .thd b{font-size:24px;font-weight:700;line-height:1.3;color:#111111}
 .team .thd .dl{font-size:16px;font-weight:600;color:var(--muted)}
-.team .thd.solo{border-radius:0 0 22px 22px;box-shadow:0 8px 16px -10px rgba(15,27,45,.25)}
+.team .thd.solo{border-radius:0;box-shadow:0 4px 12px -4px rgba(15,27,45,.22)}
 .team .back{position:absolute;left:8px;top:14px;display:flex;align-items:center;gap:2px;min-height:48px;padding:0 10px;font-size:17px;font-weight:600;color:#111111}
-.team .stabs{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;background:#fff;border-radius:0 0 22px 22px;box-shadow:0 8px 16px -10px rgba(15,27,45,.25)}
+.team .stabs{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;background:#fff;border-radius:0;box-shadow:0 4px 12px -4px rgba(15,27,45,.22)}
 .team .stab{position:relative;min-height:54px;padding:4px 8px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);font-size:17px;font-weight:600;line-height:1.3}
 .team .stab .tl{display:inline-flex;align-items:center;gap:6px}
 .team .stab .ic{width:20px;height:20px}
@@ -216,7 +217,7 @@ textarea{width:100%;min-height:90px;border:1px solid var(--line);border-radius:1
 /* หน้าหลังสแกน 25 พ.ย. 2569 (ตรวจรูป · แผ่นเลือกชื่อ · สำเร็จ · สแกนซ้ำ) หน้าตาตาม ออกแบบมินิมอล/AfterScan3.mock.html */
 .ap{flex:1;display:flex;flex-direction:column;background:#F1F3F6;color:var(--text);min-height:100vh;min-height:100dvh}
 .ap .scroll{flex:1;padding-bottom:14px}
-.ap .ahd{background:#fff;border-radius:0 0 22px 22px;box-shadow:0 8px 16px -10px rgba(15,27,45,.25);padding:18px 16px 16px;text-align:center;margin-bottom:14px}
+.ap .ahd{background:#fff;border-radius:0;box-shadow:0 4px 12px -4px rgba(15,27,45,.22);padding:18px 16px 16px;text-align:center;margin-bottom:14px}
 .ap .ahd .ttl{font-size:22px;font-weight:700;color:#111111;line-height:1.35}
 .ap .ahd .s{font-size:16px;font-weight:500;color:var(--muted)}
 .ap .grp{margin:0 12px 10px;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}
